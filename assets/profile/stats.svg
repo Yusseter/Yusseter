@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="180" viewBox="0 0 560 180" role="img" aria-labelledby="title desc">
     <title id="title">Yusseter GitHub Stats</title>
-    <desc id="desc">Live GitHub statistics for Yusseter.</desc>
+    <desc id="desc">Aggregated GitHub statistics for Yusseter.</desc>
 
     <style>
         .card {
@@ -15,7 +15,7 @@
 
         .value {
             fill: #1f2328;
-            font: 600 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
 
         .label {
@@ -56,22 +56,15 @@
     <text class="title" x="24" y="35">Yusseter · GitHub overview</text>
 
     <line class="rule" x1="24" y1="51" x2="536" y2="51" />
+    <line class="rule" x1="280" y1="72" x2="280" y2="143" />
 
     
-    <g transform="translate(35 78)">
-        <text class="value" x="0" y="0">3</text>
-        <text class="label" x="0" y="24">Total stars</text>
+    <g transform="translate(150 103)">
+        <text class="value" x="0" y="0" text-anchor="middle">3</text>
+        <text class="label" x="0" y="26" text-anchor="middle">Total stars</text>
     </g>
-    <g transform="translate(167 78)">
-        <text class="value" x="0" y="0">9</text>
-        <text class="label" x="0" y="24">Public repos</text>
-    </g>
-    <g transform="translate(299 78)">
-        <text class="value" x="0" y="0">578</text>
-        <text class="label" x="0" y="24">Contributions</text>
-    </g>
-    <g transform="translate(431 78)">
-        <text class="value" x="0" y="0">1</text>
-        <text class="label" x="0" y="24">Followers</text>
+    <g transform="translate(410 103)">
+        <text class="value" x="0" y="0" text-anchor="middle">7</text>
+        <text class="label" x="0" y="26" text-anchor="middle">Total releases</text>
     </g>
 </svg>
