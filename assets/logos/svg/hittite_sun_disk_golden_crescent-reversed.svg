@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" lang="en" width="1920" height="1920" viewBox="0 0 1920 1920" role="img" aria-labelledby="title desc">
+	<title id="title">Hittite Sun Disk and Golden Crescent Emblem — Reversed Plum Variant</title>
+
+	<desc id="desc">A circular emblem featuring a stylized Hittite sun disk with reversed plum-and-white coloring, framed by a golden crescent on a plum background.</desc>
+
+	<defs>
+		<radialGradient id="golden-crescent-gradient" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
+			<stop offset="0%" stop-color="#d7c277" />
+			<stop offset="42%" stop-color="#c8ad67" />
+			<stop offset="78%" stop-color="#b89558" />
+			<stop offset="100%" stop-color="#a9874e" />
+		</radialGradient>
+
+		<g id="hittite-disk-cross-motif" fill="#ffffff">
+			<rect x="-120" y="-18.5" width="240" height="37" transform="rotate(45)" />
+			<rect x="-120" y="-18.5" width="240" height="37" transform="rotate(-45)" />
+		</g>
+
+		<clipPath id="hittite-disk-clip">
+			<circle cx="960" cy="825" r="375" />
+		</clipPath>
+	</defs>
+
+	<rect id="background" x="0" y="0" width="1920" height="1920" fill="#491d34" />
+
+	<circle id="golden-crescent-base" cx="960" cy="960" r="540" fill="url(#golden-crescent-gradient)" />
+
+	<circle id="hittite-disk-outer" cx="960" cy="825" r="405" fill="#ffffff" />
+	<circle id="hittite-disk-inner" cx="960" cy="825" r="365" fill="#491d34" />
+
+	<g id="hittite-disk-pattern" fill="#ffffff" clip-path="url(#hittite-disk-clip)">
+		<rect x="775" y="458" width="34" height="734" />
+		<rect x="943" y="458" width="34" height="734" />
+		<rect x="1111" y="458" width="34" height="734" />
+		<rect x="593" y="640" width="734" height="34" />
+		<rect x="593" y="808" width="734" height="34" />
+		<rect x="593" y="976" width="734" height="34" />
+		<use href="#hittite-disk-cross-motif" transform="translate(708 573)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(876 573)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(1044 573)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(1212 573)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(708 741)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(876 741)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(1044 741)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(1212 741)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(708 909)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(876 909)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(1044 909)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(1212 909)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(708 1077)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(876 1077)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(1044 1077)" />
+		<use href="#hittite-disk-cross-motif" transform="translate(1212 1077)" />
+	</g>
+</svg>
