@@ -1,0 +1,14 @@
+# Default
+* text=auto
+
+# Text files
+*.md text eol=lf
+*.py text eol=lf
+*.svg text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Binary files
+*.jpg binary
+*.jpeg binary
+*.png binary
