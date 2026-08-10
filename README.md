@@ -8,8 +8,8 @@
 
 ## Building now
 
-- [ck3-workshop-auto-updater](https://github.com/Yusseter/ck3-workshop-auto-updater)
-- [tray-order-lock](https://github.com/Yusseter/tray-order-lock)
+<!-- building_now:start -->
+<!-- building_now:end -->
 
 ## Recent releases
 
