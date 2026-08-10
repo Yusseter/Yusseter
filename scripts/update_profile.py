@@ -28,9 +28,6 @@ GRAPHQL_URL = "https://api.github.com/graphql"
 REPOSITORIES_QUERY = """
 query($login: String!, $after: String) {
     user(login: $login) {
-        followers {
-            totalCount
-        }
         contributionsCollection {
             contributionCalendar {
                 totalContributions
@@ -65,6 +62,7 @@ query($login: String!, $after: String) {
                     }
                 }
                 releases(first: 10, orderBy: {field: CREATED_AT, direction: DESC}) {
+                    totalCount
                     nodes {
                         name
                         tagName
@@ -120,7 +118,6 @@ def graphql_request(query, variables):
 def fetch_profile_data():
     repositories = []
     cursor = None
-    followers = 0
     contributions = 0
 
     while True:
@@ -137,7 +134,6 @@ def fetch_profile_data():
         if not user:
             raise RuntimeError(f"GitHub user not found: {USERNAME}")
 
-        followers = user["followers"]["totalCount"]
         contributions = user["contributionsCollection"][
             "contributionCalendar"
         ]["totalContributions"]
@@ -153,7 +149,6 @@ def fetch_profile_data():
         cursor = page_info["endCursor"]
 
     return {
-        "followers": followers,
         "contributions": contributions,
         "repositories": repositories,
     }
@@ -204,29 +199,31 @@ def render_stats_svg(profile):
         for repository in repositories
     )
 
+    total_releases = sum(
+        repository["releases"]["totalCount"]
+        for repository in repositories
+    )
+
     metrics = [
         ("Total stars", format_number(total_stars)),
-        ("Public repos", format_number(len(repositories))),
-        ("Contributions", format_number(profile["contributions"])),
-        ("Followers", format_number(profile["followers"])),
+        ("Total releases", format_number(total_releases)),
     ]
 
+    positions = [150, 410]
     metric_markup = []
 
-    for index, (label, value) in enumerate(metrics):
-        x = 35 + index * 132
-
+    for x, (label, value) in zip(positions, metrics):
         metric_markup.append(
             f'''
-    <g transform="translate({x} 78)">
-        <text class="value" x="0" y="0">{escape(value)}</text>
-        <text class="label" x="0" y="24">{escape(label)}</text>
+    <g transform="translate({x} 103)">
+        <text class="value" x="0" y="0" text-anchor="middle">{escape(value)}</text>
+        <text class="label" x="0" y="26" text-anchor="middle">{escape(label)}</text>
     </g>'''
         )
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="560" height="180" viewBox="0 0 560 180" role="img" aria-labelledby="title desc">
     <title id="title">{escape(USERNAME)} GitHub Stats</title>
-    <desc id="desc">Live GitHub statistics for {escape(USERNAME)}.</desc>
+    <desc id="desc">Aggregated GitHub statistics for {escape(USERNAME)}.</desc>
 
     <style>
         .card {{
@@ -241,7 +238,7 @@ def render_stats_svg(profile):
 
         .value {{
             fill: #1f2328;
-            font: 600 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }}
 
         .label {{
@@ -282,11 +279,11 @@ def render_stats_svg(profile):
     <text class="title" x="24" y="35">{escape(USERNAME)} · GitHub overview</text>
 
     <line class="rule" x1="24" y1="51" x2="536" y2="51" />
+    <line class="rule" x1="280" y1="72" x2="280" y2="143" />
 
     {''.join(metric_markup)}
 </svg>
 '''
-
 def render_languages_svg(languages):
     top_languages = languages[:5]
     total_bytes = sum(language["bytes"] for language in languages)
