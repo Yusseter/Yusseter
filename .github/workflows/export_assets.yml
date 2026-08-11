@@ -1,0 +1,62 @@
+name: Export visual assets
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "assets/logos/svg/**"
+      - "assets/backgrounds/svg/**"
+      - "scripts/export_pngs.py"
+      - ".github/workflows/export_assets.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-maintenance
+  cancel-in-progress: false
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install export dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes inkscape
+          python -m pip install --disable-pip-version-check pillow
+
+      - name: Export visual assets
+        env:
+          FORCE_PNG_EXPORT: "1"
+        run: python scripts/export_pngs.py
+
+      - name: Commit visual assets
+        run: |
+          git add assets/backgrounds/png
+          git add assets/logos/png
+          git add assets/profile/header.svg
+
+          if git diff --cached --quiet; then
+            echo "No visual asset changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "Update visual assets"
+          git push

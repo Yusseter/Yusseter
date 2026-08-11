@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 import shutil
 import subprocess
 import sys
@@ -14,8 +15,10 @@ BACKGROUND_WIDTHS = [1920, 2560, 3840, 5120]
 LOGO_ASPECT_RATIO = (1, 1)
 LOGO_WIDTHS = [256, 512, 1024]
 
-# Skip PNGs that are newer than their source SVG.
-SKIP_UP_TO_DATE = True
+# Local runs skip PNGs that are newer than their source SVG.
+# CI forces regeneration when source assets change.
+FORCE_PNG_EXPORT = os.environ.get("FORCE_PNG_EXPORT") == "1"
+SKIP_UP_TO_DATE = not FORCE_PNG_EXPORT
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -26,6 +29,13 @@ LOGOS_SVG_DIR = REPO_ROOT / "assets" / "logos" / "svg"
 LOGOS_PNG_DIR = REPO_ROOT / "assets" / "logos" / "png"
 
 BACKGROUND_SOURCE = BACKGROUNDS_SVG_DIR / "eagle_background.svg"
+
+PROFILE_HEADER = (
+    REPO_ROOT
+    / "assets"
+    / "profile"
+    / "header.svg"
+)
 
 WINDOWS_INKSCAPE = Path(
     r"C:\Program Files\Inkscape\bin\inkscape.com"
@@ -93,6 +103,57 @@ def export_svg(source, target, width, height):
         print(f"Error: {target.relative_to(REPO_ROOT)} -> {error}")
         error_count += 1
 
+def export_profile_header():
+    if not BACKGROUND_SOURCE.exists():
+        raise FileNotFoundError(
+            f"Background SVG not found: {BACKGROUND_SOURCE}"
+        )
+
+    source = BACKGROUND_SOURCE.read_text(
+        encoding="utf-8"
+    )
+
+    original_geometry = (
+        'width="1920" height="1080" '
+        'viewBox="0 0 1920 1080"'
+    )
+
+    header_geometry = (
+        'width="760" height="380" '
+        'viewBox="160 140 1600 800"'
+    )
+
+    if original_geometry not in source:
+        raise RuntimeError(
+            "Could not find the expected eagle SVG geometry."
+        )
+
+    header = source.replace(
+        original_geometry,
+        header_geometry,
+        1,
+    )
+
+    header = header.replace(
+        "Yusseter Eagle Background",
+        "Yusseter Profile Header",
+        1,
+    )
+
+    PROFILE_HEADER.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    PROFILE_HEADER.write_text(
+        header,
+        encoding="utf-8",
+        newline="\n",
+    )
+
+    print(
+        f"Updated: {PROFILE_HEADER.relative_to(REPO_ROOT)}"
+    )
 def export_backgrounds():
     global created_count, skipped_count, error_count
 
@@ -221,8 +282,9 @@ def main():
         )
         sys.exit(1)
 
-    print("Starting PNG export...")
+    print("Starting visual asset export...")
 
+    export_profile_header()
     export_backgrounds()
     export_logos()
 

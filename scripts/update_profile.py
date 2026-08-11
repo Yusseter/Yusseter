@@ -25,8 +25,9 @@ EXCLUDED_REPOSITORIES = {
 BUILDING_NOW_LIMIT = 4
 ACTIVITY_WINDOW_DAYS = 30
 
-RECENT_RELEASE_LIMIT = 5
-RECENT_REPOSITORY_LIMIT = 3
+RECENT_RELEASE_VISIBLE = 3
+RECENT_RELEASE_LIMIT = 8
+RECENT_REPOSITORY_LIMIT = 5
 
 GRAPHQL_URL = "https://api.github.com/graphql"
 
@@ -420,6 +421,182 @@ def render_languages_svg(languages):
 </svg>
 '''
 
+def render_overview_svg(profile, languages):
+    repositories = profile["repositories"]
+
+    total_stars = sum(
+        repository["stargazerCount"]
+        for repository in repositories
+    )
+
+    total_releases = sum(
+        repository["releases"]["totalCount"]
+        for repository in repositories
+    )
+
+    metrics = [
+        ("Total stars", format_number(total_stars)),
+        ("Total releases", format_number(total_releases)),
+    ]
+
+    metric_positions = [105, 255]
+    metric_markup = []
+
+    for x, (label, value) in zip(
+        metric_positions,
+        metrics,
+    ):
+        metric_markup.append(
+            f'''
+    <text class="value" x="{x}" y="108" text-anchor="middle">{escape(value)}</text>
+    <text class="label" x="{x}" y="134" text-anchor="middle">{escape(label)}</text>'''
+        )
+
+    top_languages = languages[:5]
+    total_bytes = sum(
+        language["bytes"]
+        for language in languages
+    )
+
+    language_markup = []
+    bar_markup = []
+
+    bar_x = 390.0
+    bar_width = 346.0
+
+    if total_bytes:
+        for index, language in enumerate(
+            top_languages
+        ):
+            percentage = (
+                language["bytes"]
+                / total_bytes
+                * 100
+            )
+
+            y = 99 + index * 23
+            color = language["color"]
+
+            language_markup.append(
+                f'''
+    <circle cx="397" cy="{y - 4}" r="4" fill="{escape(color)}" />
+    <text class="language" x="409" y="{y}">{escape(language["name"])}</text>
+    <text class="percentage" x="728" y="{y}" text-anchor="end">{percentage:.1f}%</text>'''
+            )
+
+            segment_width = (
+                bar_width
+                * language["bytes"]
+                / total_bytes
+            )
+
+            bar_markup.append(
+                f'<rect x="{bar_x:.2f}" y="58" width="{segment_width:.2f}" height="10" fill="{escape(color)}" />'
+            )
+
+            bar_x += segment_width
+
+    else:
+        language_markup.append(
+            '''
+    <text class="muted" x="390" y="105">No language data available yet.</text>'''
+        )
+
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="760" height="230" viewBox="0 0 760 230" role="img" aria-labelledby="title desc">
+    <title id="title">{escape(USERNAME)} GitHub Overview</title>
+    <desc id="desc">Aggregated GitHub statistics and language distribution for {escape(USERNAME)}.</desc>
+
+    <style>
+        .card {{
+            fill: #ffffff;
+            stroke: #d0d7de;
+        }}
+
+        .heading {{
+            fill: #491d34;
+            font: 600 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }}
+
+        .value {{
+            fill: #1f2328;
+            font: 600 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }}
+
+        .label,
+        .percentage,
+        .muted {{
+            fill: #656d76;
+            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }}
+
+        .language {{
+            fill: #1f2328;
+            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }}
+
+        .rule {{
+            stroke: #d0d7de;
+        }}
+
+        .bar-background {{
+            fill: #eaeef2;
+        }}
+
+        @media (prefers-color-scheme: dark) {{
+            .card {{
+                fill: #0d1117;
+                stroke: #30363d;
+            }}
+
+            .heading {{
+                fill: #c8ad67;
+            }}
+
+            .value,
+            .language {{
+                fill: #e6edf3;
+            }}
+
+            .label,
+            .percentage,
+            .muted {{
+                fill: #8b949e;
+            }}
+
+            .rule {{
+                stroke: #30363d;
+            }}
+
+            .bar-background {{
+                fill: #21262d;
+            }}
+        }}
+    </style>
+
+    <defs>
+        <clipPath id="overview-language-bar">
+            <rect x="390" y="58" width="346" height="10" rx="5" />
+        </clipPath>
+    </defs>
+
+    <rect class="card" x="0.5" y="0.5" width="759" height="229" rx="8" />
+
+    <text class="heading" x="24" y="35">GitHub overview</text>
+    <text class="heading" x="390" y="35">Languages</text>
+
+    <line class="rule" x1="360" y1="24" x2="360" y2="206" />
+
+    {''.join(metric_markup)}
+
+    <rect class="bar-background" x="390" y="58" width="346" height="10" rx="5" />
+
+    <g clip-path="url(#overview-language-bar)">
+        {''.join(bar_markup)}
+    </g>
+
+    {''.join(language_markup)}
+</svg>
+'''
 def parse_github_date(value):
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
@@ -819,18 +996,52 @@ def render_recent_releases(releases):
     if not releases:
         return "_No published releases yet._"
 
-    lines = []
+    def release_line(release):
+        suffix = (
+            " (pre-release)"
+            if release["isPrerelease"]
+            else ""
+        )
 
-    for release in releases:
-        suffix = " (pre-release)" if release["isPrerelease"] else ""
         published = release["publishedAt"][:10]
 
-        lines.append(
-            f'- [{release["repository"]} — {release["name"]}]({release["url"]}){suffix} — {published}'
+        return (
+            f'- [{release["repository"]} — {release["name"]}]'
+            f'({release["url"]})'
+            f'{suffix} — {published}'
+        )
+
+    visible = releases[:RECENT_RELEASE_VISIBLE]
+    hidden = releases[RECENT_RELEASE_VISIBLE:]
+
+    lines = [
+        release_line(release)
+        for release in visible
+    ]
+
+    if hidden:
+        lines.extend(
+            [
+                "",
+                "<details>",
+                "<summary>More releases</summary>",
+                "",
+            ]
+        )
+
+        lines.extend(
+            release_line(release)
+            for release in hidden
+        )
+
+        lines.extend(
+            [
+                "",
+                "</details>",
+            ]
         )
 
     return "\n".join(lines)
-
 def render_recent_repositories(repositories):
     recent = sorted(
         project_repositories(repositories),
@@ -941,6 +1152,15 @@ def main():
 
     (PROFILE_ASSETS_DIR / "languages.svg").write_text(
         render_languages_svg(languages),
+        encoding="utf-8",
+        newline="\n",
+    )
+
+    (PROFILE_ASSETS_DIR / "overview.svg").write_text(
+        render_overview_svg(
+            profile,
+            languages,
+        ),
         encoding="utf-8",
         newline="\n",
     )
