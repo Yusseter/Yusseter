@@ -4,12 +4,14 @@ from html import escape
 import json
 import os
 from pathlib import Path
+import textwrap
 import urllib.error
 import urllib.request
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 PROFILE_ASSETS_DIR = REPO_ROOT / "assets" / "profile"
+BUILDING_NOW_DIR = PROFILE_ASSETS_DIR / "building_now"
 README_PATH = REPO_ROOT / "README.md"
 
 USERNAME = os.environ.get("GITHUB_REPOSITORY_OWNER", "Yusseter")
@@ -21,7 +23,6 @@ EXCLUDED_REPOSITORIES = {
 }
 
 BUILDING_NOW_LIMIT = 4
-BUILDING_NOW_MIN_SCORE = 12.0
 ACTIVITY_WINDOW_DAYS = 30
 
 RECENT_RELEASE_LIMIT = 5
@@ -447,69 +448,42 @@ def own_commit_dates(repository):
 
     return dates
 
-def building_activity_score(repository, now):
+def repository_activity(repository, now):
     commit_dates = own_commit_dates(repository)
 
+    since_7d = now - timedelta(days=7)
+    since_14d = now - timedelta(days=14)
+
     commits_7d = sum(
-        date >= now - timedelta(days=7)
+        date >= since_7d
         for date in commit_dates
     )
 
     commits_14d = sum(
-        date >= now - timedelta(days=14)
+        date >= since_14d
         for date in commit_dates
     )
 
     commits_30d = len(commit_dates)
 
-    active_days = len({
+    active_days_14d = len({
         date.date()
         for date in commit_dates
+        if date >= since_14d
     })
 
-    score = 0.0
-
-    score += min(commits_7d, 10) * 3.0
-    score += min(
-        max(commits_14d - commits_7d, 0),
-        10,
-    ) * 1.5
-    score += min(
-        max(commits_30d - commits_14d, 0),
-        20,
-    ) * 0.5
-    score += min(active_days, 10) * 1.5
+    latest_commit_age = None
 
     if commit_dates:
         latest_commit_age = (
             now - max(commit_dates)
         ).days
 
-        if latest_commit_age <= 2:
-            score += 5.0
-        elif latest_commit_age <= 7:
-            score += 3.0
-        elif latest_commit_age <= 14:
-            score += 1.0
-
     created_age = (
         now - parse_github_date(repository["createdAt"])
     ).days
 
-    if created_age <= 14:
-        score += 3.0
-    elif created_age <= 30:
-        score += 1.0
-
-    pushed_at = repository.get("pushedAt")
-
-    if pushed_at:
-        pushed_age = (
-            now - parse_github_date(pushed_at)
-        ).days
-
-        if pushed_age <= 2:
-            score += 1.0
+    latest_release_age = None
 
     published_releases = [
         release
@@ -527,32 +501,115 @@ def building_activity_score(repository, now):
             )
         ).days
 
-        if latest_release_age <= 14:
+    return {
+        "commits_7d": commits_7d,
+        "commits_14d": commits_14d,
+        "commits_30d": commits_30d,
+        "active_days_14d": active_days_14d,
+        "latest_commit_age": latest_commit_age,
+        "created_age": created_age,
+        "latest_release_age": latest_release_age,
+    }
+
+def qualifies_for_building_now(activity):
+    commits_7d = activity["commits_7d"]
+    commits_14d = activity["commits_14d"]
+    active_days_14d = activity["active_days_14d"]
+    created_age = activity["created_age"]
+
+    sustained_recent_work = (
+        commits_7d >= 2
+        and active_days_14d >= 2
+    )
+
+    concentrated_recent_work = commits_7d >= 4
+
+    continuing_work = (
+        commits_7d >= 1
+        and commits_14d >= 4
+        and active_days_14d >= 3
+    )
+
+    new_project_work = (
+        created_age <= 14
+        and commits_7d >= 2
+    )
+
+    return any(
+        (
+            sustained_recent_work,
+            concentrated_recent_work,
+            continuing_work,
+            new_project_work,
+        )
+    )
+
+def building_activity_score(activity):
+    commits_7d = activity["commits_7d"]
+    commits_14d = activity["commits_14d"]
+    commits_30d = activity["commits_30d"]
+    active_days_14d = activity["active_days_14d"]
+    latest_commit_age = activity["latest_commit_age"]
+
+    score = 0.0
+
+    score += min(commits_7d, 10) * 4.0
+
+    score += min(
+        max(commits_14d - commits_7d, 0),
+        10,
+    ) * 1.25
+
+    score += min(
+        max(commits_30d - commits_14d, 0),
+        20,
+    ) * 0.2
+
+    score += min(active_days_14d, 10) * 2.0
+
+    if latest_commit_age is not None:
+        if latest_commit_age <= 1:
+            score += 6.0
+        elif latest_commit_age <= 3:
+            score += 4.0
+        elif latest_commit_age <= 7:
             score += 2.0
+
+    if activity["created_age"] <= 14:
+        score += 2.0
+
+    latest_release_age = activity["latest_release_age"]
+
+    if (
+        latest_release_age is not None
+        and latest_release_age <= 7
+    ):
+        score += 1.0
 
     return score
 
 def collect_building_now(repositories):
     now = datetime.now(timezone.utc)
-    scored = []
+    candidates = []
 
     for repository in project_repositories(repositories):
-        score = building_activity_score(
+        activity = repository_activity(
             repository,
             now,
         )
 
-        if score < BUILDING_NOW_MIN_SCORE:
+        if not qualifies_for_building_now(activity):
             continue
 
-        scored.append(
+        candidates.append(
             {
                 "repository": repository,
-                "score": score,
+                "activity": activity,
+                "score": building_activity_score(activity),
             }
         )
 
-    scored.sort(
+    candidates.sort(
         key=lambda item: (
             item["score"],
             parse_github_date(
@@ -563,30 +620,176 @@ def collect_building_now(repositories):
         reverse=True,
     )
 
-    return [
-        item["repository"]
-        for item in scored[:BUILDING_NOW_LIMIT]
-    ]
+    return candidates[:BUILDING_NOW_LIMIT]
 
-def render_building_now(repositories):
-    if not repositories:
+def building_card_filename(repository):
+    name = repository["name"]
+
+    safe_name = "".join(
+        character
+        if character.isalnum() or character in "-_."
+        else "_"
+        for character in name
+    )
+
+    return f"{safe_name}.svg"
+
+def relative_commit_age(days):
+    if days == 0:
+        return "today"
+
+    if days == 1:
+        return "1d ago"
+
+    return f"{days}d ago"
+
+def render_building_card_svg(item):
+    repository = item["repository"]
+    activity = item["activity"]
+
+    description = (
+        (repository["description"] or "No description.")
+        .replace("\r", " ")
+        .replace("\n", " ")
+        .strip()
+    )
+
+    description_lines = textwrap.wrap(
+        description,
+        width=88,
+        max_lines=2,
+        placeholder="…",
+    )
+
+    while len(description_lines) < 2:
+        description_lines.append("")
+
+    language_edges = repository["languages"]["edges"]
+
+    if language_edges:
+        language = language_edges[0]["node"]["name"]
+        language_color = (
+            language_edges[0]["node"]["color"]
+            or "#8b949e"
+        )
+    else:
+        language = "No language data"
+        language_color = "#8b949e"
+
+    latest_commit_age = activity["latest_commit_age"]
+
+    activity_text = (
+        f'{activity["commits_7d"]} commits / 7d'
+        f' · {activity["active_days_14d"]} active days / 14d'
+    )
+
+    if latest_commit_age is not None:
+        activity_text += (
+            f" · last commit "
+            f"{relative_commit_age(latest_commit_age)}"
+        )
+
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="760" height="142" viewBox="0 0 760 142" role="img" aria-labelledby="title desc">
+    <title id="title">{escape(repository["name"])}</title>
+    <desc id="desc">{escape(description)}</desc>
+
+    <style>
+        .card {{
+            fill: #ffffff;
+            stroke: #d0d7de;
+        }}
+
+        .accent {{
+            fill: #c8ad67;
+        }}
+
+        .title {{
+            fill: #491d34;
+            font: 600 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }}
+
+        .description {{
+            fill: #1f2328;
+            font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }}
+
+        .meta {{
+            fill: #656d76;
+            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }}
+
+        @media (prefers-color-scheme: dark) {{
+            .card {{
+                fill: #0d1117;
+                stroke: #30363d;
+            }}
+
+            .title {{
+                fill: #c8ad67;
+            }}
+
+            .description {{
+                fill: #e6edf3;
+            }}
+
+            .meta {{
+                fill: #8b949e;
+            }}
+        }}
+    </style>
+
+    <rect class="card" x="0.5" y="0.5" width="759" height="141" rx="8" />
+    <rect class="accent" x="0.5" y="0.5" width="5" height="141" rx="3" />
+
+    <text class="title" x="24" y="34">{escape(repository["name"])}</text>
+
+    <text class="description" x="24" y="61">{escape(description_lines[0])}</text>
+    <text class="description" x="24" y="81">{escape(description_lines[1])}</text>
+
+    <circle cx="29" cy="112" r="4" fill="{escape(language_color)}" />
+    <text class="meta" x="40" y="116">{escape(language)} · {escape(activity_text)}</text>
+</svg>
+'''
+
+def write_building_now_cards(items):
+    BUILDING_NOW_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    for existing in BUILDING_NOW_DIR.glob("*.svg"):
+        existing.unlink()
+
+    for item in items:
+        repository = item["repository"]
+
+        target = (
+            BUILDING_NOW_DIR
+            / building_card_filename(repository)
+        )
+
+        target.write_text(
+            render_building_card_svg(item),
+            encoding="utf-8",
+            newline="\n",
+        )
+
+def render_building_now(items):
+    if not items:
         return "_No active repositories detected right now._"
 
     lines = []
 
-    for repository in repositories:
-        description = (
-            (repository["description"] or "No description.")
-            .replace("\r", " ")
-            .replace("\n", " ")
-            .strip()
-        )
+    for item in items:
+        repository = item["repository"]
+        filename = building_card_filename(repository)
 
         lines.append(
-            f'- [{repository["name"]}]({repository["url"]}) — {description}'
+            f'[![{repository["name"]}](./assets/profile/building_now/{filename})]'
+            f'({repository["url"]})'
         )
 
-    return "\n".join(lines)
+    return "\n\n".join(lines)
 def collect_recent_releases(repositories):
     releases = []
 
@@ -684,7 +887,7 @@ def replace_marked_block(content, marker, replacement):
 
     return updated, True
 
-def update_readme(repositories):
+def update_readme(repositories, building_now):
     if not README_PATH.exists():
         return
 
@@ -693,9 +896,7 @@ def update_readme(repositories):
     content, building_updated = replace_marked_block(
         content,
         "building_now",
-        render_building_now(
-            collect_building_now(repositories)
-        ),
+        render_building_now(building_now),
     )
 
     content, releases_updated = replace_marked_block(
@@ -723,11 +924,14 @@ def main():
     profile = fetch_profile_data()
     repositories = profile["repositories"]
     languages = aggregate_languages(repositories)
+    building_now = collect_building_now(repositories)
 
     PROFILE_ASSETS_DIR.mkdir(
         parents=True,
         exist_ok=True,
     )
+
+    write_building_now_cards(building_now)
 
     (PROFILE_ASSETS_DIR / "stats.svg").write_text(
         render_stats_svg(profile),
@@ -741,11 +945,12 @@ def main():
         newline="\n",
     )
 
-    update_readme(repositories)
+    update_readme(repositories, building_now)
 
     print("Updated profile assets.")
     print(f"Repositories: {len(repositories)}")
     print(f"Languages: {len(languages)}")
+    print(f"Building now: {len(building_now)}")
 
 if __name__ == "__main__":
     main()
