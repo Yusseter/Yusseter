@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="230" viewBox="0 0 760 230" role="img" aria-labelledby="title desc">
+    <title id="title">Yusseter GitHub Overview</title>
+    <desc id="desc">Aggregated GitHub statistics and language distribution for Yusseter.</desc>
+
+    <style>
+        .card {
+            fill: #ffffff;
+            stroke: #d0d7de;
+        }
+
+        .heading {
+            fill: #491d34;
+            font: 600 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        .value {
+            fill: #1f2328;
+            font: 600 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        .label,
+        .percentage,
+        .muted {
+            fill: #656d76;
+            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        .language {
+            fill: #1f2328;
+            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        .rule {
+            stroke: #d0d7de;
+        }
+
+        .bar-background {
+            fill: #eaeef2;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .card {
+                fill: #0d1117;
+                stroke: #30363d;
+            }
+
+            .heading {
+                fill: #c8ad67;
+            }
+
+            .value,
+            .language {
+                fill: #e6edf3;
+            }
+
+            .label,
+            .percentage,
+            .muted {
+                fill: #8b949e;
+            }
+
+            .rule {
+                stroke: #30363d;
+            }
+
+            .bar-background {
+                fill: #21262d;
+            }
+        }
+    </style>
+
+    <defs>
+        <clipPath id="overview-language-bar">
+            <rect x="390" y="58" width="346" height="10" rx="5" />
+        </clipPath>
+    </defs>
+
+    <rect class="card" x="0.5" y="0.5" width="759" height="229" rx="8" />
+
+    <text class="heading" x="24" y="35">GitHub overview</text>
+    <text class="heading" x="390" y="35">Languages</text>
+
+    <line class="rule" x1="360" y1="24" x2="360" y2="206" />
+
+    
+    <text class="value" x="105" y="108" text-anchor="middle">3</text>
+    <text class="label" x="105" y="134" text-anchor="middle">Total stars</text>
+    <text class="value" x="255" y="108" text-anchor="middle">7</text>
+    <text class="label" x="255" y="134" text-anchor="middle">Total releases</text>
+
+    <rect class="bar-background" x="390" y="58" width="346" height="10" rx="5" />
+
+    <g clip-path="url(#overview-language-bar)">
+        <rect x="390.00" y="58" width="162.22" height="10" fill="#f34b7d" /><rect x="552.22" y="58" width="67.60" height="10" fill="#f1e05a" /><rect x="619.83" y="58" width="36.20" height="10" fill="#012456" /><rect x="656.02" y="58" width="32.73" height="10" fill="#663399" /><rect x="688.75" y="58" width="26.78" height="10" fill="#3572A5" />
+    </g>
+
+    
+    <circle cx="397" cy="95" r="4" fill="#f34b7d" />
+    <text class="language" x="409" y="99">C++</text>
+    <text class="percentage" x="728" y="99" text-anchor="end">46.9%</text>
+    <circle cx="397" cy="118" r="4" fill="#f1e05a" />
+    <text class="language" x="409" y="122">JavaScript</text>
+    <text class="percentage" x="728" y="122" text-anchor="end">19.5%</text>
+    <circle cx="397" cy="141" r="4" fill="#012456" />
+    <text class="language" x="409" y="145">PowerShell</text>
+    <text class="percentage" x="728" y="145" text-anchor="end">10.5%</text>
+    <circle cx="397" cy="164" r="4" fill="#663399" />
+    <text class="language" x="409" y="168">CSS</text>
+    <text class="percentage" x="728" y="168" text-anchor="end">9.5%</text>
+    <circle cx="397" cy="187" r="4" fill="#3572A5" />
+    <text class="language" x="409" y="191">Python</text>
+    <text class="percentage" x="728" y="191" text-anchor="end">7.7%</text>
+</svg>
