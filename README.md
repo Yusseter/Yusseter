@@ -11,7 +11,6 @@
 <!-- building_now:start -->
 - [tray-order-lock](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.
 - [ck3-workshop-auto-updater](https://github.com/Yusseter/ck3-workshop-auto-updater) — A Windows utility that detects and requests missing Crusader Kings III Steam Workshop updates.
-- [energy-saver-power-plan-link](https://github.com/Yusseter/energy-saver-power-plan-link) — A Windhawk mod that links Windows 11 Energy Saver with the Power Saver power plan.
 <!-- building_now:end -->
 
 ## Recent releases
