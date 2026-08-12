@@ -241,45 +241,45 @@ def render_stats_svg(profile):
     ):
         metric_markup.append(
             f'''
-    <g transform="translate({x} 101)">
+    <g transform="translate({x} 115)">
         <text class="value" x="0" y="0" text-anchor="middle">{escape(value)}</text>
-        <text class="label" x="0" y="25" text-anchor="middle">{escape(label)}</text>
+        <text class="label" x="0" y="30" text-anchor="middle">{escape(label)}</text>
     </g>'''
         )
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="370" height="170" viewBox="0 0 370 170" role="img" aria-labelledby="title desc">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="370" height="190" viewBox="0 0 370 190" role="img" aria-labelledby="title desc">
     <title id="title">{escape(USERNAME)} GitHub Stats</title>
     <desc id="desc">Aggregated GitHub statistics for {escape(USERNAME)}.</desc>
 
     <style>
         .card {{
-            fill: #ffffff;
-            stroke: #d0d7de;
+            fill: transparent;
+            stroke: #d1d9e0b3;
         }}
 
         .title {{
             fill: #491d34;
-            font: 600 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
         .value {{
             fill: #1f2328;
-            font: 600 27px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 28px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
         .label {{
-            fill: #656d76;
-            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            fill: #59636e;
+            font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
         .rule {{
-            stroke: #d0d7de;
+            stroke: #d1d9e0b3;
         }}
 
         @media (prefers-color-scheme: dark) {{
             .card {{
-                fill: #0d1117;
-                stroke: #30363d;
+                fill: transparent;
+                stroke: #3d444db3;
             }}
 
             .title {{
@@ -287,25 +287,25 @@ def render_stats_svg(profile):
             }}
 
             .value {{
-                fill: #e6edf3;
+                fill: #f0f6fc;
             }}
 
             .label {{
-                fill: #8b949e;
+                fill: #9198a1;
             }}
 
             .rule {{
-                stroke: #30363d;
+                stroke: #3d444db3;
             }}
         }}
     </style>
 
-    <rect class="card" x="0.5" y="0.5" width="369" height="169" rx="8" />
+    <rect class="card" x="0.5" y="0.5" width="369" height="189" rx="6" />
 
-    <text class="title" x="20" y="31">GitHub overview</text>
+    <text class="title" x="20" y="32">GitHub overview</text>
 
-    <line class="rule" x1="20" y1="47" x2="350" y2="47" />
-    <line class="rule" x1="185" y1="66" x2="185" y2="141" />
+    <line class="rule" x1="20" y1="51" x2="350" y2="51" />
+    <line class="rule" x1="185" y1="72" x2="185" y2="160" />
 
     {''.join(metric_markup)}
 </svg>
@@ -320,7 +320,7 @@ def render_languages_svg(languages):
 
     if total_bytes == 0:
         rows = '''
-    <text class="muted" x="20" y="91">No language data available yet.</text>'''
+    <text class="muted" x="20" y="98">No language data available yet.</text>'''
 
         bar_segments = ""
 
@@ -340,7 +340,7 @@ def render_languages_svg(languages):
                 * 100
             )
 
-            y = 84 + index * 18
+            y = 88 + index * 22
             color = language["color"]
 
             rows_markup.append(
@@ -357,7 +357,7 @@ def render_languages_svg(languages):
             )
 
             bar_markup.append(
-                f'<rect x="{bar_x:.2f}" y="52" width="{segment_width:.2f}" height="10" fill="{escape(color)}" />'
+                f'<rect x="{bar_x:.2f}" y="58" width="{segment_width:.2f}" height="10" fill="{escape(color)}" />'
             )
 
             bar_x += segment_width
@@ -365,40 +365,41 @@ def render_languages_svg(languages):
         rows = "".join(rows_markup)
         bar_segments = "\n    ".join(bar_markup)
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="370" height="170" viewBox="0 0 370 170" role="img" aria-labelledby="title desc">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="370" height="190" viewBox="0 0 370 190" role="img" aria-labelledby="title desc">
     <title id="title">{escape(USERNAME)} Top Languages</title>
     <desc id="desc">Language distribution across public non-archived project repositories owned by {escape(USERNAME)}.</desc>
 
     <style>
         .card {{
-            fill: #ffffff;
-            stroke: #d0d7de;
+            fill: transparent;
+            stroke: #d1d9e0b3;
         }}
 
         .title {{
             fill: #491d34;
-            font: 600 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
         .language {{
             fill: #1f2328;
-            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
         .percentage,
         .muted {{
-            fill: #656d76;
-            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            fill: #59636e;
+            font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
         .bar-background {{
-            fill: #eaeef2;
+            fill: #59636e;
+            fill-opacity: 0.12;
         }}
 
         @media (prefers-color-scheme: dark) {{
             .card {{
-                fill: #0d1117;
-                stroke: #30363d;
+                fill: transparent;
+                stroke: #3d444db3;
             }}
 
             .title {{
@@ -406,31 +407,32 @@ def render_languages_svg(languages):
             }}
 
             .language {{
-                fill: #e6edf3;
+                fill: #f0f6fc;
             }}
 
             .percentage,
             .muted {{
-                fill: #8b949e;
+                fill: #9198a1;
             }}
 
             .bar-background {{
-                fill: #21262d;
+                fill: #9198a1;
+                fill-opacity: 0.18;
             }}
         }}
     </style>
 
     <defs>
         <clipPath id="language-bar-clip">
-            <rect x="20" y="52" width="330" height="10" rx="5" />
+            <rect x="20" y="58" width="330" height="10" rx="5" />
         </clipPath>
     </defs>
 
-    <rect class="card" x="0.5" y="0.5" width="369" height="169" rx="8" />
+    <rect class="card" x="0.5" y="0.5" width="369" height="189" rx="6" />
 
-    <text class="title" x="20" y="31">Languages</text>
+    <text class="title" x="20" y="32">Languages</text>
 
-    <rect class="bar-background" x="20" y="52" width="330" height="10" rx="5" />
+    <rect class="bar-background" x="20" y="58" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
         {bar_segments}
