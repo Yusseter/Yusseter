@@ -677,19 +677,19 @@ def render_building_now(items):
 
         language = primary_language(repository)
 
-        activity_text = (
-            f'{language}'
-            f' · {activity["commits_7d"]} commits / 7d'
-            f' · {activity["active_days_14d"]} active days / 14d'
-        )
+        activity_parts = [language]
+
+        if activity["commits_7d"] > 0:
+            activity_parts.append("active this week")
 
         latest_commit_age = activity["latest_commit_age"]
 
         if latest_commit_age is not None:
-            activity_text += (
-                f" · last commit "
-                f"{relative_commit_age(latest_commit_age)}"
+            activity_parts.append(
+                f"updated {relative_commit_age(latest_commit_age)}"
             )
+
+        activity_text = " · ".join(activity_parts)
 
         lines.append(
             f'- **[{repository["name"]}]({repository["url"]})**'

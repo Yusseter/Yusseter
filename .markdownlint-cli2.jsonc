@@ -1,0 +1,24 @@
+{
+  "overrides": [
+    {
+      "filter": [
+        "README.md"
+      ],
+      "config": {
+        "MD033": {
+          "allowed_elements": [
+            "p",
+            "img",
+            "details",
+            "summary"
+          ]
+        },
+        "MD041": {
+          "allow_preamble": true,
+          "level": 2
+        }
+      },
+      "combine": "merge"
+    }
+  ]
+}
