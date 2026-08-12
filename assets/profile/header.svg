@@ -340,7 +340,7 @@ transform="translate(380 90) scale(0.21) translate(-960 -540)"
 	<circle id="golden-crescent-base" cx="960" cy="960" r="540" fill="url(#emblem-golden-crescent-gradient)" />
 
 	<circle id="hittite-disk-outer" cx="960" cy="825" r="405" fill="#491d34" />
-	<circle id="hittite-disk-inner" cx="960" cy="825" r="365"  class="emblem-background-fill" />
+	<circle id="hittite-disk-inner" cx="960" cy="825" r="365" fill="#fdfbf8" />
 
 	<g id="hittite-disk-pattern" fill="#491d34" clip-path="url(#emblem-hittite-disk-clip)">
 		<rect x="775" y="458" width="34" height="734" />

@@ -11,7 +11,7 @@ The SVG files are the canonical sources.
 
 ## PNG Exports
 
-PNG files are generated with `scripts/export_pngs.py` at:
+PNG files are generated with `scripts/update_visual_assets.py` at:
 
 - 256x256
 - 512x512

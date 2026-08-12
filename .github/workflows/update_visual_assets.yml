@@ -1,4 +1,4 @@
-name: Export visual assets
+name: Update visual assets
 
 on:
   workflow_dispatch:
@@ -8,8 +8,9 @@ on:
     paths:
       - "assets/logos/svg/**"
       - "assets/backgrounds/svg/**"
-      - "scripts/export_pngs.py"
-      - ".github/workflows/export_assets.yml"
+      - "assets/profile/header.svg"
+      - "scripts/update_visual_assets.py"
+      - ".github/workflows/update_visual_assets.yml"
 
 permissions:
   contents: write
@@ -19,7 +20,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  export:
+  update:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,21 +34,24 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install export dependencies
+      - name: Install visual asset dependencies
         run: |
           sudo apt-get update
           sudo apt-get install --yes inkscape
           python -m pip install --disable-pip-version-check pillow
 
-      - name: Export visual assets
+      - name: Update visual assets
         env:
           FORCE_PNG_EXPORT: "1"
-        run: python scripts/export_pngs.py
+        run: python scripts/update_visual_assets.py
 
-      - name: Commit visual assets
+      - name: Commit visual asset changes
         run: |
-          git add assets/backgrounds/png
+          git add assets/logos/svg/hittite_sun_disk_golden_crescent-reversed.svg
+          git add assets/backgrounds/svg/eagle_background.svg
+          git add assets/profile/header.svg
           git add assets/logos/png
+          git add assets/backgrounds/png
 
           if git diff --cached --quiet; then
             echo "No visual asset changes."

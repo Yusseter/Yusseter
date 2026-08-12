@@ -12,7 +12,7 @@ When PNG backgrounds are generated, the eagle retains its 1920x1080 base visual 
 
 ## PNG Exports
 
-PNG files are generated with `scripts/export_pngs.py` at:
+PNG files are generated with `scripts/update_visual_assets.py` at:
 
 - 1920x1080
 - 2560x1440
