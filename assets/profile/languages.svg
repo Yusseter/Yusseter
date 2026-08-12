@@ -1,37 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="370" height="170" viewBox="0 0 370 170" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="190" viewBox="0 0 370 190" role="img" aria-labelledby="title desc">
     <title id="title">Yusseter Top Languages</title>
     <desc id="desc">Language distribution across public non-archived project repositories owned by Yusseter.</desc>
 
     <style>
         .card {
-            fill: #ffffff;
-            stroke: #d0d7de;
+            fill: transparent;
+            stroke: #d1d9e0b3;
         }
 
         .title {
             fill: #491d34;
-            font: 600 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }
 
         .language {
             fill: #1f2328;
-            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }
 
         .percentage,
         .muted {
-            fill: #656d76;
-            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            fill: #59636e;
+            font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }
 
         .bar-background {
-            fill: #eaeef2;
+            fill: #59636e;
+            fill-opacity: 0.12;
         }
 
         @media (prefers-color-scheme: dark) {
             .card {
-                fill: #0d1117;
-                stroke: #30363d;
+                fill: transparent;
+                stroke: #3d444db3;
             }
 
             .title {
@@ -39,54 +40,55 @@
             }
 
             .language {
-                fill: #e6edf3;
+                fill: #f0f6fc;
             }
 
             .percentage,
             .muted {
-                fill: #8b949e;
+                fill: #9198a1;
             }
 
             .bar-background {
-                fill: #21262d;
+                fill: #9198a1;
+                fill-opacity: 0.18;
             }
         }
     </style>
 
     <defs>
         <clipPath id="language-bar-clip">
-            <rect x="20" y="52" width="330" height="10" rx="5" />
+            <rect x="20" y="58" width="330" height="10" rx="5" />
         </clipPath>
     </defs>
 
-    <rect class="card" x="0.5" y="0.5" width="369" height="169" rx="8" />
+    <rect class="card" x="0.5" y="0.5" width="369" height="189" rx="6" />
 
-    <text class="title" x="20" y="31">Languages</text>
+    <text class="title" x="20" y="32">Languages</text>
 
-    <rect class="bar-background" x="20" y="52" width="330" height="10" rx="5" />
+    <rect class="bar-background" x="20" y="58" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="20.00" y="52" width="154.72" height="10" fill="#f34b7d" />
-    <rect x="174.72" y="52" width="64.47" height="10" fill="#f1e05a" />
-    <rect x="239.20" y="52" width="34.52" height="10" fill="#012456" />
-    <rect x="273.72" y="52" width="31.21" height="10" fill="#663399" />
-    <rect x="304.93" y="52" width="25.54" height="10" fill="#3572A5" />
+        <rect x="20.00" y="58" width="154.72" height="10" fill="#f34b7d" />
+    <rect x="174.72" y="58" width="64.47" height="10" fill="#f1e05a" />
+    <rect x="239.20" y="58" width="34.52" height="10" fill="#012456" />
+    <rect x="273.72" y="58" width="31.21" height="10" fill="#663399" />
+    <rect x="304.93" y="58" width="25.54" height="10" fill="#3572A5" />
     </g>
 
     
-    <circle cx="26" cy="80" r="4" fill="#f34b7d" />
-    <text class="language" x="38" y="84">C++</text>
-    <text class="percentage" x="350" y="84" text-anchor="end">46.9%</text>
-    <circle cx="26" cy="98" r="4" fill="#f1e05a" />
-    <text class="language" x="38" y="102">JavaScript</text>
-    <text class="percentage" x="350" y="102" text-anchor="end">19.5%</text>
-    <circle cx="26" cy="116" r="4" fill="#012456" />
-    <text class="language" x="38" y="120">PowerShell</text>
-    <text class="percentage" x="350" y="120" text-anchor="end">10.5%</text>
-    <circle cx="26" cy="134" r="4" fill="#663399" />
-    <text class="language" x="38" y="138">CSS</text>
-    <text class="percentage" x="350" y="138" text-anchor="end">9.5%</text>
-    <circle cx="26" cy="152" r="4" fill="#3572A5" />
-    <text class="language" x="38" y="156">Python</text>
-    <text class="percentage" x="350" y="156" text-anchor="end">7.7%</text>
+    <circle cx="26" cy="84" r="4" fill="#f34b7d" />
+    <text class="language" x="38" y="88">C++</text>
+    <text class="percentage" x="350" y="88" text-anchor="end">46.9%</text>
+    <circle cx="26" cy="106" r="4" fill="#f1e05a" />
+    <text class="language" x="38" y="110">JavaScript</text>
+    <text class="percentage" x="350" y="110" text-anchor="end">19.5%</text>
+    <circle cx="26" cy="128" r="4" fill="#012456" />
+    <text class="language" x="38" y="132">PowerShell</text>
+    <text class="percentage" x="350" y="132" text-anchor="end">10.5%</text>
+    <circle cx="26" cy="150" r="4" fill="#663399" />
+    <text class="language" x="38" y="154">CSS</text>
+    <text class="percentage" x="350" y="154" text-anchor="end">9.5%</text>
+    <circle cx="26" cy="172" r="4" fill="#3572A5" />
+    <text class="language" x="38" y="176">Python</text>
+    <text class="percentage" x="350" y="176" text-anchor="end">7.7%</text>
 </svg>
