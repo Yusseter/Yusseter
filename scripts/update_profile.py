@@ -214,7 +214,7 @@ def aggregate_languages(repositories):
         for name, size in ordered
     ]
 
-def render_stats_svg(profile):
+def render_snapshot_svg(profile, languages):
     repositories = profile["repositories"]
 
     total_stars = sum(
@@ -232,85 +232,21 @@ def render_stats_svg(profile):
         ("Total releases", format_number(total_releases)),
     ]
 
-    positions = [95, 275]
+    metric_positions = [95, 275]
     metric_markup = []
 
     for x, (label, value) in zip(
-        positions,
+        metric_positions,
         metrics,
     ):
         metric_markup.append(
             f'''
     <g transform="translate({x} 115)">
         <text class="value" x="0" y="0" text-anchor="middle">{escape(value)}</text>
-        <text class="label" x="0" y="30" text-anchor="middle">{escape(label)}</text>
+        <text class="secondary" x="0" y="30" text-anchor="middle">{escape(label)}</text>
     </g>'''
         )
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="370" height="190" viewBox="0 0 370 190" role="img" aria-labelledby="title desc">
-    <title id="title">{escape(USERNAME)} GitHub Stats</title>
-    <desc id="desc">Aggregated GitHub statistics for {escape(USERNAME)}.</desc>
-
-    <style>
-        .card {{
-            fill: transparent;
-            stroke: #d1d9e0b3;
-        }}
-
-        .title {{
-            fill: #491d34;
-            font: 600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-        }}
-
-        .value {{
-            fill: #1f2328;
-            font: 600 28px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-        }}
-
-        .label {{
-            fill: #59636e;
-            font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-        }}
-
-        .rule {{
-            stroke: #d1d9e0b3;
-        }}
-
-        @media (prefers-color-scheme: dark) {{
-            .card {{
-                fill: transparent;
-                stroke: #3d444db3;
-            }}
-
-            .title {{
-                fill: #c8ad67;
-            }}
-
-            .value {{
-                fill: #f0f6fc;
-            }}
-
-            .label {{
-                fill: #9198a1;
-            }}
-
-            .rule {{
-                stroke: #3d444db3;
-            }}
-        }}
-    </style>
-
-    <rect class="card" x="0.5" y="0.5" width="369" height="189" rx="6" />
-
-    <text class="title" x="20" y="32">GitHub overview</text>
-
-    <line class="rule" x1="20" y1="51" x2="350" y2="51" />
-    <line class="rule" x1="185" y1="72" x2="185" y2="160" />
-
-    {''.join(metric_markup)}
-</svg>
-'''
-def render_languages_svg(languages):
     top_languages = languages[:5]
 
     total_bytes = sum(
@@ -319,8 +255,8 @@ def render_languages_svg(languages):
     )
 
     if total_bytes == 0:
-        rows = '''
-    <text class="muted" x="20" y="98">No language data available yet.</text>'''
+        language_rows = '''
+    <text class="secondary" x="410" y="98">No language data available yet.</text>'''
 
         bar_segments = ""
 
@@ -328,7 +264,7 @@ def render_languages_svg(languages):
         rows_markup = []
         bar_markup = []
 
-        bar_x = 20.0
+        bar_x = 410.0
         bar_width = 330.0
 
         for index, language in enumerate(
@@ -345,9 +281,9 @@ def render_languages_svg(languages):
 
             rows_markup.append(
                 f'''
-    <circle cx="26" cy="{y - 4}" r="4" fill="{escape(color)}" />
-    <text class="language" x="38" y="{y}">{escape(language["name"])}</text>
-    <text class="percentage" x="350" y="{y}" text-anchor="end">{percentage:.1f}%</text>'''
+    <circle cx="416" cy="{y - 4}" r="4" fill="{escape(color)}" />
+    <text class="primary" x="428" y="{y}">{escape(language["name"])}</text>
+    <text class="secondary" x="740" y="{y}" text-anchor="end">{percentage:.1f}%</text>'''
             )
 
             segment_width = (
@@ -362,12 +298,12 @@ def render_languages_svg(languages):
 
             bar_x += segment_width
 
-        rows = "".join(rows_markup)
+        language_rows = "".join(rows_markup)
         bar_segments = "\n    ".join(bar_markup)
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="370" height="190" viewBox="0 0 370 190" role="img" aria-labelledby="title desc">
-    <title id="title">{escape(USERNAME)} Top Languages</title>
-    <desc id="desc">Language distribution across public non-archived project repositories owned by {escape(USERNAME)}.</desc>
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="760" height="190" viewBox="0 0 760 190" role="img" aria-labelledby="title desc">
+    <title id="title">{escape(USERNAME)} GitHub Snapshot</title>
+    <desc id="desc">GitHub statistics and language distribution for {escape(USERNAME)}.</desc>
 
     <style>
         .card {{
@@ -376,19 +312,27 @@ def render_languages_svg(languages):
         }}
 
         .title {{
-            fill: #491d34;
+            fill: #1f2328;
             font: 600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
-        .language {{
+        .value {{
+            fill: #1f2328;
+            font: 600 28px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        }}
+
+        .primary {{
             fill: #1f2328;
             font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
-        .percentage,
-        .muted {{
+        .secondary {{
             fill: #59636e;
             font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        }}
+
+        .rule {{
+            stroke: #d1d9e0b3;
         }}
 
         .bar-background {{
@@ -398,21 +342,21 @@ def render_languages_svg(languages):
 
         @media (prefers-color-scheme: dark) {{
             .card {{
-                fill: transparent;
                 stroke: #3d444db3;
             }}
 
-            .title {{
-                fill: #c8ad67;
-            }}
-
-            .language {{
+            .title,
+            .value,
+            .primary {{
                 fill: #f0f6fc;
             }}
 
-            .percentage,
-            .muted {{
+            .secondary {{
                 fill: #9198a1;
+            }}
+
+            .rule {{
+                stroke: #3d444db3;
             }}
 
             .bar-background {{
@@ -424,23 +368,35 @@ def render_languages_svg(languages):
 
     <defs>
         <clipPath id="language-bar-clip">
-            <rect x="20" y="58" width="330" height="10" rx="5" />
+            <rect x="410" y="58" width="330" height="10" rx="5" />
         </clipPath>
     </defs>
 
+    <!-- GitHub overview -->
     <rect class="card" x="0.5" y="0.5" width="369" height="189" rx="6" />
 
-    <text class="title" x="20" y="32">Languages</text>
+    <text class="title" x="20" y="32">GitHub overview</text>
 
-    <rect class="bar-background" x="20" y="58" width="330" height="10" rx="5" />
+    <line class="rule" x1="20" y1="51" x2="350" y2="51" />
+    <line class="rule" x1="185" y1="72" x2="185" y2="160" />
+
+    {''.join(metric_markup)}
+
+    <!-- Languages -->
+    <rect class="card" x="390.5" y="0.5" width="369" height="189" rx="6" />
+
+    <text class="title" x="410" y="32">Languages</text>
+
+    <rect class="bar-background" x="410" y="58" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
         {bar_segments}
     </g>
 
-    {rows}
+    {language_rows}
 </svg>
 '''
+
 def parse_github_date(value):
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
@@ -837,6 +793,25 @@ def update_readme(repositories, building_now):
 
     content = README_PATH.read_text(encoding="utf-8")
 
+    legacy_snapshot = """<p align="center">
+  <img src="./assets/profile/stats.svg" width="370" alt="GitHub overview">
+  <img src="./assets/profile/languages.svg" width="370" alt="Languages">
+</p>"""
+
+    snapshot = """<p align="center">
+  <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
+</p>"""
+
+    snapshot_updated = False
+
+    if legacy_snapshot in content:
+        content = content.replace(
+            legacy_snapshot,
+            snapshot,
+            1,
+        )
+        snapshot_updated = True
+
     content, building_updated = replace_marked_block(
         content,
         "building_now",
@@ -857,7 +832,12 @@ def update_readme(repositories, building_now):
         render_recent_repositories(repositories),
     )
 
-    if building_updated or releases_updated or repositories_updated:
+    if (
+        snapshot_updated
+        or building_updated
+        or releases_updated
+        or repositories_updated
+    ):
         README_PATH.write_text(
             content,
             encoding="utf-8",
@@ -876,17 +856,20 @@ def main():
     )
 
 
-    (PROFILE_ASSETS_DIR / "stats.svg").write_text(
-        render_stats_svg(profile),
+    (PROFILE_ASSETS_DIR / "snapshot.svg").write_text(
+        render_snapshot_svg(profile, languages),
         encoding="utf-8",
         newline="\n",
     )
 
-    (PROFILE_ASSETS_DIR / "languages.svg").write_text(
-        render_languages_svg(languages),
-        encoding="utf-8",
-        newline="\n",
-    )
+    for legacy_name in (
+        "stats.svg",
+        "languages.svg",
+    ):
+        legacy_path = PROFILE_ASSETS_DIR / legacy_name
+
+        if legacy_path.exists():
+            legacy_path.unlink()
 
 
     update_readme(repositories, building_now)
