@@ -1,4 +1,6 @@
-![Yusseter profile header](./assets/profile/header.svg)
+<p align="center">
+  <img src="./assets/profile/header.svg" width="760" alt="Yusseter profile header">
+</p>
 
 ## Building now
 

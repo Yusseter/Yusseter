@@ -70,7 +70,7 @@
     <rect x="174.72" y="52" width="64.47" height="10" fill="#f1e05a" />
     <rect x="239.20" y="52" width="34.52" height="10" fill="#012456" />
     <rect x="273.72" y="52" width="31.21" height="10" fill="#663399" />
-    <rect x="304.93" y="52" width="25.54" height="10" fill="#3572A5" />
+    <rect x="304.93" y="52" width="25.54" height="10" fill="#3572a5" />
     </g>
 
     
@@ -86,7 +86,7 @@
     <circle cx="26" cy="134" r="4" fill="#663399" />
     <text class="language" x="38" y="138">CSS</text>
     <text class="percentage" x="350" y="138" text-anchor="end">9.5%</text>
-    <circle cx="26" cy="152" r="4" fill="#3572A5" />
+    <circle cx="26" cy="152" r="4" fill="#3572a5" />
     <text class="language" x="38" y="156">Python</text>
     <text class="percentage" x="350" y="156" text-anchor="end">7.7%</text>
 </svg>

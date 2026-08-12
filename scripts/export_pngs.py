@@ -160,7 +160,7 @@ def export_backgrounds():
                 canvas = Image.new(
                     "RGB",
                     (width, height),
-                    "#ffffff",
+                    "#fdfbf8",
                 )
 
                 x = (width - BACKGROUND_BASE_WIDTH) // 2

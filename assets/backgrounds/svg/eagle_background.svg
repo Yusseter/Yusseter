@@ -21,7 +21,7 @@
 		</clipPath>
 	</defs>
 
-	<rect id="background" x="0" y="0" width="1920" height="1080" fill="#ffffff" />
+	<rect id="background" x="0" y="0" width="1920" height="1080" fill="#fdfbf8" />
 
 	<g id="eagle-layout" transform="translate(362.746875 -66.234375) scale(2.99375000)">
 <g transform="translate(-3.7321472e-8,-3.2000245)" id="palaiologos-eagle">
@@ -253,7 +253,7 @@
 		</g>
 
 		<g id="chest-emblem" transform="translate(-3.7321472e-8,-3.2000245)">
-			<circle transform="matrix(0.9904422 0 0 1.0092514 -0.38627236 -0.01528094)" cx="202.5" cy="205.005" r="38.43" fill="none" stroke="#ffffff" stroke-width="5.0" />
+			<circle transform="matrix(0.9904422 0 0 1.0092514 -0.38627236 -0.01528094)" cx="202.5" cy="205.005" r="38.43" fill="none" stroke="#fdfbf8" stroke-width="5.0" />
 
 			<g transform="matrix(0.9904422 0 0 1.0092514 -0.38627236 -0.01528094)">
 				<g transform="translate(202.5 205.005) scale(0.066537037037) translate(-960 -960)">
@@ -262,7 +262,7 @@
 	<circle id="golden-crescent-base" cx="960" cy="960" r="540" fill="url(#emblem-golden-crescent-gradient)" />
 
 	<circle id="hittite-disk-outer" cx="960" cy="825" r="405" fill="#491d34" />
-	<circle id="hittite-disk-inner" cx="960" cy="825" r="365" fill="#ffffff" />
+	<circle id="hittite-disk-inner" cx="960" cy="825" r="365" fill="#fdfbf8" />
 
 	<g id="hittite-disk-pattern" fill="#491d34" clip-path="url(#emblem-hittite-disk-clip)">
 		<rect x="775" y="458" width="34" height="734" />

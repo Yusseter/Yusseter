@@ -2,34 +2,38 @@
 	<title id="title">Yusseter Profile Header</title>
 
 	<desc id="desc">A centered double-headed eagle with the Hittite Sun Disk and Golden Crescent emblem.</desc>
-<style>
-.header-background {
-fill: #ffffff;
-}
+<style id="profile-header-style">
+    .header-background {
+        fill: #fdfbf8;
+    }
 
-.header-rule-primary {
-stroke: #491d34;
-}
+    .header-rule-primary {
+        stroke: #491d34;
+    }
 
-.header-rule-accent {
-stroke: #c8ad67;
-}
+    .header-rule-accent {
+        stroke: #c8ad67;
+    }
 
-@media (prefers-color-scheme: dark) {
-.header-background {
-fill: #0d1117;
-}
+    .emblem-background-fill {
+        fill: #fdfbf8;
+    }
 
-.header-rule-primary {
-stroke: #c8ad67;
-}
+    .emblem-background-stroke {
+        stroke: #fdfbf8;
+    }
 
-#header-art #palaiologos-eagle path {
-fill: #c8ad67 !important;
-}
-}
+    #header-art #palaiologos-eagle path {
+        fill: #491d34 !important;
+    }
+
+    #chest-emblem #hittite-disk-outer,
+    #chest-emblem #hittite-disk-pattern,
+    #chest-emblem #emblem-hittite-disk-cross-motif {
+        fill: #491d34 !important;
+    }
 </style>
-	<defs>
+<defs>
 		<radialGradient id="emblem-golden-crescent-gradient" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
 			<stop offset="0%" stop-color="#d7c277" />
 			<stop offset="42%" stop-color="#c8ad67" />
@@ -327,7 +331,7 @@ transform="translate(380 90) scale(0.21) translate(-960 -540)"
 		</g>
 
 		<g id="chest-emblem" transform="translate(-3.7321472e-8,-3.2000245)">
-			<circle transform="matrix(0.9904422 0 0 1.0092514 -0.38627236 -0.01528094)" cx="202.5" cy="205.005" r="38.43" fill="none" stroke="#ffffff" stroke-width="5.0" />
+			<circle transform="matrix(0.9904422 0 0 1.0092514 -0.38627236 -0.01528094)" cx="202.5" cy="205.005" r="38.43" fill="none" stroke-width="5.0"  class="emblem-background-stroke" />
 
 			<g transform="matrix(0.9904422 0 0 1.0092514 -0.38627236 -0.01528094)">
 				<g transform="translate(202.5 205.005) scale(0.066537037037) translate(-960 -960)">
@@ -336,7 +340,7 @@ transform="translate(380 90) scale(0.21) translate(-960 -540)"
 	<circle id="golden-crescent-base" cx="960" cy="960" r="540" fill="url(#emblem-golden-crescent-gradient)" />
 
 	<circle id="hittite-disk-outer" cx="960" cy="825" r="405" fill="#491d34" />
-	<circle id="hittite-disk-inner" cx="960" cy="825" r="365" fill="#ffffff" />
+	<circle id="hittite-disk-inner" cx="960" cy="825" r="365"  class="emblem-background-fill" />
 
 	<g id="hittite-disk-pattern" fill="#491d34" clip-path="url(#emblem-hittite-disk-clip)">
 		<rect x="775" y="458" width="34" height="734" />

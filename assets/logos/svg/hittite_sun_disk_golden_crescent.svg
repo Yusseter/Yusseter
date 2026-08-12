@@ -21,12 +21,12 @@
 		</clipPath>
 	</defs>
 
-	<rect id="background" x="0" y="0" width="1920" height="1920" fill="#ffffff" />
+	<rect id="background" x="0" y="0" width="1920" height="1920" fill="#fdfbf8" />
 
 	<circle id="golden-crescent-base" cx="960" cy="960" r="540" fill="url(#golden-crescent-gradient)" />
 
 	<circle id="hittite-disk-outer" cx="960" cy="825" r="405" fill="#491d34" />
-	<circle id="hittite-disk-inner" cx="960" cy="825" r="365" fill="#ffffff" />
+	<circle id="hittite-disk-inner" cx="960" cy="825" r="365" fill="#fdfbf8" />
 
 	<g id="hittite-disk-pattern" fill="#491d34" clip-path="url(#hittite-disk-clip)">
 		<rect x="775" y="458" width="34" height="734" />
