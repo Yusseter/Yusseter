@@ -74,8 +74,7 @@ error_count = 0
 EMBEDDED_ID_MAP = {
     "golden-crescent-gradient":
         "emblem-golden-crescent-gradient",
-    "hittite-disk-cross-motif":
-        "emblem-hittite-disk-cross-motif",
+
     "hittite-disk-clip":
         "emblem-hittite-disk-clip",
 }
@@ -86,11 +85,7 @@ DEFINITION_ELEMENTS = (
         "golden-crescent-gradient",
         True,
     ),
-    (
-        "g",
-        "hittite-disk-cross-motif",
-        True,
-    ),
+
     (
         "clipPath",
         "hittite-disk-clip",
@@ -396,28 +391,6 @@ def sync_reversed_logo(
         "golden-crescent-gradient",
         True,
         gradient,
-    )
-
-    # Cross motif geometry is canonical, but its color is reversed.
-    motif = extract_element(
-        canonical_text,
-        "g",
-        "hittite-disk-cross-motif",
-        True,
-    )
-
-    motif = swap_brand_colors(
-        motif,
-        canonical_plum,
-        canonical_background,
-    )
-
-    updated = replace_element(
-        updated,
-        "g",
-        "hittite-disk-cross-motif",
-        True,
-        motif,
     )
 
     clip = extract_element(
