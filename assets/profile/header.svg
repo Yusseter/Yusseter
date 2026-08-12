@@ -47,8 +47,8 @@
 		</g>
 
 		<clipPath id="emblem-hittite-disk-clip">
-			<circle cx="960" cy="825" r="375" />
-		</clipPath>
+					<circle cx="960" cy="825" r="375" />
+				</clipPath>
 	</defs>
 
 	<rect
@@ -349,22 +349,38 @@ transform="translate(380 90) scale(0.21) translate(-960 -540)"
 		<rect x="593" y="640" width="734" height="34" />
 		<rect x="593" y="808" width="734" height="34" />
 		<rect x="593" y="976" width="734" height="34" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(708 573)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(876 573)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(1044 573)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(1212 573)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(708 741)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(876 741)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(1044 741)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(1212 741)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(708 909)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(876 909)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(1044 909)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(1212 909)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(708 1077)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(876 1077)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(1044 1077)" />
-		<use href="#emblem-hittite-disk-cross-motif" transform="translate(1212 1077)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(708 573) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(708 573) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(876 573) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(876 573) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1044 573) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1044 573) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1212 573) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1212 573) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(708 741) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(708 741) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(876 741) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(876 741) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1044 741) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1044 741) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1212 741) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1212 741) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(708 909) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(708 909) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(876 909) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(876 909) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1044 909) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1044 909) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1212 909) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1212 909) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(708 1077) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(708 1077) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(876 1077) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(876 1077) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1044 1077) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1044 1077) rotate(-45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1212 1077) rotate(45)" />
+		<rect x="-120" y="-18.5" width="240" height="37" transform="translate(1212 1077) rotate(-45)" />
 	</g>
 
 
