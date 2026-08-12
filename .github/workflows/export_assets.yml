@@ -48,7 +48,6 @@ jobs:
         run: |
           git add assets/backgrounds/png
           git add assets/logos/png
-          git add assets/profile/header.svg
 
           if git diff --cached --quiet; then
             echo "No visual asset changes."

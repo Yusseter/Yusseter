@@ -1,8 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="380" viewBox="160 140 1600 800" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="180" viewBox="0 0 760 180" role="img" aria-labelledby="title desc">
 	<title id="title">Yusseter Profile Header</title>
 
-	<desc id="desc">A deep plum double-headed Palaiologan eagle with crossless crowns and the Hittite Sun Disk and Golden Crescent emblem, separated from the eagle by a white ring.</desc>
+	<desc id="desc">A centered double-headed eagle with the Hittite Sun Disk and Golden Crescent emblem.</desc>
+<style>
+.header-background {
+fill: #ffffff;
+}
 
+.header-rule-primary {
+stroke: #491d34;
+}
+
+.header-rule-accent {
+stroke: #c8ad67;
+}
+
+@media (prefers-color-scheme: dark) {
+.header-background {
+fill: #0d1117;
+}
+
+.header-rule-primary {
+stroke: #c8ad67;
+}
+
+#header-art #palaiologos-eagle path {
+fill: #c8ad67 !important;
+}
+}
+</style>
 	<defs>
 		<radialGradient id="emblem-golden-crescent-gradient" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
 			<stop offset="0%" stop-color="#d7c277" />
@@ -21,7 +47,55 @@
 		</clipPath>
 	</defs>
 
-	<rect id="background" x="0" y="0" width="1920" height="1080" fill="#ffffff" />
+	<rect
+id="background"
+class="header-background"
+x="0"
+y="0"
+width="760"
+height="180"
+/>
+
+<line
+class="header-rule-primary"
+x1="28"
+y1="86"
+x2="248"
+y2="86"
+stroke-width="2"
+/>
+
+<line
+class="header-rule-accent"
+x1="28"
+y1="94"
+x2="248"
+y2="94"
+stroke-width="1"
+/>
+
+<line
+class="header-rule-primary"
+x1="512"
+y1="86"
+x2="732"
+y2="86"
+stroke-width="2"
+/>
+
+<line
+class="header-rule-accent"
+x1="512"
+y1="94"
+x2="732"
+y2="94"
+stroke-width="1"
+/>
+
+<g
+id="header-art"
+transform="translate(380 90) scale(0.21) translate(-960 -540)"
+>
 
 	<g id="eagle-layout" transform="translate(362.746875 -66.234375) scale(2.99375000)">
 <g transform="translate(-3.7321472e-8,-3.2000245)" id="palaiologos-eagle">
@@ -293,5 +367,6 @@
 				</g>
 			</g>
 		</g>
+	</g>
 	</g>
 </svg>

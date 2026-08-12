@@ -30,13 +30,6 @@ LOGOS_PNG_DIR = REPO_ROOT / "assets" / "logos" / "png"
 
 BACKGROUND_SOURCE = BACKGROUNDS_SVG_DIR / "eagle_background.svg"
 
-PROFILE_HEADER = (
-    REPO_ROOT
-    / "assets"
-    / "profile"
-    / "header.svg"
-)
-
 WINDOWS_INKSCAPE = Path(
     r"C:\Program Files\Inkscape\bin\inkscape.com"
 )
@@ -103,57 +96,6 @@ def export_svg(source, target, width, height):
         print(f"Error: {target.relative_to(REPO_ROOT)} -> {error}")
         error_count += 1
 
-def export_profile_header():
-    if not BACKGROUND_SOURCE.exists():
-        raise FileNotFoundError(
-            f"Background SVG not found: {BACKGROUND_SOURCE}"
-        )
-
-    source = BACKGROUND_SOURCE.read_text(
-        encoding="utf-8"
-    )
-
-    original_geometry = (
-        'width="1920" height="1080" '
-        'viewBox="0 0 1920 1080"'
-    )
-
-    header_geometry = (
-        'width="760" height="380" '
-        'viewBox="160 140 1600 800"'
-    )
-
-    if original_geometry not in source:
-        raise RuntimeError(
-            "Could not find the expected eagle SVG geometry."
-        )
-
-    header = source.replace(
-        original_geometry,
-        header_geometry,
-        1,
-    )
-
-    header = header.replace(
-        "Yusseter Eagle Background",
-        "Yusseter Profile Header",
-        1,
-    )
-
-    PROFILE_HEADER.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
-    PROFILE_HEADER.write_text(
-        header,
-        encoding="utf-8",
-        newline="\n",
-    )
-
-    print(
-        f"Updated: {PROFILE_HEADER.relative_to(REPO_ROOT)}"
-    )
 def export_backgrounds():
     global created_count, skipped_count, error_count
 
@@ -284,7 +226,6 @@ def main():
 
     print("Starting visual asset export...")
 
-    export_profile_header()
     export_backgrounds()
     export_logos()
 

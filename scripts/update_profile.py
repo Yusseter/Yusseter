@@ -4,14 +4,12 @@ from html import escape
 import json
 import os
 from pathlib import Path
-import textwrap
 import urllib.error
 import urllib.request
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 PROFILE_ASSETS_DIR = REPO_ROOT / "assets" / "profile"
-BUILDING_NOW_DIR = PROFILE_ASSETS_DIR / "building_now"
 README_PATH = REPO_ROOT / "README.md"
 
 USERNAME = os.environ.get("GITHUB_REPOSITORY_OWNER", "Yusseter")
@@ -234,19 +232,22 @@ def render_stats_svg(profile):
         ("Total releases", format_number(total_releases)),
     ]
 
-    positions = [150, 410]
+    positions = [95, 275]
     metric_markup = []
 
-    for x, (label, value) in zip(positions, metrics):
+    for x, (label, value) in zip(
+        positions,
+        metrics,
+    ):
         metric_markup.append(
             f'''
-    <g transform="translate({x} 103)">
+    <g transform="translate({x} 101)">
         <text class="value" x="0" y="0" text-anchor="middle">{escape(value)}</text>
-        <text class="label" x="0" y="26" text-anchor="middle">{escape(label)}</text>
+        <text class="label" x="0" y="25" text-anchor="middle">{escape(label)}</text>
     </g>'''
         )
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="560" height="180" viewBox="0 0 560 180" role="img" aria-labelledby="title desc">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="370" height="170" viewBox="0 0 370 170" role="img" aria-labelledby="title desc">
     <title id="title">{escape(USERNAME)} GitHub Stats</title>
     <desc id="desc">Aggregated GitHub statistics for {escape(USERNAME)}.</desc>
 
@@ -258,12 +259,12 @@ def render_stats_svg(profile):
 
         .title {{
             fill: #491d34;
-            font: 600 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }}
 
         .value {{
             fill: #1f2328;
-            font: 600 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 27px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }}
 
         .label {{
@@ -299,46 +300,64 @@ def render_stats_svg(profile):
         }}
     </style>
 
-    <rect class="card" x="0.5" y="0.5" width="559" height="179" rx="8" />
+    <rect class="card" x="0.5" y="0.5" width="369" height="169" rx="8" />
 
-    <text class="title" x="24" y="35">{escape(USERNAME)} · GitHub overview</text>
+    <text class="title" x="20" y="31">GitHub overview</text>
 
-    <line class="rule" x1="24" y1="51" x2="536" y2="51" />
-    <line class="rule" x1="280" y1="72" x2="280" y2="143" />
+    <line class="rule" x1="20" y1="47" x2="350" y2="47" />
+    <line class="rule" x1="185" y1="66" x2="185" y2="141" />
 
     {''.join(metric_markup)}
 </svg>
 '''
 def render_languages_svg(languages):
     top_languages = languages[:5]
-    total_bytes = sum(language["bytes"] for language in languages)
+
+    total_bytes = sum(
+        language["bytes"]
+        for language in languages
+    )
 
     if total_bytes == 0:
         rows = '''
-    <text class="muted" x="24" y="92">No language data available yet.</text>'''
+    <text class="muted" x="20" y="91">No language data available yet.</text>'''
+
         bar_segments = ""
+
     else:
         rows_markup = []
         bar_markup = []
-        bar_x = 24.0
-        bar_width = 512.0
 
-        for index, language in enumerate(top_languages):
-            percentage = language["bytes"] / total_bytes * 100
-            y = 92 + index * 19
+        bar_x = 20.0
+        bar_width = 330.0
+
+        for index, language in enumerate(
+            top_languages
+        ):
+            percentage = (
+                language["bytes"]
+                / total_bytes
+                * 100
+            )
+
+            y = 84 + index * 18
             color = language["color"]
 
             rows_markup.append(
                 f'''
-    <circle cx="30" cy="{y - 4}" r="4" fill="{escape(color)}" />
-    <text class="language" x="42" y="{y}">{escape(language["name"])}</text>
-    <text class="percentage" x="526" y="{y}" text-anchor="end">{percentage:.1f}%</text>'''
+    <circle cx="26" cy="{y - 4}" r="4" fill="{escape(color)}" />
+    <text class="language" x="38" y="{y}">{escape(language["name"])}</text>
+    <text class="percentage" x="350" y="{y}" text-anchor="end">{percentage:.1f}%</text>'''
             )
 
-            segment_width = bar_width * language["bytes"] / total_bytes
+            segment_width = (
+                bar_width
+                * language["bytes"]
+                / total_bytes
+            )
 
             bar_markup.append(
-                f'<rect x="{bar_x:.2f}" y="58" width="{segment_width:.2f}" height="10" fill="{escape(color)}" />'
+                f'<rect x="{bar_x:.2f}" y="52" width="{segment_width:.2f}" height="10" fill="{escape(color)}" />'
             )
 
             bar_x += segment_width
@@ -346,7 +365,7 @@ def render_languages_svg(languages):
         rows = "".join(rows_markup)
         bar_segments = "\n    ".join(bar_markup)
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="560" height="180" viewBox="0 0 560 180" role="img" aria-labelledby="title desc">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="370" height="170" viewBox="0 0 370 170" role="img" aria-labelledby="title desc">
     <title id="title">{escape(USERNAME)} Top Languages</title>
     <desc id="desc">Language distribution across public non-archived project repositories owned by {escape(USERNAME)}.</desc>
 
@@ -358,7 +377,7 @@ def render_languages_svg(languages):
 
         .title {{
             fill: #491d34;
-            font: 600 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font: 600 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }}
 
         .language {{
@@ -403,198 +422,21 @@ def render_languages_svg(languages):
 
     <defs>
         <clipPath id="language-bar-clip">
-            <rect x="24" y="58" width="512" height="10" rx="5" />
+            <rect x="20" y="52" width="330" height="10" rx="5" />
         </clipPath>
     </defs>
 
-    <rect class="card" x="0.5" y="0.5" width="559" height="179" rx="8" />
+    <rect class="card" x="0.5" y="0.5" width="369" height="169" rx="8" />
 
-    <text class="title" x="24" y="35">Languages</text>
+    <text class="title" x="20" y="31">Languages</text>
 
-    <rect class="bar-background" x="24" y="58" width="512" height="10" rx="5" />
+    <rect class="bar-background" x="20" y="52" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
         {bar_segments}
     </g>
 
     {rows}
-</svg>
-'''
-
-def render_overview_svg(profile, languages):
-    repositories = profile["repositories"]
-
-    total_stars = sum(
-        repository["stargazerCount"]
-        for repository in repositories
-    )
-
-    total_releases = sum(
-        repository["releases"]["totalCount"]
-        for repository in repositories
-    )
-
-    metrics = [
-        ("Total stars", format_number(total_stars)),
-        ("Total releases", format_number(total_releases)),
-    ]
-
-    metric_positions = [105, 255]
-    metric_markup = []
-
-    for x, (label, value) in zip(
-        metric_positions,
-        metrics,
-    ):
-        metric_markup.append(
-            f'''
-    <text class="value" x="{x}" y="108" text-anchor="middle">{escape(value)}</text>
-    <text class="label" x="{x}" y="134" text-anchor="middle">{escape(label)}</text>'''
-        )
-
-    top_languages = languages[:5]
-    total_bytes = sum(
-        language["bytes"]
-        for language in languages
-    )
-
-    language_markup = []
-    bar_markup = []
-
-    bar_x = 390.0
-    bar_width = 346.0
-
-    if total_bytes:
-        for index, language in enumerate(
-            top_languages
-        ):
-            percentage = (
-                language["bytes"]
-                / total_bytes
-                * 100
-            )
-
-            y = 99 + index * 23
-            color = language["color"]
-
-            language_markup.append(
-                f'''
-    <circle cx="397" cy="{y - 4}" r="4" fill="{escape(color)}" />
-    <text class="language" x="409" y="{y}">{escape(language["name"])}</text>
-    <text class="percentage" x="728" y="{y}" text-anchor="end">{percentage:.1f}%</text>'''
-            )
-
-            segment_width = (
-                bar_width
-                * language["bytes"]
-                / total_bytes
-            )
-
-            bar_markup.append(
-                f'<rect x="{bar_x:.2f}" y="58" width="{segment_width:.2f}" height="10" fill="{escape(color)}" />'
-            )
-
-            bar_x += segment_width
-
-    else:
-        language_markup.append(
-            '''
-    <text class="muted" x="390" y="105">No language data available yet.</text>'''
-        )
-
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="760" height="230" viewBox="0 0 760 230" role="img" aria-labelledby="title desc">
-    <title id="title">{escape(USERNAME)} GitHub Overview</title>
-    <desc id="desc">Aggregated GitHub statistics and language distribution for {escape(USERNAME)}.</desc>
-
-    <style>
-        .card {{
-            fill: #ffffff;
-            stroke: #d0d7de;
-        }}
-
-        .heading {{
-            fill: #491d34;
-            font: 600 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }}
-
-        .value {{
-            fill: #1f2328;
-            font: 600 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }}
-
-        .label,
-        .percentage,
-        .muted {{
-            fill: #656d76;
-            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }}
-
-        .language {{
-            fill: #1f2328;
-            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }}
-
-        .rule {{
-            stroke: #d0d7de;
-        }}
-
-        .bar-background {{
-            fill: #eaeef2;
-        }}
-
-        @media (prefers-color-scheme: dark) {{
-            .card {{
-                fill: #0d1117;
-                stroke: #30363d;
-            }}
-
-            .heading {{
-                fill: #c8ad67;
-            }}
-
-            .value,
-            .language {{
-                fill: #e6edf3;
-            }}
-
-            .label,
-            .percentage,
-            .muted {{
-                fill: #8b949e;
-            }}
-
-            .rule {{
-                stroke: #30363d;
-            }}
-
-            .bar-background {{
-                fill: #21262d;
-            }}
-        }}
-    </style>
-
-    <defs>
-        <clipPath id="overview-language-bar">
-            <rect x="390" y="58" width="346" height="10" rx="5" />
-        </clipPath>
-    </defs>
-
-    <rect class="card" x="0.5" y="0.5" width="759" height="229" rx="8" />
-
-    <text class="heading" x="24" y="35">GitHub overview</text>
-    <text class="heading" x="390" y="35">Languages</text>
-
-    <line class="rule" x1="360" y1="24" x2="360" y2="206" />
-
-    {''.join(metric_markup)}
-
-    <rect class="bar-background" x="390" y="58" width="346" height="10" rx="5" />
-
-    <g clip-path="url(#overview-language-bar)">
-        {''.join(bar_markup)}
-    </g>
-
-    {''.join(language_markup)}
 </svg>
 '''
 def parse_github_date(value):
@@ -799,18 +641,6 @@ def collect_building_now(repositories):
 
     return candidates[:BUILDING_NOW_LIMIT]
 
-def building_card_filename(repository):
-    name = repository["name"]
-
-    safe_name = "".join(
-        character
-        if character.isalnum() or character in "-_."
-        else "_"
-        for character in name
-    )
-
-    return f"{safe_name}.svg"
-
 def relative_commit_age(days):
     if days == 0:
         return "today"
@@ -820,136 +650,13 @@ def relative_commit_age(days):
 
     return f"{days}d ago"
 
-def render_building_card_svg(item):
-    repository = item["repository"]
-    activity = item["activity"]
-
-    description = (
-        (repository["description"] or "No description.")
-        .replace("\r", " ")
-        .replace("\n", " ")
-        .strip()
-    )
-
-    description_lines = textwrap.wrap(
-        description,
-        width=88,
-        max_lines=2,
-        placeholder="…",
-    )
-
-    while len(description_lines) < 2:
-        description_lines.append("")
-
+def primary_language(repository):
     language_edges = repository["languages"]["edges"]
 
-    if language_edges:
-        language = language_edges[0]["node"]["name"]
-        language_color = (
-            language_edges[0]["node"]["color"]
-            or "#8b949e"
-        )
-    else:
-        language = "No language data"
-        language_color = "#8b949e"
+    if not language_edges:
+        return "No language data"
 
-    latest_commit_age = activity["latest_commit_age"]
-
-    activity_text = (
-        f'{activity["commits_7d"]} commits / 7d'
-        f' · {activity["active_days_14d"]} active days / 14d'
-    )
-
-    if latest_commit_age is not None:
-        activity_text += (
-            f" · last commit "
-            f"{relative_commit_age(latest_commit_age)}"
-        )
-
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="760" height="142" viewBox="0 0 760 142" role="img" aria-labelledby="title desc">
-    <title id="title">{escape(repository["name"])}</title>
-    <desc id="desc">{escape(description)}</desc>
-
-    <style>
-        .card {{
-            fill: #ffffff;
-            stroke: #d0d7de;
-        }}
-
-        .accent {{
-            fill: #c8ad67;
-        }}
-
-        .title {{
-            fill: #491d34;
-            font: 600 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }}
-
-        .description {{
-            fill: #1f2328;
-            font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }}
-
-        .meta {{
-            fill: #656d76;
-            font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }}
-
-        @media (prefers-color-scheme: dark) {{
-            .card {{
-                fill: #0d1117;
-                stroke: #30363d;
-            }}
-
-            .title {{
-                fill: #c8ad67;
-            }}
-
-            .description {{
-                fill: #e6edf3;
-            }}
-
-            .meta {{
-                fill: #8b949e;
-            }}
-        }}
-    </style>
-
-    <rect class="card" x="0.5" y="0.5" width="759" height="141" rx="8" />
-    <rect class="accent" x="0.5" y="0.5" width="5" height="141" rx="3" />
-
-    <text class="title" x="24" y="34">{escape(repository["name"])}</text>
-
-    <text class="description" x="24" y="61">{escape(description_lines[0])}</text>
-    <text class="description" x="24" y="81">{escape(description_lines[1])}</text>
-
-    <circle cx="29" cy="112" r="4" fill="{escape(language_color)}" />
-    <text class="meta" x="40" y="116">{escape(language)} · {escape(activity_text)}</text>
-</svg>
-'''
-
-def write_building_now_cards(items):
-    BUILDING_NOW_DIR.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
-    for existing in BUILDING_NOW_DIR.glob("*.svg"):
-        existing.unlink()
-
-    for item in items:
-        repository = item["repository"]
-
-        target = (
-            BUILDING_NOW_DIR
-            / building_card_filename(repository)
-        )
-
-        target.write_text(
-            render_building_card_svg(item),
-            encoding="utf-8",
-            newline="\n",
-        )
+    return language_edges[0]["node"]["name"]
 
 def render_building_now(items):
     if not items:
@@ -959,14 +666,38 @@ def render_building_now(items):
 
     for item in items:
         repository = item["repository"]
-        filename = building_card_filename(repository)
+        activity = item["activity"]
 
-        lines.append(
-            f'[![{repository["name"]}](./assets/profile/building_now/{filename})]'
-            f'({repository["url"]})'
+        description = (
+            (repository["description"] or "No description.")
+            .replace("\r", " ")
+            .replace("\n", " ")
+            .strip()
         )
 
-    return "\n\n".join(lines)
+        language = primary_language(repository)
+
+        activity_text = (
+            f'{language}'
+            f' · {activity["commits_7d"]} commits / 7d'
+            f' · {activity["active_days_14d"]} active days / 14d'
+        )
+
+        latest_commit_age = activity["latest_commit_age"]
+
+        if latest_commit_age is not None:
+            activity_text += (
+                f" · last commit "
+                f"{relative_commit_age(latest_commit_age)}"
+            )
+
+        lines.append(
+            f'- **[{repository["name"]}]({repository["url"]})**'
+            f' — {description}  \n'
+            f'  *{activity_text}*'
+        )
+
+    return "\n".join(lines)
 def collect_recent_releases(repositories):
     releases = []
 
@@ -1142,7 +873,6 @@ def main():
         exist_ok=True,
     )
 
-    write_building_now_cards(building_now)
 
     (PROFILE_ASSETS_DIR / "stats.svg").write_text(
         render_stats_svg(profile),
@@ -1156,14 +886,6 @@ def main():
         newline="\n",
     )
 
-    (PROFILE_ASSETS_DIR / "overview.svg").write_text(
-        render_overview_svg(
-            profile,
-            languages,
-        ),
-        encoding="utf-8",
-        newline="\n",
-    )
 
     update_readme(repositories, building_now)
 
