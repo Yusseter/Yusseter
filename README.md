@@ -32,8 +32,7 @@
 ## GitHub snapshot
 
 <p align="center">
-  <img src="./assets/profile/stats.svg" width="370" alt="GitHub overview">
-  <img src="./assets/profile/languages.svg" width="370" alt="Languages">
+  <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
 </p>
 
 <details>
