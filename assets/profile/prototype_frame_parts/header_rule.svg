@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+ width="330" height="1" viewBox="0 0 330 1">
+<style>
+.stroke {
+    fill: none;
+    stroke: #d1d9e0;
+    stroke-opacity: 0.70;
+    stroke-width: 1;
+}
+.track {
+    fill: #59636e;
+    fill-opacity: 0.12;
+}
+@media (prefers-color-scheme: dark) {
+    .stroke {
+        stroke: #3d444d;
+        stroke-opacity: 0.70;
+    }
+    .track {
+        fill: #9198a1;
+        fill-opacity: 0.18;
+    }
+}
+</style>
+<line class="stroke" x1="0" y1="0.5" x2="330" y2="0.5"/>
+</svg>

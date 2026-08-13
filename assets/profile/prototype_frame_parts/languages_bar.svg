@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+ width="330" height="10" viewBox="0 0 330 10">
+<style>
+.stroke {
+    fill: none;
+    stroke: #d1d9e0;
+    stroke-opacity: 0.70;
+    stroke-width: 1;
+}
+.track {
+    fill: #59636e;
+    fill-opacity: 0.12;
+}
+@media (prefers-color-scheme: dark) {
+    .stroke {
+        stroke: #3d444d;
+        stroke-opacity: 0.70;
+    }
+    .track {
+        fill: #9198a1;
+        fill-opacity: 0.18;
+    }
+}
+</style>
+<defs>
+  <clipPath id="bar-clip">
+    <rect width="330" height="10" rx="5"/>
+  </clipPath>
+</defs>
+<rect class="track" width="330" height="10" rx="5"/>
+<g clip-path="url(#bar-clip)">
+  <rect x="0.00" y="0" width="152.46" height="10" fill="#f34b7d"/>
+<rect x="152.46" y="0" width="65.34" height="10" fill="#f1e05a"/>
+<rect x="217.80" y="0" width="34.98" height="10" fill="#012456"/>
+<rect x="252.78" y="0" width="31.68" height="10" fill="#663399"/>
+<rect x="284.46" y="0" width="25.74" height="10" fill="#3572a5"/>
+</g>
+</svg>
