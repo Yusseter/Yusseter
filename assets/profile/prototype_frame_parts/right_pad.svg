@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg"
- width="370" height="7"
- viewBox="0 0 370 7"
+ width="20" height="1"
+ viewBox="0 0 20 1"
  role="presentation" aria-hidden="true">
 <style>
 .edge {
@@ -33,7 +33,5 @@
     }
 }
 </style>
-<path class="stroke"
- d="M0.5 7 V6.5 A6 6 0 0 1 6.5 0.5
- H363.5 A6 6 0 0 1 369.5 6.5 V7"/>
+<rect class="edge" x="19" y="0" width="1" height="1"/>
 </svg>

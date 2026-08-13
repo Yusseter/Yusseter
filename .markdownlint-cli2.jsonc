@@ -29,10 +29,8 @@
           "allowed_elements": [
             "p",
             "img",
-            "table",
-            "tr",
-            "td",
-            "h3",
+            "strong",
+            "big",
             "br"
           ]
         }
