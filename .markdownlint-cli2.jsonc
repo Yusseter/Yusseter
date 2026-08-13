@@ -19,6 +19,25 @@
         }
       },
       "combine": "merge"
+    },
+    {
+      "filter": [
+        "prototype_snapshot.md"
+      ],
+      "config": {
+        "MD033": {
+          "allowed_elements": [
+            "p",
+            "img",
+            "table",
+            "tr",
+            "td",
+            "h2",
+            "h3"
+          ]
+        }
+      },
+      "combine": "merge"
     }
   ]
 }
