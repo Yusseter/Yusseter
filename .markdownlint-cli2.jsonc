@@ -33,8 +33,7 @@
             "tr",
             "td",
             "h3",
-            "big",
-            "strong",
+            "span",
             "br"
           ]
         }
