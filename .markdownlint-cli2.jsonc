@@ -28,7 +28,13 @@
         "MD033": {
           "allowed_elements": [
             "p",
-            "img"
+            "img",
+            "table",
+            "tr",
+            "td",
+            "strong",
+            "big",
+            "br"
           ]
         }
       },
