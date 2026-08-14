@@ -6,9 +6,7 @@
 
 <!-- building_now:start -->
 - **[tray-order-lock](https://github.com/Yusseter/tray-order-lock)** — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.  
-  *C++ · active this week · updated today*
-- **[ck3-workshop-auto-updater](https://github.com/Yusseter/ck3-workshop-auto-updater)** — A Windows utility that detects and requests missing Crusader Kings III Steam Workshop updates.  
-  *PowerShell · active this week · updated 6d ago*
+  *C++ · active this week · updated 1d ago*
 <!-- building_now:end -->
 
 ## Recent releases
