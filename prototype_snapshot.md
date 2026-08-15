@@ -10,7 +10,7 @@
 
 ## Native-table hybrid snapshot
 
-<table align="left" width="370" height="190">
+<table align="left" width="370">
   <tr>
     <td colspan="2" align="left" valign="middle">
       <strong><big>GitHub overview</big></strong><br>
@@ -19,18 +19,18 @@
     </td>
   </tr>
   <tr>
-    <td width="185" height="132" align="center" valign="middle">
+    <td width="185" align="center" valign="middle">
       <strong><big><big><big>3</big></big></big></strong><br>
-      <big>Total stars</big>
+      <big>Total stars</big><br><br><br>
     </td>
-    <td width="185" height="132" align="center" valign="middle">
+    <td width="185" align="center" valign="middle">
       <strong><big><big><big>7</big></big></big></strong><br>
-      <big>Total releases</big>
+      <big>Total releases</big><br><br><br>
     </td>
   </tr>
 </table>
 
-<table align="right" width="370" height="190">
+<table align="right" width="370">
   <tr>
     <td colspan="2" align="left" valign="middle">
       <strong><big>Languages</big></strong><br><br>
