@@ -2,6 +2,7 @@
 * text=auto
 
 # Text files
+*.json text eol=lf
 *.jsonc text eol=lf
 *.md text eol=lf
 *.py text eol=lf

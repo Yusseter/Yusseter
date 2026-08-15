@@ -7,6 +7,12 @@ from pathlib import Path
 import urllib.error
 import urllib.request
 
+from profile_renderers import (
+    load_snapshot_mode,
+    render_snapshot_readme,
+    write_native_table_hybrid_assets,
+)
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 PROFILE_ASSETS_DIR = REPO_ROOT / "assets" / "profile"
@@ -787,30 +793,30 @@ def replace_marked_block(content, marker, replacement):
 
     return updated, True
 
-def update_readme(repositories, building_now):
+def update_readme(
+    profile,
+    languages,
+    building_now,
+    snapshot_mode,
+):
+    repositories = profile["repositories"]
+
     if not README_PATH.exists():
         return
 
     content = README_PATH.read_text(encoding="utf-8")
 
-    legacy_snapshot = """<p align="center">
-  <img src="./assets/profile/stats.svg" width="370" alt="GitHub overview">
-  <img src="./assets/profile/languages.svg" width="370" alt="Languages">
-</p>"""
+    snapshot = render_snapshot_readme(
+        profile,
+        languages,
+        snapshot_mode,
+    )
 
-    snapshot = """<p align="center">
-  <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
-</p>"""
-
-    snapshot_updated = False
-
-    if legacy_snapshot in content:
-        content = content.replace(
-            legacy_snapshot,
-            snapshot,
-            1,
-        )
-        snapshot_updated = True
+    content, snapshot_updated = replace_marked_block(
+        content,
+        "snapshot",
+        snapshot,
+    )
 
     content, building_updated = replace_marked_block(
         content,
@@ -845,6 +851,10 @@ def update_readme(repositories, building_now):
         )
 
 def main():
+    snapshot_mode = load_snapshot_mode(
+        REPO_ROOT
+    )
+
     profile = fetch_profile_data()
     repositories = profile["repositories"]
     languages = aggregate_languages(repositories)
@@ -862,6 +872,11 @@ def main():
         newline="\n",
     )
 
+    write_native_table_hybrid_assets(
+        PROFILE_ASSETS_DIR,
+        languages,
+    )
+
     for legacy_name in (
         "stats.svg",
         "languages.svg",
@@ -872,9 +887,15 @@ def main():
             legacy_path.unlink()
 
 
-    update_readme(repositories, building_now)
+    update_readme(
+        profile,
+        languages,
+        building_now,
+        snapshot_mode,
+    )
 
     print("Updated profile assets.")
+    print(f"Snapshot mode: {snapshot_mode}")
     print(f"Repositories: {len(repositories)}")
     print(f"Languages: {len(languages)}")
     print(f"Building now: {len(building_now)}")

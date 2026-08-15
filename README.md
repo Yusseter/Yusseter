@@ -29,9 +29,11 @@
 
 ## GitHub snapshot
 
+<!-- snapshot:start -->
 <p align="center">
   <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
 </p>
+<!-- snapshot:end -->
 
 <details>
 <summary>Recently updated repositories</summary>

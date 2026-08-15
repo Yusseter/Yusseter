@@ -10,34 +10,18 @@
             "p",
             "img",
             "details",
-            "summary"
+            "summary",
+            "table",
+            "tr",
+            "td",
+            "h2",
+            "h3",
+            "br"
           ]
         },
         "MD041": {
           "allow_preamble": true,
           "level": 2
-        }
-      },
-      "combine": "merge"
-    },
-    {
-      "filter": [
-        "prototype_snapshot.md"
-      ],
-      "config": {
-        "MD033": {
-          "allowed_elements": [
-            "p",
-            "img",
-            "table",
-            "tr",
-            "td",
-            "strong",
-            "big",
-            "br",
-            "h3",
-            "h2"
-          ]
         }
       },
       "combine": "merge"
