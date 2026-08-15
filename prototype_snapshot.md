@@ -20,16 +20,16 @@
   </tr>
   <tr>
     <td width="185" align="center" valign="middle">
-      <h3>3</h3>
+      <h2>3</h2>
       Total stars<br>
       <img src="./assets/profile/prototype_card_height.svg"
-           width="1" height="34" alt="">
+           width="1" height="20" alt="">
     </td>
     <td width="185" align="center" valign="middle">
-      <h3>7</h3>
+      <h2>7</h2>
       Total releases<br>
       <img src="./assets/profile/prototype_card_height.svg"
-           width="1" height="34" alt="">
+           width="1" height="20" alt="">
     </td>
   </tr>
 </table>
