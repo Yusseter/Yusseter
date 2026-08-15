@@ -13,19 +13,23 @@
 <table align="left" width="370">
   <tr>
     <td colspan="2" align="left" valign="middle">
-      <strong><big>GitHub overview</big></strong><br>
+      <h3>GitHub overview</h3>
       <img src="./assets/profile/prototype_card_width.svg"
            width="330" height="1" alt="">
     </td>
   </tr>
   <tr>
     <td width="185" align="center" valign="middle">
-      <strong><big><big><big>3</big></big></big></strong><br>
-      <big>Total stars</big><br><br><br>
+      <h3>3</h3>
+      Total stars<br>
+      <img src="./assets/profile/prototype_card_height.svg"
+           width="1" height="34" alt="">
     </td>
     <td width="185" align="center" valign="middle">
-      <strong><big><big><big>7</big></big></big></strong><br>
-      <big>Total releases</big><br><br><br>
+      <h3>7</h3>
+      Total releases<br>
+      <img src="./assets/profile/prototype_card_height.svg"
+           width="1" height="34" alt="">
     </td>
   </tr>
 </table>
@@ -33,7 +37,7 @@
 <table align="right" width="370">
   <tr>
     <td colspan="2" align="left" valign="middle">
-      <strong><big>Languages</big></strong><br><br>
+      <h3>Languages</h3>
       <img src="./assets/profile/prototype_languages_bar.svg"
            width="330" height="10"
            alt="Language distribution">
