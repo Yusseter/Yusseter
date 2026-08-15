@@ -10,27 +10,29 @@
 
 ## Native-table hybrid snapshot
 
-<table align="left" width="370">
+<table align="left" width="370" height="190">
   <tr>
-    <td colspan="2" align="left">
-      <strong><big>GitHub overview</big></strong>
+    <td colspan="2" align="left" valign="middle">
+      <strong><big>GitHub overview</big></strong><br>
+      <img src="./assets/profile/prototype_card_width.svg"
+           width="330" height="1" alt="">
     </td>
   </tr>
   <tr>
-    <td width="185" align="center">
-      <strong><big><big>3</big></big></strong><br>
-      Total stars
+    <td width="185" height="132" align="center" valign="middle">
+      <strong><big><big><big>3</big></big></big></strong><br>
+      <big>Total stars</big>
     </td>
-    <td width="185" align="center">
-      <strong><big><big>7</big></big></strong><br>
-      Total releases
+    <td width="185" height="132" align="center" valign="middle">
+      <strong><big><big><big>7</big></big></big></strong><br>
+      <big>Total releases</big>
     </td>
   </tr>
 </table>
 
-<table align="right" width="370">
+<table align="right" width="370" height="190">
   <tr>
-    <td colspan="2" align="left">
+    <td colspan="2" align="left" valign="middle">
       <strong><big>Languages</big></strong><br><br>
       <img src="./assets/profile/prototype_languages_bar.svg"
            width="330" height="10"
@@ -38,14 +40,14 @@
     </td>
   </tr>
   <tr>
-    <td align="left">
-      <img src="./assets/profile/prototype_language_dots/dot-1.svg" width="8" height="8" alt=""> C++<br>
-      <img src="./assets/profile/prototype_language_dots/dot-2.svg" width="8" height="8" alt=""> JavaScript<br>
-      <img src="./assets/profile/prototype_language_dots/dot-3.svg" width="8" height="8" alt=""> PowerShell<br>
-      <img src="./assets/profile/prototype_language_dots/dot-4.svg" width="8" height="8" alt=""> CSS<br>
-      <img src="./assets/profile/prototype_language_dots/dot-5.svg" width="8" height="8" alt=""> Python
+    <td width="285" align="left" valign="top">
+      <img src="./assets/profile/prototype_language_dots/dot-1.svg" width="8" height="16" alt=""> C++<br>
+      <img src="./assets/profile/prototype_language_dots/dot-2.svg" width="8" height="16" alt=""> JavaScript<br>
+      <img src="./assets/profile/prototype_language_dots/dot-3.svg" width="8" height="16" alt=""> PowerShell<br>
+      <img src="./assets/profile/prototype_language_dots/dot-4.svg" width="8" height="16" alt=""> CSS<br>
+      <img src="./assets/profile/prototype_language_dots/dot-5.svg" width="8" height="16" alt=""> Python
     </td>
-    <td align="right">
+    <td width="65" align="right" valign="top">
       44.4%<br>
       20.5%<br>
       11.0%<br>
@@ -59,4 +61,4 @@
 
 ## Evaluation
 
-All visible text is native GitHub HTML. The language distribution bar and color markers are the only SVG components.
+All visible text is native GitHub HTML. The language distribution bar and color markers are SVG components; one transparent SVG only enforces equal card width.
