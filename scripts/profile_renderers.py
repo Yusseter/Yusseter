@@ -84,7 +84,7 @@ def render_bar_svg(languages):
                 f'y="0" '
                 f'width="{width:.2f}" '
                 f'height="10" '
-                f'fill="{escape(language["color"])}" />'
+                f'fill="{escape(language["color"].lower())}" />'
             )
 
             bar_x += width
@@ -125,7 +125,7 @@ def render_bar_svg(languages):
 
 def render_dot_svg(color):
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="8" height="16" viewBox="0 0 8 16" role="presentation" aria-hidden="true">
-    <circle cx="4" cy="10" r="4" fill="{escape(color)}" />
+    <circle cx="4" cy="10" r="4" fill="{escape(color.lower())}" />
 </svg>
 '''
 
