@@ -838,8 +838,8 @@ def render_language_metadata(language):
         return escaped_language
 
     return (
-        f'<img src="{icon_url}" alt="" '
-        f'height="18" align="texttop">'
+        f'<picture><img src="{icon_url}" alt="" '
+        f'height="16" align="texttop"></picture>'
         f'{escaped_language}'
     )
 
