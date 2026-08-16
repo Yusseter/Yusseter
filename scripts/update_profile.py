@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, timezone
 from html import escape
 import json
 import os
+import re
 from pathlib import Path
 import urllib.error
 import urllib.parse
@@ -17,6 +18,7 @@ from profile_renderers import (
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 PROFILE_ASSETS_DIR = REPO_ROOT / "assets" / "profile"
+LANGUAGE_ASSETS_DIR = PROFILE_ASSETS_DIR / "languages"
 README_PATH = REPO_ROOT / "README.md"
 
 USERNAME = os.environ.get("GITHUB_REPOSITORY_OWNER", "Yusseter")
@@ -53,6 +55,9 @@ SETI_LANGUAGE_ICON_OVERRIDES = {
     "Jupyter Notebook": "jupyter",
     "Vim Script": "vim",
 }
+
+SETI_ICON_RENDER_HEIGHT = 18
+SETI_ICON_VERTICAL_SHIFT_PX = 2.0
 
 _SETI_ICON_AVAILABILITY = {}
 
@@ -830,16 +835,132 @@ def seti_language_icon_url(language):
 
     return icon_url if available else None
 
+def seti_language_icon_asset_path(language):
+    if language == "No language data":
+        return None
+
+    stem = normalized_seti_icon_stem(language)
+
+    if not stem:
+        return None
+
+    return LANGUAGE_ASSETS_DIR / f"{stem}.svg"
+
+def normalize_seti_icon_svg(svg_text):
+    match = re.search(
+        r'\bviewBox="([^"]+)"',
+        svg_text,
+    )
+
+    if not match:
+        raise ValueError("Seti SVG is missing a viewBox.")
+
+    values = match.group(1).split()
+
+    if len(values) != 4:
+        raise ValueError("Seti SVG has an invalid viewBox.")
+
+    min_x, min_y, width, height = map(float, values)
+
+    if height <= 0:
+        raise ValueError("Seti SVG has an invalid viewBox height.")
+
+    shift = (
+        height
+        * SETI_ICON_VERTICAL_SHIFT_PX
+        / SETI_ICON_RENDER_HEIGHT
+    )
+
+    adjusted_viewbox = " ".join(
+        f"{value:g}"
+        for value in (
+            min_x,
+            min_y + shift,
+            width,
+            height,
+        )
+    )
+
+    return (
+        svg_text[:match.start(1)]
+        + adjusted_viewbox
+        + svg_text[match.end(1):]
+    )
+
+def write_seti_language_assets(items):
+    LANGUAGE_ASSETS_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    desired_names = set()
+
+    for item in items:
+        language = primary_language(item["repository"])
+        asset_path = seti_language_icon_asset_path(language)
+        icon_url = seti_language_icon_url(language)
+
+        if not asset_path or not icon_url:
+            continue
+
+        desired_names.add(asset_path.name)
+
+        request = urllib.request.Request(
+            icon_url,
+            headers={
+                "User-Agent": f"{USERNAME}-profile-updater",
+            },
+            method="GET",
+        )
+
+        try:
+            with urllib.request.urlopen(
+                request,
+                timeout=10,
+            ) as response:
+                svg_text = response.read().decode("utf-8")
+
+            normalized_svg = normalize_seti_icon_svg(
+                svg_text
+            )
+        except (
+            urllib.error.HTTPError,
+            urllib.error.URLError,
+            TimeoutError,
+            UnicodeDecodeError,
+            ValueError,
+        ):
+            continue
+
+        asset_path.write_text(
+            normalized_svg.rstrip() + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+
+    for asset_path in LANGUAGE_ASSETS_DIR.glob("*.svg"):
+        if asset_path.name not in desired_names:
+            asset_path.unlink()
+
 def render_language_metadata(language):
     escaped_language = escape(language)
-    icon_url = seti_language_icon_url(language)
+    asset_path = seti_language_icon_asset_path(language)
 
-    if not icon_url:
+    if asset_path and asset_path.exists():
+        icon_src = (
+            "./assets/profile/languages/"
+            f"{asset_path.name}"
+        )
+    else:
+        icon_src = seti_language_icon_url(language)
+
+    if not icon_src:
         return escaped_language
 
     return (
-        f'<picture><img src="{icon_url}" alt="" '
-        f'height="16" align="texttop"></picture>'
+        f'<picture><img src="{icon_src}" alt="" '
+        f'height="{SETI_ICON_RENDER_HEIGHT}" '
+        f'align="texttop"></picture>'
         f'{escaped_language}'
     )
 
@@ -1130,6 +1251,7 @@ def main():
         exist_ok=True,
     )
 
+    write_seti_language_assets(building_now)
 
     (PROFILE_ASSETS_DIR / "snapshot.svg").write_text(
         render_snapshot_svg(profile, languages),
