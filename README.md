@@ -6,9 +6,9 @@
 
 <!-- building_now:start -->
 - [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — *No description.*<br>
-  <sub><blockquote>Updated 9 hours ago · <picture><img src="https://raw.githubusercontent.com/jesseweed/seti-ui/2d6c5e68b4ded73c92dac291845ee44e1182d511/icons/powershell.svg" alt="" height="18" align="texttop"></picture>PowerShell</blockquote></sub>
+  <sub><blockquote>Updated 2 minutes ago · <img src="https://raw.githubusercontent.com/jesseweed/seti-ui/2d6c5e68b4ded73c92dac291845ee44e1182d511/icons/powershell.svg" alt="" height="18" align="texttop">PowerShell</blockquote></sub>
 - [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.<br>
-  <sub><blockquote>Updated 3 days ago · <picture><img src="https://raw.githubusercontent.com/jesseweed/seti-ui/2d6c5e68b4ded73c92dac291845ee44e1182d511/icons/cpp.svg" alt="" height="18" align="texttop"></picture>C++</blockquote></sub>
+  <sub><blockquote>Updated 3 days ago · <img src="https://raw.githubusercontent.com/jesseweed/seti-ui/2d6c5e68b4ded73c92dac291845ee44e1182d511/icons/cpp.svg" alt="" height="18" align="texttop">C++</blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent releases
