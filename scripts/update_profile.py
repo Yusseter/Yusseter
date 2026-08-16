@@ -838,9 +838,9 @@ def render_language_metadata(language):
         return escaped_language
 
     return (
-        f'<img src="{icon_url}" alt="" '
-        f'height="16" align="absmiddle">'
-        f'&thinsp;{escaped_language}'
+        f'<picture><img src="{icon_url}" alt="" '
+        f'height="18" align="texttop"></picture>'
+        f'{escaped_language}'
     )
 
 def render_building_now(items):
@@ -965,7 +965,7 @@ def render_recent_releases(releases):
             f'{status}<br>\n'
             f'  <sub><blockquote>{released_text} · '
             f'[<img src="./assets/profile/release-tag.svg" '
-            f'alt="" height="16" align="absmiddle"> '
+            f'alt="" height="18" align="texttop"> '
             f'{release["tagName"]}]'
             f'({tag_url})</blockquote></sub>'
         )
