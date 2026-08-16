@@ -62,6 +62,7 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
                 defaultBranchRef {
                     target {
                         ... on Commit {
+                            committedDate
                             history(first: 50, since: $activitySince) {
                                 nodes {
                                     committedDate
@@ -98,6 +99,7 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
                         url
                         isDraft
                         isPrerelease
+                        isLatest
                     }
                 }
             }
@@ -643,14 +645,99 @@ def collect_building_now(repositories):
 
     return candidates[:BUILDING_NOW_LIMIT]
 
-def relative_commit_age(days):
+def github_time_label(value, now=None):
+    timestamp = parse_github_date(value)
+    current = now or datetime.now(timezone.utc)
+
+    elapsed_seconds = max(
+        int((current - timestamp).total_seconds()),
+        0,
+    )
+
+    # GitHub's relative-time element switches to an absolute
+    # date at its default 30-day threshold.
+    if elapsed_seconds >= 30 * 24 * 60 * 60:
+        months = (
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        )
+
+        absolute = (
+            f"{months[timestamp.month - 1]} "
+            f"{timestamp.day}"
+        )
+
+        if timestamp.year != current.year:
+            absolute += f", {timestamp.year}"
+
+        return absolute
+
+    # GitHub displays very recent timestamps as "now",
+    # then keeps second-level precision until 55 seconds.
+    if elapsed_seconds < 10:
+        return "now"
+
+    if elapsed_seconds < 55:
+        return f"{elapsed_seconds} seconds ago"
+
+    seconds = elapsed_seconds % 60
+    minutes = elapsed_seconds // 60
+
+    if seconds >= 55:
+        minutes += 1
+
+    if minutes < 55:
+        unit = "minute" if minutes == 1 else "minutes"
+        return f"{minutes} {unit} ago"
+
+    # Minutes round into hours at 55 minutes.
+    minute_remainder = minutes % 60
+    hours = minutes // 60
+
+    if minute_remainder >= 55:
+        hours += 1
+
+    if hours < 21:
+        unit = "hour" if hours == 1 else "hours"
+        return f"{hours} {unit} ago"
+
+    # Around 21 hours GitHub begins using day-level wording.
+    days = hours // 24
+    hour_remainder = hours % 24
+
     if days == 0:
-        return "today"
+        days = 1
+    elif hour_remainder >= 12:
+        days += 1
 
     if days == 1:
-        return "1d ago"
+        return "yesterday"
 
-    return f"{days}d ago"
+    if days < 6:
+        return f"{days} days ago"
+
+    # Around six days GitHub rounds to weeks.
+    weeks = (days + 3) // 7
+
+    # Four rounded weeks become "last month" while the
+    # timestamp is still inside the 30-day relative window.
+    if weeks >= 4:
+        return "last month"
+
+    if weeks == 1:
+        return "last week"
+
+    return f"{weeks} weeks ago"
 
 def primary_language(repository):
     language_edges = repository["languages"]["edges"]
@@ -665,38 +752,52 @@ def render_building_now(items):
         return "_Nothing is actively being built in public right now._"
 
     lines = []
+    now = datetime.now(timezone.utc)
 
     for item in items:
         repository = item["repository"]
-        activity = item["activity"]
 
-        description = (
-            (repository["description"] or "No description.")
-            .replace("\r", " ")
-            .replace("\n", " ")
-            .strip()
-        )
+        raw_description = repository["description"]
+
+        if raw_description:
+            description = (
+                raw_description
+                .replace("\r", " ")
+                .replace("\n", " ")
+                .strip()
+            )
+        else:
+            description = "*No description.*"
 
         language = primary_language(repository)
 
-        activity_parts = [language]
+        target = (
+            (repository.get("defaultBranchRef") or {})
+            .get("target")
+            or {}
+        )
 
-        latest_commit_age = activity["latest_commit_age"]
+        updated_at = target.get("committedDate")
 
-        if latest_commit_age is not None:
-            activity_parts.append(
-                f"updated {relative_commit_age(latest_commit_age)}"
+        metadata_parts = []
+
+        if updated_at:
+            metadata_parts.append(
+                f"Updated {github_time_label(updated_at, now)}"
             )
 
-        activity_text = " · ".join(activity_parts)
+        metadata_parts.append(language)
+
+        metadata = " · ".join(metadata_parts)
 
         lines.append(
             f'- **[{repository["name"]}]({repository["url"]})**'
-            f' — {description}  \n'
-            f'  *{activity_text}*'
+            f' — {description}<br>\n'
+            f'  *{metadata}*'
         )
 
     return "\n".join(lines)
+
 def collect_recent_releases(repositories):
     releases = []
 
@@ -707,11 +808,12 @@ def collect_recent_releases(repositories):
 
             releases.append(
                 {
-                    "repository": repository["name"],
                     "name": release["name"] or release["tagName"],
+                    "tagName": release["tagName"],
                     "url": release["url"],
                     "publishedAt": release["publishedAt"],
                     "isPrerelease": release["isPrerelease"],
+                    "isLatest": release["isLatest"],
                 }
             )
 
@@ -726,19 +828,35 @@ def render_recent_releases(releases):
     if not releases:
         return "_No published releases yet._"
 
+    now = datetime.now(timezone.utc)
+
     def release_line(release):
-        suffix = (
-            " (pre-release)"
-            if release["isPrerelease"]
-            else ""
+        status = ""
+
+        if release["isLatest"]:
+            status = (
+                " ![Latest]"
+                "(./assets/profile/release-latest.svg)"
+            )
+        elif release["isPrerelease"]:
+            status = (
+                " ![Pre-release]"
+                "(./assets/profile/release-prerelease.svg)"
+            )
+
+        time_label = github_time_label(
+            release["publishedAt"],
+            now,
         )
 
-        published = release["publishedAt"][:10]
+        released_text = f"Released this {time_label}"
 
         return (
-            f'- [{release["repository"]} — {release["name"]}]'
-            f'({release["url"]})'
-            f'{suffix} — {published}'
+            f'- **[{release["name"]}]({release["url"]})**'
+            f'{status}<br>\n'
+            f'  *{released_text} · '
+            f'![Tag](./assets/profile/release-tag.svg) '
+            f'{release["tagName"]}*'
         )
 
     visible = releases[:RECENT_RELEASE_VISIBLE]
@@ -772,6 +890,7 @@ def render_recent_releases(releases):
         )
 
     return "\n".join(lines)
+
 def render_recent_repositories(repositories):
     recent = sorted(
         project_repositories(repositories),

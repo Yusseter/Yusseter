@@ -5,26 +5,33 @@
 ## Building now
 
 <!-- building_now:start -->
-- **[ck3-workshop-history](https://github.com/Yusseter/ck3-workshop-history)** — No description.  
-  *PowerShell · updated today*
-- **[tray-order-lock](https://github.com/Yusseter/tray-order-lock)** — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.  
-  *C++ · updated 2d ago*
+- **[ck3-workshop-history](https://github.com/Yusseter/ck3-workshop-history)** — *No description.*<br>
+  *Updated 7 hours ago · PowerShell*
+- **[tray-order-lock](https://github.com/Yusseter/tray-order-lock)** — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.<br>
+  *Updated 3 days ago · C++*
 <!-- building_now:end -->
 
 ## Recent releases
 
 <!-- recent_releases:start -->
-- [ck3-workshop-auto-updater — CK3 Workshop Auto Updater v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.0) — 2026-08-07
-- [tray-order-lock — Tray Order Lock 0.1.0](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.1.0) — 2026-08-05
-- [ck3-workshop-auto-updater — CK3 Workshop Auto Updater v0.2.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0) (pre-release) — 2026-08-05
+- **[CK3 Workshop Auto Updater v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.0)** ![Latest](./assets/profile/release-latest.svg)<br>
+  *Released this last week · ![Tag](./assets/profile/release-tag.svg) v0.3.0*
+- **[Tray Order Lock 0.1.0](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.1.0)** ![Latest](./assets/profile/release-latest.svg)<br>
+  *Released this 2 weeks ago · ![Tag](./assets/profile/release-tag.svg) tray-order-lock-v0.1.0*
+- **[CK3 Workshop Auto Updater v0.2.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0)** ![Pre-release](./assets/profile/release-prerelease.svg)<br>
+  *Released this 2 weeks ago · ![Tag](./assets/profile/release-tag.svg) v0.2.0*
 
 <details>
 <summary>More releases</summary>
 
-- [ck3-workshop-auto-updater — CK3 Workshop Auto Updater v0.1.1](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1) (pre-release) — 2026-08-05
-- [ck3-workshop-auto-updater — CK3 Workshop Auto Updater v0.1.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0) (pre-release) — 2026-08-03
-- [yb_map — 1.2.2 for 1.19 (Released: 2026-04-20)](https://github.com/Yusseter/yb_map/releases/tag/1.2.2) — 2026-04-20
-- [yb_map — 1.2.1 for 1.18 (Released: 2026-03-13)](https://github.com/Yusseter/yb_map/releases/tag/1.2.1) — 2026-03-13
+- **[CK3 Workshop Auto Updater v0.1.1](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1)** ![Pre-release](./assets/profile/release-prerelease.svg)<br>
+  *Released this 2 weeks ago · ![Tag](./assets/profile/release-tag.svg) v0.1.1*
+- **[CK3 Workshop Auto Updater v0.1.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0)** ![Pre-release](./assets/profile/release-prerelease.svg)<br>
+  *Released this 2 weeks ago · ![Tag](./assets/profile/release-tag.svg) v0.1.0*
+- **[1.2.2 for 1.19 (Released: 2026-04-20)](https://github.com/Yusseter/yb_map/releases/tag/1.2.2)** ![Latest](./assets/profile/release-latest.svg)<br>
+  *Released this Apr 20 · ![Tag](./assets/profile/release-tag.svg) 1.2.2*
+- **[1.2.1 for 1.18 (Released: 2026-03-13)](https://github.com/Yusseter/yb_map/releases/tag/1.2.1)**<br>
+  *Released this Mar 13 · ![Tag](./assets/profile/release-tag.svg) 1.2.1*
 
 </details>
 <!-- recent_releases:end -->
