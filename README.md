@@ -8,7 +8,7 @@
 - **[ck3-workshop-history](https://github.com/Yusseter/ck3-workshop-history)** — No description.  
   *PowerShell · updated today*
 - **[tray-order-lock](https://github.com/Yusseter/tray-order-lock)** — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.  
-  *C++ · updated 2d ago*
+  *C++ · updated 3d ago*
 <!-- building_now:end -->
 
 ## Recent releases
