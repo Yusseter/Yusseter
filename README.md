@@ -14,24 +14,24 @@
 ## Recent releases
 
 <!-- recent_releases:start -->
-- **[CK3 Workshop Auto Updater v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.0)** ![Latest](./assets/profile/release-latest.svg)<br>
-  *Released this last week · ![Tag](./assets/profile/release-tag.svg) v0.3.0*
-- **[Tray Order Lock 0.1.0](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.1.0)** ![Latest](./assets/profile/release-latest.svg)<br>
-  *Released this 2 weeks ago · ![Tag](./assets/profile/release-tag.svg) tray-order-lock-v0.1.0*
-- **[CK3 Workshop Auto Updater v0.2.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0)** ![Pre-release](./assets/profile/release-prerelease.svg)<br>
-  *Released this 2 weeks ago · ![Tag](./assets/profile/release-tag.svg) v0.2.0*
+- **[CK3 Workshop Auto Updater v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.0)** <img src="./assets/profile/release-latest.svg" alt="Latest" height="20" align="absmiddle"><br>
+  *Released this last week ·* <img src="./assets/profile/release-tag.svg" alt="Tag" height="14" align="absmiddle"> *v0.3.0*
+- **[Tray Order Lock 0.1.0](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.1.0)** <img src="./assets/profile/release-latest.svg" alt="Latest" height="20" align="absmiddle"><br>
+  *Released this 2 weeks ago ·* <img src="./assets/profile/release-tag.svg" alt="Tag" height="14" align="absmiddle"> *tray-order-lock-v0.1.0*
+- **[CK3 Workshop Auto Updater v0.2.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0)** <img src="./assets/profile/release-prerelease.svg" alt="Pre-release" height="20" align="absmiddle"><br>
+  *Released this 2 weeks ago ·* <img src="./assets/profile/release-tag.svg" alt="Tag" height="14" align="absmiddle"> *v0.2.0*
 
 <details>
 <summary>More releases</summary>
 
-- **[CK3 Workshop Auto Updater v0.1.1](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1)** ![Pre-release](./assets/profile/release-prerelease.svg)<br>
-  *Released this 2 weeks ago · ![Tag](./assets/profile/release-tag.svg) v0.1.1*
-- **[CK3 Workshop Auto Updater v0.1.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0)** ![Pre-release](./assets/profile/release-prerelease.svg)<br>
-  *Released this 2 weeks ago · ![Tag](./assets/profile/release-tag.svg) v0.1.0*
-- **[1.2.2 for 1.19 (Released: 2026-04-20)](https://github.com/Yusseter/yb_map/releases/tag/1.2.2)** ![Latest](./assets/profile/release-latest.svg)<br>
-  *Released this Apr 20 · ![Tag](./assets/profile/release-tag.svg) 1.2.2*
+- **[CK3 Workshop Auto Updater v0.1.1](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1)** <img src="./assets/profile/release-prerelease.svg" alt="Pre-release" height="20" align="absmiddle"><br>
+  *Released this 2 weeks ago ·* <img src="./assets/profile/release-tag.svg" alt="Tag" height="14" align="absmiddle"> *v0.1.1*
+- **[CK3 Workshop Auto Updater v0.1.0](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0)** <img src="./assets/profile/release-prerelease.svg" alt="Pre-release" height="20" align="absmiddle"><br>
+  *Released this 2 weeks ago ·* <img src="./assets/profile/release-tag.svg" alt="Tag" height="14" align="absmiddle"> *v0.1.0*
+- **[1.2.2 for 1.19 (Released: 2026-04-20)](https://github.com/Yusseter/yb_map/releases/tag/1.2.2)** <img src="./assets/profile/release-latest.svg" alt="Latest" height="20" align="absmiddle"><br>
+  *Released this Apr 20 ·* <img src="./assets/profile/release-tag.svg" alt="Tag" height="14" align="absmiddle"> *1.2.2*
 - **[1.2.1 for 1.18 (Released: 2026-03-13)](https://github.com/Yusseter/yb_map/releases/tag/1.2.1)**<br>
-  *Released this Mar 13 · ![Tag](./assets/profile/release-tag.svg) 1.2.1*
+  *Released this Mar 13 ·* <img src="./assets/profile/release-tag.svg" alt="Tag" height="14" align="absmiddle"> *1.2.1*
 
 </details>
 <!-- recent_releases:end -->
