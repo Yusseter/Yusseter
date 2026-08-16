@@ -319,7 +319,7 @@ def render_snapshot_svg(profile, languages):
 
         .title {{
             fill: #1f2328;
-            font: 600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font: 600 18px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
         .value {{
