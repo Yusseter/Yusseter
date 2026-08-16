@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import urllib.error
+import urllib.parse
 import urllib.request
 
 from profile_renderers import (
@@ -791,7 +792,7 @@ def render_building_now(items):
         metadata = " · ".join(metadata_parts)
 
         lines.append(
-            f'- **[{repository["name"]}]({repository["url"]})**'
+            f'- [**{repository["name"]}**]({repository["url"]})'
             f' — {description}<br>\n'
             f'  *{metadata}*'
         )
@@ -811,6 +812,7 @@ def collect_recent_releases(repositories):
                     "name": release["name"] or release["tagName"],
                     "tagName": release["tagName"],
                     "url": release["url"],
+                    "repositoryUrl": repository["url"],
                     "publishedAt": release["publishedAt"],
                     "isPrerelease": release["isPrerelease"],
                     "isLatest": release["isLatest"],
@@ -835,13 +837,15 @@ def render_recent_releases(releases):
 
         if release["isLatest"]:
             status = (
-                ' <img src="./assets/profile/release-latest.svg"'
-                ' alt="Latest" height="24" align="absmiddle">'
+                ' [<img src="./assets/profile/release-latest.svg"'
+                ' alt="Latest" height="24" align="absmiddle">]'
+                f'({release["url"]})'
             )
         elif release["isPrerelease"]:
             status = (
-                ' <img src="./assets/profile/release-prerelease.svg"'
-                ' alt="Pre-release" height="24" align="absmiddle">'
+                ' [<img src="./assets/profile/release-prerelease.svg"'
+                ' alt="Pre-release" height="24" align="absmiddle">]'
+                f'({release["url"]})'
             )
 
         time_label = github_time_label(
@@ -851,13 +855,22 @@ def render_recent_releases(releases):
 
         released_text = f"Released this {time_label}"
 
+        tag_path = urllib.parse.quote(
+            release["tagName"],
+            safe="/",
+        )
+        tag_url = (
+            f'{release["repositoryUrl"]}/tree/{tag_path}'
+        )
+
         return (
-            f'- **[{release["name"]}]({release["url"]})**'
+            f'- [**{release["name"]}**]({release["url"]})'
             f'{status}<br>\n'
             f'  *{released_text} ·* '
-            f'<img src="./assets/profile/release-tag.svg" '
-            f'alt="Tag" height="16" align="absmiddle"> '
-            f'*{release["tagName"]}*'
+            f'[<img src="./assets/profile/release-tag.svg" '
+            f'alt="" height="16" align="absmiddle"> '
+            f'*{release["tagName"]}*]'
+            f'({tag_url})'
         )
 
     visible = releases[:RECENT_RELEASE_VISIBLE]
