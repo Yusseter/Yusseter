@@ -39,11 +39,11 @@
 <summary>Recently updated repositories</summary>
 
 <!-- recent_repositories:start -->
+- [dijital-cagda-deger-erozyonu](https://github.com/Yusseter/dijital-cagda-deger-erozyonu) — No description. — 2026-08-15
 - [tray-order-lock](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research. — 2026-08-13
 - [ck3-workshop-auto-updater](https://github.com/Yusseter/ck3-workshop-auto-updater) — A Windows utility that detects and requests missing Crusader Kings III Steam Workshop updates. — 2026-08-07
 - [energy-saver-power-plan-link](https://github.com/Yusseter/energy-saver-power-plan-link) — A Windhawk mod that links Windows 11 Energy Saver with the Power Saver power plan. — 2026-08-02
 - [yb_map](https://github.com/Yusseter/yb_map) — No description. — 2026-07-28
-- [dijital-cagda-deger-erozyonu](https://github.com/Yusseter/dijital-cagda-deger-erozyonu) — No description. — 2026-07-28
 <!-- recent_repositories:end -->
 
 </details>
