@@ -662,7 +662,7 @@ def primary_language(repository):
 
 def render_building_now(items):
     if not items:
-        return "_No active repositories detected right now._"
+        return "_Nothing is actively being built in public right now._"
 
     lines = []
 
