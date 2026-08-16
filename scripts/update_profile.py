@@ -681,9 +681,6 @@ def render_building_now(items):
 
         activity_parts = [language]
 
-        if activity["commits_7d"] > 0:
-            activity_parts.append("active this week")
-
         latest_commit_age = activity["latest_commit_age"]
 
         if latest_commit_age is not None:

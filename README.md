@@ -6,9 +6,9 @@
 
 <!-- building_now:start -->
 - **[tray-order-lock](https://github.com/Yusseter/tray-order-lock)** — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.  
-  *C++ · active this week · updated 2d ago*
+  *C++ · updated 2d ago*
 - **[ck3-workshop-history](https://github.com/Yusseter/ck3-workshop-history)** — No description.  
-  *HTML · active this week · updated today*
+  *HTML · updated today*
 <!-- building_now:end -->
 
 ## Recent releases
