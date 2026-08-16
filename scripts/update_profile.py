@@ -36,6 +36,26 @@ RECENT_REPOSITORY_LIMIT = 5
 
 GRAPHQL_URL = "https://api.github.com/graphql"
 
+SETI_UI_REVISION = "2d6c5e68b4ded73c92dac291845ee44e1182d511"
+SETI_ICON_RAW_BASE_URL = (
+    "https://raw.githubusercontent.com/jesseweed/seti-ui/"
+    f"{SETI_UI_REVISION}/icons"
+)
+
+SETI_LANGUAGE_ICON_OVERRIDES = {
+    "C++": "cpp",
+    "C#": "c-sharp",
+    "F#": "f-sharp",
+    "Objective-C": "objective-c",
+    "Objective-C++": "objective-cpp",
+    "PowerShell": "powershell",
+    "Shell": "shell",
+    "Jupyter Notebook": "jupyter",
+    "Vim Script": "vim",
+}
+
+_SETI_ICON_AVAILABILITY = {}
+
 REPOSITORIES_QUERY = """
 query($login: String!, $after: String, $activitySince: GitTimestamp!) {
     user(login: $login) {
@@ -748,6 +768,81 @@ def primary_language(repository):
 
     return language_edges[0]["node"]["name"]
 
+def normalized_seti_icon_stem(language):
+    override = SETI_LANGUAGE_ICON_OVERRIDES.get(language)
+
+    if override:
+        return override
+
+    parts = []
+    pending_dash = False
+
+    for character in language.casefold():
+        if character.isalnum():
+            if pending_dash and parts:
+                parts.append("-")
+            parts.append(character)
+            pending_dash = False
+        else:
+            pending_dash = True
+
+    return "".join(parts).strip("-")
+
+def seti_language_icon_url(language):
+    if language == "No language data":
+        return None
+
+    stem = normalized_seti_icon_stem(language)
+
+    if not stem:
+        return None
+
+    encoded_name = urllib.parse.quote(
+        f"{stem}.svg",
+        safe="",
+    )
+    icon_url = f"{SETI_ICON_RAW_BASE_URL}/{encoded_name}"
+
+    cached = _SETI_ICON_AVAILABILITY.get(icon_url)
+
+    if cached is not None:
+        return icon_url if cached else None
+
+    request = urllib.request.Request(
+        icon_url,
+        headers={
+            "User-Agent": f"{USERNAME}-profile-updater",
+        },
+        method="HEAD",
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=10) as response:
+            available = 200 <= response.status < 400
+    except (
+        urllib.error.HTTPError,
+        urllib.error.URLError,
+        TimeoutError,
+    ):
+        available = False
+
+    _SETI_ICON_AVAILABILITY[icon_url] = available
+
+    return icon_url if available else None
+
+def render_language_metadata(language):
+    escaped_language = escape(language)
+    icon_url = seti_language_icon_url(language)
+
+    if not icon_url:
+        return escaped_language
+
+    return (
+        f'<img src="{icon_url}" alt="" '
+        f'height="16" align="absmiddle">'
+        f'&thinsp;{escaped_language}'
+    )
+
 def render_building_now(items):
     if not items:
         return "_Nothing is actively being built in public right now._"
@@ -787,14 +882,16 @@ def render_building_now(items):
                 f"Updated {github_time_label(updated_at, now)}"
             )
 
-        metadata_parts.append(language)
+        metadata_parts.append(
+            render_language_metadata(language)
+        )
 
         metadata = " · ".join(metadata_parts)
 
         lines.append(
             f'- [**{repository["name"]}**]({repository["url"]})'
             f' — {description}<br>\n'
-            f'  *{metadata}*'
+            f'  <sub><blockquote>{metadata}</blockquote></sub>'
         )
 
     return "\n".join(lines)
@@ -866,11 +963,11 @@ def render_recent_releases(releases):
         return (
             f'- [**{release["name"]}**]({release["url"]})'
             f'{status}<br>\n'
-            f'  *{released_text} ·* '
+            f'  <sub><blockquote>{released_text} · '
             f'[<img src="./assets/profile/release-tag.svg" '
             f'alt="" height="16" align="absmiddle"> '
-            f'*{release["tagName"]}*]'
-            f'({tag_url})'
+            f'{release["tagName"]}]'
+            f'({tag_url})</blockquote></sub>'
         )
 
     visible = releases[:RECENT_RELEASE_VISIBLE]
