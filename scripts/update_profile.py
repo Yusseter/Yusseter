@@ -835,13 +835,13 @@ def render_recent_releases(releases):
 
         if release["isLatest"]:
             status = (
-                " ![Latest]"
-                "(./assets/profile/release-latest.svg)"
+                ' <img src="./assets/profile/release-latest.svg"'
+                ' alt="Latest" height="20" align="absmiddle">'
             )
         elif release["isPrerelease"]:
             status = (
-                " ![Pre-release]"
-                "(./assets/profile/release-prerelease.svg)"
+                ' <img src="./assets/profile/release-prerelease.svg"'
+                ' alt="Pre-release" height="20" align="absmiddle">'
             )
 
         time_label = github_time_label(
@@ -854,9 +854,10 @@ def render_recent_releases(releases):
         return (
             f'- **[{release["name"]}]({release["url"]})**'
             f'{status}<br>\n'
-            f'  *{released_text} · '
-            f'![Tag](./assets/profile/release-tag.svg) '
-            f'{release["tagName"]}*'
+            f'  *{released_text} ·* '
+            f'<img src="./assets/profile/release-tag.svg" '
+            f'alt="Tag" height="14" align="absmiddle"> '
+            f'*{release["tagName"]}*'
         )
 
     visible = releases[:RECENT_RELEASE_VISIBLE]
