@@ -327,7 +327,10 @@ def render_snapshot_readme(
 ):
     if snapshot_mode == "full_svg":
         return '''<p align="center">
-  <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
+  <picture>
+    <source media="(max-width: 600px)" srcset="./assets/profile/snapshot-mobile.svg">
+    <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
+  </picture>
 </p>'''
 
     if snapshot_mode == "native_table_hybrid":

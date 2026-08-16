@@ -220,7 +220,11 @@ def aggregate_languages(repositories):
         for name, size in ordered
     ]
 
-def render_snapshot_svg(profile, languages):
+def render_snapshot_svg(
+    profile,
+    languages,
+    mobile=False,
+):
     repositories = profile["repositories"]
 
     total_stars = sum(
@@ -253,6 +257,40 @@ def render_snapshot_svg(profile, languages):
     </g>'''
         )
 
+    if mobile:
+        svg_width = 370
+        svg_height = 400
+        title_size = 18
+
+        language_card_x = 0.5
+        language_card_y = 210.5
+
+        language_content_x = 20
+        language_title_y = 242
+        language_bar_y = 268
+        language_row_start_y = 298
+
+        language_dot_x = 26
+        language_name_x = 38
+        language_percentage_x = 350
+
+    else:
+        svg_width = 760
+        svg_height = 190
+        title_size = 16
+
+        language_card_x = 390.5
+        language_card_y = 0.5
+
+        language_content_x = 410
+        language_title_y = 32
+        language_bar_y = 58
+        language_row_start_y = 88
+
+        language_dot_x = 416
+        language_name_x = 428
+        language_percentage_x = 740
+
     top_languages = languages[:5]
 
     total_bytes = sum(
@@ -261,8 +299,8 @@ def render_snapshot_svg(profile, languages):
     )
 
     if total_bytes == 0:
-        language_rows = '''
-    <text class="secondary" x="410" y="98">No language data available yet.</text>'''
+        language_rows = f'''
+    <text class="secondary" x="{language_content_x}" y="{language_row_start_y + 10}">No language data available yet.</text>'''
 
         bar_segments = ""
 
@@ -270,7 +308,7 @@ def render_snapshot_svg(profile, languages):
         rows_markup = []
         bar_markup = []
 
-        bar_x = 410.0
+        bar_x = float(language_content_x)
         bar_width = 330.0
 
         for index, language in enumerate(
@@ -282,14 +320,14 @@ def render_snapshot_svg(profile, languages):
                 * 100
             )
 
-            y = 88 + index * 22
+            y = language_row_start_y + index * 22
             color = language["color"]
 
             rows_markup.append(
                 f'''
-    <circle cx="416" cy="{y - 4}" r="4" fill="{escape(color)}" />
-    <text class="primary" x="428" y="{y}">{escape(language["name"])}</text>
-    <text class="secondary" x="740" y="{y}" text-anchor="end">{percentage:.1f}%</text>'''
+    <circle cx="{language_dot_x}" cy="{y - 4}" r="4" fill="{escape(color)}" />
+    <text class="primary" x="{language_name_x}" y="{y}">{escape(language["name"])}</text>
+    <text class="secondary" x="{language_percentage_x}" y="{y}" text-anchor="end">{percentage:.1f}%</text>'''
             )
 
             segment_width = (
@@ -299,7 +337,7 @@ def render_snapshot_svg(profile, languages):
             )
 
             bar_markup.append(
-                f'<rect x="{bar_x:.2f}" y="58" width="{segment_width:.2f}" height="10" fill="{escape(color)}" />'
+                f'<rect x="{bar_x:.2f}" y="{language_bar_y}" width="{segment_width:.2f}" height="10" fill="{escape(color)}" />'
             )
 
             bar_x += segment_width
@@ -307,7 +345,7 @@ def render_snapshot_svg(profile, languages):
         language_rows = "".join(rows_markup)
         bar_segments = "\n    ".join(bar_markup)
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="760" height="190" viewBox="0 0 760 190" role="img" aria-labelledby="title desc">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{svg_width}" height="{svg_height}" viewBox="0 0 {svg_width} {svg_height}" role="img" aria-labelledby="title desc">
     <title id="title">{escape(USERNAME)} GitHub Snapshot</title>
     <desc id="desc">GitHub statistics and language distribution for {escape(USERNAME)}.</desc>
 
@@ -319,7 +357,7 @@ def render_snapshot_svg(profile, languages):
 
         .title {{
             fill: #1f2328;
-            font: 600 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font: 600 {title_size}px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }}
 
         .value {{
@@ -374,7 +412,7 @@ def render_snapshot_svg(profile, languages):
 
     <defs>
         <clipPath id="language-bar-clip">
-            <rect x="410" y="58" width="330" height="10" rx="5" />
+            <rect x="{language_content_x}" y="{language_bar_y}" width="330" height="10" rx="5" />
         </clipPath>
     </defs>
 
@@ -389,11 +427,11 @@ def render_snapshot_svg(profile, languages):
     {''.join(metric_markup)}
 
     <!-- Languages -->
-    <rect class="card" x="390.5" y="0.5" width="369" height="189" rx="6" />
+    <rect class="card" x="{language_card_x}" y="{language_card_y}" width="369" height="189" rx="6" />
 
-    <text class="title" x="410" y="32">Languages</text>
+    <text class="title" x="{language_content_x}" y="{language_title_y}">Languages</text>
 
-    <rect class="bar-background" x="410" y="58" width="330" height="10" rx="5" />
+    <rect class="bar-background" x="{language_content_x}" y="{language_bar_y}" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
         {bar_segments}
@@ -868,6 +906,16 @@ def main():
 
     (PROFILE_ASSETS_DIR / "snapshot.svg").write_text(
         render_snapshot_svg(profile, languages),
+        encoding="utf-8",
+        newline="\n",
+    )
+
+    (PROFILE_ASSETS_DIR / "snapshot-mobile.svg").write_text(
+        render_snapshot_svg(
+            profile,
+            languages,
+            mobile=True,
+        ),
         encoding="utf-8",
         newline="\n",
     )

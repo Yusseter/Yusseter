@@ -9,6 +9,8 @@
           "allowed_elements": [
             "p",
             "img",
+            "picture",
+            "source",
             "details",
             "summary",
             "table",

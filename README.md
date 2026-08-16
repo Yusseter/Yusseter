@@ -31,7 +31,10 @@
 
 <!-- snapshot:start -->
 <p align="center">
-  <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
+  <picture>
+    <source media="(max-width: 600px)" srcset="./assets/profile/snapshot-mobile.svg">
+    <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
+  </picture>
 </p>
 <!-- snapshot:end -->
 
