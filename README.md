@@ -5,10 +5,10 @@
 ## Building now
 
 <!-- building_now:start -->
+- **[ck3-workshop-history](https://github.com/Yusseter/ck3-workshop-history)** — No description.  
+  *PowerShell · updated today*
 - **[tray-order-lock](https://github.com/Yusseter/tray-order-lock)** — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.  
   *C++ · updated 2d ago*
-- **[ck3-workshop-history](https://github.com/Yusseter/ck3-workshop-history)** — No description.  
-  *HTML · updated today*
 <!-- building_now:end -->
 
 ## Recent releases
@@ -44,7 +44,7 @@
 <summary>Recently updated repositories</summary>
 
 <!-- recent_repositories:start -->
-- [ck3-workshop-history](https://github.com/Yusseter/ck3-workshop-history) — No description. — 2026-08-15
+- [ck3-workshop-history](https://github.com/Yusseter/ck3-workshop-history) — No description. — 2026-08-16
 - [dijital-cagda-deger-erozyonu](https://github.com/Yusseter/dijital-cagda-deger-erozyonu) — No description. — 2026-08-15
 - [tray-order-lock](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research. — 2026-08-13
 - [ck3-workshop-auto-updater](https://github.com/Yusseter/ck3-workshop-auto-updater) — A Windows utility that detects and requests missing Crusader Kings III Steam Workshop updates. — 2026-08-07
