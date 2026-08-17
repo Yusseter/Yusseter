@@ -18,7 +18,9 @@
             "td",
             "h2",
             "h3",
-            "br"
+            "br",
+            "sub",
+            "blockquote"
           ]
         },
         "MD041": {
