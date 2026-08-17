@@ -944,6 +944,10 @@ def write_seti_language_assets(items):
 
 def render_language_metadata(language):
     escaped_language = escape(language)
+
+    if language == "No language data":
+        return escaped_language
+
     asset_path = seti_language_icon_asset_path(language)
 
     if asset_path and asset_path.exists():
@@ -952,10 +956,10 @@ def render_language_metadata(language):
             f"{asset_path.name}"
         )
     else:
-        icon_src = seti_language_icon_url(language)
-
-    if not icon_src:
-        return escaped_language
+        icon_src = (
+            seti_language_icon_url(language)
+            or "./assets/profile/language-default.svg"
+        )
 
     return (
         f'<picture><img src="{icon_src}" alt="" '
