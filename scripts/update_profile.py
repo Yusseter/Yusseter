@@ -94,6 +94,11 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
                             committedDate
                             history(first: 50, since: $activitySince) {
                                 nodes {
+                                    oid
+                                    url
+                                    messageHeadline
+                                    messageBody
+                                    authoredDate
                                     committedDate
                                     author {
                                         user {
@@ -1201,7 +1206,67 @@ def render_recent_releases(releases):
 
     return "\n".join(lines)
 
-def fetch_recent_commits():
+def collect_owned_recent_commits(repositories):
+    username = USERNAME.casefold()
+    commits = []
+
+    for repository in repositories:
+        if repository["name"] == "Placeholder":
+            continue
+
+        target = (
+            (repository.get("defaultBranchRef") or {})
+            .get("target")
+            or {}
+        )
+
+        history = (
+            (target.get("history") or {})
+            .get("nodes")
+            or []
+        )
+
+        for commit in history:
+            author_user = (
+                (commit.get("author") or {})
+                .get("user")
+                or {}
+            )
+            author_login = (
+                author_user.get("login") or ""
+            ).casefold()
+
+            if author_login != username:
+                continue
+
+            authored_date = (
+                commit.get("authoredDate")
+                or commit.get("committedDate")
+            )
+
+            if not authored_date:
+                continue
+
+            commits.append(
+                {
+                    "repositoryName": repository["name"],
+                    "repositoryUrl": repository["url"],
+                    "oid": commit["oid"],
+                    "url": commit["url"],
+                    "messageHeadline": (
+                        commit["messageHeadline"]
+                        or commit["oid"]
+                    ),
+                    "messageBody": (
+                        commit["messageBody"] or ""
+                    ),
+                    "committedDate": authored_date,
+                }
+            )
+
+    return commits
+
+def fetch_searched_recent_commits():
     payload = rest_json_request(
         SEARCH_COMMITS_URL,
         {
@@ -1313,6 +1378,28 @@ def fetch_recent_commits():
             break
 
     return commits
+
+def collect_recent_commits(repositories):
+    commits_by_oid = {
+        commit["oid"]: commit
+        for commit in fetch_searched_recent_commits()
+    }
+
+    # Prefer GraphQL data for owned repositories because it is
+    # available immediately after a push, before Commit Search
+    # necessarily finishes indexing the new commit.
+    for commit in collect_owned_recent_commits(repositories):
+        commits_by_oid[commit["oid"]] = commit
+
+    commits = sorted(
+        commits_by_oid.values(),
+        key=lambda commit: parse_github_date(
+            commit["committedDate"]
+        ),
+        reverse=True,
+    )
+
+    return commits[:RECENT_COMMIT_LIMIT]
 
 def render_recent_commits(commits):
     if not commits:
@@ -1451,7 +1538,7 @@ def main():
     repositories = profile["repositories"]
     languages = aggregate_languages(repositories)
     building_now = collect_building_now(repositories)
-    recent_commits = fetch_recent_commits()
+    recent_commits = collect_recent_commits(repositories)
 
     PROFILE_ASSETS_DIR.mkdir(
         parents=True,
