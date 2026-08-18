@@ -8,7 +8,7 @@
 
 <!-- building_now:start -->
 - [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.<br>
-  <sub><blockquote>Updated 20 minutes ago · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/cpp-mobile.svg"><img src="./assets/profile/languages/cpp.svg" alt="" height="20" align="texttop"></picture>C++</blockquote></sub>
+  <sub><blockquote>Updated 2 minutes ago · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/cpp-mobile.svg"><img src="./assets/profile/languages/cpp.svg" alt="" height="20" align="texttop"></picture>C++</blockquote></sub>
 - [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — *No description.*<br>
   <sub><blockquote>Updated 2 days ago · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/powershell-mobile.svg"><img src="./assets/profile/languages/powershell.svg" alt="" height="20" align="texttop"></picture>PowerShell</blockquote></sub>
 <!-- building_now:end -->
@@ -16,35 +16,35 @@
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Keep recent commits fresh after pushes](https://github.com/Yusseter/Yusseter/commit/8757486ec9a4b442b23fdaafd617173e6e469992)<br>
+  <sub><blockquote>Committed 25 seconds ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 8757486](https://github.com/Yusseter/Yusseter/commit/8757486ec9a4b442b23fdaafd617173e6e469992)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Combine GitHub Commit Search with fresh default-branch commit data from owned public repositories so Recent commits does not depend on search indexing immediately after a push. Merge both sources by commit SHA, prefer the fresh GraphQL data for owned repositories, sort by author date, and keep the latest five authored commits.</p>
+  </details>
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Audit NotificationAreaIconIdentity bridge symbols](https://github.com/Yusseter/tray-order-lock/commit/231af690c33ef08e5352cdd1b7183c35cfee271e)<br>
+  <sub><blockquote>Committed 2 minutes ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 231af69](https://github.com/Yusseter/tray-order-lock/commit/231af690c33ef08e5352cdd1b7183c35cfee271e)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>- Update Tray Add Path Analyzer to version 0.32.0.<br>- Enumerate every taskbar.dll symbol that references NotificationAreaIconIdentity.<br>- Emit long undecorated and decorated PDB symbol names in complete log chunks.<br>- Confirm that NotificationAreaIconIdentity can be constructed directly from _TRAYNOTIFYDATAW.<br>- Confirm that NotificationAreaIcon2::Identity() returns NotificationAreaIconIdentity by value.<br>- Discover that NotificationAreaIcon2 construction receives both NotificationAreaIconIdentity and a pair containing an unsigned 64-bit value plus a shared registry HKEY.<br>- Identify equality and collection-search operations that use NotificationAreaIconIdentity.<br>- Scan 27,966 symbols and record 36 identity-related matches, including 16 bridge candidates.<br>- Keep the audit read-only without invoking identity functions or modifying tray state.</p>
+  </details>
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Audit NotificationAreaIcon2 identity signature](https://github.com/Yusseter/tray-order-lock/commit/a53fb2ec8109531369223df065a1e3ce16af6aa5)<br>
+  <sub><blockquote>Committed 6 minutes ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> a53fb2e](https://github.com/Yusseter/tray-order-lock/commit/a53fb2ec8109531369223df065a1e3ce16af6aa5)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>- Update Tray Add Path Analyzer to version 0.31.0.<br>- Enumerate taskbar.dll symbols without installing taskbar function hooks.<br>- Locate the exact NotificationAreaIcon2::Identity() PDB signature.<br>- Confirm that Identity() returns NotificationAreaIconIdentity by value rather than a primitive Windows tray identity.<br>- Record both the undecorated and decorated identity symbol names.<br>- Scan 27,966 taskbar.dll symbols and observe eight related identity matches.<br>- Keep the experiment read-only without invoking Identity(), moving tray icons or modifying tray state.</p>
+  </details>
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Polish recent commit metadata](https://github.com/Yusseter/Yusseter/commit/1ef05719d955cadc74f9726e9385cce6544b2f71)<br>
+  <sub><blockquote>Committed 14 minutes ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 1ef0571](https://github.com/Yusseter/Yusseter/commit/1ef05719d955cadc74f9726e9385cce6544b2f71)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Add the official GitHub Primer git-commit icon before short commit SHAs to better balance Recent commits metadata with the surrounding profile sections. Also shorten expandable commit body labels from &quot;Commit description&quot; to &quot;Details&quot; for a cleaner layout.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Search authored commits across public repositories](https://github.com/Yusseter/Yusseter/commit/066bfff66a5e421ea383c3788c06516b5b9da92e)<br>
-  <sub><blockquote>Committed 15 minutes ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 066bfff](https://github.com/Yusseter/Yusseter/commit/066bfff66a5e421ea383c3788c06516b5b9da92e)</blockquote></sub>
+  <sub><blockquote>Committed 29 minutes ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 066bfff](https://github.com/Yusseter/Yusseter/commit/066bfff66a5e421ea383c3788c06516b5b9da92e)</blockquote></sub>
   <details>
   <summary>Details</summary>
   <p>Replace the owned-repository commit scan with GitHub&#x27;s global commit search so Recent commits can include commits authored by Yusseter in public repositories regardless of ownership. Sort results by author date, verify the matched GitHub author, preserve owner/repository names for external repositories, and keep the five-commit display limit.</p>
-  </details>
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Persist manually learned tray order across Explorer restarts](https://github.com/Yusseter/tray-order-lock/commit/80a2dd0a9c915f117cfaba6d94be66a17d855a5a)<br>
-  <sub><blockquote>Committed 20 minutes ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 80a2dd0](https://github.com/Yusseter/tray-order-lock/commit/80a2dd0a9c915f117cfaba6d94be66a17d855a5a)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>- Extend the Tray Order Lock 0.2.0 development line with configurable ordering behavior.<br>- Add Lock all reordering and Preserve order, allow manual changes modes.<br>- Preserve the existing move-suppression behavior in Lock all reordering mode.<br>- Allow manual tray moves to execute normally in Preserve order mode.<br>- Capture UIOrderList before and after an allowed move and identify the moved Windows tray identity.<br>- Convert supported tray identities to canonical logical keys using IconGuid or version-normalized executable path plus UID.<br>- Learn the moved icon&#x27;s nearest reliable logical predecessor and follower.<br>- Persist the updated canonical order in Windhawk mod local storage.<br>- Reload and merge the persisted canonical order when settings change or Explorer starts again.<br>- Confirm that a manual Discord move is learned and persisted with both logical neighbors resolved.<br>- Confirm that Lock all reordering still blocks subsequent move requests.<br>- Confirm that the persisted canonical order reloads successfully after a full Explorer process restart.<br>- Keep automatic replacement restoration disabled until the production live-identity mapping layer is added.</p>
-  </details>
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Document invalid alternate tray move-path experiment](https://github.com/Yusseter/tray-order-lock/commit/08eb0528c5f12a3aa58a959631f29aab58f62e22)<br>
-  <sub><blockquote>Committed 21 minutes ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 08eb052](https://github.com/Yusseter/tray-order-lock/commit/08eb0528c5f12a3aa58a959631f29aab58f62e22)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>- Update Tray Add Path Analyzer to version 0.30.0.<br>- Instrument ITaskbarModel5::MoveNotificationAreaIcon and NotificationAreaIconManager2::MoveIcon to correlate their call paths.<br>- Record that the tested move followed the normal taskbar-model-to-manager path with parentTaskbarMove=1.<br>- Record that no manager move without a taskbar-model parent was observed in the run.<br>- Correct the experiment documentation to state that the assumed separate context-menu move path was based on a mistaken interpretation of the manual test.<br>- Preserve the result as a research-history checkpoint without claiming that an alternate move path exists or does not exist.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Replace recent repositories with recent commits](https://github.com/Yusseter/Yusseter/commit/6350721c7cbd3939c5b54825de565c04d8357a98)<br>
-  <sub><blockquote>Committed 39 minutes ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 6350721](https://github.com/Yusseter/Yusseter/commit/6350721c7cbd3939c5b54825de565c04d8357a98)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Replace the recently updated repositories section with a Recent commits feed that collects the latest five commits authored by Yusseter across public repositories. Include repository and commit links, relative commit timestamps, short SHAs, and optional commit descriptions, and clean up related Markdown lint issues.</p>
-  </details>
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Harden Tray Order Lock initialization across Explorer restarts](https://github.com/Yusseter/tray-order-lock/commit/c200eaa26fe4e661adcc3cda08527bbc04c922e5)<br>
-  <sub><blockquote>Committed 1 hour ago · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> c200eaa](https://github.com/Yusseter/tray-order-lock/commit/c200eaa26fe4e661adcc3cda08527bbc04c922e5)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>- Start the Tray Order Lock 0.2.0 development line while preserving the existing lock-all-reordering behavior.<br>- Replace the previous taskbar module-load bootstrap with Shell_TrayWnd-aware initialization.<br>- Detect an already running primary taskbar and register taskbar hooks during normal mod initialization.<br>- Defer taskbar hook setup when Explorer starts before its primary shell window exists.<br>- Detect creation of Shell_TrayWnd and apply the deferred taskbar hooks immediately.<br>- Preserve the existing MoveNotificationAreaIcon suppression behavior without writing tray order data.<br>- Confirm that tray move requests remain blocked before and after a complete Explorer process restart.</p>
   </details>
 <!-- recent_commits:end -->
 
