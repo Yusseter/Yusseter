@@ -710,99 +710,23 @@ def collect_building_now(repositories):
 
     return candidates[:BUILDING_NOW_LIMIT]
 
-def github_time_label(value, now=None):
-    timestamp = parse_github_date(value)
-    current = now or datetime.now(timezone.utc)
-
-    elapsed_seconds = max(
-        int((current - timestamp).total_seconds()),
-        0,
+def render_relative_time(value):
+    timestamp = parse_github_date(value).astimezone(timezone.utc)
+    datetime_value = (
+        timestamp.isoformat()
+        .replace("+00:00", "Z")
+    )
+    fallback = (
+        f"{timestamp.strftime('%b')} "
+        f"{timestamp.day}, "
+        f"{timestamp.year}"
     )
 
-    # GitHub's relative-time element switches to an absolute
-    # date at its default 30-day threshold.
-    if elapsed_seconds >= 30 * 24 * 60 * 60:
-        months = (
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        )
-
-        absolute = (
-            f"{months[timestamp.month - 1]} "
-            f"{timestamp.day}"
-        )
-
-        if timestamp.year != current.year:
-            absolute += f", {timestamp.year}"
-
-        return absolute
-
-    # GitHub displays very recent timestamps as "now",
-    # then keeps second-level precision until 55 seconds.
-    if elapsed_seconds < 10:
-        return "now"
-
-    if elapsed_seconds < 55:
-        return f"{elapsed_seconds} seconds ago"
-
-    seconds = elapsed_seconds % 60
-    minutes = elapsed_seconds // 60
-
-    if seconds >= 55:
-        minutes += 1
-
-    if minutes < 55:
-        unit = "minute" if minutes == 1 else "minutes"
-        return f"{minutes} {unit} ago"
-
-    # Minutes round into hours at 55 minutes.
-    minute_remainder = minutes % 60
-    hours = minutes // 60
-
-    if minute_remainder >= 55:
-        hours += 1
-
-    if hours < 21:
-        unit = "hour" if hours == 1 else "hours"
-        return f"{hours} {unit} ago"
-
-    # Around 21 hours GitHub begins using day-level wording.
-    days = hours // 24
-    hour_remainder = hours % 24
-
-    if days == 0:
-        days = 1
-    elif hour_remainder >= 12:
-        days += 1
-
-    if days == 1:
-        return "yesterday"
-
-    if days < 6:
-        return f"{days} days ago"
-
-    # Around six days GitHub rounds to weeks.
-    weeks = (days + 3) // 7
-
-    # Four rounded weeks become "last month" while the
-    # timestamp is still inside the 30-day relative window.
-    if weeks >= 4:
-        return "last month"
-
-    if weeks == 1:
-        return "last week"
-
-    return f"{weeks} weeks ago"
+    return (
+        f'<relative-time datetime="{datetime_value}">'
+        f'{fallback}'
+        f'</relative-time>'
+    )
 
 def primary_language(repository):
     language_edges = repository["languages"]["edges"]
@@ -1052,7 +976,6 @@ def render_building_now(items):
         return "*Nothing is actively being built in public right now.*"
 
     lines = []
-    now = datetime.now(timezone.utc)
 
     for item in items:
         repository = item["repository"]
@@ -1083,7 +1006,7 @@ def render_building_now(items):
 
         if updated_at:
             metadata_parts.append(
-                f"Updated {github_time_label(updated_at, now)}"
+                f"Updated {render_relative_time(updated_at)}"
             )
 
         metadata_parts.append(
@@ -1131,8 +1054,6 @@ def render_recent_releases(releases):
     if not releases:
         return "*No published releases yet.*"
 
-    now = datetime.now(timezone.utc)
-
     def release_line(release):
         status = ""
 
@@ -1149,12 +1070,10 @@ def render_recent_releases(releases):
                 f'({release["url"]})'
             )
 
-        time_label = github_time_label(
-            release["publishedAt"],
-            now,
+        released_text = (
+            f'Released '
+            f'{render_relative_time(release["publishedAt"])}'
         )
-
-        released_text = f"Released this {time_label}"
 
         tag_path = urllib.parse.quote(
             release["tagName"],
@@ -1405,7 +1324,6 @@ def render_recent_commits(commits):
     if not commits:
         return "*No authored commits found.*"
 
-    now = datetime.now(timezone.utc)
     lines = []
 
     for commit in commits:
@@ -1424,7 +1342,7 @@ def render_recent_commits(commits):
             f' — [{headline}]({commit["url"]})<br>\n'
             f'  <sub><blockquote>'
             f'Committed '
-            f'{github_time_label(commit["committedDate"], now)}'
+            f'{render_relative_time(commit["committedDate"])}'
             f' · [<img src="./assets/profile/git-commit.svg" '
             f'alt="" height="18" align="texttop"> '
             f'{short_oid}]({commit["url"]})'
