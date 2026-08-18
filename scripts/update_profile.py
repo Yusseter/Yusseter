@@ -1338,7 +1338,9 @@ def render_recent_commits(commits):
             f'  <sub><blockquote>'
             f'Committed '
             f'{github_time_label(commit["committedDate"], now)}'
-            f' · [{short_oid}]({commit["url"]})'
+            f' · [<img src="./assets/profile/git-commit.svg" '
+            f'alt="" height="18" align="texttop"> '
+            f'{short_oid}]({commit["url"]})'
             f'</blockquote></sub>'
         )
 
@@ -1353,7 +1355,7 @@ def render_recent_commits(commits):
 
             lines.append(
                 '  <details>\n'
-                '  <summary>Commit description</summary>\n'
+                '  <summary>Details</summary>\n'
                 f'  <p>{body_html}</p>\n'
                 '  </details>'
             )
