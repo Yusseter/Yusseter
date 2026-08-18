@@ -35,8 +35,10 @@ ACTIVITY_WINDOW_DAYS = 30
 RECENT_RELEASE_VISIBLE = 3
 RECENT_RELEASE_LIMIT = 8
 RECENT_COMMIT_LIMIT = 5
+RECENT_COMMIT_SEARCH_LIMIT = 50
 
 GRAPHQL_URL = "https://api.github.com/graphql"
+SEARCH_COMMITS_URL = "https://api.github.com/search/commits"
 
 SETI_UI_REVISION = "2d6c5e68b4ded73c92dac291845ee44e1182d511"
 SETI_ICON_RAW_BASE_URL = (
@@ -99,20 +101,6 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
                                         }
                                     }
                                     committer {
-                                        user {
-                                            login
-                                        }
-                                    }
-                                }
-                            }
-                            recentCommits: history(first: 50) {
-                                nodes {
-                                    oid
-                                    url
-                                    messageHeadline
-                                    messageBody
-                                    committedDate
-                                    author {
                                         user {
                                             login
                                         }
@@ -185,6 +173,37 @@ def graphql_request(query, variables):
         )
 
     return payload["data"]
+
+def rest_json_request(url, params=None):
+    if not GITHUB_TOKEN:
+        raise RuntimeError("GITHUB_TOKEN is not set.")
+
+    if params:
+        query = urllib.parse.urlencode(params)
+        url = f"{url}?{query}"
+
+    request = urllib.request.Request(
+        url,
+        headers={
+            "Authorization": f"Bearer {GITHUB_TOKEN}",
+            "Accept": "application/vnd.github+json",
+            "User-Agent": f"{USERNAME}-profile-updater",
+        },
+        method="GET",
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            return json.load(response)
+    except urllib.error.HTTPError as error:
+        body = error.read().decode(
+            "utf-8",
+            errors="replace",
+        )
+        raise RuntimeError(
+            f"GitHub REST request failed with HTTP "
+            f"{error.code}: {body}"
+        ) from error
 
 def fetch_profile_data():
     repositories = []
@@ -1182,55 +1201,118 @@ def render_recent_releases(releases):
 
     return "\n".join(lines)
 
-def collect_recent_commits(repositories):
-    commits = []
-
-    for repository in repositories:
-        if repository["name"] == "Placeholder":
-            continue
-
-        target = (
-            (repository.get("defaultBranchRef") or {})
-            .get("target")
-            or {}
-        )
-
-        history = (
-            (target.get("recentCommits") or {})
-            .get("nodes")
-            or []
-        )
-
-        for commit in history:
-            author_user = (
-                (commit.get("author") or {})
-                .get("user")
-                or {}
-            )
-
-            if author_user.get("login") != USERNAME:
-                continue
-
-            commits.append(
-                {
-                    "repositoryName": repository["name"],
-                    "repositoryUrl": repository["url"],
-                    "oid": commit["oid"],
-                    "url": commit["url"],
-                    "messageHeadline": commit["messageHeadline"],
-                    "messageBody": commit["messageBody"],
-                    "committedDate": commit["committedDate"],
-                }
-            )
-
-    commits.sort(
-        key=lambda commit: parse_github_date(
-            commit["committedDate"]
-        ),
-        reverse=True,
+def fetch_recent_commits():
+    payload = rest_json_request(
+        SEARCH_COMMITS_URL,
+        {
+            "q": f"author:{USERNAME} is:public",
+            "sort": "author-date",
+            "order": "desc",
+            "per_page": RECENT_COMMIT_SEARCH_LIMIT,
+        },
     )
 
-    return commits[:RECENT_COMMIT_LIMIT]
+    if payload.get("incomplete_results"):
+        raise RuntimeError(
+            "GitHub commit search returned incomplete results."
+        )
+
+    username = USERNAME.casefold()
+    placeholder_full_name = (
+        f"{USERNAME}/Placeholder"
+    ).casefold()
+
+    commits = []
+    seen_oids = set()
+
+    for item in payload.get("items") or []:
+        repository = item.get("repository") or {}
+        full_name = repository.get("full_name") or ""
+
+        if not full_name:
+            continue
+
+        if full_name.casefold() == placeholder_full_name:
+            continue
+
+        if repository.get("private"):
+            continue
+
+        author = item.get("author") or {}
+        author_login = (
+            author.get("login") or ""
+        ).casefold()
+
+        if author_login != username:
+            continue
+
+        oid = item.get("sha") or ""
+
+        if not oid or oid in seen_oids:
+            continue
+
+        commit_data = item.get("commit") or {}
+
+        message = (
+            commit_data.get("message") or ""
+        ).replace("\r\n", "\n").replace("\r", "\n").strip()
+
+        headline, separator, body = message.partition("\n")
+
+        committed_date = (
+            (commit_data.get("author") or {})
+            .get("date")
+            or
+            (commit_data.get("committer") or {})
+            .get("date")
+        )
+
+        commit_url = item.get("html_url")
+        repository_url = repository.get("html_url")
+
+        if (
+            not committed_date
+            or not commit_url
+            or not repository_url
+        ):
+            continue
+
+        owner_login = (
+            (repository.get("owner") or {})
+            .get("login")
+            or ""
+        )
+
+        repository_name = (
+            repository.get("name")
+            or full_name
+        )
+
+        if owner_login.casefold() != username:
+            repository_name = full_name
+
+        commits.append(
+            {
+                "repositoryName": repository_name,
+                "repositoryUrl": repository_url,
+                "oid": oid,
+                "url": commit_url,
+                "messageHeadline": headline.strip() or oid,
+                "messageBody": (
+                    body.strip()
+                    if separator
+                    else ""
+                ),
+                "committedDate": committed_date,
+            }
+        )
+
+        seen_oids.add(oid)
+
+        if len(commits) >= RECENT_COMMIT_LIMIT:
+            break
+
+    return commits
 
 def render_recent_commits(commits):
     if not commits:
@@ -1304,6 +1386,7 @@ def update_readme(
     profile,
     languages,
     building_now,
+    recent_commits,
     snapshot_mode,
 ):
     repositories = profile["repositories"]
@@ -1342,9 +1425,7 @@ def update_readme(
     content, commits_updated = replace_marked_block(
         content,
         "recent_commits",
-        render_recent_commits(
-            collect_recent_commits(repositories)
-        ),
+        render_recent_commits(recent_commits),
     )
 
     if (
@@ -1368,6 +1449,7 @@ def main():
     repositories = profile["repositories"]
     languages = aggregate_languages(repositories)
     building_now = collect_building_now(repositories)
+    recent_commits = fetch_recent_commits()
 
     PROFILE_ASSETS_DIR.mkdir(
         parents=True,
@@ -1411,6 +1493,7 @@ def main():
         profile,
         languages,
         building_now,
+        recent_commits,
         snapshot_mode,
     )
 
@@ -1419,6 +1502,7 @@ def main():
     print(f"Repositories: {len(repositories)}")
     print(f"Languages: {len(languages)}")
     print(f"Building now: {len(building_now)}")
+    print(f"Recent commits: {len(recent_commits)}")
 
 if __name__ == "__main__":
     main()
