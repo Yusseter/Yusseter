@@ -57,7 +57,8 @@ SETI_LANGUAGE_ICON_OVERRIDES = {
 }
 
 SETI_ICON_RENDER_HEIGHT = 20
-SETI_ICON_VERTICAL_SHIFT_PX = 2.0
+SETI_ICON_VERTICAL_SHIFT_PX = 3.0
+SETI_ICON_MOBILE_VERTICAL_SHIFT_PX = 2.0
 
 _SETI_ICON_AVAILABILITY = {}
 
@@ -835,7 +836,7 @@ def seti_language_icon_url(language):
 
     return icon_url if available else None
 
-def seti_language_icon_asset_path(language):
+def seti_language_icon_asset_path(language, mobile=False):
     if language == "No language data":
         return None
 
@@ -844,9 +845,11 @@ def seti_language_icon_asset_path(language):
     if not stem:
         return None
 
-    return LANGUAGE_ASSETS_DIR / f"{stem}.svg"
+    suffix = "-mobile" if mobile else ""
 
-def normalize_seti_icon_svg(svg_text):
+    return LANGUAGE_ASSETS_DIR / f"{stem}{suffix}.svg"
+
+def normalize_seti_icon_svg(svg_text, vertical_shift_px):
     match = re.search(
         r'\bviewBox="([^"]+)"',
         svg_text,
@@ -867,7 +870,7 @@ def normalize_seti_icon_svg(svg_text):
 
     shift = (
         height
-        * SETI_ICON_VERTICAL_SHIFT_PX
+        * vertical_shift_px
         / SETI_ICON_RENDER_HEIGHT
     )
 
@@ -898,12 +901,17 @@ def write_seti_language_assets(items):
     for item in items:
         language = primary_language(item["repository"])
         asset_path = seti_language_icon_asset_path(language)
+        mobile_asset_path = seti_language_icon_asset_path(
+            language,
+            mobile=True,
+        )
         icon_url = seti_language_icon_url(language)
 
-        if not asset_path or not icon_url:
+        if not asset_path or not mobile_asset_path or not icon_url:
             continue
 
         desired_names.add(asset_path.name)
+        desired_names.add(mobile_asset_path.name)
 
         request = urllib.request.Request(
             icon_url,
@@ -921,7 +929,12 @@ def write_seti_language_assets(items):
                 svg_text = response.read().decode("utf-8")
 
             normalized_svg = normalize_seti_icon_svg(
-                svg_text
+                svg_text,
+                SETI_ICON_VERTICAL_SHIFT_PX,
+            )
+            mobile_normalized_svg = normalize_seti_icon_svg(
+                svg_text,
+                SETI_ICON_MOBILE_VERTICAL_SHIFT_PX,
             )
         except (
             urllib.error.HTTPError,
@@ -937,6 +950,11 @@ def write_seti_language_assets(items):
             encoding="utf-8",
             newline="\n",
         )
+        mobile_asset_path.write_text(
+            mobile_normalized_svg.rstrip() + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
 
     for asset_path in LANGUAGE_ASSETS_DIR.glob("*.svg"):
         if asset_path.name not in desired_names:
@@ -949,24 +967,47 @@ def render_language_metadata(language):
         return escaped_language
 
     asset_path = seti_language_icon_asset_path(language)
+    mobile_asset_path = seti_language_icon_asset_path(
+        language,
+        mobile=True,
+    )
 
-    if asset_path and asset_path.exists():
+    if (
+        asset_path
+        and mobile_asset_path
+        and asset_path.exists()
+        and mobile_asset_path.exists()
+    ):
         icon_src = (
             "./assets/profile/languages/"
             f"{asset_path.name}"
+        )
+        mobile_icon_src = (
+            "./assets/profile/languages/"
+            f"{mobile_asset_path.name}"
+        )
+
+        picture = (
+            '<picture>'
+            f'<source media="(max-width: 600px)" '
+            f'srcset="{mobile_icon_src}">'
+            f'<img src="{icon_src}" alt="" '
+            f'height="{SETI_ICON_RENDER_HEIGHT}" '
+            f'align="texttop">'
+            '</picture>'
         )
     else:
         icon_src = (
             seti_language_icon_url(language)
             or "./assets/profile/language-default.svg"
         )
+        picture = (
+            f'<picture><img src="{icon_src}" alt="" '
+            f'height="{SETI_ICON_RENDER_HEIGHT}" '
+            f'align="texttop"></picture>'
+        )
 
-    return (
-        f'<picture><img src="{icon_src}" alt="" '
-        f'height="{SETI_ICON_RENDER_HEIGHT}" '
-        f'align="texttop"></picture>'
-        f'{escaped_language}'
-    )
+    return picture + escaped_language
 
 def render_building_now(items):
     if not items:
