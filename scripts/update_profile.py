@@ -34,7 +34,7 @@ ACTIVITY_WINDOW_DAYS = 30
 
 RECENT_RELEASE_VISIBLE = 3
 RECENT_RELEASE_LIMIT = 8
-RECENT_REPOSITORY_LIMIT = 5
+RECENT_COMMIT_LIMIT = 5
 
 GRAPHQL_URL = "https://api.github.com/graphql"
 
@@ -99,6 +99,20 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
                                         }
                                     }
                                     committer {
+                                        user {
+                                            login
+                                        }
+                                    }
+                                }
+                            }
+                            recentCommits: history(first: 50) {
+                                nodes {
+                                    oid
+                                    url
+                                    messageHeadline
+                                    messageBody
+                                    committedDate
+                                    author {
                                         user {
                                             login
                                         }
@@ -1011,7 +1025,7 @@ def render_language_metadata(language):
 
 def render_building_now(items):
     if not items:
-        return "_Nothing is actively being built in public right now._"
+        return "*Nothing is actively being built in public right now.*"
 
     lines = []
     now = datetime.now(timezone.utc)
@@ -1091,7 +1105,7 @@ def collect_recent_releases(repositories):
 
 def render_recent_releases(releases):
     if not releases:
-        return "_No published releases yet._"
+        return "*No published releases yet.*"
 
     now = datetime.now(timezone.utc)
 
@@ -1168,37 +1182,99 @@ def render_recent_releases(releases):
 
     return "\n".join(lines)
 
-def render_recent_repositories(repositories):
-    recent = sorted(
-        project_repositories(repositories),
-        key=lambda repository: parse_github_date(
-            repository["pushedAt"]
-            or repository["createdAt"]
+def collect_recent_commits(repositories):
+    commits = []
+
+    for repository in repositories:
+        if repository["name"] == "Placeholder":
+            continue
+
+        target = (
+            (repository.get("defaultBranchRef") or {})
+            .get("target")
+            or {}
+        )
+
+        history = (
+            (target.get("recentCommits") or {})
+            .get("nodes")
+            or []
+        )
+
+        for commit in history:
+            author_user = (
+                (commit.get("author") or {})
+                .get("user")
+                or {}
+            )
+
+            if author_user.get("login") != USERNAME:
+                continue
+
+            commits.append(
+                {
+                    "repositoryName": repository["name"],
+                    "repositoryUrl": repository["url"],
+                    "oid": commit["oid"],
+                    "url": commit["url"],
+                    "messageHeadline": commit["messageHeadline"],
+                    "messageBody": commit["messageBody"],
+                    "committedDate": commit["committedDate"],
+                }
+            )
+
+    commits.sort(
+        key=lambda commit: parse_github_date(
+            commit["committedDate"]
         ),
         reverse=True,
-    )[:RECENT_REPOSITORY_LIMIT]
+    )
 
-    if not recent:
-        return "_No recently updated repositories._"
+    return commits[:RECENT_COMMIT_LIMIT]
 
+def render_recent_commits(commits):
+    if not commits:
+        return "*No authored commits found.*"
+
+    now = datetime.now(timezone.utc)
     lines = []
 
-    for repository in recent:
-        description = (
-            (repository["description"] or "No description.")
-            .replace("\r", " ")
-            .replace("\n", " ")
+    for commit in commits:
+        repository_name = escape(
+            commit["repositoryName"]
+        )
+        headline = escape(
+            (commit["messageHeadline"] or commit["oid"])
             .strip()
         )
-
-        pushed = (
-            repository["pushedAt"]
-            or repository["createdAt"]
-        )[:10]
+        short_oid = commit["oid"][:7]
 
         lines.append(
-            f'- [{repository["name"]}]({repository["url"]}) — {description} — {pushed}'
+            f'- [**{repository_name}**]'
+            f'({commit["repositoryUrl"]})'
+            f' — [{headline}]({commit["url"]})<br>\n'
+            f'  <sub><blockquote>'
+            f'Committed '
+            f'{github_time_label(commit["committedDate"], now)}'
+            f' · [{short_oid}]({commit["url"]})'
+            f'</blockquote></sub>'
         )
+
+        body = (commit["messageBody"] or "").strip()
+
+        if body:
+            body_html = (
+                escape(body)
+                .replace("\r", "")
+                .replace("\n", "<br>")
+            )
+
+            lines.append(
+                '  <details>\n'
+                '  <summary>Commit description</summary>\n'
+                f'  <p>{body_html}</p>\n'
+                '  </details>'
+            )
 
     return "\n".join(lines)
 
@@ -1263,17 +1339,19 @@ def update_readme(
         ),
     )
 
-    content, repositories_updated = replace_marked_block(
+    content, commits_updated = replace_marked_block(
         content,
-        "recent_repositories",
-        render_recent_repositories(repositories),
+        "recent_commits",
+        render_recent_commits(
+            collect_recent_commits(repositories)
+        ),
     )
 
     if (
         snapshot_updated
         or building_updated
         or releases_updated
-        or repositories_updated
+        or commits_updated
     ):
         README_PATH.write_text(
             content,

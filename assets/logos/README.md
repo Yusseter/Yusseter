@@ -17,7 +17,8 @@ PNG files are generated with `scripts/update_visual_assets.py` at:
 - 512x512
 - 1024x1024
 
-Generated filenames include the variant, when applicable, followed by the output resolution:
+Generated filenames include the variant, when applicable, followed by the
+output resolution:
 
 `hittite_sun_disk_golden_crescent-512x512.png`
 

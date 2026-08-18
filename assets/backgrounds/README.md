@@ -1,14 +1,17 @@
 # Backgrounds
 
-This directory contains the double-headed eagle background used by the Yusseter profile.
+This directory contains the double-headed eagle background used by
+the Yusseter profile.
 
 ## Eagle Background
 
 `svg/eagle_background.svg` is the canonical vector source.
 
-The composition uses a deep plum double-headed eagle on a white background, with the Hittite Sun Disk and Golden Crescent emblem at its center.
+The composition uses a deep plum double-headed eagle on a white background,
+with the Hittite Sun Disk and Golden Crescent emblem at its center.
 
-When PNG backgrounds are generated, the eagle retains its 1920x1080 base visual size while the surrounding white canvas expands for larger resolutions.
+When PNG backgrounds are generated, the eagle retains its 1920x1080 base
+visual size while the surrounding white canvas expands for larger resolutions.
 
 ## PNG Exports
 
