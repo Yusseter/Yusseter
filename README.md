@@ -10,7 +10,7 @@
 - [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.<br>
   <sub><blockquote>Updated <relative-time datetime="2026-08-18T22:10:40Z">Aug 18, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/cpp-mobile.svg"><img src="./assets/profile/languages/cpp.svg" alt="" height="20" align="texttop"></picture>C++</blockquote></sub>
 - [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — *No description.*<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-08-19T13:00:43Z">Aug 19, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/powershell-mobile.svg"><img src="./assets/profile/languages/powershell.svg" alt="" height="20" align="texttop"></picture>PowerShell</blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-08-19T13:11:09Z">Aug 19, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/powershell-mobile.svg"><img src="./assets/profile/languages/powershell.svg" alt="" height="20" align="texttop"></picture>PowerShell</blockquote></sub>
 - [**ck3-workshop-auto-updater**](https://github.com/Yusseter/ck3-workshop-auto-updater) — A Windows utility that detects and requests missing Crusader Kings III Steam Workshop updates.<br>
   <sub><blockquote>Updated <relative-time datetime="2026-08-19T10:29:24Z">Aug 19, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/powershell-mobile.svg"><img src="./assets/profile/languages/powershell.svg" alt="" height="20" align="texttop"></picture>PowerShell</blockquote></sub>
 <!-- building_now:end -->
@@ -18,6 +18,18 @@
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add profile tests and run them in workflow](https://github.com/Yusseter/Yusseter/commit/b4c98c6805bd5b9ea104e1fe9128a59fe16aa339)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-08-19T13:13:41Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> b4c98c6](https://github.com/Yusseter/Yusseter/commit/b4c98c6805bd5b9ea104e1fe9128a59fe16aa339)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Add regression tests for scripts/update_profile.py covering relative-time rendering, recent release wording, commit ownership filtering, search result merging and deduplication, and recent-feed limiting. Update .github/workflows/update_profile.yml to include tests/** as a watched path and run the test suite as a pre-check before updating profile data to catch regressions early.</p>
+  </details>
+- [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — [Document first-pass archive verification](https://github.com/Yusseter/ck3-workshop-history/commit/a5644ffb629c0de022d42a2dc85921c9701662c8)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-08-19T13:11:09Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> a5644ff](https://github.com/Yusseter/ck3-workshop-history/commit/a5644ffb629c0de022d42a2dc85921c9701662c8)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Adds Analysis 09 documentation covering the first-pass archive verification batch across all 52 P0 revisions. It notes resumable verification, reuse of existing validated content, isolated Chrome/CDP retrieval, SHA-256 and Workshop ID validation, inventory checks, projected blob comparisons, persisted state, and run-to-completion execution. Results: 41 unique matches, 1 multiple-match case, and 10 with no exact projected Git match; all 52 archives contain exactly one descriptor.mod matching the expected Workshop ID, and the stage remains evidence-only without final Steam-event status assignment.</p>
+  </details>
 - [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — [Add first-pass archive verification analysis](https://github.com/Yusseter/ck3-workshop-history/commit/27be09f84e2b67a701fc7131b517660888dd8a7a)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-08-19T13:00:43Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 27be09f](https://github.com/Yusseter/ck3-workshop-history/commit/27be09f84e2b67a701fc7131b517660888dd8a7a)</blockquote></sub>
   <details>
@@ -35,18 +47,6 @@
   <details>
   <summary>Details</summary>
   <p>The Windows installer now uses the correct Explorer path for the Open Logs shortcut so the logs folder opens reliably. This change also bumps the project version to 0.3.1 and updates the README and changelog for the unreleased fix.</p>
-  </details>
-- [**ck3-workshop-auto-updater**](https://github.com/Yusseter/ck3-workshop-auto-updater) — [Fix Open Logs shortcut path](https://github.com/Yusseter/ck3-workshop-auto-updater/commit/46998a7c25a33b59b623cc4b705b1b1a6e057afa)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-08-19T09:53:47Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 46998a7](https://github.com/Yusseter/ck3-workshop-auto-updater/commit/46998a7c25a33b59b623cc4b705b1b1a6e057afa)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>The installer used the system directory variable for the Open Logs shortcut, which points to System32 instead of the Windows directory. This change uses the Windows directory variable so the shortcut resolves explorer.exe correctly.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Use native relative times in profile metadata](https://github.com/Yusseter/Yusseter/commit/40a0aed846be8e49b2ff6bf6a5af04fed7309f7b)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-08-18T22:16:58Z">Aug 18, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 40a0aed](https://github.com/Yusseter/Yusseter/commit/40a0aed846be8e49b2ff6bf6a5af04fed7309f7b)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Replace static GitHub-style time labels with GitHub&#x27;s native &lt;relative-time&gt; element for Building now updates, recent commits, and releases so displayed times update client-side without regenerating the README. Remove the custom relative-time formatter and fix release metadata wording from &quot;Released this ...&quot; to &quot;Released ...&quot;.</p>
   </details>
 <!-- recent_commits:end -->
 
