@@ -7,12 +7,31 @@
 ## Building now
 
 <!-- building_now:start -->
-*Nothing is actively being built in public right now.*
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.<br>
+  <sub><blockquote>Updated <relative-time datetime="2026-08-28T11:24:17Z">Aug 28, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/cpp-mobile.svg"><img src="./assets/profile/languages/cpp.svg" alt="" height="20" align="texttop"></picture>C++</blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Document 0.2.0 tray ordering features](https://github.com/Yusseter/tray-order-lock/commit/22536d765b5f466753e68d2ec4ad9cf996dbe77e)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-08-28T11:24:17Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 22536d7](https://github.com/Yusseter/tray-order-lock/commit/22536d765b5f466753e68d2ec4ad9cf996dbe77e)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Update the project banner text to reflect the completed 0.2.0 release notes. This change describes the new persistent manual ordering support and automatic restoration of known tray icons, while keeping the original lock-all-reordering behavior from 0.1.0.</p>
+  </details>
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Add new icon placement option](https://github.com/Yusseter/tray-order-lock/commit/73b2e32227358c1bf2e1645edf9eb396a90dbf3e)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-08-28T11:09:09Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 73b2e32](https://github.com/Yusseter/tray-order-lock/commit/73b2e32227358c1bf2e1645edf9eb396a90dbf3e)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Introduce a new setting &#x27;newIconBehavior&#x27; with options &#x27;windowsDefault&#x27; and &#x27;placeAtEnd&#x27;. Add the NewIconBehavior enum and g_newIconBehavior storage, and implement handling for newly discovered tray icons through AppendNewCanonicalKeyAtEnd, AdoptNewIconAtWindowsDefault, AdoptNewIconFromUiOrder and HandleNewIcon. When configured for place-at-end, the mod moves the new icon to the end of the overflow, verifies the resulting position and persists it in the canonical order; otherwise it adopts Windows&#x27; current placement, using UIOrder state as a fallback when live overflow neighbors are unavailable. LoadSettings now reads and logs the new setting, and RestoreCanonicalRelation delegates new-icon handling to HandleNewIcon.</p>
+  </details>
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Use MoveIcon to auto-restore tray icon order](https://github.com/Yusseter/tray-order-lock/commit/259396fda935c233e06791e117031e7bfa14a19a)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-08-28T10:36:59Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 259396f](https://github.com/Yusseter/tray-order-lock/commit/259396fda935c233e06791e117031e7bfa14a19a)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Implement automatic restoration of known canonical tray-icon order in PreserveManual mode by invoking NotificationAreaIconManager2::MoveIcon through Windows&#x27; own move path. Add MoveIcon symbol resolution, function storage, restore logging and counters, and relation helpers to compute, perform, and verify safe moves from the live overflow snapshot. Introduce thread-local internal and taskbar move depths to prevent reentrant restoration, suppress automatic restore while a user-initiated taskbar move is in progress, and avoid learning internal restore moves as manual changes. Update TaskbarModel move handling to forward internal moves without learning them, leave new or ambiguous icons untouched, and initialize and report the new restore metrics during mod lifecycle events.</p>
+  </details>
 - [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Add overflow snapshot &amp; restore observation hooks](https://github.com/Yusseter/tray-order-lock/commit/73c48b26334df9edeff72b9984f4c3b135a1ee0c)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-08-20T14:55:55Z">Aug 20, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 73c48b2](https://github.com/Yusseter/tray-order-lock/commit/73c48b26334df9edeff72b9984f4c3b135a1ee0c)</blockquote></sub>
   <details>
@@ -24,24 +43,6 @@
   <details>
   <summary>Details</summary>
   <p>Adds Analysis 10 for conservative event-level resolution across 1,198 Steam events and 116 historical Git commits. It combines Steam/Git candidate evidence, verified Steam-to-Skymods temporal alignment, and Analysis 09 archive-content verification into auditable event and Git resolution matrices with input SHA-256 provenance and strengthened validation.<br><br>The analysis resolves 42 Steam events as KNOWN + EXISTING: 41 through unique exact projected Git matches and one additional Special World event through byte-identical verified archive evidence. It leaves 1,156 events UNVERIFIED and assigns no KNOWN + RECOVERED or KNOWN + MISSING statuses because candidate-limited no-match evidence is not sufficient to prove recovery or absence.<br><br>Historical Git resolution identifies 41 commits as KNOWN + EXISTING, 8 as INVALID, and 67 as UNVERIFIED. Descriptor-only near matches, multiple exact Git matches, duplicate archive content, and external descriptor mismatches are preserved conservatively for later reconstruction work. Updates the analysis index with the completed Analysis 10 stage.</p>
-  </details>
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Add live notification-area identity mapping and hooks](https://github.com/Yusseter/tray-order-lock/commit/6dcbb624fecb56801b79bc3b6286932cddd25af3)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-08-19T16:02:44Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 6dcbb62](https://github.com/Yusseter/tray-order-lock/commit/6dcbb624fecb56801b79bc3b6286932cddd25af3)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Introduce live mapping of NotificationAreaIcon2 objects to Windows 64-bit identities and hook the constructor while resolving query_interface to capture implementation-&gt;ABI-&gt;windowsIdentity mappings. Adds LiveIdentityMapping storage, thread-safe lookup/store, counting/logging metrics, and constructor-based identity capture. Taskbar move handling now prefers live mappings and falls back to registry UIOrder diff when necessary, records the identity source, and centralizes skip logging. Also adds live-identity symbol resolution, additional diagnostics and counters, and README updates describing the new behavior. Validates live-mapped manual move learning before and after an Explorer restart while preserving lock-all move blocking.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add profile tests and run them in workflow](https://github.com/Yusseter/Yusseter/commit/b4c98c6805bd5b9ea104e1fe9128a59fe16aa339)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-08-19T13:13:41Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> b4c98c6](https://github.com/Yusseter/Yusseter/commit/b4c98c6805bd5b9ea104e1fe9128a59fe16aa339)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Add regression tests for scripts/update_profile.py covering relative-time rendering, recent release wording, commit ownership filtering, search result merging and deduplication, and recent-feed limiting. Update .github/workflows/update_profile.yml to include tests/** as a watched path and run the test suite as a pre-check before updating profile data to catch regressions early.</p>
-  </details>
-- [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — [Document first-pass archive verification](https://github.com/Yusseter/ck3-workshop-history/commit/a5644ffb629c0de022d42a2dc85921c9701662c8)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-08-19T13:11:09Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> a5644ff](https://github.com/Yusseter/ck3-workshop-history/commit/a5644ffb629c0de022d42a2dc85921c9701662c8)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Adds Analysis 09 documentation covering the first-pass archive verification batch across all 52 P0 revisions. It notes resumable verification, reuse of existing validated content, isolated Chrome/CDP retrieval, SHA-256 and Workshop ID validation, inventory checks, projected blob comparisons, persisted state, and run-to-completion execution. Results: 41 unique matches, 1 multiple-match case, and 10 with no exact projected Git match; all 52 archives contain exactly one descriptor.mod matching the expected Workshop ID, and the stage remains evidence-only without final Steam-event status assignment.</p>
   </details>
 <!-- recent_commits:end -->
 
