@@ -83,7 +83,7 @@
         <text class="secondary" x="0" y="30" text-anchor="middle">Total stars</text>
     </g>
     <g transform="translate(275 115)">
-        <text class="value" x="0" y="0" text-anchor="middle">9</text>
+        <text class="value" x="0" y="0" text-anchor="middle">10</text>
         <text class="secondary" x="0" y="30" text-anchor="middle">Total releases</text>
     </g>
 
@@ -96,8 +96,8 @@
 
     <g clip-path="url(#language-bar-clip)">
         <rect x="410.00" y="58" width="161.39" height="10" fill="#012456" />
-    <rect x="571.39" y="58" width="94.36" height="10" fill="#f34b7d" />
-    <rect x="665.74" y="58" width="34.01" height="10" fill="#f1e05a" />
+    <rect x="571.39" y="58" width="94.35" height="10" fill="#f34b7d" />
+    <rect x="665.74" y="58" width="34.02" height="10" fill="#f1e05a" />
     <rect x="699.76" y="58" width="16.47" height="10" fill="#663399" />
     <rect x="716.22" y="58" width="13.48" height="10" fill="#3572A5" />
     </g>

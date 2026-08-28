@@ -7,13 +7,19 @@
 ## Building now
 
 <!-- building_now:start -->
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for locking Windows 11 notification-area icon order, with supporting analyzers and research.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-08-28T11:24:17Z">Aug 28, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/cpp-mobile.svg"><img src="./assets/profile/languages/cpp.svg" alt="" height="20" align="texttop"></picture>C++</blockquote></sub>
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for preserving Windows 11 notification-area icon order while allowing user-controlled reordering.<br>
+  <sub><blockquote>Updated <relative-time datetime="2026-08-28T12:31:30Z">Aug 28, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/cpp-mobile.svg"><img src="./assets/profile/languages/cpp.svg" alt="" height="20" align="texttop"></picture>C++</blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Document 0.2.0 and reorganize research](https://github.com/Yusseter/tray-order-lock/commit/2e167faf4752085bacae5f42c61308a4e247014f)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-08-28T12:31:30Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 2e167fa](https://github.com/Yusseter/tray-order-lock/commit/2e167faf4752085bacae5f42c61308a4e247014f)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>This update refreshes the project docs for the 0.2.0 release, including the new Preserve order mode, installation settings, validation notes, and repository layout. It also moves the analyzer and experiment sources under research/ to clarify the production mod versus historical research work, and updates the project homepage URLs to the repo&#x27;s current name.</p>
+  </details>
 - [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Document 0.2.0 tray ordering features](https://github.com/Yusseter/tray-order-lock/commit/22536d765b5f466753e68d2ec4ad9cf996dbe77e)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-08-28T11:24:17Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 22536d7](https://github.com/Yusseter/tray-order-lock/commit/22536d765b5f466753e68d2ec4ad9cf996dbe77e)</blockquote></sub>
   <details>
@@ -38,28 +44,24 @@
   <summary>Details</summary>
   <p>Capture TaskbarModel6 overflow state and observe restore decisions when icons become visible. Introduces LiveOverflowEntry/LiveOverflowSnapshot types, caching of TaskbarModel6, vector IID resolution, and helpers to snapshot overflow icons, find unique logical keys, and compute desired positions. Adds hooks for NotificationAreaIconManager2::AddIconToVisibleCollection and TaskbarModel::get_NotificationAreaOverflowIcons to record events and trigger canonical-restore observations. Adds logging and atomic counters for visibility/overflow/restore telemetry, and cleans up cached TaskbarModel6 on uninit. These changes extend PreserveManual ordering support by detecting known icons as they become visible and computing whether a move would be required to satisfy the persisted canonical order.</p>
   </details>
-- [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — [Add event resolution matrix analysis](https://github.com/Yusseter/ck3-workshop-history/commit/94310b5619b7dfc472343faaf1b97e70cb858c11)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-08-19T17:35:54Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 94310b5](https://github.com/Yusseter/ck3-workshop-history/commit/94310b5619b7dfc472343faaf1b97e70cb858c11)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Adds Analysis 10 for conservative event-level resolution across 1,198 Steam events and 116 historical Git commits. It combines Steam/Git candidate evidence, verified Steam-to-Skymods temporal alignment, and Analysis 09 archive-content verification into auditable event and Git resolution matrices with input SHA-256 provenance and strengthened validation.<br><br>The analysis resolves 42 Steam events as KNOWN + EXISTING: 41 through unique exact projected Git matches and one additional Special World event through byte-identical verified archive evidence. It leaves 1,156 events UNVERIFIED and assigns no KNOWN + RECOVERED or KNOWN + MISSING statuses because candidate-limited no-match evidence is not sufficient to prove recovery or absence.<br><br>Historical Git resolution identifies 41 commits as KNOWN + EXISTING, 8 as INVALID, and 67 as UNVERIFIED. Descriptor-only near matches, multiple exact Git matches, duplicate archive content, and external descriptor mismatches are preserved conservatively for later reconstruction work. Updates the analysis index with the completed Analysis 10 stage.</p>
-  </details>
 <!-- recent_commits:end -->
 
 ## Recent releases
 
 <!-- recent_releases:start -->
+- [**Tray Order Lock 0.2.0**](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.2.0) [<img src="./assets/profile/release-latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.2.0)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-28T11:31:20Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> tray-order-lock-v0.2.0](https://github.com/Yusseter/tray-order-lock/tree/tray-order-lock-v0.2.0)</blockquote></sub>
 - [**test**](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/releases/tag/test) [<img src="./assets/profile/release-latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/releases/tag/test)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-20T14:03:25Z">Aug 20, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> test](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/tree/test)</blockquote></sub>
 - [**CK3 Workshop Auto Updater v0.3.1**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.1) [<img src="./assets/profile/release-latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.1)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-19T15:55:31Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.3.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.1)</blockquote></sub>
-- [**CK3 Workshop Auto Updater v0.3.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.0)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-07T09:23:12Z">Aug 7, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.0)</blockquote></sub>
 
 <details>
 <summary>More releases</summary>
 
-- [**Tray Order Lock 0.1.0**](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.1.0) [<img src="./assets/profile/release-latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.1.0)<br>
+- [**CK3 Workshop Auto Updater v0.3.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.0)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-07T09:23:12Z">Aug 7, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.0)</blockquote></sub>
+- [**Tray Order Lock 0.1.0**](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.1.0)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-05T19:40:24Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> tray-order-lock-v0.1.0](https://github.com/Yusseter/tray-order-lock/tree/tray-order-lock-v0.1.0)</blockquote></sub>
 - [**CK3 Workshop Auto Updater v0.2.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0) [<img src="./assets/profile/release-prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-05T11:08:17Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.2.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.2.0)</blockquote></sub>
@@ -67,8 +69,6 @@
   <sub><blockquote>Released <relative-time datetime="2026-08-05T10:06:18Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.1.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.1.1)</blockquote></sub>
 - [**CK3 Workshop Auto Updater v0.1.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0) [<img src="./assets/profile/release-prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-03T12:43:57Z">Aug 3, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.1.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.1.0)</blockquote></sub>
-- [**1.2.2 for 1.19 (Released: 2026-04-20)**](https://github.com/Yusseter/yb_map/releases/tag/1.2.2) [<img src="./assets/profile/release-latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/yb_map/releases/tag/1.2.2)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-04-20T17:44:05Z">Apr 20, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> 1.2.2](https://github.com/Yusseter/yb_map/tree/1.2.2)</blockquote></sub>
 
 </details>
 <!-- recent_releases:end -->

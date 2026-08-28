@@ -23,8 +23,8 @@
 
     <g clip-path="url(#bar-clip)">
         <rect x="0.00" y="0" width="161.39" height="10" fill="#012456" />
-        <rect x="161.39" y="0" width="94.36" height="10" fill="#f34b7d" />
-        <rect x="255.74" y="0" width="34.01" height="10" fill="#f1e05a" />
+        <rect x="161.39" y="0" width="94.35" height="10" fill="#f34b7d" />
+        <rect x="255.74" y="0" width="34.02" height="10" fill="#f1e05a" />
         <rect x="289.76" y="0" width="16.47" height="10" fill="#663399" />
         <rect x="306.22" y="0" width="13.48" height="10" fill="#3572a5" />
     </g>
