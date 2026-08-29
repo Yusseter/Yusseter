@@ -17,6 +17,12 @@
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add responsive profile header SVGs](https://github.com/Yusseter/Yusseter/commit/67469a04af440341ba12fe71a98b9c422f2134cd)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-08-29T08:43:44Z">Aug 29, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 67469a0](https://github.com/Yusseter/Yusseter/commit/67469a04af440341ba12fe71a98b9c422f2134cd)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Use a `&lt;picture&gt;` block in README to serve a dedicated mobile header on small screens while keeping the desktop SVG as the default. Refine both header variants with improved proportions, geometric precision rendering, stronger rule strokes, and adjusted emblem positioning for cleaner scaling and alignment.</p>
+  </details>
 - [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Document 0.2.0 and reorganize research](https://github.com/Yusseter/tray-order-lock/commit/2e167faf4752085bacae5f42c61308a4e247014f)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-08-28T12:31:30Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 2e167fa](https://github.com/Yusseter/tray-order-lock/commit/2e167faf4752085bacae5f42c61308a4e247014f)</blockquote></sub>
   <details>
@@ -40,12 +46,6 @@
   <details>
   <summary>Details</summary>
   <p>Implement automatic restoration of known canonical tray-icon order in PreserveManual mode by invoking NotificationAreaIconManager2::MoveIcon through Windows&#x27; own move path. Add MoveIcon symbol resolution, function storage, restore logging and counters, and relation helpers to compute, perform, and verify safe moves from the live overflow snapshot. Introduce thread-local internal and taskbar move depths to prevent reentrant restoration, suppress automatic restore while a user-initiated taskbar move is in progress, and avoid learning internal restore moves as manual changes. Update TaskbarModel move handling to forward internal moves without learning them, leave new or ambiguous icons untouched, and initialize and report the new restore metrics during mod lifecycle events.</p>
-  </details>
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Add overflow snapshot &amp; restore observation hooks](https://github.com/Yusseter/tray-order-lock/commit/73c48b26334df9edeff72b9984f4c3b135a1ee0c)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-08-20T14:55:55Z">Aug 20, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 73c48b2](https://github.com/Yusseter/tray-order-lock/commit/73c48b26334df9edeff72b9984f4c3b135a1ee0c)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Capture TaskbarModel6 overflow state and observe restore decisions when icons become visible. Introduces LiveOverflowEntry/LiveOverflowSnapshot types, caching of TaskbarModel6, vector IID resolution, and helpers to snapshot overflow icons, find unique logical keys, and compute desired positions. Adds hooks for NotificationAreaIconManager2::AddIconToVisibleCollection and TaskbarModel::get_NotificationAreaOverflowIcons to record events and trigger canonical-restore observations. Adds logging and atomic counters for visibility/overflow/restore telemetry, and cleans up cached TaskbarModel6 on uninit. These changes extend PreserveManual ordering support by detecting known icons as they become visible and computing whether a move would be required to satisfy the persisted canonical order.</p>
   </details>
 <!-- recent_commits:end -->
 
