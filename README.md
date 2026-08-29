@@ -17,6 +17,12 @@
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Polish profile header SVG layout and styling](https://github.com/Yusseter/Yusseter/commit/5aa0fffdb434823c4aee071c6d06a288d50a7ae8)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-08-29T16:45:04Z">Aug 29, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 5aa0fff](https://github.com/Yusseter/Yusseter/commit/5aa0fffdb434823c4aee071c6d06a288d50a7ae8)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Updated the README header image to use full-width rendering and refreshed both profile header SVGs with a rounded frame, theme-aware border stroke, and gold gradient accent rules. Also adjusted rule positions and artwork transforms to improve visual balance and consistency across desktop and mobile variants.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add responsive profile header SVGs](https://github.com/Yusseter/Yusseter/commit/67469a04af440341ba12fe71a98b9c422f2134cd)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-08-29T08:43:44Z">Aug 29, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 67469a0](https://github.com/Yusseter/Yusseter/commit/67469a04af440341ba12fe71a98b9c422f2134cd)</blockquote></sub>
   <details>
@@ -40,12 +46,6 @@
   <details>
   <summary>Details</summary>
   <p>Introduce a new setting &#x27;newIconBehavior&#x27; with options &#x27;windowsDefault&#x27; and &#x27;placeAtEnd&#x27;. Add the NewIconBehavior enum and g_newIconBehavior storage, and implement handling for newly discovered tray icons through AppendNewCanonicalKeyAtEnd, AdoptNewIconAtWindowsDefault, AdoptNewIconFromUiOrder and HandleNewIcon. When configured for place-at-end, the mod moves the new icon to the end of the overflow, verifies the resulting position and persists it in the canonical order; otherwise it adopts Windows&#x27; current placement, using UIOrder state as a fallback when live overflow neighbors are unavailable. LoadSettings now reads and logs the new setting, and RestoreCanonicalRelation delegates new-icon handling to HandleNewIcon.</p>
-  </details>
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Use MoveIcon to auto-restore tray icon order](https://github.com/Yusseter/tray-order-lock/commit/259396fda935c233e06791e117031e7bfa14a19a)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-08-28T10:36:59Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 259396f](https://github.com/Yusseter/tray-order-lock/commit/259396fda935c233e06791e117031e7bfa14a19a)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Implement automatic restoration of known canonical tray-icon order in PreserveManual mode by invoking NotificationAreaIconManager2::MoveIcon through Windows&#x27; own move path. Add MoveIcon symbol resolution, function storage, restore logging and counters, and relation helpers to compute, perform, and verify safe moves from the live overflow snapshot. Introduce thread-local internal and taskbar move depths to prevent reentrant restoration, suppress automatic restore while a user-initiated taskbar move is in progress, and avoid learning internal restore moves as manual changes. Update TaskbarModel move handling to forward internal moves without learning them, leave new or ambiguous icons untouched, and initialize and report the new restore metrics during mod lifecycle events.</p>
   </details>
 <!-- recent_commits:end -->
 
