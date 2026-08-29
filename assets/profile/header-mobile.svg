@@ -7,12 +7,17 @@
         fill: #fdfbf8;
     }
 
+    .header-frame {
+        fill: none;
+        stroke: #d1d9e0b3;
+    }
+
     .header-rule-primary {
         stroke: #491d34;
     }
 
     .header-rule-accent {
-        stroke: #c8ad67;
+        stroke-linecap: round;
     }
 
     .emblem-background-fill {
@@ -32,6 +37,12 @@
     #chest-emblem #emblem-hittite-disk-cross-motif {
         fill: #491d34 !important;
     }
+
+    @media (prefers-color-scheme: dark) {
+        .header-frame {
+            stroke: #3d444db3;
+        }
+    }
 </style>
 <defs>
 		<radialGradient id="emblem-golden-crescent-gradient" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
@@ -41,7 +52,40 @@
 			<stop offset="100%" stop-color="#a9874e" />
 		</radialGradient>
 
-		<g id="emblem-hittite-disk-cross-motif" fill="#491d34">
+		<linearGradient
+    id="header-rule-accent-left-gradient"
+    gradientUnits="userSpaceOnUse"
+    x1="40"
+    y1="0"
+    x2="235"
+    y2="0"
+>
+    <stop offset="0%" stop-color="#a9874e" />
+    <stop offset="11%" stop-color="#b89558" />
+    <stop offset="29%" stop-color="#c8ad67" />
+    <stop offset="50%" stop-color="#d7c277" />
+    <stop offset="71%" stop-color="#c8ad67" />
+    <stop offset="89%" stop-color="#b89558" />
+    <stop offset="100%" stop-color="#a9874e" />
+</linearGradient>
+
+<linearGradient
+    id="header-rule-accent-right-gradient"
+    gradientUnits="userSpaceOnUse"
+    x1="525"
+    y1="0"
+    x2="720"
+    y2="0"
+>
+    <stop offset="0%" stop-color="#a9874e" />
+    <stop offset="11%" stop-color="#b89558" />
+    <stop offset="29%" stop-color="#c8ad67" />
+    <stop offset="50%" stop-color="#d7c277" />
+    <stop offset="71%" stop-color="#c8ad67" />
+    <stop offset="89%" stop-color="#b89558" />
+    <stop offset="100%" stop-color="#a9874e" />
+</linearGradient>
+<g id="emblem-hittite-disk-cross-motif" fill="#491d34">
 			<rect x="-120" y="-18.5" width="240" height="37" transform="rotate(45)" />
 			<rect x="-120" y="-18.5" width="240" height="37" transform="rotate(-45)" />
 		</g>
@@ -58,6 +102,18 @@ x="0"
 y="0"
 width="760"
 height="240"
+rx="6"
+/>
+
+<rect
+id="frame"
+class="header-frame"
+x="0.5"
+y="0.5"
+width="759"
+height="239"
+rx="6"
+stroke-width="1"
 />
 
 <line
@@ -80,6 +136,7 @@ y2="124"
 stroke-width="1.25"
 stroke-linecap="round"
 vector-effect="non-scaling-stroke"
+stroke="url(#header-rule-accent-left-gradient)"
 />
 
 <line
@@ -102,11 +159,12 @@ y2="124"
 stroke-width="1.25"
 stroke-linecap="round"
 vector-effect="non-scaling-stroke"
+stroke="url(#header-rule-accent-right-gradient)"
 />
 
 <g
 id="header-art"
-transform="translate(380 120) scale(0.25) translate(-960 -540)"
+transform="translate(380 119.34100289734043) scale(0.25) translate(-960 -540)"
 >
 
 	<g id="eagle-layout" transform="translate(362.746875 -66.234375) scale(2.99375000)">

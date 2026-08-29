@@ -3,7 +3,7 @@
 <p align="center">
   <picture>
     <source media="(max-width: 600px)" srcset="./assets/profile/header-mobile.svg">
-    <img src="./assets/profile/header.svg" width="760" alt="Yusseter profile header">
+    <img src="./assets/profile/header.svg" width="100%" alt="Yusseter profile header">
   </picture>
 </p>
 
