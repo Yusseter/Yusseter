@@ -10,8 +10,7 @@
 ## Building now
 
 <!-- building_now:start -->
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — Windhawk mod for preserving Windows 11 notification-area icon order while allowing user-controlled reordering.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-08-28T12:31:30Z">Aug 28, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/cpp-mobile.svg"><img src="./assets/profile/languages/cpp.svg" alt="" height="20" align="texttop"></picture>C++</blockquote></sub>
+*Nothing is actively being built in public right now.*
 <!-- building_now:end -->
 
 ## Recent commits
