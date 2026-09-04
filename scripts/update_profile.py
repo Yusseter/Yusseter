@@ -64,6 +64,7 @@ SETI_ICON_MOBILE_VERTICAL_SHIFT_PX = 2.0
 
 _SETI_ICON_AVAILABILITY = {}
 
+# Fetch broadly; each profile section decides whether forks belong.
 REPOSITORIES_QUERY = """
 query($login: String!, $after: String, $activitySince: GitTimestamp!) {
     user(login: $login) {
@@ -73,7 +74,6 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
             after: $after
             ownerAffiliations: OWNER
             privacy: PUBLIC
-            isFork: false
             orderBy: {field: PUSHED_AT, direction: DESC}
         ) {
             pageInfo {
@@ -85,6 +85,7 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
                 url
                 description
                 isArchived
+                isFork
                 stargazerCount
                 pushedAt
                 createdAt
@@ -257,8 +258,32 @@ def project_repositories(repositories):
         repository
         for repository in repositories
         if not repository["isArchived"]
+        and not repository.get("isFork", False)
         and repository["name"] not in EXCLUDED_REPOSITORIES
     ]
+
+def activity_repositories(repositories):
+    return [
+        repository
+        for repository in repositories
+        if not repository["isArchived"]
+        and repository["name"] not in EXCLUDED_REPOSITORIES
+    ]
+
+def snapshot_repositories(repositories):
+    return [
+        repository
+        for repository in repositories
+        if not repository.get("isFork", False)
+    ]
+
+def build_snapshot_profile(profile):
+    return {
+        **profile,
+        "repositories": snapshot_repositories(
+            profile["repositories"]
+        ),
+    }
 
 def aggregate_languages(repositories):
     totals = defaultdict(int)
@@ -292,7 +317,9 @@ def render_snapshot_svg(
     languages,
     mobile=False,
 ):
-    repositories = profile["repositories"]
+    repositories = snapshot_repositories(
+        profile["repositories"]
+    )
 
     total_stars = sum(
         repository["stargazerCount"]
@@ -680,7 +707,7 @@ def collect_building_now(repositories):
     now = datetime.now(timezone.utc)
     candidates = []
 
-    for repository in project_repositories(repositories):
+    for repository in activity_repositories(repositories):
         activity = repository_activity(
             repository,
             now,
@@ -1304,9 +1331,9 @@ def collect_recent_commits(repositories):
         for commit in fetch_searched_recent_commits()
     }
 
-    # Prefer GraphQL data for owned repositories because it is
-    # available immediately after a push, before Commit Search
-    # necessarily finishes indexing the new commit.
+    # Prefer GraphQL data for repositories owned by USERNAME,
+    # including forks, because it is available immediately after a
+    # push, before Commit Search necessarily finishes indexing it.
     for commit in collect_owned_recent_commits(repositories):
         commits_by_oid[commit["oid"]] = commit
 
@@ -1396,6 +1423,7 @@ def update_readme(
     recent_commits,
     snapshot_mode,
 ):
+    snapshot_profile = build_snapshot_profile(profile)
     repositories = profile["repositories"]
 
     if not README_PATH.exists():
@@ -1404,7 +1432,7 @@ def update_readme(
     content = README_PATH.read_text(encoding="utf-8")
 
     snapshot = render_snapshot_readme(
-        profile,
+        snapshot_profile,
         languages,
         snapshot_mode,
     )

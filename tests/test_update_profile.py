@@ -12,6 +12,255 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 import update_profile as profile  # pyright: ignore[reportMissingImports]
 
 
+class RepositoryScopeTests(unittest.TestCase):
+    def test_repository_query_fetches_forks_and_requests_fork_metadata(self):
+        self.assertNotIn(
+            "isFork: false",
+            profile.REPOSITORIES_QUERY,
+        )
+        self.assertIn(
+            "\n                isFork\n",
+            profile.REPOSITORIES_QUERY,
+        )
+
+    def test_project_scope_excludes_forks_but_activity_scope_keeps_them(self):
+        repositories = [
+            {
+                "name": "project",
+                "isArchived": False,
+                "isFork": False,
+            },
+            {
+                "name": "forked-project",
+                "isArchived": False,
+                "isFork": True,
+            },
+            {
+                "name": "archived-project",
+                "isArchived": True,
+                "isFork": False,
+            },
+            {
+                "name": "Placeholder",
+                "isArchived": False,
+                "isFork": False,
+            },
+        ]
+
+        project_names = [
+            repository["name"]
+            for repository in profile.project_repositories(
+                repositories
+            )
+        ]
+        activity_names = [
+            repository["name"]
+            for repository in profile.activity_repositories(
+                repositories
+            )
+        ]
+        snapshot_names = [
+            repository["name"]
+            for repository in profile.snapshot_repositories(
+                repositories
+            )
+        ]
+
+        self.assertEqual(
+            project_names,
+            ["project"],
+        )
+        self.assertEqual(
+            activity_names,
+            ["project", "forked-project"],
+        )
+        self.assertEqual(
+            snapshot_names,
+            [
+                "project",
+                "archived-project",
+                "Placeholder",
+            ],
+        )
+
+    def test_building_now_uses_activity_repository_scope(self):
+        fork_repository = {
+            "name": "forked-project",
+            "pushedAt": "2026-09-04T16:32:43Z",
+            "createdAt": "2026-08-31T11:17:05Z",
+        }
+        activity = {
+            "commits_7d": 4,
+            "commits_14d": 4,
+            "commits_30d": 4,
+            "active_days_14d": 2,
+            "latest_commit_age": 0,
+            "created_age": 4,
+            "latest_release_age": None,
+        }
+
+        with (
+            patch.object(
+                profile,
+                "activity_repositories",
+                return_value=[fork_repository],
+            ) as activity_scope,
+            patch.object(
+                profile,
+                "repository_activity",
+                return_value=activity,
+            ),
+            patch.object(
+                profile,
+                "qualifies_for_building_now",
+                return_value=True,
+            ),
+            patch.object(
+                profile,
+                "building_activity_score",
+                return_value=10.0,
+            ),
+        ):
+            items = profile.collect_building_now([])
+
+        activity_scope.assert_called_once_with([])
+        self.assertEqual(len(items), 1)
+        self.assertIs(
+            items[0]["repository"],
+            fork_repository,
+        )
+
+    def test_snapshot_totals_exclude_forks_in_both_renderer_modes(self):
+        profile_data = {
+            "repositories": [
+                {
+                    "name": "project",
+                    "isArchived": False,
+                    "isFork": False,
+                    "stargazerCount": 3,
+                    "releases": {
+                        "totalCount": 2,
+                    },
+                },
+                {
+                    "name": "forked-project",
+                    "isArchived": False,
+                    "isFork": True,
+                    "stargazerCount": 100,
+                    "releases": {
+                        "totalCount": 100,
+                    },
+                },
+                {
+                    "name": "archived-project",
+                    "isArchived": True,
+                    "isFork": False,
+                    "stargazerCount": 5,
+                    "releases": {
+                        "totalCount": 4,
+                    },
+                },
+            ],
+        }
+
+        full_svg = profile.render_snapshot_svg(
+            profile_data,
+            [],
+        )
+
+        snapshot_profile = profile.build_snapshot_profile(
+            profile_data
+        )
+        hybrid = profile.render_snapshot_readme(
+            snapshot_profile,
+            [],
+            "native_table_hybrid",
+        )
+
+        self.assertIn(
+            'text-anchor="middle">8</text>',
+            full_svg,
+        )
+        self.assertIn(
+            'text-anchor="middle">6</text>',
+            full_svg,
+        )
+        self.assertNotIn(
+            'text-anchor="middle">103</text>',
+            full_svg,
+        )
+        self.assertNotIn(
+            'text-anchor="middle">102</text>',
+            full_svg,
+        )
+
+        self.assertIn("<h2>8</h2>", hybrid)
+        self.assertIn("<h2>6</h2>", hybrid)
+        self.assertNotIn("<h2>103</h2>", hybrid)
+        self.assertNotIn("<h2>102</h2>", hybrid)
+
+    def test_recent_releases_exclude_fork_releases(self):
+        repositories = [
+            {
+                "name": "project",
+                "url": "https://github.com/Yusseter/project",
+                "isArchived": False,
+                "isFork": False,
+                "releases": {
+                    "nodes": [
+                        {
+                            "name": "Project release",
+                            "tagName": "v1.0.0",
+                            "url": (
+                                "https://github.com/Yusseter/project/"
+                                "releases/tag/v1.0.0"
+                            ),
+                            "publishedAt": "2026-09-01T12:00:00Z",
+                            "isDraft": False,
+                            "isPrerelease": False,
+                            "isLatest": True,
+                        }
+                    ]
+                },
+            },
+            {
+                "name": "forked-project",
+                "url": (
+                    "https://github.com/Yusseter/"
+                    "forked-project"
+                ),
+                "isArchived": False,
+                "isFork": True,
+                "releases": {
+                    "nodes": [
+                        {
+                            "name": "Fork release",
+                            "tagName": "fork-v2.0.0",
+                            "url": (
+                                "https://github.com/Yusseter/"
+                                "forked-project/releases/tag/"
+                                "fork-v2.0.0"
+                            ),
+                            "publishedAt": "2026-09-02T12:00:00Z",
+                            "isDraft": False,
+                            "isPrerelease": False,
+                            "isLatest": True,
+                        }
+                    ]
+                },
+            },
+        ]
+
+        releases = profile.collect_recent_releases(
+            repositories
+        )
+
+        self.assertEqual(
+            [release["tagName"] for release in releases],
+            ["v1.0.0"],
+        )
+
+
 class RelativeTimeTests(unittest.TestCase):
     def test_render_relative_time_uses_native_element(self):
         rendered = profile.render_relative_time(
@@ -63,10 +312,11 @@ class RecentReleaseTests(unittest.TestCase):
 
 
 class RecentCommitTests(unittest.TestCase):
-    def test_owned_commits_require_matching_author(self):
+    def test_owned_fork_commits_require_matching_author(self):
         repository = {
             "name": "project",
             "url": "https://github.com/Yusseter/project",
+            "isFork": True,
             "defaultBranchRef": {
                 "target": {
                     "history": {
