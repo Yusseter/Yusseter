@@ -11,12 +11,18 @@
 
 <!-- building_now:start -->
 - [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — OptiFabric venturing out into the 1.16+ world<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-05T10:46:27Z">Sep 5, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/java-mobile.svg"><img src="./assets/profile/languages/java.svg" alt="" height="20" align="texttop"></picture>Java</blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-05T19:13:30Z">Sep 5, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/java-mobile.svg"><img src="./assets/profile/languages/java.svg" alt="" height="20" align="texttop"></picture>Java</blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Bridge Fabric world render events in patcher](https://github.com/Yusseter/OptiFabric/commit/44cc62087ce63f25dd0e29eef434d11328576a81)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-05T19:13:30Z">Sep 5, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 44cc620](https://github.com/Yusseter/OptiFabric/commit/44cc62087ce63f25dd0e29eef434d11328576a81)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Update `WorldRendererFix` to robustly inject Fabric Rendering V1 hooks into OptiFine&#x27;s main world render path. The patch now detects required anchor instructions, validates expected method and instruction shapes, prepares `WorldRenderContextImpl`, sets the matrix stack, and inserts all main event callbacks (`START_MAIN`, `BEFORE_ENTITIES`, `AFTER_ENTITIES`, `BEFORE_TRANSLUCENT`, `END_MAIN`). It also adds stronger duplicate and partial-bridge detection, clearer constants and helpers, and improved logging and error messages to fail fast when the bytecode structure is unexpected.</p>
+  </details>
 - [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Restore vanilla render methods for Indigo](https://github.com/Yusseter/OptiFabric/commit/47e501ed3b112a5d3113d6296e80dd4bcdf609de)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-05T10:46:27Z">Sep 5, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 47e501e](https://github.com/Yusseter/OptiFabric/commit/47e501ed3b112a5d3113d6296e80dd4bcdf609de)</blockquote></sub>
   <details>
@@ -40,12 +46,6 @@
   <details>
   <summary>Details</summary>
   <p>Resolve and cache the Fabric `getCurrentInfo` method and `handler` field instead of looking them up on every fluid color call. Keep the current info and handler values live per call, add a null guard when no current info is available, and separate reflection resolution failures from runtime read failures.</p>
-  </details>
-- [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Add icon to OptiFabric library jar](https://github.com/Yusseter/OptiFabric/commit/fe8d4ec270ca97d22ac140a9ba2999141f11a1ce)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-04T14:51:49Z">Sep 4, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> fe8d4ec](https://github.com/Yusseter/OptiFabric/commit/fe8d4ec270ca97d22ac140a9ba2999141f11a1ce)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Update the `libraryJar` task to package `assets/optifabric/icon.png` and declare it in the generated `fabric.mod.json`. This ensures the nested `optifabric-libs` mod includes a valid icon resource and metadata reference.</p>
   </details>
 <!-- recent_commits:end -->
 
