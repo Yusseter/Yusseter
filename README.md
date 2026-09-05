@@ -11,12 +11,18 @@
 
 <!-- building_now:start -->
 - [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — OptiFabric venturing out into the 1.16+ world<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-04T16:32:38Z">Sep 4, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/java-mobile.svg"><img src="./assets/profile/languages/java.svg" alt="" height="20" align="texttop"></picture>Java</blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-05T10:46:27Z">Sep 5, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/java-mobile.svg"><img src="./assets/profile/languages/java.svg" alt="" height="20" align="texttop"></picture>Java</blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Restore vanilla render methods for Indigo](https://github.com/Yusseter/OptiFabric/commit/47e501ed3b112a5d3113d6296e80dd4bcdf609de)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-05T10:46:27Z">Sep 5, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 47e501e](https://github.com/Yusseter/OptiFabric/commit/47e501ed3b112a5d3113d6296e80dd4bcdf609de)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Rework `BlockRenderManagerFix` to replace OptiFine’s transformed `method_23071` and `method_3353` with vanilla copies when Indigo is loaded and no other renderer advertises `fabric-renderer-api-v1:contains_renderer`. Remove the previous dead-anchor injection approach, retain missing-method backfill logic, and fail explicitly when the expected vanilla or OptiFine render methods are unavailable.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Refine fork handling across profile sections](https://github.com/Yusseter/Yusseter/commit/a456908944c89a826aba238e42ca6309f58678b1)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-04T23:36:21Z">Sep 4, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> a456908](https://github.com/Yusseter/Yusseter/commit/a456908944c89a826aba238e42ca6309f58678b1)</blockquote></sub>
   <details>
@@ -40,12 +46,6 @@
   <details>
   <summary>Details</summary>
   <p>Update the `libraryJar` task to package `assets/optifabric/icon.png` and declare it in the generated `fabric.mod.json`. This ensures the nested `optifabric-libs` mod includes a valid icon resource and metadata reference.</p>
-  </details>
-- [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Align modded options with OptiFine layout](https://github.com/Yusseter/OptiFabric/commit/b579877bfa87a0911fb8267b99a4dcc6f0c96ddc)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-04T14:19:17Z">Sep 4, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> b579877](https://github.com/Yusseter/OptiFabric/commit/b579877bfa87a0911fb8267b99a4dcc6f0c96ddc)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Adjust the Fabric compatibility `OptionListWidget` positioning so the first actual option aligns with OptiFine submenu geometry. Instead of assuming a fixed leading header height, measure non-option entries dynamically before the first `WidgetEntry`. Update the video options probe to detect actual option entries rather than any child entry, avoiding false positives from header-only lists.</p>
   </details>
 <!-- recent_commits:end -->
 
