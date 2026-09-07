@@ -12,11 +12,19 @@
 <!-- building_now:start -->
 - [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — OptiFabric venturing out into the 1.16+ world<br>
   <sub><blockquote>Updated <relative-time datetime="2026-09-05T19:13:30Z">Sep 5, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/java-mobile.svg"><img src="./assets/profile/languages/java.svg" alt="" height="20" align="texttop"></picture>Java</blockquote></sub>
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — *No description.*<br>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-07T18:34:57Z">Sep 7, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/python-mobile.svg"><img src="./assets/profile/languages/python.svg" alt="" height="20" align="texttop"></picture>Python</blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add contribution_forks and private repo handling](https://github.com/Yusseter/Yusseter/commit/73e811d9bee84fd70ccfa8c2f8cb58ae25edc697)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-07T18:34:57Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 73e811d](https://github.com/Yusseter/Yusseter/commit/73e811d9bee84fd70ccfa8c2f8cb58ae25edc697)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Use PROFILE_GITHUB_TOKEN in CI and add support for a contribution_forks list in profile_renderer.json. Introduce load_profile_config with validation and normalization of contribution_forks. Update the GraphQL query to fetch all owned repositories visible to the token, including private repositories, with nameWithOwner and isPrivate metadata. Snapshot languages, stars, and releases now use the same repository scope: all owned repositories are included except forks explicitly listed in contribution_forks. Public activity and release feeds continue to exclude private repositories, and hardcoded Yusseter/Placeholder exclusions were removed. Expand tests to cover contribution fork filtering, private repository handling, snapshot scope consistency, and the new query fields.</p>
+  </details>
 - [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Bridge Fabric world render events in patcher](https://github.com/Yusseter/OptiFabric/commit/44cc62087ce63f25dd0e29eef434d11328576a81)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-05T19:13:30Z">Sep 5, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 44cc620](https://github.com/Yusseter/OptiFabric/commit/44cc62087ce63f25dd0e29eef434d11328576a81)</blockquote></sub>
   <details>
@@ -40,12 +48,6 @@
   <details>
   <summary>Details</summary>
   <p>Reworks the InGameHud fix to preserve OptiFine’s selected-item rendering path instead of replacing its wrapper with the vanilla method. Adds a dead draw anchor for Bedrockify’s redirect and routes OptiFine’s real selected-item text draw through a new external bridge that invokes Bedrockify held-item tooltips via cached reflection when enabled, while preserving OptiFine’s normal draw behavior as fallback.</p>
-  </details>
-- [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Cache Fabric fluid reflection lookups](https://github.com/Yusseter/OptiFabric/commit/0cf830ccf287582b06eabc43e063470758d6596b)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-04T15:52:07Z">Sep 4, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 0cf830c](https://github.com/Yusseter/OptiFabric/commit/0cf830ccf287582b06eabc43e063470758d6596b)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Resolve and cache the Fabric `getCurrentInfo` method and `handler` field instead of looking them up on every fluid color call. Keep the current info and handler values live per call, add a null guard when no current info is available, and separate reflection resolution failures from runtime read failures.</p>
   </details>
 <!-- recent_commits:end -->
 
