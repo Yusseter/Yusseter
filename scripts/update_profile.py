@@ -4,6 +4,7 @@ from html import escape
 import json
 import os
 import re
+import time
 from pathlib import Path
 import urllib.error
 import urllib.parse
@@ -31,6 +32,7 @@ RECENT_RELEASE_VISIBLE = 3
 RECENT_RELEASE_LIMIT = 8
 RECENT_COMMIT_LIMIT = 5
 RECENT_COMMIT_SEARCH_LIMIT = 50
+RECENT_COMMIT_SEARCH_RETRY_DELAYS = (1, 3)
 
 GRAPHQL_URL = "https://api.github.com/graphql"
 SEARCH_COMMITS_URL = "https://api.github.com/search/commits"
@@ -1249,19 +1251,35 @@ def collect_owned_recent_commits(repositories):
     return commits
 
 def fetch_searched_recent_commits():
-    payload = rest_json_request(
-        SEARCH_COMMITS_URL,
-        {
-            "q": f"author:{USERNAME} is:public",
-            "sort": "author-date",
-            "order": "desc",
-            "per_page": RECENT_COMMIT_SEARCH_LIMIT,
-        },
-    )
+    payload = None
 
-    if payload.get("incomplete_results"):
-        raise RuntimeError(
-            "GitHub commit search returned incomplete results."
+    for attempt in range(
+        len(RECENT_COMMIT_SEARCH_RETRY_DELAYS) + 1
+    ):
+        payload = rest_json_request(
+            SEARCH_COMMITS_URL,
+            {
+                "q": f"author:{USERNAME} is:public",
+                "sort": "author-date",
+                "order": "desc",
+                "per_page": RECENT_COMMIT_SEARCH_LIMIT,
+            },
+        )
+
+        if not payload.get("incomplete_results"):
+            break
+
+        if attempt == len(
+            RECENT_COMMIT_SEARCH_RETRY_DELAYS
+        ):
+            print(
+                "Warning: GitHub commit search remained "
+                "incomplete; preserving Recent commits."
+            )
+            return None
+
+        time.sleep(
+            RECENT_COMMIT_SEARCH_RETRY_DELAYS[attempt]
         )
 
     username = USERNAME.casefold()
@@ -1356,9 +1374,14 @@ def fetch_searched_recent_commits():
     return commits
 
 def collect_recent_commits(repositories):
+    searched_commits = fetch_searched_recent_commits()
+
+    if searched_commits is None:
+        return None
+
     commits_by_oid = {
         commit["oid"]: commit
-        for commit in fetch_searched_recent_commits()
+        for commit in searched_commits
     }
 
     # Prefer GraphQL data for repositories owned by USERNAME,
@@ -1487,11 +1510,14 @@ def update_readme(
         ),
     )
 
-    content, commits_updated = replace_marked_block(
-        content,
-        "recent_commits",
-        render_recent_commits(recent_commits),
-    )
+    commits_updated = False
+
+    if recent_commits is not None:
+        content, commits_updated = replace_marked_block(
+            content,
+            "recent_commits",
+            render_recent_commits(recent_commits),
+        )
 
     if (
         snapshot_updated
@@ -1581,7 +1607,10 @@ def main():
     print("Repository data loaded.")
     print(f"Languages: {len(languages)}")
     print(f"Building now: {len(building_now)}")
-    print(f"Recent commits: {len(recent_commits)}")
+    if recent_commits is None:
+        print("Recent commits: preserved")
+    else:
+        print(f"Recent commits: {len(recent_commits)}")
 
 if __name__ == "__main__":
     main()

@@ -534,6 +534,112 @@ class RecentCommitTests(unittest.TestCase):
         self.assertIn(">C++</a>", rendered)
         icon_url_mock.assert_called_once_with("C++")
 
+    def test_search_retries_incomplete_results(self):
+        incomplete = {
+            "incomplete_results": True,
+            "items": [],
+        }
+        complete = {
+            "incomplete_results": False,
+            "items": [],
+        }
+
+        with (
+            patch.object(
+                profile,
+                "rest_json_request",
+                side_effect=[
+                    incomplete,
+                    incomplete,
+                    complete,
+                ],
+            ) as request_mock,
+            patch.object(
+                profile.time,
+                "sleep",
+            ) as sleep_mock,
+        ):
+            commits = profile.fetch_searched_recent_commits()
+
+        self.assertEqual(commits, [])
+        self.assertEqual(request_mock.call_count, 3)
+        self.assertEqual(
+            [call.args[0] for call in sleep_mock.call_args_list],
+            [1, 3],
+        )
+
+    def test_persistent_incomplete_search_returns_none(self):
+        incomplete = {
+            "incomplete_results": True,
+            "items": [],
+        }
+
+        with (
+            patch.object(
+                profile,
+                "rest_json_request",
+                return_value=incomplete,
+            ) as request_mock,
+            patch.object(
+                profile.time,
+                "sleep",
+            ),
+            patch("builtins.print") as print_mock,
+        ):
+            commits = profile.fetch_searched_recent_commits()
+
+        self.assertIsNone(commits)
+        self.assertEqual(request_mock.call_count, 3)
+        print_mock.assert_called_once()
+        self.assertIn(
+            "preserving Recent commits",
+            print_mock.call_args.args[0],
+        )
+
+    def test_readme_preserves_commits_when_search_is_incomplete(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            readme_path = Path(temp_dir) / "README.md"
+
+            readme_path.write_text(
+                """<!-- snapshot:start -->
+old snapshot
+<!-- snapshot:end -->
+<!-- building_now:start -->
+old building
+<!-- building_now:end -->
+<!-- recent_releases:start -->
+old releases
+<!-- recent_releases:end -->
+<!-- recent_commits:start -->
+KEEP THIS COMMIT FEED
+<!-- recent_commits:end -->
+""",
+                encoding="utf-8",
+            )
+
+            with patch.object(
+                profile,
+                "README_PATH",
+                readme_path,
+            ):
+                profile.update_readme(
+                    {"repositories": []},
+                    {"repositories": []},
+                    [],
+                    [],
+                    None,
+                    "full_svg",
+                )
+
+            result = readme_path.read_text(
+                encoding="utf-8"
+            )
+
+        self.assertIn(
+            "KEEP THIS COMMIT FEED",
+            result,
+        )
+
     def test_search_keeps_external_owner_in_repository_name(self):
         payload = {
             "incomplete_results": False,
