@@ -1000,13 +1000,13 @@ def render_language_metadata(language):
         )
 
         picture = (
-            '<picture>'
-            f'<source media="(max-width: 600px)" '
+            "<picture>"
+            '<source media="(max-width: 600px)" '
             f'srcset="{mobile_icon_src}">'
             f'<img src="{icon_src}" alt="" '
             f'height="{SETI_ICON_RENDER_HEIGHT}" '
-            f'align="texttop">'
-            '</picture>'
+            'align="texttop">'
+            "</picture>"
         )
     else:
         icon_src = (
@@ -1019,7 +1019,20 @@ def render_language_metadata(language):
             f'align="texttop"></picture>'
         )
 
-    return picture + escaped_language
+    query = urllib.parse.urlencode(
+        {
+            "tab": "repositories",
+            "language": language.casefold(),
+        }
+    )
+    url = f"https://github.com/{USERNAME}?{query}"
+
+    return (
+        f'<a href="{escape(url, quote=True)}">'
+        f"{picture}{escaped_language}"
+        "</a>"
+    )
+
 
 def render_building_now(items):
     if not items:

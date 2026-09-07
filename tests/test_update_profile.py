@@ -508,6 +508,32 @@ class RecentCommitTests(unittest.TestCase):
             "2026-08-19T10:00:00Z",
         )
 
+
+    def test_building_language_metadata_links_to_repository_filter(self):
+        with (
+            patch.object(
+                profile,
+                "seti_language_icon_asset_path",
+                return_value=None,
+            ),
+            patch.object(
+                profile,
+                "seti_language_icon_url",
+                return_value="https://example.invalid/cpp.svg",
+            ) as icon_url_mock,
+        ):
+            rendered = profile.render_language_metadata("C++")
+
+        self.assertIn(
+            (
+                'href="https://github.com/Yusseter'
+                '?tab=repositories&amp;language=c%2B%2B"'
+            ),
+            rendered,
+        )
+        self.assertIn(">C++</a>", rendered)
+        icon_url_mock.assert_called_once_with("C++")
+
     def test_search_keeps_external_owner_in_repository_name(self):
         payload = {
             "incomplete_results": False,
