@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 
 from profile_renderers import (
-    load_snapshot_mode,
+    load_profile_config,
     render_snapshot_readme,
     write_native_table_hybrid_assets,
 )
@@ -23,11 +23,6 @@ README_PATH = REPO_ROOT / "README.md"
 
 USERNAME = os.environ.get("GITHUB_REPOSITORY_OWNER", "Yusseter")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-
-EXCLUDED_REPOSITORIES = {
-    USERNAME,
-    "Placeholder",
-}
 
 BUILDING_NOW_LIMIT = 4
 ACTIVITY_WINDOW_DAYS = 30
@@ -64,7 +59,8 @@ SETI_ICON_MOBILE_VERTICAL_SHIFT_PX = 2.0
 
 _SETI_ICON_AVAILABILITY = {}
 
-# Fetch broadly; each profile section decides whether forks belong.
+# Fetch all owned repositories visible to the token; each profile
+# section decides what can safely be published.
 REPOSITORIES_QUERY = """
 query($login: String!, $after: String, $activitySince: GitTimestamp!) {
     user(login: $login) {
@@ -73,7 +69,6 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
             first: 100
             after: $after
             ownerAffiliations: OWNER
-            privacy: PUBLIC
             orderBy: {field: PUSHED_AT, direction: DESC}
         ) {
             pageInfo {
@@ -82,10 +77,12 @@ query($login: String!, $after: String, $activitySince: GitTimestamp!) {
             }
             nodes {
                 name
+                nameWithOwner
                 url
                 description
                 isArchived
                 isFork
+                isPrivate
                 stargazerCount
                 pushedAt
                 createdAt
@@ -253,43 +250,71 @@ def fetch_profile_data():
 def format_number(value):
     return f"{value:,}"
 
-def project_repositories(repositories):
+def repository_full_name(repository):
+    return (
+        repository.get("nameWithOwner")
+        or f'{USERNAME}/{repository["name"]}'
+    )
+
+
+def release_repositories(repositories):
     return [
         repository
         for repository in repositories
         if not repository["isArchived"]
         and not repository.get("isFork", False)
-        and repository["name"] not in EXCLUDED_REPOSITORIES
+        and not repository.get("isPrivate", False)
     ]
+
 
 def activity_repositories(repositories):
     return [
         repository
         for repository in repositories
         if not repository["isArchived"]
-        and repository["name"] not in EXCLUDED_REPOSITORIES
+        and not repository.get("isPrivate", False)
     ]
 
-def snapshot_repositories(repositories):
+
+def snapshot_repositories(
+    repositories,
+    contribution_forks,
+):
+    contribution_forks = {
+        repository.casefold()
+        for repository in contribution_forks
+    }
+
     return [
         repository
         for repository in repositories
-        if not repository.get("isFork", False)
+        if not (
+            repository.get("isFork", False)
+            and repository_full_name(
+                repository
+            ).casefold() in contribution_forks
+        )
     ]
 
-def build_snapshot_profile(profile):
+
+def build_snapshot_profile(
+    profile,
+    contribution_forks,
+):
     return {
         **profile,
         "repositories": snapshot_repositories(
-            profile["repositories"]
+            profile["repositories"],
+            contribution_forks,
         ),
     }
+
 
 def aggregate_languages(repositories):
     totals = defaultdict(int)
     colors = {}
 
-    for repository in project_repositories(repositories):
+    for repository in repositories:
         for edge in repository["languages"]["edges"]:
             language = edge["node"]["name"]
             totals[language] += edge["size"]
@@ -317,9 +342,7 @@ def render_snapshot_svg(
     languages,
     mobile=False,
 ):
-    repositories = snapshot_repositories(
-        profile["repositories"]
-    )
+    repositories = profile["repositories"]
 
     total_stars = sum(
         repository["stargazerCount"]
@@ -1053,7 +1076,7 @@ def render_building_now(items):
 def collect_recent_releases(repositories):
     releases = []
 
-    for repository in project_repositories(repositories):
+    for repository in release_repositories(repositories):
         for release in repository["releases"]["nodes"]:
             if release["isDraft"] or not release["publishedAt"]:
                 continue
@@ -1157,7 +1180,7 @@ def collect_owned_recent_commits(repositories):
     commits = []
 
     for repository in repositories:
-        if repository["name"] == "Placeholder":
+        if repository.get("isPrivate", False):
             continue
 
         target = (
@@ -1229,9 +1252,6 @@ def fetch_searched_recent_commits():
         )
 
     username = USERNAME.casefold()
-    placeholder_full_name = (
-        f"{USERNAME}/Placeholder"
-    ).casefold()
 
     commits = []
     seen_oids = set()
@@ -1241,9 +1261,6 @@ def fetch_searched_recent_commits():
         full_name = repository.get("full_name") or ""
 
         if not full_name:
-            continue
-
-        if full_name.casefold() == placeholder_full_name:
             continue
 
         if repository.get("private"):
@@ -1418,12 +1435,12 @@ def replace_marked_block(content, marker, replacement):
 
 def update_readme(
     profile,
+    snapshot_profile,
     languages,
     building_now,
     recent_commits,
     snapshot_mode,
 ):
-    snapshot_profile = build_snapshot_profile(profile)
     repositories = profile["repositories"]
 
     if not README_PATH.exists():
@@ -1476,13 +1493,23 @@ def update_readme(
         )
 
 def main():
-    snapshot_mode = load_snapshot_mode(
+    config = load_profile_config(
         REPO_ROOT
     )
+    snapshot_mode = config["snapshot_mode"]
+    contribution_forks = config[
+        "contribution_forks"
+    ]
 
     profile = fetch_profile_data()
     repositories = profile["repositories"]
-    languages = aggregate_languages(repositories)
+    snapshot_profile = build_snapshot_profile(
+        profile,
+        contribution_forks,
+    )
+    languages = aggregate_languages(
+        snapshot_profile["repositories"]
+    )
     building_now = collect_building_now(repositories)
     recent_commits = collect_recent_commits(repositories)
 
@@ -1494,14 +1521,17 @@ def main():
     write_seti_language_assets(building_now)
 
     (PROFILE_ASSETS_DIR / "snapshot.svg").write_text(
-        render_snapshot_svg(profile, languages),
+        render_snapshot_svg(
+            snapshot_profile,
+            languages,
+        ),
         encoding="utf-8",
         newline="\n",
     )
 
     (PROFILE_ASSETS_DIR / "snapshot-mobile.svg").write_text(
         render_snapshot_svg(
-            profile,
+            snapshot_profile,
             languages,
             mobile=True,
         ),
@@ -1526,6 +1556,7 @@ def main():
 
     update_readme(
         profile,
+        snapshot_profile,
         languages,
         building_now,
         recent_commits,
@@ -1534,7 +1565,7 @@ def main():
 
     print("Updated profile assets.")
     print(f"Snapshot mode: {snapshot_mode}")
-    print(f"Repositories: {len(repositories)}")
+    print("Repository data loaded.")
     print(f"Languages: {len(languages)}")
     print(f"Building now: {len(building_now)}")
     print(f"Recent commits: {len(recent_commits)}")

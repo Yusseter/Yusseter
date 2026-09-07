@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -13,82 +14,284 @@ import update_profile as profile  # pyright: ignore[reportMissingImports]
 
 
 class RepositoryScopeTests(unittest.TestCase):
-    def test_repository_query_fetches_forks_and_requests_fork_metadata(self):
+    @staticmethod
+    def repository(
+        name,
+        *,
+        fork=False,
+        private=False,
+        archived=False,
+        stars=0,
+        release_count=0,
+        languages=None,
+    ):
+        edges = [
+            {
+                "size": size,
+                "node": {
+                    "name": language,
+                    "color": color,
+                },
+            }
+            for language, size, color in (languages or [])
+        ]
+
+        return {
+            "name": name,
+            "nameWithOwner": f"Yusseter/{name}",
+            "url": f"https://github.com/Yusseter/{name}",
+            "description": "",
+            "isArchived": archived,
+            "isFork": fork,
+            "isPrivate": private,
+            "stargazerCount": stars,
+            "pushedAt": "2026-09-04T16:32:43Z",
+            "createdAt": "2026-08-01T12:00:00Z",
+            "defaultBranchRef": None,
+            "languages": {
+                "edges": edges,
+            },
+            "releases": {
+                "totalCount": release_count,
+                "nodes": [],
+            },
+        }
+
+    def test_repository_query_fetches_all_owned_visibility_metadata(self):
         self.assertNotIn(
-            "isFork: false",
-            profile.REPOSITORIES_QUERY,
-        )
-        self.assertIn(
-            "\n                isFork\n",
+            "privacy: PUBLIC",
             profile.REPOSITORIES_QUERY,
         )
 
-    def test_project_scope_excludes_forks_but_activity_scope_keeps_them(self):
+        for field in (
+            "nameWithOwner",
+            "isFork",
+            "isPrivate",
+        ):
+            self.assertIn(
+                f"\n                {field}\n",
+                profile.REPOSITORIES_QUERY,
+            )
+
+    def test_profile_config_loads_contribution_forks(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            config_path = (
+                Path(temp_dir)
+                / "profile_renderer.json"
+            )
+            config_path.write_text(
+                (
+                    '{\n'
+                    '  "snapshot_mode": "full_svg",\n'
+                    '  "contribution_forks": [\n'
+                    '    "Yusseter/example",\n'
+                    '    "yusseter/EXAMPLE"\n'
+                    '  ]\n'
+                    '}\n'
+                ),
+                encoding="utf-8",
+            )
+
+            config = profile.load_profile_config(
+                temp_dir
+            )
+
+        self.assertEqual(
+            config["snapshot_mode"],
+            "full_svg",
+        )
+        self.assertEqual(
+            config["contribution_forks"],
+            ["Yusseter/example"],
+        )
+
+    def test_repository_scopes_match_profile_policy(self):
         repositories = [
-            {
-                "name": "project",
-                "isArchived": False,
-                "isFork": False,
-            },
-            {
-                "name": "forked-project",
-                "isArchived": False,
-                "isFork": True,
-            },
-            {
-                "name": "archived-project",
-                "isArchived": True,
-                "isFork": False,
-            },
-            {
-                "name": "Placeholder",
-                "isArchived": False,
-                "isFork": False,
-            },
+            self.repository("project"),
+            self.repository("archived-project", archived=True),
+            self.repository("private-project", private=True),
+            self.repository("own-fork", fork=True),
+            self.repository("contribution-fork", fork=True),
+            self.repository("Yusseter"),
+            self.repository("Placeholder"),
         ]
 
-        project_names = [
-            repository["name"]
-            for repository in profile.project_repositories(
-                repositories
-            )
-        ]
-        activity_names = [
-            repository["name"]
-            for repository in profile.activity_repositories(
-                repositories
-            )
-        ]
         snapshot_names = [
-            repository["name"]
-            for repository in profile.snapshot_repositories(
+            repo["name"]
+            for repo in profile.snapshot_repositories(
+                repositories,
+                ["Yusseter/contribution-fork"],
+            )
+        ]
+
+        activity_names = [
+            repo["name"]
+            for repo in profile.activity_repositories(
                 repositories
             )
         ]
 
-        self.assertEqual(
-            project_names,
-            ["project"],
-        )
-        self.assertEqual(
-            activity_names,
-            ["project", "forked-project"],
-        )
+        release_names = [
+            repo["name"]
+            for repo in profile.release_repositories(
+                repositories
+            )
+        ]
+
         self.assertEqual(
             snapshot_names,
             [
                 "project",
                 "archived-project",
+                "private-project",
+                "own-fork",
+                "Yusseter",
                 "Placeholder",
             ],
         )
 
-    def test_building_now_uses_activity_repository_scope(self):
-        fork_repository = {
-            "name": "forked-project",
-            "pushedAt": "2026-09-04T16:32:43Z",
-            "createdAt": "2026-08-31T11:17:05Z",
+        self.assertEqual(
+            activity_names,
+            [
+                "project",
+                "own-fork",
+                "contribution-fork",
+                "Yusseter",
+                "Placeholder",
+            ],
+        )
+
+        self.assertEqual(
+            release_names,
+            [
+                "project",
+                "Yusseter",
+                "Placeholder",
+            ],
+        )
+
+    def test_snapshot_totals_and_languages_share_the_same_scope(self):
+        repositories = [
+            self.repository(
+                "project",
+                stars=3,
+                release_count=2,
+                languages=[
+                    ("Python", 30, "#3572A5"),
+                ],
+            ),
+            self.repository(
+                "archived-project",
+                archived=True,
+                stars=5,
+                release_count=4,
+                languages=[
+                    ("PowerShell", 20, "#012456"),
+                ],
+            ),
+            self.repository(
+                "private-project",
+                private=True,
+                stars=7,
+                release_count=6,
+                languages=[
+                    ("C++", 10, "#f34b7d"),
+                ],
+            ),
+            self.repository(
+                "own-fork",
+                fork=True,
+                stars=11,
+                release_count=8,
+                languages=[
+                    ("Java", 40, "#b07219"),
+                ],
+            ),
+            self.repository(
+                "contribution-fork",
+                fork=True,
+                stars=100,
+                release_count=100,
+                languages=[
+                    ("Rust", 999, "#dea584"),
+                ],
+            ),
+            self.repository(
+                "Yusseter",
+                stars=13,
+                release_count=10,
+                languages=[
+                    ("Python", 10, "#3572A5"),
+                ],
+            ),
+            self.repository(
+                "Placeholder",
+                stars=17,
+                release_count=12,
+                languages=[
+                    ("CSS", 5, "#663399"),
+                ],
+            ),
+        ]
+
+        snapshot_profile = profile.build_snapshot_profile(
+            {
+                "repositories": repositories,
+            },
+            ["Yusseter/contribution-fork"],
+        )
+
+        languages = profile.aggregate_languages(
+            snapshot_profile["repositories"]
+        )
+
+        language_bytes = {
+            language["name"]: language["bytes"]
+            for language in languages
         }
+
+        self.assertEqual(
+            language_bytes,
+            {
+                "Python": 40,
+                "Java": 40,
+                "PowerShell": 20,
+                "C++": 10,
+                "CSS": 5,
+            },
+        )
+
+        full_svg = profile.render_snapshot_svg(
+            snapshot_profile,
+            languages,
+        )
+
+        hybrid = profile.render_snapshot_readme(
+            snapshot_profile,
+            languages,
+            "native_table_hybrid",
+        )
+
+        self.assertIn(
+            'text-anchor="middle">56</text>',
+            full_svg,
+        )
+        self.assertIn(
+            'text-anchor="middle">42</text>',
+            full_svg,
+        )
+        self.assertIn("<h2>56</h2>", hybrid)
+        self.assertIn("<h2>42</h2>", hybrid)
+
+        self.assertNotIn("Rust", full_svg)
+        self.assertNotIn("Rust", hybrid)
+
+    def test_building_now_uses_public_activity_scope(self):
+        fork_repository = self.repository(
+            "forked-project",
+            fork=True,
+        )
+
         activity = {
             "commits_7d": 4,
             "commits_14d": 4,
@@ -130,134 +333,48 @@ class RepositoryScopeTests(unittest.TestCase):
             fork_repository,
         )
 
-    def test_snapshot_totals_exclude_forks_in_both_renderer_modes(self):
-        profile_data = {
-            "repositories": [
-                {
-                    "name": "project",
-                    "isArchived": False,
-                    "isFork": False,
-                    "stargazerCount": 3,
-                    "releases": {
-                        "totalCount": 2,
-                    },
-                },
-                {
-                    "name": "forked-project",
-                    "isArchived": False,
-                    "isFork": True,
-                    "stargazerCount": 100,
-                    "releases": {
-                        "totalCount": 100,
-                    },
-                },
-                {
-                    "name": "archived-project",
-                    "isArchived": True,
-                    "isFork": False,
-                    "stargazerCount": 5,
-                    "releases": {
-                        "totalCount": 4,
-                    },
-                },
-            ],
-        }
-
-        full_svg = profile.render_snapshot_svg(
-            profile_data,
-            [],
+    def test_recent_releases_exclude_private_and_fork_repositories(self):
+        project = self.repository("project")
+        fork = self.repository(
+            "forked-project",
+            fork=True,
+        )
+        private = self.repository(
+            "private-project",
+            private=True,
         )
 
-        snapshot_profile = profile.build_snapshot_profile(
-            profile_data
-        )
-        hybrid = profile.render_snapshot_readme(
-            snapshot_profile,
-            [],
-            "native_table_hybrid",
-        )
-
-        self.assertIn(
-            'text-anchor="middle">8</text>',
-            full_svg,
-        )
-        self.assertIn(
-            'text-anchor="middle">6</text>',
-            full_svg,
-        )
-        self.assertNotIn(
-            'text-anchor="middle">103</text>',
-            full_svg,
-        )
-        self.assertNotIn(
-            'text-anchor="middle">102</text>',
-            full_svg,
-        )
-
-        self.assertIn("<h2>8</h2>", hybrid)
-        self.assertIn("<h2>6</h2>", hybrid)
-        self.assertNotIn("<h2>103</h2>", hybrid)
-        self.assertNotIn("<h2>102</h2>", hybrid)
-
-    def test_recent_releases_exclude_fork_releases(self):
-        repositories = [
-            {
-                "name": "project",
-                "url": "https://github.com/Yusseter/project",
-                "isArchived": False,
-                "isFork": False,
-                "releases": {
-                    "nodes": [
-                        {
-                            "name": "Project release",
-                            "tagName": "v1.0.0",
-                            "url": (
-                                "https://github.com/Yusseter/project/"
-                                "releases/tag/v1.0.0"
-                            ),
-                            "publishedAt": "2026-09-01T12:00:00Z",
-                            "isDraft": False,
-                            "isPrerelease": False,
-                            "isLatest": True,
-                        }
-                    ]
-                },
-            },
-            {
-                "name": "forked-project",
+        def release(name, published_at):
+            return {
+                "name": name,
+                "tagName": "v1.0.0",
                 "url": (
                     "https://github.com/Yusseter/"
-                    "forked-project"
+                    f"{name}/releases/tag/v1.0.0"
                 ),
-                "isArchived": False,
-                "isFork": True,
-                "releases": {
-                    "nodes": [
-                        {
-                            "name": "Fork release",
-                            "tagName": "fork-v2.0.0",
-                            "url": (
-                                "https://github.com/Yusseter/"
-                                "forked-project/releases/tag/"
-                                "fork-v2.0.0"
-                            ),
-                            "publishedAt": "2026-09-02T12:00:00Z",
-                            "isDraft": False,
-                            "isPrerelease": False,
-                            "isLatest": True,
-                        }
-                    ]
-                },
-            },
+                "publishedAt": published_at,
+                "isDraft": False,
+                "isPrerelease": False,
+                "isLatest": True,
+            }
+
+        project["releases"]["nodes"] = [
+            release("project", "2026-09-01T12:00:00Z")
+        ]
+        fork["releases"]["nodes"] = [
+            release("forked-project", "2026-09-02T12:00:00Z")
+        ]
+        private["releases"]["nodes"] = [
+            release("private-project", "2026-09-03T12:00:00Z")
         ]
 
         releases = profile.collect_recent_releases(
-            repositories
+            [project, fork, private]
         )
 
         self.assertEqual(
-            [release["tagName"] for release in releases],
-            ["v1.0.0"],
+            [release["name"] for release in releases],
+            ["project"],
         )
 
 
@@ -476,6 +593,106 @@ class RecentCommitTests(unittest.TestCase):
         self.assertEqual(
             commits[0]["messageBody"],
             "Details",
+        )
+
+    def test_owned_private_commits_are_not_published(self):
+        repository = {
+            "name": "private-project",
+            "url": (
+                "https://github.com/Yusseter/"
+                "private-project"
+            ),
+            "isPrivate": True,
+            "defaultBranchRef": {
+                "target": {
+                    "history": {
+                        "nodes": [
+                            {
+                                "oid": "private111",
+                                "url": (
+                                    "https://github.com/Yusseter/"
+                                    "private-project/commit/"
+                                    "private111"
+                                ),
+                                "messageHeadline": "Private commit",
+                                "messageBody": "",
+                                "authoredDate": (
+                                    "2026-09-04T12:00:00Z"
+                                ),
+                                "committedDate": (
+                                    "2026-09-04T12:00:01Z"
+                                ),
+                                "author": {
+                                    "user": {
+                                        "login": "Yusseter"
+                                    }
+                                },
+                            }
+                        ]
+                    }
+                }
+            },
+        }
+
+        with patch.object(profile, "USERNAME", "Yusseter"):
+            commits = profile.collect_owned_recent_commits(
+                [repository]
+            )
+
+        self.assertEqual(commits, [])
+
+    def test_search_keeps_placeholder_repository(self):
+        payload = {
+            "incomplete_results": False,
+            "items": [
+                {
+                    "sha": "placeholder111",
+                    "html_url": (
+                        "https://github.com/Yusseter/"
+                        "Placeholder/commit/placeholder111"
+                    ),
+                    "author": {
+                        "login": "Yusseter"
+                    },
+                    "repository": {
+                        "full_name": "Yusseter/Placeholder",
+                        "name": "Placeholder",
+                        "html_url": (
+                            "https://github.com/Yusseter/"
+                            "Placeholder"
+                        ),
+                        "private": False,
+                        "owner": {
+                            "login": "Yusseter"
+                        },
+                    },
+                    "commit": {
+                        "message": "Placeholder commit",
+                        "author": {
+                            "date": "2026-09-04T13:00:00Z"
+                        },
+                        "committer": {
+                            "date": "2026-09-04T13:00:01Z"
+                        },
+                    },
+                }
+            ],
+        }
+
+        with (
+            patch.object(profile, "USERNAME", "Yusseter"),
+            patch.object(
+                profile,
+                "rest_json_request",
+                return_value=payload,
+            ),
+        ):
+            commits = profile.fetch_searched_recent_commits()
+
+        self.assertEqual(len(commits), 1)
+        self.assertEqual(
+            commits[0]["repositoryName"],
+            "Placeholder",
         )
 
     def test_graphql_commit_overrides_duplicate_search_commit(self):

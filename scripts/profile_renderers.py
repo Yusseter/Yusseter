@@ -12,14 +12,17 @@ SUPPORTED_SNAPSHOT_MODES = {
 }
 
 
-def load_snapshot_mode(repo_root):
+def load_profile_config(repo_root):
     config_path = (
         Path(repo_root)
         / "profile_renderer.json"
     )
 
     if not config_path.exists():
-        return DEFAULT_SNAPSHOT_MODE
+        return {
+            "snapshot_mode": DEFAULT_SNAPSHOT_MODE,
+            "contribution_forks": [],
+        }
 
     try:
         config = json.loads(
@@ -55,7 +58,61 @@ def load_snapshot_mode(repo_root):
             f"Expected one of: {supported}."
         )
 
-    return snapshot_mode
+    contribution_forks = config.get(
+        "contribution_forks",
+        [],
+    )
+
+    if not isinstance(contribution_forks, list):
+        raise RuntimeError(
+            "contribution_forks must be a JSON array."
+        )
+
+    normalized_forks = []
+    seen_forks = set()
+
+    for repository in contribution_forks:
+        if (
+            not isinstance(repository, str)
+            or repository.count("/") != 1
+        ):
+            raise RuntimeError(
+                "Each contribution_forks entry must use "
+                'the "owner/repository" format.'
+            )
+
+        owner, name = repository.split("/", 1)
+
+        if (
+            not owner
+            or not name
+            or owner != owner.strip()
+            or name != name.strip()
+        ):
+            raise RuntimeError(
+                "Each contribution_forks entry must use "
+                'the "owner/repository" format.'
+            )
+
+        normalized = f"{owner}/{name}"
+        normalized_key = normalized.casefold()
+
+        if normalized_key in seen_forks:
+            continue
+
+        seen_forks.add(normalized_key)
+        normalized_forks.append(normalized)
+
+    return {
+        "snapshot_mode": snapshot_mode,
+        "contribution_forks": normalized_forks,
+    }
+
+
+def load_snapshot_mode(repo_root):
+    return load_profile_config(
+        repo_root
+    )["snapshot_mode"]
 
 
 def render_bar_svg(languages):

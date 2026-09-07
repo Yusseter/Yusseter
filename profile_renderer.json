@@ -1,3 +1,6 @@
 {
-  "snapshot_mode": "full_svg"
+  "snapshot_mode": "full_svg",
+  "contribution_forks": [
+    "Yusseter/windhawk-mods"
+  ]
 }
