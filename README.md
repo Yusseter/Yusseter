@@ -11,14 +11,28 @@
 
 <!-- building_now:start -->
 - [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — OptiFabric venturing out into the 1.16+ world<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-05T19:13:30Z">Sep 5, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/java-mobile.svg"><img src="./assets/profile/languages/java.svg" alt="" height="20" align="texttop"></picture>Java</blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-05T19:13:30Z">Sep 5, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=java"><picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/java-mobile.svg"><img src="./assets/profile/languages/java.svg" alt="" height="20" align="texttop"></picture>Java</a></blockquote></sub>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — *No description.*<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-07T18:35:19Z">Sep 7, 2026</relative-time> · <picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/python-mobile.svg"><img src="./assets/profile/languages/python.svg" alt="" height="20" align="texttop"></picture>Python</blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-07T22:25:06Z">Sep 7, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/python-mobile.svg"><img src="./assets/profile/languages/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Merge branch &#x27;main&#x27; of https://github.com/Yusseter/Yusseter](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-07T22:25:06Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 81e6c47](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)</blockquote></sub>
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Retry commit search and preserve feed on incomplete results](https://github.com/Yusseter/Yusseter/commit/73dec10c96d4e495a14245f064a7397788984936)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-07T22:24:18Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 73dec10](https://github.com/Yusseter/Yusseter/commit/73dec10c96d4e495a14245f064a7397788984936)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Add retry logic for GitHub commit search when `incomplete_results` is returned, using short delays between attempts. If the search remains incomplete after all retries, log a warning and preserve the existing Recent commits block in the README instead of overwriting it with partial data. Update status output accordingly and add tests covering successful retry, persistent incomplete results, and README preservation.</p>
+  </details>
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Link language metadata to repo filter](https://github.com/Yusseter/Yusseter/commit/75a534ca1f731918234a7774869e94114284c7a0)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-07T20:15:34Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 75a534c](https://github.com/Yusseter/Yusseter/commit/75a534ca1f731918234a7774869e94114284c7a0)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Wrap language metadata (icon + name) in an anchor to the user&#x27;s GitHub repositories page with `tab=repositories` and a `language` query. Use `urllib.parse.urlencode` and `escape(..., quote=True)` to safely encode values such as `C++` as `c%2B%2B`. Add a unit test confirming the encoded `href` and language icon URL resolution.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add contribution_forks and private repo handling](https://github.com/Yusseter/Yusseter/commit/73e811d9bee84fd70ccfa8c2f8cb58ae25edc697)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-07T18:34:57Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 73e811d](https://github.com/Yusseter/Yusseter/commit/73e811d9bee84fd70ccfa8c2f8cb58ae25edc697)</blockquote></sub>
   <details>
@@ -30,24 +44,6 @@
   <details>
   <summary>Details</summary>
   <p>Update `WorldRendererFix` to robustly inject Fabric Rendering V1 hooks into OptiFine&#x27;s main world render path. The patch now detects required anchor instructions, validates expected method and instruction shapes, prepares `WorldRenderContextImpl`, sets the matrix stack, and inserts all main event callbacks (`START_MAIN`, `BEFORE_ENTITIES`, `AFTER_ENTITIES`, `BEFORE_TRANSLUCENT`, `END_MAIN`). It also adds stronger duplicate and partial-bridge detection, clearer constants and helpers, and improved logging and error messages to fail fast when the bytecode structure is unexpected.</p>
-  </details>
-- [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Restore vanilla render methods for Indigo](https://github.com/Yusseter/OptiFabric/commit/47e501ed3b112a5d3113d6296e80dd4bcdf609de)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-05T10:46:27Z">Sep 5, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 47e501e](https://github.com/Yusseter/OptiFabric/commit/47e501ed3b112a5d3113d6296e80dd4bcdf609de)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Rework `BlockRenderManagerFix` to replace OptiFine’s transformed `method_23071` and `method_3353` with vanilla copies when Indigo is loaded and no other renderer advertises `fabric-renderer-api-v1:contains_renderer`. Remove the previous dead-anchor injection approach, retain missing-method backfill logic, and fail explicitly when the expected vanilla or OptiFine render methods are unavailable.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Refine fork handling across profile sections](https://github.com/Yusseter/Yusseter/commit/a456908944c89a826aba238e42ca6309f58678b1)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-04T23:36:21Z">Sep 4, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> a456908](https://github.com/Yusseter/Yusseter/commit/a456908944c89a826aba238e42ca6309f58678b1)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Adjust repository fetching and filtering so forks are handled per feature instead of globally. The GraphQL query now includes fork metadata, with separate project, activity, and snapshot scopes. Project languages, releases, and snapshot totals exclude forks, while Building now and the owned-repository freshness path for Recent commits can include them. Tests were expanded to cover query shape, scope behavior, snapshot totals, building-now selection, recent release filtering, and owned fork commit author matching.</p>
-  </details>
-- [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Patch Bedrockify tooltip draw in OptiFine HUD](https://github.com/Yusseter/OptiFabric/commit/d12b9303ef75964fd06c03483b2aeb35cdd50b43)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-04T16:32:38Z">Sep 4, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> d12b930](https://github.com/Yusseter/OptiFabric/commit/d12b9303ef75964fd06c03483b2aeb35cdd50b43)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Reworks the InGameHud fix to preserve OptiFine’s selected-item rendering path instead of replacing its wrapper with the vanilla method. Adds a dead draw anchor for Bedrockify’s redirect and routes OptiFine’s real selected-item text draw through a new external bridge that invokes Bedrockify held-item tooltips via cached reflection when enabled, while preserving OptiFine’s normal draw behavior as fallback.</p>
   </details>
 <!-- recent_commits:end -->
 
