@@ -1,4 +1,5 @@
 from pathlib import Path
+import io
 import sys
 import tempfile
 import unittest
@@ -11,6 +12,104 @@ SCRIPTS_DIR = REPO_ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 import update_profile as profile  # pyright: ignore[reportMissingImports]
+
+
+
+class GitHubRequestTests(unittest.TestCase):
+    def test_graphql_retries_transient_502(self):
+        error = profile.urllib.error.HTTPError(
+            profile.GRAPHQL_URL,
+            502,
+            "Bad Gateway",
+            {},
+            io.BytesIO(b"bad gateway"),
+        )
+
+        success = io.BytesIO(
+            b'{"data":{"viewer":"ok"}}'
+        )
+
+        with (
+            patch.object(
+                profile,
+                "GITHUB_TOKEN",
+                "test-token",
+            ),
+            patch.object(
+                profile.urllib.request,
+                "urlopen",
+                side_effect=[
+                    error,
+                    success,
+                ],
+            ) as urlopen_mock,
+            patch.object(
+                profile.time,
+                "sleep",
+            ) as sleep_mock,
+            patch("builtins.print"),
+        ):
+            data = profile.graphql_request(
+                "query Test { viewer { login } }",
+                {},
+            )
+
+        self.assertEqual(
+            data,
+            {"viewer": "ok"},
+        )
+        self.assertEqual(
+            urlopen_mock.call_count,
+            2,
+        )
+        sleep_mock.assert_called_once_with(1)
+
+    def test_rest_retries_transient_502(self):
+        error = profile.urllib.error.HTTPError(
+            "https://api.github.com/test",
+            502,
+            "Bad Gateway",
+            {},
+            io.BytesIO(b"bad gateway"),
+        )
+
+        success = io.BytesIO(
+            b'{"ok":true}'
+        )
+
+        with (
+            patch.object(
+                profile,
+                "GITHUB_TOKEN",
+                "test-token",
+            ),
+            patch.object(
+                profile.urllib.request,
+                "urlopen",
+                side_effect=[
+                    error,
+                    success,
+                ],
+            ) as urlopen_mock,
+            patch.object(
+                profile.time,
+                "sleep",
+            ) as sleep_mock,
+            patch("builtins.print"),
+        ):
+            data = profile.rest_json_request(
+                "https://api.github.com/test"
+            )
+
+        self.assertEqual(
+            data,
+            {"ok": True},
+        )
+        self.assertEqual(
+            urlopen_mock.call_count,
+            2,
+        )
+        sleep_mock.assert_called_once_with(1)
 
 
 class RepositoryScopeTests(unittest.TestCase):

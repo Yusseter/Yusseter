@@ -33,6 +33,8 @@ RECENT_RELEASE_LIMIT = 8
 RECENT_COMMIT_LIMIT = 5
 RECENT_COMMIT_SEARCH_LIMIT = 50
 RECENT_COMMIT_SEARCH_RETRY_DELAYS = (1, 3)
+GITHUB_REQUEST_RETRY_DELAYS = (1, 3, 7)
+TRANSIENT_GITHUB_HTTP_CODES = {429, 500, 502, 503, 504}
 
 GRAPHQL_URL = "https://api.github.com/graphql"
 SEARCH_COMMITS_URL = "https://api.github.com/search/commits"
@@ -146,38 +148,102 @@ def graphql_request(query, variables):
     if not GITHUB_TOKEN:
         raise RuntimeError("GITHUB_TOKEN is not set.")
 
-    request = urllib.request.Request(
-        GRAPHQL_URL,
-        data=json.dumps(
-            {
-                "query": query,
-                "variables": variables,
-            }
-        ).encode("utf-8"),
-        headers={
-            "Authorization": f"Bearer {GITHUB_TOKEN}",
-            "Content-Type": "application/json",
-            "User-Agent": f"{USERNAME}-profile-updater",
-        },
-        method="POST",
-    )
-
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            payload = json.load(response)
-    except urllib.error.HTTPError as error:
-        body = error.read().decode("utf-8", errors="replace")
-        raise RuntimeError(
-            f"GitHub GraphQL request failed with HTTP {error.code}: {body}"
-        ) from error
-
-    if payload.get("errors"):
-        raise RuntimeError(
-            "GitHub GraphQL returned errors: "
-            + json.dumps(payload["errors"], ensure_ascii=False)
+    for attempt in range(
+        len(GITHUB_REQUEST_RETRY_DELAYS) + 1
+    ):
+        request = urllib.request.Request(
+            GRAPHQL_URL,
+            data=json.dumps(
+                {
+                    "query": query,
+                    "variables": variables,
+                }
+            ).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {GITHUB_TOKEN}",
+                "Content-Type": "application/json",
+                "User-Agent": f"{USERNAME}-profile-updater",
+            },
+            method="POST",
         )
 
-    return payload["data"]
+        try:
+            with urllib.request.urlopen(
+                request,
+                timeout=30,
+            ) as response:
+                payload = json.load(response)
+
+        except urllib.error.HTTPError as error:
+            try:
+                body = error.read().decode(
+                    "utf-8",
+                    errors="replace",
+                )
+            finally:
+                error.close()
+
+            if (
+                error.code in TRANSIENT_GITHUB_HTTP_CODES
+                and attempt
+                < len(GITHUB_REQUEST_RETRY_DELAYS)
+            ):
+                delay = GITHUB_REQUEST_RETRY_DELAYS[
+                    attempt
+                ]
+
+                print(
+                    "Warning: GitHub GraphQL returned "
+                    f"HTTP {error.code}; retrying in "
+                    f"{delay}s."
+                )
+                time.sleep(delay)
+                continue
+
+            raise RuntimeError(
+                "GitHub GraphQL request failed with "
+                f"HTTP {error.code}: {body}"
+            ) from error
+
+        except (
+            urllib.error.URLError,
+            TimeoutError,
+        ) as error:
+            if attempt < len(
+                GITHUB_REQUEST_RETRY_DELAYS
+            ):
+                delay = GITHUB_REQUEST_RETRY_DELAYS[
+                    attempt
+                ]
+
+                print(
+                    "Warning: GitHub GraphQL request "
+                    f"failed temporarily; retrying in "
+                    f"{delay}s."
+                )
+                time.sleep(delay)
+                continue
+
+            raise RuntimeError(
+                "GitHub GraphQL request failed after "
+                f"retries: {error}"
+            ) from error
+
+        if payload.get("errors"):
+            raise RuntimeError(
+                "GitHub GraphQL returned errors: "
+                + json.dumps(
+                    payload["errors"],
+                    ensure_ascii=False,
+                )
+            )
+
+        return payload["data"]
+
+    raise RuntimeError(
+        "GitHub GraphQL retry loop exited unexpectedly."
+    )
+
 
 def rest_json_request(url, params=None):
     if not GITHUB_TOKEN:
@@ -187,28 +253,84 @@ def rest_json_request(url, params=None):
         query = urllib.parse.urlencode(params)
         url = f"{url}?{query}"
 
-    request = urllib.request.Request(
-        url,
-        headers={
-            "Authorization": f"Bearer {GITHUB_TOKEN}",
-            "Accept": "application/vnd.github+json",
-            "User-Agent": f"{USERNAME}-profile-updater",
-        },
-        method="GET",
+    for attempt in range(
+        len(GITHUB_REQUEST_RETRY_DELAYS) + 1
+    ):
+        request = urllib.request.Request(
+            url,
+            headers={
+                "Authorization": f"Bearer {GITHUB_TOKEN}",
+                "Accept": "application/vnd.github+json",
+                "User-Agent": f"{USERNAME}-profile-updater",
+            },
+            method="GET",
+        )
+
+        try:
+            with urllib.request.urlopen(
+                request,
+                timeout=30,
+            ) as response:
+                return json.load(response)
+
+        except urllib.error.HTTPError as error:
+            try:
+                body = error.read().decode(
+                    "utf-8",
+                    errors="replace",
+                )
+            finally:
+                error.close()
+
+            if (
+                error.code in TRANSIENT_GITHUB_HTTP_CODES
+                and attempt
+                < len(GITHUB_REQUEST_RETRY_DELAYS)
+            ):
+                delay = GITHUB_REQUEST_RETRY_DELAYS[
+                    attempt
+                ]
+
+                print(
+                    "Warning: GitHub REST returned "
+                    f"HTTP {error.code}; retrying in "
+                    f"{delay}s."
+                )
+                time.sleep(delay)
+                continue
+
+            raise RuntimeError(
+                "GitHub REST request failed with HTTP "
+                f"{error.code}: {body}"
+            ) from error
+
+        except (
+            urllib.error.URLError,
+            TimeoutError,
+        ) as error:
+            if attempt < len(
+                GITHUB_REQUEST_RETRY_DELAYS
+            ):
+                delay = GITHUB_REQUEST_RETRY_DELAYS[
+                    attempt
+                ]
+
+                print(
+                    "Warning: GitHub REST request failed "
+                    f"temporarily; retrying in {delay}s."
+                )
+                time.sleep(delay)
+                continue
+
+            raise RuntimeError(
+                "GitHub REST request failed after "
+                f"retries: {error}"
+            ) from error
+
+    raise RuntimeError(
+        "GitHub REST retry loop exited unexpectedly."
     )
 
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            return json.load(response)
-    except urllib.error.HTTPError as error:
-        body = error.read().decode(
-            "utf-8",
-            errors="replace",
-        )
-        raise RuntimeError(
-            f"GitHub REST request failed with HTTP "
-            f"{error.code}: {body}"
-        ) from error
 
 def fetch_profile_data():
     repositories = []
