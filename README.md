@@ -11,12 +11,24 @@
 
 <!-- building_now:start -->
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's Profile repository.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-13T20:53:46Z">Sep 13, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/python-mobile.svg"><img src="./assets/profile/languages/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-14T17:32:41Z">Sep 14, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/python-mobile.svg"><img src="./assets/profile/languages/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Use user commit time for Building now ordering](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:28:08Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> c04dae6](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Track `latest_commit_at` in repository activity from filtered user-associated commit history and use it to drive Building now behavior. Candidate selection now ranks by score first, then latest user commit, while final display order is chronological by that same timestamp. Rendering also uses activity-derived commit time instead of the branch head commit time, preventing bot-only updates from appearing as recent user activity. Add tests for bot-commit exclusion, score-vs-order behavior, and the renderer timestamp source.</p>
+  </details>
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add retry handling for GitHub API requests](https://github.com/Yusseter/Yusseter/commit/c4644e548bdd3a1a77353654f610bc936d7ceabd)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:26:56Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> c4644e5](https://github.com/Yusseter/Yusseter/commit/c4644e548bdd3a1a77353654f610bc936d7ceabd)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Add retry handling for GitHub GraphQL and REST requests in `update_profile.py`, using short delays for transient HTTP errors (429 and 5xx) and temporary network failures. Preserve existing error reporting after retries are exhausted and close HTTP error responses after reading their bodies. Add unit tests confirming that transient 502 responses are retried successfully for both GraphQL and REST requests.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Merge branch &#x27;main&#x27; of https://github.com/Yusseter/Yusseter](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-07T22:25:06Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 81e6c47](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)</blockquote></sub>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Retry commit search and preserve feed on incomplete results](https://github.com/Yusseter/Yusseter/commit/73dec10c96d4e495a14245f064a7397788984936)<br>
@@ -30,18 +42,6 @@
   <details>
   <summary>Details</summary>
   <p>Wrap language metadata (icon + name) in an anchor to the user&#x27;s GitHub repositories page with `tab=repositories` and a `language` query. Use `urllib.parse.urlencode` and `escape(..., quote=True)` to safely encode values such as `C++` as `c%2B%2B`. Add a unit test confirming the encoded `href` and language icon URL resolution.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add contribution_forks and private repo handling](https://github.com/Yusseter/Yusseter/commit/73e811d9bee84fd70ccfa8c2f8cb58ae25edc697)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-07T18:34:57Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 73e811d](https://github.com/Yusseter/Yusseter/commit/73e811d9bee84fd70ccfa8c2f8cb58ae25edc697)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Use PROFILE_GITHUB_TOKEN in CI and add support for a contribution_forks list in profile_renderer.json. Introduce load_profile_config with validation and normalization of contribution_forks. Update the GraphQL query to fetch all owned repositories visible to the token, including private repositories, with nameWithOwner and isPrivate metadata. Snapshot languages, stars, and releases now use the same repository scope: all owned repositories are included except forks explicitly listed in contribution_forks. Public activity and release feeds continue to exclude private repositories, and hardcoded Yusseter/Placeholder exclusions were removed. Expand tests to cover contribution fork filtering, private repository handling, snapshot scope consistency, and the new query fields.</p>
-  </details>
-- [**OptiFabric**](https://github.com/Yusseter/OptiFabric) — [Bridge Fabric world render events in patcher](https://github.com/Yusseter/OptiFabric/commit/44cc62087ce63f25dd0e29eef434d11328576a81)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-05T19:13:30Z">Sep 5, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 44cc620](https://github.com/Yusseter/OptiFabric/commit/44cc62087ce63f25dd0e29eef434d11328576a81)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Update `WorldRendererFix` to robustly inject Fabric Rendering V1 hooks into OptiFine&#x27;s main world render path. The patch now detects required anchor instructions, validates expected method and instruction shapes, prepares `WorldRenderContextImpl`, sets the matrix stack, and inserts all main event callbacks (`START_MAIN`, `BEFORE_ENTITIES`, `AFTER_ENTITIES`, `BEFORE_TRANSLUCENT`, `END_MAIN`). It also adds stronger duplicate and partial-bridge detection, clearer constants and helpers, and improved logging and error messages to fail fast when the bytecode structure is unexpected.</p>
   </details>
 <!-- recent_commits:end -->
 
