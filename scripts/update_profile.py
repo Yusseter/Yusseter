@@ -735,11 +735,21 @@ def repository_activity(repository, now):
     })
 
     latest_commit_age = None
+    latest_commit_at = None
 
     if commit_dates:
+        latest_commit = max(commit_dates)
+
         latest_commit_age = (
-            now - max(commit_dates)
+            now - latest_commit
         ).days
+
+        latest_commit_at = (
+            latest_commit
+            .astimezone(timezone.utc)
+            .isoformat()
+            .replace("+00:00", "Z")
+        )
 
     created_age = (
         now - parse_github_date(repository["createdAt"])
@@ -769,9 +779,11 @@ def repository_activity(repository, now):
         "commits_30d": commits_30d,
         "active_days_14d": active_days_14d,
         "latest_commit_age": latest_commit_age,
+        "latest_commit_at": latest_commit_at,
         "created_age": created_age,
         "latest_release_age": latest_release_age,
     }
+
 
 def qualifies_for_building_now(activity):
     commits_7d = activity["commits_7d"]
@@ -854,7 +866,21 @@ def collect_building_now(repositories):
     now = datetime.now(timezone.utc)
     candidates = []
 
-    for repository in activity_repositories(repositories):
+    def latest_commit_key(item):
+        value = item["activity"].get(
+            "latest_commit_at"
+        )
+
+        if value:
+            return parse_github_date(value)
+
+        return datetime.min.replace(
+            tzinfo=timezone.utc
+        )
+
+    for repository in activity_repositories(
+        repositories
+    ):
         activity = repository_activity(
             repository,
             now,
@@ -867,22 +893,33 @@ def collect_building_now(repositories):
             {
                 "repository": repository,
                 "activity": activity,
-                "score": building_activity_score(activity),
+                "score": building_activity_score(
+                    activity
+                ),
             }
         )
 
+    # Activity score chooses which repositories qualify
+    # for the limited Building now slots.
     candidates.sort(
         key=lambda item: (
             item["score"],
-            parse_github_date(
-                item["repository"]["pushedAt"]
-                or item["repository"]["createdAt"]
-            ),
+            latest_commit_key(item),
         ),
         reverse=True,
     )
 
-    return candidates[:BUILDING_NOW_LIMIT]
+    selected = candidates[:BUILDING_NOW_LIMIT]
+
+    # Presentation order is chronological: newest real
+    # user-associated activity first.
+    selected.sort(
+        key=latest_commit_key,
+        reverse=True,
+    )
+
+    return selected
+
 
 def render_relative_time(value):
     timestamp = parse_github_date(value).astimezone(timezone.utc)
@@ -1181,13 +1218,11 @@ def render_building_now(items):
 
         language = primary_language(repository)
 
-        target = (
-            (repository.get("defaultBranchRef") or {})
-            .get("target")
-            or {}
+        updated_at = (
+            item["activity"].get(
+                "latest_commit_at"
+            )
         )
-
-        updated_at = target.get("committedDate")
 
         metadata_parts = []
 
@@ -1203,12 +1238,15 @@ def render_building_now(items):
         metadata = " · ".join(metadata_parts)
 
         lines.append(
-            f'- [**{repository["name"]}**]({repository["url"]})'
+            f'- [**{repository["name"]}**]'
+            f'({repository["url"]})'
             f' — {description}<br>\n'
-            f'  <sub><blockquote>{metadata}</blockquote></sub>'
+            f'  <sub><blockquote>{metadata}'
+            f'</blockquote></sub>'
         )
 
     return "\n".join(lines)
+
 
 def collect_recent_releases(repositories):
     releases = []

@@ -476,6 +476,191 @@ class RepositoryScopeTests(unittest.TestCase):
             ["project"],
         )
 
+    def test_building_activity_ignores_bot_commit_for_updated_time(self):
+        repository = self.repository("Yusseter")
+
+        repository["defaultBranchRef"] = {
+            "target": {
+                "history": {
+                    "nodes": [
+                        {
+                            "committedDate": (
+                                "2026-09-10T10:00:00Z"
+                            ),
+                            "author": {
+                                "user": {
+                                    "login": (
+                                        "github-actions[bot]"
+                                    )
+                                }
+                            },
+                            "committer": {
+                                "user": {
+                                    "login": (
+                                        "github-actions[bot]"
+                                    )
+                                }
+                            },
+                        },
+                        {
+                            "committedDate": (
+                                "2026-09-09T20:00:00Z"
+                            ),
+                            "author": {
+                                "user": {
+                                    "login": "Yusseter"
+                                }
+                            },
+                            "committer": {
+                                "user": {
+                                    "login": "Yusseter"
+                                }
+                            },
+                        },
+                    ]
+                }
+            }
+        }
+
+        with patch.object(
+            profile,
+            "USERNAME",
+            "Yusseter",
+        ):
+            activity = profile.repository_activity(
+                repository,
+                profile.parse_github_date(
+                    "2026-09-10T12:00:00Z"
+                ),
+            )
+
+        self.assertEqual(
+            activity["latest_commit_at"],
+            "2026-09-09T20:00:00Z",
+        )
+        self.assertEqual(
+            activity["commits_7d"],
+            1,
+        )
+
+    def test_building_now_selects_by_score_then_orders_by_latest_commit(self):
+        repositories = [
+            self.repository("a"),
+            self.repository("b"),
+            self.repository("c"),
+            self.repository("d"),
+            self.repository("e"),
+        ]
+
+        activity_by_name = {
+            "a": {
+                "latest_commit_at": (
+                    "2026-09-01T12:00:00Z"
+                ),
+                "_score": 100,
+            },
+            "b": {
+                "latest_commit_at": (
+                    "2026-09-05T12:00:00Z"
+                ),
+                "_score": 90,
+            },
+            "c": {
+                "latest_commit_at": (
+                    "2026-09-03T12:00:00Z"
+                ),
+                "_score": 80,
+            },
+            "d": {
+                "latest_commit_at": (
+                    "2026-09-04T12:00:00Z"
+                ),
+                "_score": 70,
+            },
+            "e": {
+                "latest_commit_at": (
+                    "2026-09-06T12:00:00Z"
+                ),
+                "_score": 60,
+            },
+        }
+
+        with (
+            patch.object(
+                profile,
+                "activity_repositories",
+                return_value=repositories,
+            ),
+            patch.object(
+                profile,
+                "repository_activity",
+                side_effect=lambda repo, now: (
+                    activity_by_name[repo["name"]]
+                ),
+            ),
+            patch.object(
+                profile,
+                "qualifies_for_building_now",
+                return_value=True,
+            ),
+            patch.object(
+                profile,
+                "building_activity_score",
+                side_effect=lambda activity: (
+                    activity["_score"]
+                ),
+            ),
+        ):
+            items = profile.collect_building_now([])
+
+        self.assertEqual(
+            [
+                item["repository"]["name"]
+                for item in items
+            ],
+            ["b", "d", "c", "a"],
+        )
+
+    def test_building_renderer_uses_user_activity_time_not_branch_head(self):
+        repository = self.repository(
+            "Yusseter",
+            languages=[],
+        )
+
+        repository["description"] = (
+            "Yusseter's Profile repository."
+        )
+        repository["defaultBranchRef"] = {
+            "target": {
+                "committedDate": (
+                    "2026-09-10T10:00:00Z"
+                )
+            }
+        }
+
+        rendered = profile.render_building_now(
+            [
+                {
+                    "repository": repository,
+                    "activity": {
+                        "latest_commit_at": (
+                            "2026-09-09T20:00:00Z"
+                        )
+                    },
+                    "score": 10.0,
+                }
+            ]
+        )
+
+        self.assertIn(
+            'datetime="2026-09-09T20:00:00Z"',
+            rendered,
+        )
+        self.assertNotIn(
+            "2026-09-10T10:00:00Z",
+            rendered,
+        )
+
 
 class RelativeTimeTests(unittest.TestCase):
     def test_render_relative_time_uses_native_element(self):
