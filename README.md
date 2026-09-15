@@ -10,13 +10,19 @@
 ## Building now
 
 <!-- building_now:start -->
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's Profile repository.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-15T16:31:16Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's profile repository.<br>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-15T16:58:09Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Sync emblem updates across header SVG variants](https://github.com/Yusseter/Yusseter/commit/8b36d9ba68b696ee76e5c07fb1cae7d0ceebc185)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-15T16:58:09Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 8b36d9b](https://github.com/Yusseter/Yusseter/commit/8b36d9ba68b696ee76e5c07fb1cae7d0ceebc185)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Expand visual asset syncing from a single `profile/header/desktop.svg` file to all SVG variants in `assets/profile/header/`. The workflow now watches and stages the entire header directory, and `update_visual_assets.py` discovers header SVGs dynamically, validates at least one exists, and applies embedded logo/background synchronization to each file. The assets README was updated to clarify this synchronization behavior.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Rename profile config and fix hybrid asset path](https://github.com/Yusseter/Yusseter/commit/21a71a70a80a428149876e1030a6341c8c32457e)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-15T16:31:16Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 21a71a7](https://github.com/Yusseter/Yusseter/commit/21a71a70a80a428149876e1030a6341c8c32457e)</blockquote></sub>
   <details>
@@ -40,12 +46,6 @@
   <details>
   <summary>Details</summary>
   <p>Extend Seti language asset generation to produce desktop and mobile light-theme SVGs alongside the existing dark variants, using the same color darkening behavior as VS Code&#x27;s Seti generator and preserving per-viewport normalization. Update language metadata rendering to select icons by both color scheme and viewport through `&lt;picture&gt;` sources. Add tests covering the color transform, four-variant asset generation, theme/viewport source selection, and repository filter query encoding.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Use user commit time for Building now ordering](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:28:08Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> c04dae6](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Track `latest_commit_at` in repository activity from filtered user-associated commit history and use it to drive Building now behavior. Candidate selection now ranks by score first, then latest user commit, while final display order is chronological by that same timestamp. Rendering also uses activity-derived commit time instead of the branch head commit time, preventing bot-only updates from appearing as recent user activity. Add tests for bot-commit exclusion, score-vs-order behavior, and the renderer timestamp source.</p>
   </details>
 <!-- recent_commits:end -->
 
