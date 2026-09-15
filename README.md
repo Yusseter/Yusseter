@@ -11,12 +11,18 @@
 
 <!-- building_now:start -->
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's profile repository.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-15T16:58:09Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-15T17:12:53Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add visual asset regression tests and CI step](https://github.com/Yusseter/Yusseter/commit/c2b9fb156e2370e4dab650308395e25133ebd62f)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-15T17:12:53Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> c2b9fb1](https://github.com/Yusseter/Yusseter/commit/c2b9fb156e2370e4dab650308395e25133ebd62f)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Add focused regression tests in `tests/test_update_visual_assets.py` covering header SVG synchronization, idempotency, missing-header handling, and the visual asset workflow contract. Update `.github/workflows/update_visual_assets.yml` to watch the new test file and run these tests before installing visual asset dependencies, so synchronization and header-handling regressions are caught in CI.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Sync emblem updates across header SVG variants](https://github.com/Yusseter/Yusseter/commit/8b36d9ba68b696ee76e5c07fb1cae7d0ceebc185)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-15T16:58:09Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 8b36d9b](https://github.com/Yusseter/Yusseter/commit/8b36d9ba68b696ee76e5c07fb1cae7d0ceebc185)</blockquote></sub>
   <details>
@@ -40,12 +46,6 @@
   <details>
   <summary>Details</summary>
   <p>Restructure profile assets into clearer header, icon, and generated subdirectories, moving generated language SVGs into theme and viewport folders instead of encoding variants in filenames. Update README, renderer, visual asset, and profile updater references to the new paths, preserve existing asset contents during moves, add cleanup for empty generated directories, and expand tests for the new language asset layout and source selection.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add theme-aware Seti language icons](https://github.com/Yusseter/Yusseter/commit/4e140be8fd30e08c306d658486c6e4cb94d53cbf)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T15:27:26Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 4e140be](https://github.com/Yusseter/Yusseter/commit/4e140be8fd30e08c306d658486c6e4cb94d53cbf)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Extend Seti language asset generation to produce desktop and mobile light-theme SVGs alongside the existing dark variants, using the same color darkening behavior as VS Code&#x27;s Seti generator and preserving per-viewport normalization. Update language metadata rendering to select icons by both color scheme and viewport through `&lt;picture&gt;` sources. Add tests covering the color transform, four-variant asset generation, theme/viewport source selection, and repository filter query encoding.</p>
   </details>
 <!-- recent_commits:end -->
 
