@@ -15,7 +15,7 @@ SUPPORTED_SNAPSHOT_MODES = {
 def load_profile_config(repo_root):
     config_path = (
         Path(repo_root)
-        / "profile_renderer.json"
+        / "profile_config.json"
     )
 
     if not config_path.exists():
@@ -32,13 +32,13 @@ def load_profile_config(repo_root):
         )
     except json.JSONDecodeError as error:
         raise RuntimeError(
-            "Invalid profile_renderer.json: "
+            "Invalid profile_config.json: "
             f"{error}"
         ) from error
 
     if not isinstance(config, dict):
         raise RuntimeError(
-            "profile_renderer.json must "
+            "profile_config.json must "
             "contain a JSON object."
         )
 
@@ -307,7 +307,7 @@ def render_native_table_hybrid(
 
             names.append(
                 '<img '
-                'src="./assets/profile/'
+                'src="./assets/profile/generated/snapshot/'
                 'native_table_hybrid/'
                 f'dot-{index}.svg" '
                 'width="8" height="16" '

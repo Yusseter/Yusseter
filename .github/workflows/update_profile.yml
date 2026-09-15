@@ -9,7 +9,7 @@ on:
       - "README.md"
       - "scripts/update_profile.py"
       - "scripts/profile_renderers.py"
-      - "profile_renderer.json"
+      - "profile_config.json"
       - ".github/workflows/update_profile.yml"
       - "tests/**"
   schedule:

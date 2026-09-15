@@ -176,7 +176,7 @@ class RepositoryScopeTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             config_path = (
                 Path(temp_dir)
-                / "profile_renderer.json"
+                / "profile_config.json"
             )
             config_path.write_text(
                 (
@@ -381,6 +381,16 @@ class RepositoryScopeTests(unittest.TestCase):
         )
         self.assertIn("<h2>56</h2>", hybrid)
         self.assertIn("<h2>42</h2>", hybrid)
+
+        self.assertIn(
+            "./assets/profile/generated/snapshot/"
+            "native_table_hybrid/dot-1.svg",
+            hybrid,
+        )
+        self.assertNotIn(
+            "./assets/profile/native_table_hybrid/",
+            hybrid,
+        )
 
         self.assertNotIn("Rust", full_svg)
         self.assertNotIn("Rust", hybrid)
