@@ -8,7 +8,7 @@ on:
     paths:
       - "assets/logos/svg/**"
       - "assets/backgrounds/svg/**"
-      - "assets/profile/header.svg"
+      - "assets/profile/header/desktop.svg"
       - "scripts/update_visual_assets.py"
       - ".github/workflows/update_visual_assets.yml"
 
@@ -49,7 +49,7 @@ jobs:
         run: |
           git add assets/logos/svg/hittite_sun_disk_golden_crescent-reversed.svg
           git add assets/backgrounds/svg/eagle_background.svg
-          git add assets/profile/header.svg
+          git add assets/profile/header/desktop.svg
           git add assets/logos/png
           git add assets/backgrounds/png
 
