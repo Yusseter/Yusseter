@@ -11,12 +11,18 @@
 
 <!-- building_now:start -->
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's Profile repository.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-14T17:32:41Z">Sep 14, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(max-width: 600px)" srcset="./assets/profile/languages/python-mobile.svg"><img src="./assets/profile/languages/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-15T15:27:26Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/languages/python-mobile-light.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/languages/python-mobile.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/languages/python-light.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/languages/python.svg"><img src="./assets/profile/languages/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add theme-aware Seti language icons](https://github.com/Yusseter/Yusseter/commit/4e140be8fd30e08c306d658486c6e4cb94d53cbf)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-15T15:27:26Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 4e140be](https://github.com/Yusseter/Yusseter/commit/4e140be8fd30e08c306d658486c6e4cb94d53cbf)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Extend Seti language asset generation to produce desktop and mobile light-theme SVGs alongside the existing dark variants, using the same color darkening behavior as VS Code&#x27;s Seti generator and preserving per-viewport normalization. Update language metadata rendering to select icons by both color scheme and viewport through `&lt;picture&gt;` sources. Add tests covering the color transform, four-variant asset generation, theme/viewport source selection, and repository filter query encoding.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Use user commit time for Building now ordering](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:28:08Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> c04dae6](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)</blockquote></sub>
   <details>
@@ -36,12 +42,6 @@
   <details>
   <summary>Details</summary>
   <p>Add retry logic for GitHub commit search when `incomplete_results` is returned, using short delays between attempts. If the search remains incomplete after all retries, log a warning and preserve the existing Recent commits block in the README instead of overwriting it with partial data. Update status output accordingly and add tests covering successful retry, persistent incomplete results, and README preservation.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Link language metadata to repo filter](https://github.com/Yusseter/Yusseter/commit/75a534ca1f731918234a7774869e94114284c7a0)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-07T20:15:34Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 75a534c](https://github.com/Yusseter/Yusseter/commit/75a534ca1f731918234a7774869e94114284c7a0)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Wrap language metadata (icon + name) in an anchor to the user&#x27;s GitHub repositories page with `tab=repositories` and a `language` query. Use `urllib.parse.urlencode` and `escape(..., quote=True)` to safely encode values such as `C++` as `c%2B%2B`. Add a unit test confirming the encoded `href` and language icon URL resolution.</p>
   </details>
 <!-- recent_commits:end -->
 
