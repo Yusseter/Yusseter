@@ -11,12 +11,24 @@
 
 <!-- building_now:start -->
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's profile repository.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-15T17:12:53Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-15T17:26:16Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Limit profile workflow to profile regression tests](https://github.com/Yusseter/Yusseter/commit/5e96ec2f38bdd1d8d04b05da263ad91a3c201144)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-15T17:26:16Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 5e96ec2](https://github.com/Yusseter/Yusseter/commit/5e96ec2f38bdd1d8d04b05da263ad91a3c201144)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Narrow the profile update workflow from `tests/**` and the full `test_*.py` suite to `tests/test_update_profile.py`. This prevents unrelated visual asset test changes from triggering profile updates while preserving the regression coverage relevant to the profile updater.</p>
+  </details>
+- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Document order-drift investigation status](https://github.com/Yusseter/tray-order-lock/commit/f8734634232017789eef198c965ceb87c75bbb93)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-15T17:16:11Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> f873463](https://github.com/Yusseter/tray-order-lock/commit/f8734634232017789eef198c965ceb87c75bbb93)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>This update records the paused official submission status and the ongoing order-drift issue in Preserve order, allow manual changes mode. It adds tracked markdownlint configuration and a VS Code recommendation, extends LF handling to JSONC files, clarifies the new-icon handling wording, and documents the post-release investigation observations and diagnostic direction.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add visual asset regression tests and CI step](https://github.com/Yusseter/Yusseter/commit/c2b9fb156e2370e4dab650308395e25133ebd62f)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-15T17:12:53Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> c2b9fb1](https://github.com/Yusseter/Yusseter/commit/c2b9fb156e2370e4dab650308395e25133ebd62f)</blockquote></sub>
   <details>
@@ -34,18 +46,6 @@
   <details>
   <summary>Details</summary>
   <p>Rename `profile_renderer.json` to `profile_config.json` and update workflow triggers, config loading, validation messages, and tests to use the new name. Fix the native table hybrid language dot asset path to reference the generated snapshot directory, and add regression coverage for the corrected rendered path.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Fix visual asset workflow header path](https://github.com/Yusseter/Yusseter/commit/ccf9c56b128268f462adb9d791a9aad72b5af2b9)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T16:13:01Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> ccf9c56](https://github.com/Yusseter/Yusseter/commit/ccf9c56b128268f462adb9d791a9aad72b5af2b9)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Update the visual asset workflow to watch and stage `assets/profile/header/desktop.svg` instead of the old header path, keeping automated visual asset updates aligned with the reorganized profile asset hierarchy.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Reorganize profile asset hierarchy](https://github.com/Yusseter/Yusseter/commit/5a32d9496c58fb9fb167002511a369bfd9c8e614)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T15:54:49Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 5a32d94](https://github.com/Yusseter/Yusseter/commit/5a32d9496c58fb9fb167002511a369bfd9c8e614)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Restructure profile assets into clearer header, icon, and generated subdirectories, moving generated language SVGs into theme and viewport folders instead of encoding variants in filenames. Update README, renderer, visual asset, and profile updater references to the new paths, preserve existing asset contents during moves, add cleanup for empty generated directories, and expand tests for the new language asset layout and source selection.</p>
   </details>
 <!-- recent_commits:end -->
 
