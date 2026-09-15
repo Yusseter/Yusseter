@@ -50,11 +50,7 @@ BACKGROUND_SOURCE = (
     BACKGROUNDS_SVG_DIR / "eagle_background.svg"
 )
 
-HEADER_SOURCE = (
-    PROFILE_DIR
-    / "header"
-    / "desktop.svg"
-)
+HEADER_DIR = PROFILE_DIR / "header"
 
 WINDOWS_INKSCAPE = Path(
     r"C:\Program Files\Inkscape\bin\inkscape.com"
@@ -473,7 +469,7 @@ def sync_embedded_logo(
         "hittite-disk-outer",
     )
 
-    if target_path == HEADER_SOURCE:
+    if target_path.parent == HEADER_DIR:
         old_background = header_background_color(
             target_text
         )
@@ -573,11 +569,21 @@ def sync_embedded_logo(
 
 
 def sync_visual_assets():
+    header_sources = sorted(
+        HEADER_DIR.glob("*.svg")
+    )
+
+    if not header_sources:
+        raise FileNotFoundError(
+            "No profile header SVG files found in: "
+            f"{HEADER_DIR}"
+        )
+
     required_sources = (
         CANONICAL_LOGO_SOURCE,
         REVERSED_LOGO_SOURCE,
         BACKGROUND_SOURCE,
-        HEADER_SOURCE,
+        *header_sources,
     )
 
     for path in required_sources:
@@ -619,12 +625,13 @@ def sync_visual_assets():
         canonical_background,
     )
 
-    sync_embedded_logo(
-        HEADER_SOURCE,
-        canonical_text,
-        canonical_plum,
-        canonical_background,
-    )
+    for header_source in header_sources:
+        sync_embedded_logo(
+            header_source,
+            canonical_text,
+            canonical_plum,
+            canonical_background,
+        )
 
     print(
         "Canonical source: "
