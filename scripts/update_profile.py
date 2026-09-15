@@ -19,7 +19,15 @@ from profile_renderers import (
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 PROFILE_ASSETS_DIR = REPO_ROOT / "assets" / "profile"
-LANGUAGE_ASSETS_DIR = PROFILE_ASSETS_DIR / "languages"
+GENERATED_PROFILE_ASSETS_DIR = PROFILE_ASSETS_DIR / "generated"
+LANGUAGE_ASSETS_DIR = (
+    GENERATED_PROFILE_ASSETS_DIR
+    / "languages"
+)
+SNAPSHOT_ASSETS_DIR = (
+    GENERATED_PROFILE_ASSETS_DIR
+    / "snapshot"
+)
 README_PATH = REPO_ROOT / "README.md"
 
 USERNAME = os.environ.get("GITHUB_REPOSITORY_OWNER", "Yusseter")
@@ -1022,20 +1030,16 @@ def seti_language_icon_asset_path(
     if not stem:
         return None
 
-    suffix_parts = []
+    theme = "light" if light else "dark"
+    viewport = "mobile" if mobile else "desktop"
 
-    if mobile:
-        suffix_parts.append("mobile")
-
-    if light:
-        suffix_parts.append("light")
-
-    suffix = "".join(
-        f"-{part}"
-        for part in suffix_parts
+    return (
+        LANGUAGE_ASSETS_DIR
+        / theme
+        / viewport
+        / f"{stem}.svg"
     )
 
-    return LANGUAGE_ASSETS_DIR / f"{stem}{suffix}.svg"
 
 
 def normalize_seti_icon_svg(svg_text, vertical_shift_px):
@@ -1123,7 +1127,7 @@ def write_seti_language_assets(items):
         exist_ok=True,
     )
 
-    desired_names = set()
+    desired_paths = set()
 
     for item in items:
         language = primary_language(
@@ -1168,10 +1172,7 @@ def write_seti_language_assets(items):
         ):
             continue
 
-        desired_names.update(
-            path.name
-            for path in asset_paths
-        )
+        desired_paths.update(asset_paths)
 
         request = urllib.request.Request(
             icon_url,
@@ -1243,17 +1244,37 @@ def write_seti_language_assets(items):
         for path, normalized_svg in (
             normalized_variants
         ):
+            path.parent.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
             path.write_text(
                 normalized_svg.rstrip() + "\n",
                 encoding="utf-8",
                 newline="\n",
             )
 
-    for asset_path in LANGUAGE_ASSETS_DIR.glob(
+    for asset_path in LANGUAGE_ASSETS_DIR.rglob(
         "*.svg"
     ):
-        if asset_path.name not in desired_names:
+        if asset_path not in desired_paths:
             asset_path.unlink()
+
+    directories = sorted(
+        (
+            path
+            for path in LANGUAGE_ASSETS_DIR.rglob("*")
+            if path.is_dir()
+        ),
+        key=lambda path: len(path.parts),
+        reverse=True,
+    )
+
+    for directory in directories:
+        if not any(directory.iterdir()):
+            directory.rmdir()
+
 
 
 def render_language_metadata(language):
@@ -1292,6 +1313,16 @@ def render_language_metadata(language):
         mobile_light_asset_path,
     )
 
+    def asset_src(path):
+        relative = path.relative_to(
+            LANGUAGE_ASSETS_DIR
+        ).as_posix()
+
+        return (
+            "./assets/profile/generated/"
+            f"languages/{relative}"
+        )
+
     if (
         all(path is not None for path in asset_paths)
         and all(
@@ -1299,21 +1330,15 @@ def render_language_metadata(language):
             for path in asset_paths
         )
     ):
-        icon_src = (
-            "./assets/profile/languages/"
-            f"{asset_path.name}"
+        icon_src = asset_src(asset_path)
+        mobile_icon_src = asset_src(
+            mobile_asset_path
         )
-        mobile_icon_src = (
-            "./assets/profile/languages/"
-            f"{mobile_asset_path.name}"
+        light_icon_src = asset_src(
+            light_asset_path
         )
-        light_icon_src = (
-            "./assets/profile/languages/"
-            f"{light_asset_path.name}"
-        )
-        mobile_light_icon_src = (
-            "./assets/profile/languages/"
-            f"{mobile_light_asset_path.name}"
+        mobile_light_icon_src = asset_src(
+            mobile_light_asset_path
         )
 
         picture = (
@@ -1340,7 +1365,7 @@ def render_language_metadata(language):
     else:
         icon_src = (
             seti_language_icon_url(language)
-            or "./assets/profile/language-default.svg"
+            or "./assets/profile/icons/language_default.svg"
         )
 
         picture = (
@@ -1362,6 +1387,7 @@ def render_language_metadata(language):
         f"{picture}{escaped_language}"
         "</a>"
     )
+
 
 
 
@@ -1454,13 +1480,13 @@ def render_recent_releases(releases):
 
         if release["isLatest"]:
             status = (
-                ' [<img src="./assets/profile/release-latest.svg"'
+                ' [<img src="./assets/profile/icons/releases/latest.svg"'
                 ' alt="Latest" height="24" align="absmiddle">]'
                 f'({release["url"]})'
             )
         elif release["isPrerelease"]:
             status = (
-                ' [<img src="./assets/profile/release-prerelease.svg"'
+                ' [<img src="./assets/profile/icons/releases/prerelease.svg"'
                 ' alt="Pre-release" height="24" align="absmiddle">]'
                 f'({release["url"]})'
             )
@@ -1482,7 +1508,7 @@ def render_recent_releases(releases):
             f'- [**{release["name"]}**]({release["url"]})'
             f'{status}<br>\n'
             f'  <sub><blockquote>{released_text} · '
-            f'[<img src="./assets/profile/release-tag.svg" '
+            f'[<img src="./assets/profile/icons/releases/tag.svg" '
             f'alt="" height="18" align="texttop"> '
             f'{release["tagName"]}]'
             f'({tag_url})</blockquote></sub>'
@@ -1753,7 +1779,7 @@ def render_recent_commits(commits):
             f'  <sub><blockquote>'
             f'Committed '
             f'{render_relative_time(commit["committedDate"])}'
-            f' · [<img src="./assets/profile/git-commit.svg" '
+            f' · [<img src="./assets/profile/icons/commit.svg" '
             f'alt="" height="18" align="texttop"> '
             f'{short_oid}]({commit["url"]})'
             f'</blockquote></sub>'
@@ -1889,7 +1915,12 @@ def main():
 
     write_seti_language_assets(building_now)
 
-    (PROFILE_ASSETS_DIR / "snapshot.svg").write_text(
+    SNAPSHOT_ASSETS_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    (SNAPSHOT_ASSETS_DIR / "desktop.svg").write_text(
         render_snapshot_svg(
             snapshot_profile,
             languages,
@@ -1898,7 +1929,7 @@ def main():
         newline="\n",
     )
 
-    (PROFILE_ASSETS_DIR / "snapshot-mobile.svg").write_text(
+    (SNAPSHOT_ASSETS_DIR / "mobile.svg").write_text(
         render_snapshot_svg(
             snapshot_profile,
             languages,

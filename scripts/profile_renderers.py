@@ -200,6 +200,8 @@ def write_native_table_hybrid_assets(
 ):
     hybrid_dir = (
         Path(profile_assets_dir)
+        / "generated"
+        / "snapshot"
         / "native_table_hybrid"
     )
 
@@ -347,19 +349,19 @@ def render_native_table_hybrid(
   <tr>
     <td colspan="2" align="left" valign="middle">
       <h3>GitHub overview</h3>
-      <img src="./assets/profile/native_table_hybrid/card_width.svg" width="330" height="1" alt="">
+      <img src="./assets/profile/generated/snapshot/native_table_hybrid/card_width.svg" width="330" height="1" alt="">
     </td>
   </tr>
   <tr>
     <td width="185" align="center" valign="middle">
       <h2>{escape(format_number(total_stars))}</h2>
       Total stars<br>
-      <img src="./assets/profile/native_table_hybrid/card_height.svg" width="1" height="20" alt="">
+      <img src="./assets/profile/generated/snapshot/native_table_hybrid/card_height.svg" width="1" height="20" alt="">
     </td>
     <td width="185" align="center" valign="middle">
       <h2>{escape(format_number(total_releases))}</h2>
       Total releases<br>
-      <img src="./assets/profile/native_table_hybrid/card_height.svg" width="1" height="20" alt="">
+      <img src="./assets/profile/generated/snapshot/native_table_hybrid/card_height.svg" width="1" height="20" alt="">
     </td>
   </tr>
 </table>
@@ -368,7 +370,7 @@ def render_native_table_hybrid(
   <tr>
     <td colspan="2" align="left" valign="middle">
       <h3>Languages</h3>
-      <img src="./assets/profile/native_table_hybrid/languages_bar.svg" width="330" height="10" alt="Language distribution">
+      <img src="./assets/profile/generated/snapshot/native_table_hybrid/languages_bar.svg" width="330" height="10" alt="Language distribution">
     </td>
   </tr>
 {languages_row}
@@ -385,8 +387,8 @@ def render_snapshot_readme(
     if snapshot_mode == "full_svg":
         return '''<p align="center">
   <picture>
-    <source media="(max-width: 600px)" srcset="./assets/profile/snapshot-mobile.svg">
-    <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
+    <source media="(max-width: 600px)" srcset="./assets/profile/generated/snapshot/mobile.svg">
+    <img src="./assets/profile/generated/snapshot/desktop.svg" width="100%" alt="GitHub overview and languages">
   </picture>
 </p>'''
 

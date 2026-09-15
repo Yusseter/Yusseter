@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source media="(max-width: 600px)" srcset="./assets/profile/header-mobile.svg">
-    <img src="./assets/profile/header.svg" width="100%" alt="Yusseter profile header">
+    <source media="(max-width: 600px)" srcset="./assets/profile/header/mobile.svg">
+    <img src="./assets/profile/header/desktop.svg" width="100%" alt="Yusseter profile header">
   </picture>
 </p>
 
@@ -11,34 +11,34 @@
 
 <!-- building_now:start -->
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's Profile repository.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-15T15:27:26Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/languages/python-mobile-light.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/languages/python-mobile.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/languages/python-light.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/languages/python.svg"><img src="./assets/profile/languages/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-15T15:27:26Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add theme-aware Seti language icons](https://github.com/Yusseter/Yusseter/commit/4e140be8fd30e08c306d658486c6e4cb94d53cbf)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T15:27:26Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 4e140be](https://github.com/Yusseter/Yusseter/commit/4e140be8fd30e08c306d658486c6e4cb94d53cbf)</blockquote></sub>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-15T15:27:26Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 4e140be](https://github.com/Yusseter/Yusseter/commit/4e140be8fd30e08c306d658486c6e4cb94d53cbf)</blockquote></sub>
   <details>
   <summary>Details</summary>
   <p>Extend Seti language asset generation to produce desktop and mobile light-theme SVGs alongside the existing dark variants, using the same color darkening behavior as VS Code&#x27;s Seti generator and preserving per-viewport normalization. Update language metadata rendering to select icons by both color scheme and viewport through `&lt;picture&gt;` sources. Add tests covering the color transform, four-variant asset generation, theme/viewport source selection, and repository filter query encoding.</p>
   </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Use user commit time for Building now ordering](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:28:08Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> c04dae6](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)</blockquote></sub>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:28:08Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> c04dae6](https://github.com/Yusseter/Yusseter/commit/c04dae6ce336d78ccb9e330a386f5376c4eb4f0e)</blockquote></sub>
   <details>
   <summary>Details</summary>
   <p>Track `latest_commit_at` in repository activity from filtered user-associated commit history and use it to drive Building now behavior. Candidate selection now ranks by score first, then latest user commit, while final display order is chronological by that same timestamp. Rendering also uses activity-derived commit time instead of the branch head commit time, preventing bot-only updates from appearing as recent user activity. Add tests for bot-commit exclusion, score-vs-order behavior, and the renderer timestamp source.</p>
   </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add retry handling for GitHub API requests](https://github.com/Yusseter/Yusseter/commit/c4644e548bdd3a1a77353654f610bc936d7ceabd)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:26:56Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> c4644e5](https://github.com/Yusseter/Yusseter/commit/c4644e548bdd3a1a77353654f610bc936d7ceabd)</blockquote></sub>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:26:56Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> c4644e5](https://github.com/Yusseter/Yusseter/commit/c4644e548bdd3a1a77353654f610bc936d7ceabd)</blockquote></sub>
   <details>
   <summary>Details</summary>
   <p>Add retry handling for GitHub GraphQL and REST requests in `update_profile.py`, using short delays for transient HTTP errors (429 and 5xx) and temporary network failures. Preserve existing error reporting after retries are exhausted and close HTTP error responses after reading their bodies. Add unit tests confirming that transient 502 responses are retried successfully for both GraphQL and REST requests.</p>
   </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Merge branch &#x27;main&#x27; of https://github.com/Yusseter/Yusseter](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-07T22:25:06Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 81e6c47](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)</blockquote></sub>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-07T22:25:06Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 81e6c47](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)</blockquote></sub>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Retry commit search and preserve feed on incomplete results](https://github.com/Yusseter/Yusseter/commit/73dec10c96d4e495a14245f064a7397788984936)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-07T22:24:18Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/git-commit.svg" alt="" height="18" align="texttop"> 73dec10](https://github.com/Yusseter/Yusseter/commit/73dec10c96d4e495a14245f064a7397788984936)</blockquote></sub>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-07T22:24:18Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 73dec10](https://github.com/Yusseter/Yusseter/commit/73dec10c96d4e495a14245f064a7397788984936)</blockquote></sub>
   <details>
   <summary>Details</summary>
   <p>Add retry logic for GitHub commit search when `incomplete_results` is returned, using short delays between attempts. If the search remains incomplete after all retries, log a warning and preserve the existing Recent commits block in the README instead of overwriting it with partial data. Update status output accordingly and add tests covering successful retry, persistent incomplete results, and README preservation.</p>
@@ -48,26 +48,26 @@
 ## Recent releases
 
 <!-- recent_releases:start -->
-- [**Tray Order Lock 0.2.0**](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.2.0) [<img src="./assets/profile/release-latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.2.0)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-28T11:31:20Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> tray-order-lock-v0.2.0](https://github.com/Yusseter/tray-order-lock/tree/tray-order-lock-v0.2.0)</blockquote></sub>
-- [**test**](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/releases/tag/test) [<img src="./assets/profile/release-latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/releases/tag/test)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-20T14:03:25Z">Aug 20, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> test](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/tree/test)</blockquote></sub>
-- [**CK3 Workshop Auto Updater v0.3.1**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.1) [<img src="./assets/profile/release-latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.1)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-19T15:55:31Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.3.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.1)</blockquote></sub>
+- [**Tray Order Lock 0.2.0**](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.2.0) [<img src="./assets/profile/icons/releases/latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.2.0)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-28T11:31:20Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop"> tray-order-lock-v0.2.0](https://github.com/Yusseter/tray-order-lock/tree/tray-order-lock-v0.2.0)</blockquote></sub>
+- [**test**](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/releases/tag/test) [<img src="./assets/profile/icons/releases/latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/releases/tag/test)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-20T14:03:25Z">Aug 20, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop"> test](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/tree/test)</blockquote></sub>
+- [**CK3 Workshop Auto Updater v0.3.1**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.1) [<img src="./assets/profile/icons/releases/latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.1)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-19T15:55:31Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop"> v0.3.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.1)</blockquote></sub>
 
 <details>
 <summary>More releases</summary>
 
 - [**CK3 Workshop Auto Updater v0.3.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.0)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-07T09:23:12Z">Aug 7, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.0)</blockquote></sub>
+  <sub><blockquote>Released <relative-time datetime="2026-08-07T09:23:12Z">Aug 7, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop"> v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.0)</blockquote></sub>
 - [**Tray Order Lock 0.1.0**](https://github.com/Yusseter/tray-order-lock/releases/tag/tray-order-lock-v0.1.0)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-05T19:40:24Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> tray-order-lock-v0.1.0](https://github.com/Yusseter/tray-order-lock/tree/tray-order-lock-v0.1.0)</blockquote></sub>
-- [**CK3 Workshop Auto Updater v0.2.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0) [<img src="./assets/profile/release-prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-05T11:08:17Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.2.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.2.0)</blockquote></sub>
-- [**CK3 Workshop Auto Updater v0.1.1**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1) [<img src="./assets/profile/release-prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-05T10:06:18Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.1.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.1.1)</blockquote></sub>
-- [**CK3 Workshop Auto Updater v0.1.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0) [<img src="./assets/profile/release-prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-03T12:43:57Z">Aug 3, 2026</relative-time> · [<img src="./assets/profile/release-tag.svg" alt="" height="18" align="texttop"> v0.1.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.1.0)</blockquote></sub>
+  <sub><blockquote>Released <relative-time datetime="2026-08-05T19:40:24Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop"> tray-order-lock-v0.1.0](https://github.com/Yusseter/tray-order-lock/tree/tray-order-lock-v0.1.0)</blockquote></sub>
+- [**CK3 Workshop Auto Updater v0.2.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0) [<img src="./assets/profile/icons/releases/prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.2.0)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-05T11:08:17Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop"> v0.2.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.2.0)</blockquote></sub>
+- [**CK3 Workshop Auto Updater v0.1.1**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1) [<img src="./assets/profile/icons/releases/prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-05T10:06:18Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop"> v0.1.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.1.1)</blockquote></sub>
+- [**CK3 Workshop Auto Updater v0.1.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0) [<img src="./assets/profile/icons/releases/prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-03T12:43:57Z">Aug 3, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop"> v0.1.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.1.0)</blockquote></sub>
 
 </details>
 <!-- recent_releases:end -->
@@ -77,8 +77,8 @@
 <!-- snapshot:start -->
 <p align="center">
   <picture>
-    <source media="(max-width: 600px)" srcset="./assets/profile/snapshot-mobile.svg">
-    <img src="./assets/profile/snapshot.svg" width="100%" alt="GitHub overview and languages">
+    <source media="(max-width: 600px)" srcset="./assets/profile/generated/snapshot/mobile.svg">
+    <img src="./assets/profile/generated/snapshot/desktop.svg" width="100%" alt="GitHub overview and languages">
   </picture>
 </p>
 <!-- snapshot:end -->

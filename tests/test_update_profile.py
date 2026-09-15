@@ -673,6 +673,41 @@ class SetiLanguageIconTests(unittest.TestCase):
             "#306391",
         )
 
+    def test_language_asset_paths_use_variant_directories(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            language_dir = Path(temp_dir)
+
+            with patch.object(
+                profile,
+                "LANGUAGE_ASSETS_DIR",
+                language_dir,
+            ):
+                self.assertEqual(
+                    (
+                        profile
+                        .seti_language_icon_asset_path(
+                            "C++"
+                        )
+                        .relative_to(language_dir)
+                        .as_posix()
+                    ),
+                    "dark/desktop/cpp.svg",
+                )
+
+                self.assertEqual(
+                    (
+                        profile
+                        .seti_language_icon_asset_path(
+                            "C++",
+                            mobile=True,
+                            light=True,
+                        )
+                        .relative_to(language_dir)
+                        .as_posix()
+                    ),
+                    "light/mobile/cpp.svg",
+                )
+
     def test_writer_creates_dark_and_light_desktop_mobile_assets(self):
         svg = (
             '<svg xmlns="http://www.w3.org/2000/svg" '
@@ -736,35 +771,51 @@ class SetiLanguageIconTests(unittest.TestCase):
                     [item]
                 )
 
-            expected_names = {
-                "java.svg",
-                "java-mobile.svg",
-                "java-light.svg",
-                "java-mobile-light.svg",
+                dark_desktop = (
+                    profile
+                    .seti_language_icon_asset_path(
+                        "Java"
+                    )
+                )
+                light_desktop = (
+                    profile
+                    .seti_language_icon_asset_path(
+                        "Java",
+                        light=True,
+                    )
+                )
+
+            expected_paths = {
+                "dark/desktop/java.svg",
+                "dark/mobile/java.svg",
+                "light/desktop/java.svg",
+                "light/mobile/java.svg",
             }
 
             self.assertEqual(
                 {
-                    path.name
-                    for path in language_dir.glob(
+                    path
+                    .relative_to(language_dir)
+                    .as_posix()
+                    for path in language_dir.rglob(
                         "*.svg"
                     )
                 },
-                expected_names,
+                expected_paths,
             )
 
             self.assertIn(
-                '#CC3E44',
-                (
-                    language_dir / "java.svg"
-                ).read_text(encoding="utf-8"),
+                "#CC3E44",
+                dark_desktop.read_text(
+                    encoding="utf-8"
+                ),
             )
 
             self.assertIn(
-                '#b8383d',
-                (
-                    language_dir / "java-light.svg"
-                ).read_text(encoding="utf-8"),
+                "#b8383d",
+                light_desktop.read_text(
+                    encoding="utf-8"
+                ),
             )
 
     def test_metadata_uses_theme_and_viewport_sources(self):
@@ -790,6 +841,12 @@ class SetiLanguageIconTests(unittest.TestCase):
                             light=light,
                         )
                     )
+
+                    path.parent.mkdir(
+                        parents=True,
+                        exist_ok=True,
+                    )
+
                     path.write_text(
                         "<svg/>",
                         encoding="utf-8",
@@ -805,8 +862,8 @@ class SetiLanguageIconTests(unittest.TestCase):
             (
                 'media="(prefers-color-scheme: light) '
                 'and (max-width: 600px)" '
-                'srcset="./assets/profile/languages/'
-                'cpp-mobile-light.svg"'
+                'srcset="./assets/profile/generated/'
+                'languages/light/mobile/cpp.svg"'
             ),
             rendered,
         )
@@ -815,8 +872,8 @@ class SetiLanguageIconTests(unittest.TestCase):
             (
                 'media="(prefers-color-scheme: dark) '
                 'and (max-width: 600px)" '
-                'srcset="./assets/profile/languages/'
-                'cpp-mobile.svg"'
+                'srcset="./assets/profile/generated/'
+                'languages/dark/mobile/cpp.svg"'
             ),
             rendered,
         )
@@ -824,8 +881,8 @@ class SetiLanguageIconTests(unittest.TestCase):
         self.assertIn(
             (
                 'media="(prefers-color-scheme: light)" '
-                'srcset="./assets/profile/languages/'
-                'cpp-light.svg"'
+                'srcset="./assets/profile/generated/'
+                'languages/light/desktop/cpp.svg"'
             ),
             rendered,
         )
@@ -833,8 +890,8 @@ class SetiLanguageIconTests(unittest.TestCase):
         self.assertIn(
             (
                 'media="(prefers-color-scheme: dark)" '
-                'srcset="./assets/profile/languages/'
-                'cpp.svg"'
+                'srcset="./assets/profile/generated/'
+                'languages/dark/desktop/cpp.svg"'
             ),
             rendered,
         )
@@ -846,6 +903,7 @@ class SetiLanguageIconTests(unittest.TestCase):
             ),
             rendered,
         )
+
 
 class RelativeTimeTests(unittest.TestCase):
     def test_render_relative_time_uses_native_element(self):

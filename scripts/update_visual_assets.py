@@ -51,7 +51,9 @@ BACKGROUND_SOURCE = (
 )
 
 HEADER_SOURCE = (
-    PROFILE_DIR / "header.svg"
+    PROFILE_DIR
+    / "header"
+    / "desktop.svg"
 )
 
 WINDOWS_INKSCAPE = Path(
