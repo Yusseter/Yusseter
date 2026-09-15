@@ -11,12 +11,24 @@
 
 <!-- building_now:start -->
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's Profile repository.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-15T15:54:49Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-15T16:31:16Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Rename profile config and fix hybrid asset path](https://github.com/Yusseter/Yusseter/commit/21a71a70a80a428149876e1030a6341c8c32457e)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-15T16:31:16Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 21a71a7](https://github.com/Yusseter/Yusseter/commit/21a71a70a80a428149876e1030a6341c8c32457e)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Rename `profile_renderer.json` to `profile_config.json` and update workflow triggers, config loading, validation messages, and tests to use the new name. Fix the native table hybrid language dot asset path to reference the generated snapshot directory, and add regression coverage for the corrected rendered path.</p>
+  </details>
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Fix visual asset workflow header path](https://github.com/Yusseter/Yusseter/commit/ccf9c56b128268f462adb9d791a9aad72b5af2b9)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-15T16:13:01Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> ccf9c56](https://github.com/Yusseter/Yusseter/commit/ccf9c56b128268f462adb9d791a9aad72b5af2b9)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Update the visual asset workflow to watch and stage `assets/profile/header/desktop.svg` instead of the old header path, keeping automated visual asset updates aligned with the reorganized profile asset hierarchy.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Reorganize profile asset hierarchy](https://github.com/Yusseter/Yusseter/commit/5a32d9496c58fb9fb167002511a369bfd9c8e614)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-15T15:54:49Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 5a32d94](https://github.com/Yusseter/Yusseter/commit/5a32d9496c58fb9fb167002511a369bfd9c8e614)</blockquote></sub>
   <details>
@@ -35,14 +47,6 @@
   <summary>Details</summary>
   <p>Track `latest_commit_at` in repository activity from filtered user-associated commit history and use it to drive Building now behavior. Candidate selection now ranks by score first, then latest user commit, while final display order is chronological by that same timestamp. Rendering also uses activity-derived commit time instead of the branch head commit time, preventing bot-only updates from appearing as recent user activity. Add tests for bot-commit exclusion, score-vs-order behavior, and the renderer timestamp source.</p>
   </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add retry handling for GitHub API requests](https://github.com/Yusseter/Yusseter/commit/c4644e548bdd3a1a77353654f610bc936d7ceabd)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-14T17:26:56Z">Sep 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> c4644e5](https://github.com/Yusseter/Yusseter/commit/c4644e548bdd3a1a77353654f610bc936d7ceabd)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Add retry handling for GitHub GraphQL and REST requests in `update_profile.py`, using short delays for transient HTTP errors (429 and 5xx) and temporary network failures. Preserve existing error reporting after retries are exhausted and close HTTP error responses after reading their bodies. Add unit tests confirming that transient 502 responses are retried successfully for both GraphQL and REST requests.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Merge branch &#x27;main&#x27; of https://github.com/Yusseter/Yusseter](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-07T22:25:06Z">Sep 7, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 81e6c47](https://github.com/Yusseter/Yusseter/commit/81e6c47953020085e8c32dc0f33f1a7032cdc6db)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
