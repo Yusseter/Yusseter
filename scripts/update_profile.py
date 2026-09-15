@@ -1009,7 +1009,11 @@ def seti_language_icon_url(language):
 
     return icon_url if available else None
 
-def seti_language_icon_asset_path(language, mobile=False):
+def seti_language_icon_asset_path(
+    language,
+    mobile=False,
+    light=False,
+):
     if language == "No language data":
         return None
 
@@ -1018,9 +1022,21 @@ def seti_language_icon_asset_path(language, mobile=False):
     if not stem:
         return None
 
-    suffix = "-mobile" if mobile else ""
+    suffix_parts = []
+
+    if mobile:
+        suffix_parts.append("mobile")
+
+    if light:
+        suffix_parts.append("light")
+
+    suffix = "".join(
+        f"-{part}"
+        for part in suffix_parts
+    )
 
     return LANGUAGE_ASSETS_DIR / f"{stem}{suffix}.svg"
+
 
 def normalize_seti_icon_svg(svg_text, vertical_shift_px):
     match = re.search(
@@ -1063,6 +1079,44 @@ def normalize_seti_icon_svg(svg_text, vertical_shift_px):
         + svg_text[match.end(1):]
     )
 
+
+def darken_seti_color(color):
+    if not re.fullmatch(
+        r"#[0-9A-Fa-f]{6}",
+        color,
+    ):
+        raise ValueError(
+            f"Invalid Seti color: {color}"
+        )
+
+    channels = [
+        int(color[index:index + 2], 16)
+        for index in (1, 3, 5)
+    ]
+
+    # Match VS Code's Seti generator:
+    # Math.round(channel * 0.9).
+    darkened = [
+        int(channel * 0.9 + 0.5)
+        for channel in channels
+    ]
+
+    return "#" + "".join(
+        f"{channel:02x}"
+        for channel in darkened
+    )
+
+
+def make_seti_light_svg(svg_text):
+    return re.sub(
+        r"#[0-9A-Fa-f]{6}\b",
+        lambda match: darken_seti_color(
+            match.group(0)
+        ),
+        svg_text,
+    )
+
+
 def write_seti_language_assets(items):
     LANGUAGE_ASSETS_DIR.mkdir(
         parents=True,
@@ -1072,24 +1126,59 @@ def write_seti_language_assets(items):
     desired_names = set()
 
     for item in items:
-        language = primary_language(item["repository"])
-        asset_path = seti_language_icon_asset_path(language)
-        mobile_asset_path = seti_language_icon_asset_path(
-            language,
-            mobile=True,
+        language = primary_language(
+            item["repository"]
         )
+
+        asset_path = seti_language_icon_asset_path(
+            language
+        )
+        mobile_asset_path = (
+            seti_language_icon_asset_path(
+                language,
+                mobile=True,
+            )
+        )
+        light_asset_path = (
+            seti_language_icon_asset_path(
+                language,
+                light=True,
+            )
+        )
+        mobile_light_asset_path = (
+            seti_language_icon_asset_path(
+                language,
+                mobile=True,
+                light=True,
+            )
+        )
+
         icon_url = seti_language_icon_url(language)
 
-        if not asset_path or not mobile_asset_path or not icon_url:
+        asset_paths = (
+            asset_path,
+            mobile_asset_path,
+            light_asset_path,
+            mobile_light_asset_path,
+        )
+
+        if (
+            any(path is None for path in asset_paths)
+            or not icon_url
+        ):
             continue
 
-        desired_names.add(asset_path.name)
-        desired_names.add(mobile_asset_path.name)
+        desired_names.update(
+            path.name
+            for path in asset_paths
+        )
 
         request = urllib.request.Request(
             icon_url,
             headers={
-                "User-Agent": f"{USERNAME}-profile-updater",
+                "User-Agent": (
+                    f"{USERNAME}-profile-updater"
+                ),
             },
             method="GET",
         )
@@ -1099,16 +1188,49 @@ def write_seti_language_assets(items):
                 request,
                 timeout=10,
             ) as response:
-                svg_text = response.read().decode("utf-8")
+                svg_text = response.read().decode(
+                    "utf-8"
+                )
 
-            normalized_svg = normalize_seti_icon_svg(
-                svg_text,
-                SETI_ICON_VERTICAL_SHIFT_PX,
+            light_svg_text = make_seti_light_svg(
+                svg_text
             )
-            mobile_normalized_svg = normalize_seti_icon_svg(
-                svg_text,
-                SETI_ICON_MOBILE_VERTICAL_SHIFT_PX,
+
+            variants = (
+                (
+                    asset_path,
+                    svg_text,
+                    SETI_ICON_VERTICAL_SHIFT_PX,
+                ),
+                (
+                    mobile_asset_path,
+                    svg_text,
+                    SETI_ICON_MOBILE_VERTICAL_SHIFT_PX,
+                ),
+                (
+                    light_asset_path,
+                    light_svg_text,
+                    SETI_ICON_VERTICAL_SHIFT_PX,
+                ),
+                (
+                    mobile_light_asset_path,
+                    light_svg_text,
+                    SETI_ICON_MOBILE_VERTICAL_SHIFT_PX,
+                ),
             )
+
+            normalized_variants = [
+                (
+                    path,
+                    normalize_seti_icon_svg(
+                        source,
+                        vertical_shift,
+                    ),
+                )
+                for path, source, vertical_shift
+                in variants
+            ]
+
         except (
             urllib.error.HTTPError,
             urllib.error.URLError,
@@ -1118,20 +1240,21 @@ def write_seti_language_assets(items):
         ):
             continue
 
-        asset_path.write_text(
-            normalized_svg.rstrip() + "\n",
-            encoding="utf-8",
-            newline="\n",
-        )
-        mobile_asset_path.write_text(
-            mobile_normalized_svg.rstrip() + "\n",
-            encoding="utf-8",
-            newline="\n",
-        )
+        for path, normalized_svg in (
+            normalized_variants
+        ):
+            path.write_text(
+                normalized_svg.rstrip() + "\n",
+                encoding="utf-8",
+                newline="\n",
+            )
 
-    for asset_path in LANGUAGE_ASSETS_DIR.glob("*.svg"):
+    for asset_path in LANGUAGE_ASSETS_DIR.glob(
+        "*.svg"
+    ):
         if asset_path.name not in desired_names:
             asset_path.unlink()
+
 
 def render_language_metadata(language):
     escaped_language = escape(language)
@@ -1139,17 +1262,42 @@ def render_language_metadata(language):
     if language == "No language data":
         return escaped_language
 
-    asset_path = seti_language_icon_asset_path(language)
-    mobile_asset_path = seti_language_icon_asset_path(
-        language,
-        mobile=True,
+    asset_path = seti_language_icon_asset_path(
+        language
+    )
+    mobile_asset_path = (
+        seti_language_icon_asset_path(
+            language,
+            mobile=True,
+        )
+    )
+    light_asset_path = (
+        seti_language_icon_asset_path(
+            language,
+            light=True,
+        )
+    )
+    mobile_light_asset_path = (
+        seti_language_icon_asset_path(
+            language,
+            mobile=True,
+            light=True,
+        )
+    )
+
+    asset_paths = (
+        asset_path,
+        mobile_asset_path,
+        light_asset_path,
+        mobile_light_asset_path,
     )
 
     if (
-        asset_path
-        and mobile_asset_path
-        and asset_path.exists()
-        and mobile_asset_path.exists()
+        all(path is not None for path in asset_paths)
+        and all(
+            path.exists()
+            for path in asset_paths
+        )
     ):
         icon_src = (
             "./assets/profile/languages/"
@@ -1159,11 +1307,31 @@ def render_language_metadata(language):
             "./assets/profile/languages/"
             f"{mobile_asset_path.name}"
         )
+        light_icon_src = (
+            "./assets/profile/languages/"
+            f"{light_asset_path.name}"
+        )
+        mobile_light_icon_src = (
+            "./assets/profile/languages/"
+            f"{mobile_light_asset_path.name}"
+        )
 
         picture = (
             "<picture>"
-            '<source media="(max-width: 600px)" '
+            '<source media="'
+            '(prefers-color-scheme: light) '
+            'and (max-width: 600px)" '
+            f'srcset="{mobile_light_icon_src}">'
+            '<source media="'
+            '(prefers-color-scheme: dark) '
+            'and (max-width: 600px)" '
             f'srcset="{mobile_icon_src}">'
+            '<source media="'
+            '(prefers-color-scheme: light)" '
+            f'srcset="{light_icon_src}">'
+            '<source media="'
+            '(prefers-color-scheme: dark)" '
+            f'srcset="{icon_src}">'
             f'<img src="{icon_src}" alt="" '
             f'height="{SETI_ICON_RENDER_HEIGHT}" '
             'align="texttop">'
@@ -1174,10 +1342,11 @@ def render_language_metadata(language):
             seti_language_icon_url(language)
             or "./assets/profile/language-default.svg"
         )
+
         picture = (
             f'<picture><img src="{icon_src}" alt="" '
             f'height="{SETI_ICON_RENDER_HEIGHT}" '
-            f'align="texttop"></picture>'
+            'align="texttop"></picture>'
         )
 
     query = urllib.parse.urlencode(
@@ -1193,6 +1362,7 @@ def render_language_metadata(language):
         f"{picture}{escaped_language}"
         "</a>"
     )
+
 
 
 def render_building_now(items):

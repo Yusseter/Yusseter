@@ -662,6 +662,191 @@ class RepositoryScopeTests(unittest.TestCase):
         )
 
 
+class SetiLanguageIconTests(unittest.TestCase):
+    def test_light_color_matches_vscode_seti_transform(self):
+        self.assertEqual(
+            profile.darken_seti_color("#CC3E44"),
+            "#b8383d",
+        )
+        self.assertEqual(
+            profile.darken_seti_color("#356EA1"),
+            "#306391",
+        )
+
+    def test_writer_creates_dark_and_light_desktop_mobile_assets(self):
+        svg = (
+            '<svg xmlns="http://www.w3.org/2000/svg" '
+            'viewBox="0 0 32 32">'
+            '<path fill="#CC3E44" d="M0 0h1v1z"/>'
+            '</svg>'
+        )
+
+        class Response:
+            def __enter__(self):
+                return self
+
+            def __exit__(
+                self,
+                exc_type,
+                exc_value,
+                traceback,
+            ):
+                return False
+
+            def read(self):
+                return svg.encode("utf-8")
+
+        item = {
+            "repository": {
+                "languages": {
+                    "edges": [
+                        {
+                            "node": {
+                                "name": "Java"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            language_dir = Path(temp_dir)
+
+            with (
+                patch.object(
+                    profile,
+                    "LANGUAGE_ASSETS_DIR",
+                    language_dir,
+                ),
+                patch.object(
+                    profile,
+                    "seti_language_icon_url",
+                    return_value=(
+                        "https://example.invalid/java.svg"
+                    ),
+                ),
+                patch.object(
+                    profile.urllib.request,
+                    "urlopen",
+                    return_value=Response(),
+                ),
+            ):
+                profile.write_seti_language_assets(
+                    [item]
+                )
+
+            expected_names = {
+                "java.svg",
+                "java-mobile.svg",
+                "java-light.svg",
+                "java-mobile-light.svg",
+            }
+
+            self.assertEqual(
+                {
+                    path.name
+                    for path in language_dir.glob(
+                        "*.svg"
+                    )
+                },
+                expected_names,
+            )
+
+            self.assertIn(
+                '#CC3E44',
+                (
+                    language_dir / "java.svg"
+                ).read_text(encoding="utf-8"),
+            )
+
+            self.assertIn(
+                '#b8383d',
+                (
+                    language_dir / "java-light.svg"
+                ).read_text(encoding="utf-8"),
+            )
+
+    def test_metadata_uses_theme_and_viewport_sources(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            language_dir = Path(temp_dir)
+
+            with patch.object(
+                profile,
+                "LANGUAGE_ASSETS_DIR",
+                language_dir,
+            ):
+                for mobile, light in (
+                    (False, False),
+                    (True, False),
+                    (False, True),
+                    (True, True),
+                ):
+                    path = (
+                        profile
+                        .seti_language_icon_asset_path(
+                            "C++",
+                            mobile=mobile,
+                            light=light,
+                        )
+                    )
+                    path.write_text(
+                        "<svg/>",
+                        encoding="utf-8",
+                    )
+
+                rendered = (
+                    profile.render_language_metadata(
+                        "C++"
+                    )
+                )
+
+        self.assertIn(
+            (
+                'media="(prefers-color-scheme: light) '
+                'and (max-width: 600px)" '
+                'srcset="./assets/profile/languages/'
+                'cpp-mobile-light.svg"'
+            ),
+            rendered,
+        )
+
+        self.assertIn(
+            (
+                'media="(prefers-color-scheme: dark) '
+                'and (max-width: 600px)" '
+                'srcset="./assets/profile/languages/'
+                'cpp-mobile.svg"'
+            ),
+            rendered,
+        )
+
+        self.assertIn(
+            (
+                'media="(prefers-color-scheme: light)" '
+                'srcset="./assets/profile/languages/'
+                'cpp-light.svg"'
+            ),
+            rendered,
+        )
+
+        self.assertIn(
+            (
+                'media="(prefers-color-scheme: dark)" '
+                'srcset="./assets/profile/languages/'
+                'cpp.svg"'
+            ),
+            rendered,
+        )
+
+        self.assertIn(
+            (
+                '?tab=repositories&amp;'
+                'language=c%2B%2B'
+            ),
+            rendered,
+        )
+
 class RelativeTimeTests(unittest.TestCase):
     def test_render_relative_time_uses_native_element(self):
         rendered = profile.render_relative_time(
