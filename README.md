@@ -10,6 +10,8 @@
 ## Building now
 
 <!-- building_now:start -->
+- [**steam-xbox-launch-bridge**](https://github.com/Yusseter/steam-xbox-launch-bridge) — Launch Xbox / Microsoft Store games through their real Steam library entries.<br>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-16T15:21:12Z">Sep 16, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=powershell"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/powershell.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/powershell.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/powershell.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/powershell.svg"><img src="./assets/profile/generated/languages/dark/desktop/powershell.svg" alt="" height="20" align="texttop"></picture>PowerShell</a></blockquote></sub>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's profile repository.<br>
   <sub><blockquote>Updated <relative-time datetime="2026-09-15T17:26:16Z">Sep 15, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
@@ -17,6 +19,18 @@
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**steam-xbox-launch-bridge**](https://github.com/Yusseter/steam-xbox-launch-bridge) — [Add Markdown lint setup and project TODOs](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/54f16846df8b1964e153f669fc99659531325584)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-16T15:21:12Z">Sep 16, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 54f1684](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/54f16846df8b1964e153f669fc99659531325584)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Introduce `.markdownlint-cli2.jsonc` to allow `&lt;kbd&gt;` tags in Markdown, add markdownlint to VS Code recommended extensions, and add a `TODO.md` with repository and project follow-up tasks. Also update `.gitattributes` to consistently enforce LF endings for `.cpp`, `.json`, `.jsonc`, and Markdown-related text files.</p>
+  </details>
+- [**steam-xbox-launch-bridge**](https://github.com/Yusseter/steam-xbox-launch-bridge) — [Add Steam Xbox Launch Bridge project](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/4a679774f93fbd3108b9a41e186059c29a0282d7)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-16T15:04:58Z">Sep 16, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 4a67977](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/4a679774f93fbd3108b9a41e186059c29a0282d7)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Add the Steam Xbox Launch Bridge implementation for Among Us, launching the Xbox/Microsoft Store version via AUMID, verifying the package family, and keeping the bridge running until the Xbox game exits.<br><br>Include PowerShell tooling for building, testing, deploying, and restoring the bridge, with verified backups and SHA-256 checks to protect the original Steam executable. Add local path configuration, README documentation, Git settings, and VS Code configuration and tasks for development and builds.</p>
+  </details>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Limit profile workflow to profile regression tests](https://github.com/Yusseter/Yusseter/commit/5e96ec2f38bdd1d8d04b05da263ad91a3c201144)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-15T17:26:16Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 5e96ec2](https://github.com/Yusseter/Yusseter/commit/5e96ec2f38bdd1d8d04b05da263ad91a3c201144)</blockquote></sub>
   <details>
@@ -34,18 +48,6 @@
   <details>
   <summary>Details</summary>
   <p>Add focused regression tests in `tests/test_update_visual_assets.py` covering header SVG synchronization, idempotency, missing-header handling, and the visual asset workflow contract. Update `.github/workflows/update_visual_assets.yml` to watch the new test file and run these tests before installing visual asset dependencies, so synchronization and header-handling regressions are caught in CI.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Sync emblem updates across header SVG variants](https://github.com/Yusseter/Yusseter/commit/8b36d9ba68b696ee76e5c07fb1cae7d0ceebc185)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T16:58:09Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 8b36d9b](https://github.com/Yusseter/Yusseter/commit/8b36d9ba68b696ee76e5c07fb1cae7d0ceebc185)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Expand visual asset syncing from a single `profile/header/desktop.svg` file to all SVG variants in `assets/profile/header/`. The workflow now watches and stages the entire header directory, and `update_visual_assets.py` discovers header SVGs dynamically, validates at least one exists, and applies embedded logo/background synchronization to each file. The assets README was updated to clarify this synchronization behavior.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Rename profile config and fix hybrid asset path](https://github.com/Yusseter/Yusseter/commit/21a71a70a80a428149876e1030a6341c8c32457e)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T16:31:16Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 21a71a7](https://github.com/Yusseter/Yusseter/commit/21a71a70a80a428149876e1030a6341c8c32457e)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Rename `profile_renderer.json` to `profile_config.json` and update workflow triggers, config loading, validation messages, and tests to use the new name. Fix the native table hybrid language dot asset path to reference the generated snapshot directory, and add regression coverage for the corrected rendered path.</p>
   </details>
 <!-- recent_commits:end -->
 

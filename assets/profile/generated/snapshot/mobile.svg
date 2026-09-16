@@ -95,26 +95,26 @@
     <rect class="bar-background" x="20" y="268" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="20.00" y="268" width="112.44" height="10" fill="#012456" />
-    <rect x="132.44" y="268" width="54.57" height="10" fill="#b07219" />
-    <rect x="187.01" y="268" width="44.01" height="10" fill="#3572A5" />
-    <rect x="231.02" y="268" width="27.52" height="10" fill="#f34b7d" />
-    <rect x="258.54" y="268" width="26.17" height="10" fill="#f1e05a" />
+        <rect x="20.00" y="268" width="113.31" height="10" fill="#012456" />
+    <rect x="133.31" y="268" width="54.26" height="10" fill="#b07219" />
+    <rect x="187.56" y="268" width="43.76" height="10" fill="#3572A5" />
+    <rect x="231.32" y="268" width="27.74" height="10" fill="#f34b7d" />
+    <rect x="259.07" y="268" width="26.02" height="10" fill="#f1e05a" />
     </g>
 
     
     <circle cx="26" cy="294" r="4" fill="#012456" />
     <text class="primary" x="38" y="298">PowerShell</text>
-    <text class="secondary" x="350" y="298" text-anchor="end">34.1%</text>
+    <text class="secondary" x="350" y="298" text-anchor="end">34.3%</text>
     <circle cx="26" cy="316" r="4" fill="#b07219" />
     <text class="primary" x="38" y="320">Java</text>
-    <text class="secondary" x="350" y="320" text-anchor="end">16.5%</text>
+    <text class="secondary" x="350" y="320" text-anchor="end">16.4%</text>
     <circle cx="26" cy="338" r="4" fill="#3572A5" />
     <text class="primary" x="38" y="342">Python</text>
     <text class="secondary" x="350" y="342" text-anchor="end">13.3%</text>
     <circle cx="26" cy="360" r="4" fill="#f34b7d" />
     <text class="primary" x="38" y="364">C++</text>
-    <text class="secondary" x="350" y="364" text-anchor="end">8.3%</text>
+    <text class="secondary" x="350" y="364" text-anchor="end">8.4%</text>
     <circle cx="26" cy="382" r="4" fill="#f1e05a" />
     <text class="primary" x="38" y="386">JavaScript</text>
     <text class="secondary" x="350" y="386" text-anchor="end">7.9%</text>

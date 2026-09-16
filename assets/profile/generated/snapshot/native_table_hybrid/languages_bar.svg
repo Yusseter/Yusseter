@@ -22,10 +22,10 @@
     <rect class="track" x="0" y="0" width="330" height="10" rx="5" />
 
     <g clip-path="url(#bar-clip)">
-        <rect x="0.00" y="0" width="112.44" height="10" fill="#012456" />
-        <rect x="112.44" y="0" width="54.57" height="10" fill="#b07219" />
-        <rect x="167.01" y="0" width="44.01" height="10" fill="#3572a5" />
-        <rect x="211.02" y="0" width="27.52" height="10" fill="#f34b7d" />
-        <rect x="238.54" y="0" width="26.17" height="10" fill="#f1e05a" />
+        <rect x="0.00" y="0" width="113.31" height="10" fill="#012456" />
+        <rect x="113.31" y="0" width="54.26" height="10" fill="#b07219" />
+        <rect x="167.56" y="0" width="43.76" height="10" fill="#3572a5" />
+        <rect x="211.32" y="0" width="27.74" height="10" fill="#f34b7d" />
+        <rect x="239.07" y="0" width="26.02" height="10" fill="#f1e05a" />
     </g>
 </svg>
