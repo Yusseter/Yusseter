@@ -19,6 +19,18 @@
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — [Add Analysis 12 event resolution integration](https://github.com/Yusseter/ck3-workshop-history/commit/bff3c1ba60a402169fd8e77ddf171ad31b973077)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-17T15:12:55Z">Sep 17, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> bff3c1b](https://github.com/Yusseter/ck3-workshop-history/commit/bff3c1ba60a402169fd8e77ddf171ad31b973077)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Introduces the Analysis 12 integration pipeline with a new PowerShell script that merges validated Analysis 11 evidence into a successor Analysis 10 event-resolution matrix while preserving Analysis 10 provenance fields. Adds generated Analysis 12 outputs (integrated matrix, audit/change reports, repo/global summaries, validation and warning files, and input SHA-256 provenance) and documents the new stage in `analysis/README.md`. The integration keeps 1,198 events intact, promotes 9 events to `KNOWN + RECOVERED`, and records evidence-only integrations for 2 additional events, including 1 confidence update.</p>
+  </details>
+- [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — [Add exhaustive Git verification analysis](https://github.com/Yusseter/ck3-workshop-history/commit/cd7ec009fb047a46d574107b52a030051ce50789)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-17T14:38:43Z">Sep 17, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> cd7ec00](https://github.com/Yusseter/ck3-workshop-history/commit/cd7ec009fb047a46d574107b52a030051ce50789)</blockquote></sub>
+  <details>
+  <summary>Details</summary>
+  <p>Add the eleventh analysis stage for reconstructing CK3 Workshop history. Exhaustively compare the 11 unresolved Analysis 09 archive revisions against every historical Git commit in their corresponding repositories using Git-aware projected hashing, resumable per-revision state, verified archive/event relationships, and deterministic provenance and validation outputs.<br><br>The analysis performs 283 archive/Git comparisons and resolves Special World revision 2875587269|2 to historical commit 62f33e63129a4196cf45d750c5c4f9316cd368fe. EPE revision 2507209632|4 retains two exact historical matches, while the remaining nine revisions have no accepted historical Git match and are proposed as KNOWN + RECOVERED. Preserve three descriptor-only near matches and leave the Analysis 10 outputs unchanged for later integration.</p>
+  </details>
 - [**steam-xbox-launch-bridge**](https://github.com/Yusseter/steam-xbox-launch-bridge) — [Add Markdown lint setup and project TODOs](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/54f16846df8b1964e153f669fc99659531325584)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-16T15:21:12Z">Sep 16, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 54f1684](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/54f16846df8b1964e153f669fc99659531325584)</blockquote></sub>
   <details>
@@ -36,18 +48,6 @@
   <details>
   <summary>Details</summary>
   <p>Narrow the profile update workflow from `tests/**` and the full `test_*.py` suite to `tests/test_update_profile.py`. This prevents unrelated visual asset test changes from triggering profile updates while preserving the regression coverage relevant to the profile updater.</p>
-  </details>
-- [**tray-order-lock**](https://github.com/Yusseter/tray-order-lock) — [Document order-drift investigation status](https://github.com/Yusseter/tray-order-lock/commit/f8734634232017789eef198c965ceb87c75bbb93)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T17:16:11Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> f873463](https://github.com/Yusseter/tray-order-lock/commit/f8734634232017789eef198c965ceb87c75bbb93)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>This update records the paused official submission status and the ongoing order-drift issue in Preserve order, allow manual changes mode. It adds tracked markdownlint configuration and a VS Code recommendation, extends LF handling to JSONC files, clarifies the new-icon handling wording, and documents the post-release investigation observations and diagnostic direction.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add visual asset regression tests and CI step](https://github.com/Yusseter/Yusseter/commit/c2b9fb156e2370e4dab650308395e25133ebd62f)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T17:12:53Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> c2b9fb1](https://github.com/Yusseter/Yusseter/commit/c2b9fb156e2370e4dab650308395e25133ebd62f)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Add focused regression tests in `tests/test_update_visual_assets.py` covering header SVG synchronization, idempotency, missing-header handling, and the visual asset workflow contract. Update `.github/workflows/update_visual_assets.yml` to watch the new test file and run these tests before installing visual asset dependencies, so synchronization and header-handling regressions are caught in CI.</p>
   </details>
 <!-- recent_commits:end -->
 
