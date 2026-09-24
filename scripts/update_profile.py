@@ -1480,13 +1480,13 @@ def render_recent_releases(releases):
 
         if release["isLatest"]:
             status = (
-                ' [<img src="./assets/profile/icons/releases/latest.svg"'
+                '&nbsp;[<img src="./assets/profile/icons/releases/latest.svg"'
                 ' alt="Latest" height="24" align="absmiddle">]'
                 f'({release["url"]})'
             )
         elif release["isPrerelease"]:
             status = (
-                ' [<img src="./assets/profile/icons/releases/prerelease.svg"'
+                '&nbsp;[<img src="./assets/profile/icons/releases/prerelease.svg"'
                 ' alt="Pre-release" height="24" align="absmiddle">]'
                 f'({release["url"]})'
             )
@@ -1509,7 +1509,7 @@ def render_recent_releases(releases):
             f'{status}<br>\n'
             f'  <sub><blockquote>{released_text} · '
             f'[<img src="./assets/profile/icons/releases/tag.svg" '
-            f'alt="" height="18" align="texttop"> '
+            f'alt="" height="18" align="texttop">&nbsp;'
             f'{release["tagName"]}]'
             f'({tag_url})</blockquote></sub>'
         )
@@ -1780,7 +1780,7 @@ def render_recent_commits(commits):
             f'Committed '
             f'{render_relative_time(commit["committedDate"])}'
             f' · [<img src="./assets/profile/icons/commit.svg" '
-            f'alt="" height="18" align="texttop"> '
+            f'alt="" height="18" align="texttop">&nbsp;'
             f'{short_oid}]({commit["url"]})'
             f'</blockquote></sub>'
         )

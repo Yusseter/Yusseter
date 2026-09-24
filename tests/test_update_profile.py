@@ -1529,5 +1529,89 @@ KEEP THIS COMMIT FEED
         )
 
 
+
+class ResponsiveInlineRenderingTests(unittest.TestCase):
+    def test_release_badges_and_tag_are_nonbreaking_units(self):
+        cases = (
+            ("latest.svg", True, False),
+            ("prerelease.svg", False, True),
+        )
+
+        for badge, is_latest, is_prerelease in cases:
+            with self.subTest(badge=badge):
+                rendered = profile.render_recent_releases(
+                    [
+                        {
+                            "name": (
+                                "CK3 Workshop Auto Updater v0.2.0"
+                            ),
+                            "url": (
+                                "https://github.com/Yusseter/test/"
+                                "releases/tag/v0.2.0"
+                            ),
+                            "repositoryUrl": (
+                                "https://github.com/Yusseter/test"
+                            ),
+                            "tagName": "v0.2.0",
+                            "publishedAt": (
+                                "2026-08-05T11:08:17Z"
+                            ),
+                            "isLatest": is_latest,
+                            "isPrerelease": is_prerelease,
+                        }
+                    ]
+                )
+
+                headline, metadata = rendered.split(
+                    "<br>\n",
+                    1,
+                )
+
+                self.assertIn(
+                    (
+                        "&nbsp;[<img src="
+                        '"./assets/profile/icons/releases/'
+                        f'{badge}"'
+                    ),
+                    headline,
+                )
+
+                self.assertIn(
+                    (
+                        'tag.svg" alt="" height="18" '
+                        'align="texttop">&nbsp;v0.2.0'
+                    ),
+                    metadata,
+                )
+
+    def test_commit_icon_and_sha_are_nonbreaking_unit(self):
+        rendered = profile.render_recent_commits(
+            [
+                {
+                    "repositoryName": "project",
+                    "repositoryUrl": (
+                        "https://github.com/Yusseter/project"
+                    ),
+                    "oid": "abcdef1234567890",
+                    "url": (
+                        "https://github.com/Yusseter/project/"
+                        "commit/abcdef1234567890"
+                    ),
+                    "messageHeadline": "Example commit",
+                    "messageBody": "",
+                    "committedDate": "2026-09-24T12:00:00Z",
+                }
+            ]
+        )
+
+        self.assertIn(
+            (
+                'commit.svg" alt="" height="18" '
+                'align="texttop">&nbsp;abcdef1'
+            ),
+            rendered,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
