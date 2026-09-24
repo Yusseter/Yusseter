@@ -1785,22 +1785,6 @@ def render_recent_commits(commits):
             f'</blockquote></sub>'
         )
 
-        body = (commit["messageBody"] or "").strip()
-
-        if body:
-            body_html = (
-                escape(body)
-                .replace("\r", "")
-                .replace("\n", "<br>")
-            )
-
-            lines.append(
-                '  <details>\n'
-                '  <summary>Details</summary>\n'
-                f'  <p>{body_html}</p>\n'
-                '  </details>'
-            )
-
     return "\n".join(lines)
 
 def replace_marked_block(content, marker, replacement):

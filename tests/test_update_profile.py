@@ -1487,6 +1487,47 @@ KEEP THIS COMMIT FEED
             ],
         )
 
+    def test_recent_commit_render_omits_message_body(self):
+        rendered = profile.render_recent_commits(
+            [
+                {
+                    "repositoryName": "project",
+                    "repositoryUrl": (
+                        "https://github.com/Yusseter/project"
+                    ),
+                    "oid": "abcdef1234567890",
+                    "url": (
+                        "https://github.com/Yusseter/project/"
+                        "commit/abcdef1234567890"
+                    ),
+                    "messageHeadline": "Example commit",
+                    "messageBody": "BODY SENTINEL",
+                    "committedDate": "2026-09-24T12:00:00Z",
+                }
+            ]
+        )
+
+        self.assertIn(
+            "Example commit",
+            rendered,
+        )
+        self.assertIn(
+            "abcdef1",
+            rendered,
+        )
+        self.assertNotIn(
+            "BODY SENTINEL",
+            rendered,
+        )
+        self.assertNotIn(
+            "<details>",
+            rendered,
+        )
+        self.assertNotIn(
+            "<summary>Details</summary>",
+            rendered,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
