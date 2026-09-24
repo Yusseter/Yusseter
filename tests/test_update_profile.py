@@ -964,6 +964,13 @@ class RecentReleaseTests(unittest.TestCase):
         )
         self.assertNotIn("Released this", rendered)
 
+    def test_empty_release_feed_keeps_italic_message(self):
+        self.assertEqual(
+            profile.render_recent_releases([]),
+            "*No published releases yet.*",
+        )
+
+
 
 class RecentCommitTests(unittest.TestCase):
     def test_owned_fork_commits_require_matching_author(self):
@@ -1531,10 +1538,15 @@ KEEP THIS COMMIT FEED
 
 
 class ResponsiveInlineRenderingTests(unittest.TestCase):
-    def test_release_badges_and_tag_are_nonbreaking_units(self):
+    def test_release_title_and_badge_share_one_link(self):
         cases = (
             ("latest.svg", True, False),
             ("prerelease.svg", False, True),
+        )
+
+        release_url = (
+            "https://github.com/Yusseter/test/"
+            "releases/tag/v0.2.0"
         )
 
         for badge, is_latest, is_prerelease in cases:
@@ -1545,10 +1557,7 @@ class ResponsiveInlineRenderingTests(unittest.TestCase):
                             "name": (
                                 "CK3 Workshop Auto Updater v0.2.0"
                             ),
-                            "url": (
-                                "https://github.com/Yusseter/test/"
-                                "releases/tag/v0.2.0"
-                            ),
+                            "url": release_url,
                             "repositoryUrl": (
                                 "https://github.com/Yusseter/test"
                             ),
@@ -1569,10 +1578,21 @@ class ResponsiveInlineRenderingTests(unittest.TestCase):
 
                 self.assertIn(
                     (
-                        "&nbsp;[<img src="
+                        "**CK3 Workshop Auto Updater v0.2.0**"
+                        "&nbsp;<img src="
                         '"./assets/profile/icons/releases/'
                         f'{badge}"'
                     ),
+                    headline,
+                )
+
+                self.assertEqual(
+                    headline.count(release_url),
+                    1,
+                )
+
+                self.assertNotIn(
+                    "&nbsp;[<img",
                     headline,
                 )
 
@@ -1583,6 +1603,7 @@ class ResponsiveInlineRenderingTests(unittest.TestCase):
                     ),
                     metadata,
                 )
+
 
     def test_commit_icon_and_sha_are_nonbreaking_unit(self):
         rendered = profile.render_recent_commits(

@@ -1480,16 +1480,19 @@ def render_recent_releases(releases):
 
         if release["isLatest"]:
             status = (
-                '&nbsp;[<img src="./assets/profile/icons/releases/latest.svg"'
-                ' alt="Latest" height="24" align="absmiddle">]'
-                f'({release["url"]})'
+                '<img src="./assets/profile/icons/releases/latest.svg"'
+                ' alt="Latest" height="24" align="absmiddle">'
             )
         elif release["isPrerelease"]:
             status = (
-                '&nbsp;[<img src="./assets/profile/icons/releases/prerelease.svg"'
-                ' alt="Pre-release" height="24" align="absmiddle">]'
-                f'({release["url"]})'
+                '<img src="./assets/profile/icons/releases/prerelease.svg"'
+                ' alt="Pre-release" height="24" align="absmiddle">'
             )
+
+        headline = f'**{release["name"]}**'
+
+        if status:
+            headline = f"{headline}&nbsp;{status}"
 
         released_text = (
             f'Released '
@@ -1505,8 +1508,7 @@ def render_recent_releases(releases):
         )
 
         return (
-            f'- [**{release["name"]}**]({release["url"]})'
-            f'{status}<br>\n'
+            f'- [{headline}]({release["url"]})<br>\n'
             f'  <sub><blockquote>{released_text} · '
             f'[<img src="./assets/profile/icons/releases/tag.svg" '
             f'alt="" height="18" align="texttop">&nbsp;'
@@ -1545,6 +1547,7 @@ def render_recent_releases(releases):
         )
 
     return "\n".join(lines)
+
 
 def collect_owned_recent_commits(repositories):
     username = USERNAME.casefold()
