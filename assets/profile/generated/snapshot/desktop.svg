@@ -95,11 +95,11 @@
     <rect class="bar-background" x="410" y="58" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="410.00" y="58" width="120.00" height="10" fill="#012456" />
-    <rect x="530.00" y="58" width="52.42" height="10" fill="#b07219" />
-    <rect x="582.42" y="58" width="42.56" height="10" fill="#3572A5" />
-    <rect x="624.98" y="58" width="26.80" height="10" fill="#f34b7d" />
-    <rect x="651.78" y="58" width="25.14" height="10" fill="#f1e05a" />
+        <rect x="410.00" y="58" width="119.99" height="10" fill="#012456" />
+    <rect x="529.99" y="58" width="52.41" height="10" fill="#b07219" />
+    <rect x="582.40" y="58" width="42.59" height="10" fill="#3572A5" />
+    <rect x="624.99" y="58" width="26.80" height="10" fill="#f34b7d" />
+    <rect x="651.79" y="58" width="25.14" height="10" fill="#f1e05a" />
     </g>
 
     
