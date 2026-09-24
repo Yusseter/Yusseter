@@ -10,42 +10,23 @@
 ## Building now
 
 <!-- building_now:start -->
-*Nothing is actively being built in public right now.*
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's profile repository.<br>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-24T18:49:53Z">Sep 24, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Omit commit body from recent commits render](https://github.com/Yusseter/Yusseter/commit/c3e9425da84e11103096b709006821c214f003fe)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-24T18:49:53Z">Sep 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> c3e9425](https://github.com/Yusseter/Yusseter/commit/c3e9425da84e11103096b709006821c214f003fe)</blockquote></sub>
 - [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — [Add Analysis 12 event resolution integration](https://github.com/Yusseter/ck3-workshop-history/commit/bff3c1ba60a402169fd8e77ddf171ad31b973077)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-17T15:12:55Z">Sep 17, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> bff3c1b](https://github.com/Yusseter/ck3-workshop-history/commit/bff3c1ba60a402169fd8e77ddf171ad31b973077)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Introduces the Analysis 12 integration pipeline with a new PowerShell script that merges validated Analysis 11 evidence into a successor Analysis 10 event-resolution matrix while preserving Analysis 10 provenance fields. Adds generated Analysis 12 outputs (integrated matrix, audit/change reports, repo/global summaries, validation and warning files, and input SHA-256 provenance) and documents the new stage in `analysis/README.md`. The integration keeps 1,198 events intact, promotes 9 events to `KNOWN + RECOVERED`, and records evidence-only integrations for 2 additional events, including 1 confidence update.</p>
-  </details>
 - [**ck3-workshop-history**](https://github.com/Yusseter/ck3-workshop-history) — [Add exhaustive Git verification analysis](https://github.com/Yusseter/ck3-workshop-history/commit/cd7ec009fb047a46d574107b52a030051ce50789)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-17T14:38:43Z">Sep 17, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> cd7ec00](https://github.com/Yusseter/ck3-workshop-history/commit/cd7ec009fb047a46d574107b52a030051ce50789)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Add the eleventh analysis stage for reconstructing CK3 Workshop history. Exhaustively compare the 11 unresolved Analysis 09 archive revisions against every historical Git commit in their corresponding repositories using Git-aware projected hashing, resumable per-revision state, verified archive/event relationships, and deterministic provenance and validation outputs.<br><br>The analysis performs 283 archive/Git comparisons and resolves Special World revision 2875587269|2 to historical commit 62f33e63129a4196cf45d750c5c4f9316cd368fe. EPE revision 2507209632|4 retains two exact historical matches, while the remaining nine revisions have no accepted historical Git match and are proposed as KNOWN + RECOVERED. Preserve three descriptor-only near matches and leave the Analysis 10 outputs unchanged for later integration.</p>
-  </details>
 - [**steam-xbox-launch-bridge**](https://github.com/Yusseter/steam-xbox-launch-bridge) — [Add Markdown lint setup and project TODOs](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/54f16846df8b1964e153f669fc99659531325584)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-16T15:21:12Z">Sep 16, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 54f1684](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/54f16846df8b1964e153f669fc99659531325584)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Introduce `.markdownlint-cli2.jsonc` to allow `&lt;kbd&gt;` tags in Markdown, add markdownlint to VS Code recommended extensions, and add a `TODO.md` with repository and project follow-up tasks. Also update `.gitattributes` to consistently enforce LF endings for `.cpp`, `.json`, `.jsonc`, and Markdown-related text files.</p>
-  </details>
 - [**steam-xbox-launch-bridge**](https://github.com/Yusseter/steam-xbox-launch-bridge) — [Add Steam Xbox Launch Bridge project](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/4a679774f93fbd3108b9a41e186059c29a0282d7)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-16T15:04:58Z">Sep 16, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 4a67977](https://github.com/Yusseter/steam-xbox-launch-bridge/commit/4a679774f93fbd3108b9a41e186059c29a0282d7)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Add the Steam Xbox Launch Bridge implementation for Among Us, launching the Xbox/Microsoft Store version via AUMID, verifying the package family, and keeping the bridge running until the Xbox game exits.<br><br>Include PowerShell tooling for building, testing, deploying, and restoring the bridge, with verified backups and SHA-256 checks to protect the original Steam executable. Add local path configuration, README documentation, Git settings, and VS Code configuration and tasks for development and builds.</p>
-  </details>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Limit profile workflow to profile regression tests](https://github.com/Yusseter/Yusseter/commit/5e96ec2f38bdd1d8d04b05da263ad91a3c201144)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-15T17:26:16Z">Sep 15, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop"> 5e96ec2](https://github.com/Yusseter/Yusseter/commit/5e96ec2f38bdd1d8d04b05da263ad91a3c201144)</blockquote></sub>
-  <details>
-  <summary>Details</summary>
-  <p>Narrow the profile update workflow from `tests/**` and the full `test_*.py` suite to `tests/test_update_profile.py`. This prevents unrelated visual asset test changes from triggering profile updates while preserving the regression coverage relevant to the profile updater.</p>
-  </details>
 <!-- recent_commits:end -->
 
 ## Recent releases
