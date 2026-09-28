@@ -743,15 +743,34 @@ def export_svg(
         error_count += 1
 
 
-def export_backgrounds():
+def background_fill(source):
+    root = ET.parse(source).getroot()
+
+    for element in root.iter():
+        if element.get("id") == "background":
+            color = element.get("fill", "")
+
+            if re.fullmatch(r"#[0-9a-fA-F]{6}", color):
+                return color
+
+            raise ValueError(
+                f"Invalid background fill: {source}"
+            )
+
+    raise ValueError(
+        f"Background element not found: {source}"
+    )
+
+
+def export_background_variant(source):
     global created_count
     global skipped_count
     global error_count
 
-    if not BACKGROUND_SOURCE.exists():
+    if not source.exists():
         raise FileNotFoundError(
             "Background SVG not found: "
-            f"{BACKGROUND_SOURCE}"
+            f"{source}"
         )
 
     base_height = round(
@@ -770,7 +789,7 @@ def export_backgrounds():
         )
 
         output_name = (
-            f"{BACKGROUND_SOURCE.stem}"
+            f"{source.stem}"
             f"-{width}x{height}.png"
         )
 
@@ -782,7 +801,7 @@ def export_backgrounds():
         if (
             SKIP_UP_TO_DATE
             and is_up_to_date(
-                BACKGROUND_SOURCE,
+                source,
                 output_path,
             )
         ):
@@ -818,7 +837,7 @@ def export_backgrounds():
             )
 
             run_inkscape_export(
-                BACKGROUND_SOURCE,
+                source,
                 base_png,
                 BACKGROUND_BASE_WIDTH,
                 base_height,
@@ -829,11 +848,7 @@ def export_backgrounds():
                     "RGB"
                 )
 
-            background_color = element_fill(
-                read_text(BACKGROUND_SOURCE),
-                "rect",
-                "background",
-            )
+            background_color = background_fill(source)
 
             for (
                 width,
@@ -879,9 +894,21 @@ def export_backgrounds():
 
         print(
             "Error: "
-            f"{BACKGROUND_SOURCE.relative_to(REPO_ROOT)} "
+            f"{source.relative_to(REPO_ROOT)} "
             f"-> {error}"
         )
+
+
+def export_backgrounds():
+    if not BACKGROUND_SOURCE.exists():
+        raise FileNotFoundError(
+            f"Background SVG not found: {BACKGROUND_SOURCE}"
+        )
+
+    for source in sorted(
+        BACKGROUNDS_SVG_DIR.glob("eagle_background*.svg")
+    ):
+        export_background_variant(source)
 
 
 def export_logos():

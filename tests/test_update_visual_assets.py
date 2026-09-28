@@ -305,6 +305,33 @@ class VisualAssetSyncTests(unittest.TestCase):
                 visuals.sync_visual_assets()
 
 
+    def test_exports_all_eagle_background_variants(self):
+        expected = [
+            "eagle_background.svg",
+            "eagle_background-outlined.svg",
+            "eagle_background-outlined-minimal.svg",
+        ]
+
+        for name in expected[1:]:
+            (self.background.parent / name).touch()
+
+        with (
+            self.patched_paths(),
+            patch.object(
+                visuals,
+                "export_background_variant",
+            ) as exporter,
+        ):
+            visuals.export_backgrounds()
+
+        actual = [
+            call.args[0].name
+            for call in exporter.call_args_list
+        ]
+
+        self.assertEqual(actual, sorted(expected))
+
+
 class VisualAssetWorkflowTests(unittest.TestCase):
     def test_workflow_covers_header_sync_contract(self):
         workflow = (
