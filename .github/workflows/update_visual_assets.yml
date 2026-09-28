@@ -52,7 +52,7 @@ jobs:
       - name: Commit visual asset changes
         run: |
           git add assets/logos/svg/hittite_sun_disk_golden_crescent-reversed.svg
-          git add assets/backgrounds/svg/eagle_background.svg
+          git add -A -- assets/backgrounds/svg
           git add -A -- assets/profile/header
           git add assets/logos/png
           git add assets/backgrounds/png

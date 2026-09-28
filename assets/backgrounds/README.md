@@ -14,6 +14,11 @@ Additional variants:
 
 All three SVG sources have independent PNG exports.
 
+The embedded canonical logo elements are synchronized across all eagle
+background variants. The detailed outlined variant contains a separately
+derived Hittite boundary: geometry or gradient changes to the canonical
+logo require that outline to be reviewed and regenerated before syncing.
+
 The composition uses a deep plum double-headed eagle on a white background,
 with the Hittite Sun Disk and Golden Crescent emblem at its center.
 

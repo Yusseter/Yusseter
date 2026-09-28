@@ -1,6 +1,7 @@
 from pathlib import Path
 import importlib.util
 import re
+import xml.etree.ElementTree as ET
 import shutil
 import sys
 import tempfile
@@ -281,6 +282,113 @@ class VisualAssetSyncTests(unittest.TestCase):
             second_pass,
         )
 
+
+    def test_syncs_background_variants_and_preserves_outlines(self):
+        names = (
+            "eagle_background-outlined.svg",
+            "eagle_background-outlined-minimal.svg",
+        )
+
+        paths = [
+            self.background.parent / name
+            for name in names
+        ]
+
+        for path in paths:
+            shutil.copy2(
+                REPO_ROOT / "assets/backgrounds/svg" / path.name,
+                path,
+            )
+
+        detailed = paths[0]
+
+        def outline_path():
+            root = ET.parse(detailed).getroot()
+            return next(
+                e.get("d")
+                for e in root.iter()
+                if e.get("id") == "hittite-disk-pattern-outline"
+            )
+
+        original_outline = outline_path()
+
+        for path in paths:
+            content = visuals.read_text(path)
+            old = (
+                'id="hittite-disk-inner" cx="960" '
+                'cy="825" r="365" fill="#fdfbf8"'
+            )
+            self.assertEqual(content.count(old), 1)
+            visuals.write_text(
+                path,
+                content.replace(
+                    old,
+                    old.replace("#fdfbf8", "#123456"),
+                    1,
+                ),
+            )
+
+        with (
+            self.patched_paths(),
+            patch("builtins.print"),
+        ):
+            visuals.sync_visual_assets()
+            first = [p.read_bytes() for p in paths]
+
+            visuals.sync_visual_assets()
+            second = [p.read_bytes() for p in paths]
+
+        self.assertEqual(first, second)
+        self.assertEqual(outline_path(), original_outline)
+
+        for path in paths:
+            self.assertEqual(
+                visuals.element_fill(
+                    visuals.read_text(path),
+                    "circle",
+                    "hittite-disk-inner",
+                ),
+                "#fdfbf8",
+            )
+
+    def test_rejects_stale_detailed_outline_geometry(self):
+        detailed = (
+            self.background.parent
+            / "eagle_background-outlined.svg"
+        )
+
+        shutil.copy2(
+            REPO_ROOT / "assets/backgrounds/svg"
+            / detailed.name,
+            detailed,
+        )
+
+        before = detailed.read_bytes()
+
+        text = visuals.read_text(self.canonical_logo)
+
+        old = 'x="775" y="458" width="34"'
+        new = 'x="776" y="458" width="34"'
+
+        self.assertEqual(text.count(old), 1)
+
+        visuals.write_text(
+            self.canonical_logo,
+            text.replace(old, new, 1),
+        )
+
+        with (
+            self.patched_paths(),
+            patch("builtins.print"),
+        ):
+            with self.assertRaisesRegex(
+                ValueError,
+                "requires regeneration",
+            ):
+                visuals.sync_visual_assets()
+
+        self.assertEqual(detailed.read_bytes(), before)
+
     def test_requires_at_least_one_header_svg(self):
         empty_header_dir = (
             self.root
@@ -345,6 +453,11 @@ class VisualAssetWorkflowTests(unittest.TestCase):
 
         self.assertIn(
             '- "assets/profile/header/**"',
+            workflow,
+        )
+
+        self.assertIn(
+            "git add -A -- assets/backgrounds/svg",
             workflow,
         )
 

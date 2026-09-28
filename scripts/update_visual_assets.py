@@ -452,11 +452,89 @@ def sync_reversed_logo(
         )
 
 
+
+def validate_detailed_outline(canonical_text, target_path):
+    canonical = ET.fromstring(canonical_text)
+    target = ET.parse(target_path).getroot()
+
+    def by_id(root, value):
+        return next(
+            (e for e in root.iter() if e.get("id") == value),
+            None,
+        )
+
+    def shape(element):
+        if element is None:
+            raise ValueError("Missing Hittite geometry.")
+
+        return (
+            element.tag.rsplit("}", 1)[-1],
+            tuple(sorted(
+                (k, v)
+                for k, v in element.attrib.items()
+                if k not in ("id", "fill", "clip-path")
+            )),
+            tuple(shape(child) for child in element),
+        )
+
+    if by_id(target, "hittite-disk-pattern-outline") is None:
+        raise ValueError(
+            "Detailed Hittite outline layer is missing."
+        )
+
+    for element_id in (
+        "golden-crescent-base",
+        "hittite-disk-outer",
+        "hittite-disk-inner",
+        "hittite-disk-pattern",
+    ):
+        if shape(by_id(canonical, element_id)) != shape(
+            by_id(target, element_id)
+        ):
+            raise ValueError(
+                "Detailed Hittite outline requires regeneration: "
+                f"{element_id} geometry changed."
+            )
+
+    if shape(
+        by_id(canonical, "hittite-disk-clip")
+    ) != shape(
+        by_id(target, "emblem-hittite-disk-clip")
+    ):
+        raise ValueError(
+            "Detailed Hittite outline requires regeneration: "
+            "clip geometry changed."
+        )
+
+    original_gradient = by_id(
+        canonical, "golden-crescent-gradient"
+    )
+    outline_gradient = by_id(
+        target, "hittite-outline-gradient"
+    )
+
+    if original_gradient is None or outline_gradient is None:
+        raise ValueError("Missing Hittite outline gradient.")
+
+    def stops(element):
+        return [
+            (child.get("offset"), child.get("stop-color"))
+            for child in element
+        ]
+
+    if stops(original_gradient) != stops(outline_gradient):
+        raise ValueError(
+            "Detailed Hittite outline gradient requires review "
+            "after canonical gradient changes."
+        )
+
+
 def sync_embedded_logo(
     target_path,
     canonical_text,
     canonical_plum,
     canonical_background,
+    preserve_detailed_outline=False,
 ):
     target_text = read_text(target_path)
     updated = target_text
@@ -527,6 +605,12 @@ def sync_embedded_logo(
         element_id,
         container,
     ) in EMBLEM_ELEMENTS:
+        if (
+            preserve_detailed_outline
+            and element_id == "hittite-disk-pattern"
+        ):
+            continue
+
         fragment = extract_element(
             canonical_text,
             tag,
@@ -569,6 +653,10 @@ def sync_embedded_logo(
 
 
 def sync_visual_assets():
+    background_sources = sorted(
+        BACKGROUNDS_SVG_DIR.glob("eagle_background*.svg")
+    )
+
     header_sources = sorted(
         HEADER_DIR.glob("*.svg")
     )
@@ -583,6 +671,7 @@ def sync_visual_assets():
         CANONICAL_LOGO_SOURCE,
         REVERSED_LOGO_SOURCE,
         BACKGROUND_SOURCE,
+        *background_sources,
         *header_sources,
     )
 
@@ -597,6 +686,14 @@ def sync_visual_assets():
     canonical_text = read_text(
         CANONICAL_LOGO_SOURCE
     )
+
+    # Validate derived geometry before modifying any SVG.
+    for background_source in background_sources:
+        if background_source.name == "eagle_background-outlined.svg":
+            validate_detailed_outline(
+                canonical_text,
+                background_source,
+            )
 
     canonical_plum = element_fill(
         canonical_text,
@@ -618,12 +715,17 @@ def sync_visual_assets():
         canonical_background,
     )
 
-    sync_embedded_logo(
-        BACKGROUND_SOURCE,
-        canonical_text,
-        canonical_plum,
-        canonical_background,
-    )
+    for background_source in background_sources:
+        sync_embedded_logo(
+            background_source,
+            canonical_text,
+            canonical_plum,
+            canonical_background,
+            preserve_detailed_outline=(
+                background_source.name
+                == "eagle_background-outlined.svg"
+            ),
+        )
 
     for header_source in header_sources:
         sync_embedded_logo(
