@@ -2,5 +2,9 @@
   "snapshot_mode": "full_svg",
   "contribution_forks": [
     "Yusseter/windhawk-mods"
-  ]
+  ],
+  "header": {
+    "background_svg": "eagle_background.svg",
+    "side_rules": true
+  }
 }

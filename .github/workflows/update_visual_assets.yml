@@ -9,6 +9,7 @@ on:
       - "assets/logos/svg/**"
       - "assets/backgrounds/svg/**"
       - "assets/profile/header/**"
+      - "profile_config.json"
       - "scripts/update_visual_assets.py"
       - "tests/test_update_visual_assets.py"
       - ".github/workflows/update_visual_assets.yml"

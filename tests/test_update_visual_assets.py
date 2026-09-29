@@ -1,6 +1,7 @@
 from pathlib import Path
 import importlib.util
 import re
+import json
 import xml.etree.ElementTree as ET
 import shutil
 import sys
@@ -389,6 +390,157 @@ class VisualAssetSyncTests(unittest.TestCase):
 
         self.assertEqual(detailed.read_bytes(), before)
 
+
+    def test_header_selection_and_reversible_side_rules(self):
+        variants = (
+            "eagle_background.svg",
+            "eagle_background-outlined.svg",
+            "eagle_background-outlined-minimal.svg",
+        )
+        for name in variants[1:]:
+            shutil.copy2(
+                REPO_ROOT / "assets/backgrounds/svg" / name,
+                self.background.parent / name,
+            )
+
+        def ids(svg):
+            return {
+                element.get("id")
+                for element in ET.fromstring(svg).iter()
+                if element.get("id")
+            }
+
+        for name in variants:
+            for show_rules in (False, True):
+                (self.root / "profile_config.json").write_text(
+                    json.dumps({"header": {
+                        "background_svg": name,
+                        "side_rules": show_rules,
+                    }}),
+                    encoding="utf-8",
+                )
+                with self.patched_paths(), patch("builtins.print"):
+                    visuals.sync_visual_assets()
+                    before = [
+                        path.read_bytes()
+                        for path in sorted(self.header_dir.glob("*.svg"))
+                    ]
+                    visuals.sync_visual_assets()
+                    after = [
+                        path.read_bytes()
+                        for path in sorted(self.header_dir.glob("*.svg"))
+                    ]
+                self.assertEqual(before, after)
+
+                for header_path in self.header_dir.glob("*.svg"):
+                    self.assertNotRegex(
+                        header_path.read_text(encoding="utf-8"),
+                        r"(?m)[ \t]+$",
+                    )
+                    tree = ET.parse(header_path).getroot()
+
+                    if name == "eagle_background.svg":
+                        chest = next(
+                            element
+                            for element in tree.iter()
+                            if element.get("id") == "chest-emblem"
+                        )
+
+                        circles = [
+                            element
+                            for element in chest
+                            if element.tag.rsplit("}", 1)[-1]
+                            == "circle"
+                        ]
+
+                        self.assertEqual(len(circles), 1)
+                        self.assertEqual(
+                            circles[0].get("class"),
+                            "emblem-background-stroke",
+                        )
+                        self.assertIsNone(
+                            circles[0].get("stroke")
+                        )
+
+                    self.assertEqual(tree.get("width"), "760")
+                    header_ids = ids(header_path.read_text(encoding="utf-8"))
+                    source_ids = ids(
+                        (self.background.parent / name).read_text(
+                            encoding="utf-8"
+                        )
+                    )
+                    for outline_id in (
+                        "palaiologos-eagle-outline",
+                        "hittite-disk-pattern-outline",
+                    ):
+                        self.assertEqual(
+                            outline_id in header_ids,
+                            outline_id in source_ids,
+                        )
+
+                    def art_geometry(path):
+                        root = ET.parse(path).getroot()
+                        group = next(
+                            e for e in root.iter()
+                            if e.get("id") == "eagle-layout"
+                        )
+                        def signature(element):
+                            attributes = dict(element.attrib)
+
+                            # The original header uses a CSS-controlled
+                            # chest ring; its source uses an explicit stroke.
+                            if (
+                                name == "eagle_background.svg"
+                                and attributes.get("class")
+                                == "emblem-background-stroke"
+                            ):
+                                attributes.pop("class")
+                                attributes["stroke"] = (
+                                    visuals.header_background_color(
+                                        visuals.read_text(header_path)
+                                    )
+                                )
+
+                            return (
+                                element.tag,
+                                tuple(sorted(attributes.items())),
+                                tuple(signature(child) for child in element),
+                            )
+                        return signature(group)
+
+                    self.assertEqual(
+                        art_geometry(header_path),
+                        art_geometry(self.background.parent / name),
+                    )
+                    lines = [
+                        e for e in tree.iter()
+                        if e.tag.endswith("}line")
+                        and e.get("class") in (
+                            "header-rule-primary", "header-rule-accent"
+                        )
+                    ]
+                    self.assertEqual(len(lines), 4)
+                    self.assertTrue(all(
+                        (e.get("display") != "none") == show_rules
+                        for e in lines
+                    ))
+
+    def test_header_settings_reject_invalid_values(self):
+        for invalid in (
+            {"header": {"background_svg": "../other.svg"}},
+            {"header": {"side_rules": "false"}},
+        ):
+            (self.root / "profile_config.json").write_text(
+                json.dumps(invalid), encoding="utf-8"
+            )
+            before = (self.header_dir / "desktop.svg").read_bytes()
+            with self.patched_paths(), patch("builtins.print"):
+                with self.assertRaises(ValueError):
+                    visuals.sync_visual_assets()
+            self.assertEqual(
+                (self.header_dir / "desktop.svg").read_bytes(), before
+            )
+
     def test_requires_at_least_one_header_svg(self):
         empty_header_dir = (
             self.root
@@ -453,6 +605,10 @@ class VisualAssetWorkflowTests(unittest.TestCase):
 
         self.assertIn(
             '- "assets/profile/header/**"',
+            workflow,
+        )
+        self.assertIn(
+            '- "profile_config.json"',
             workflow,
         )
 

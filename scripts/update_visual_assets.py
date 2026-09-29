@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import os
 import re
 import shutil
@@ -652,7 +653,224 @@ def sync_embedded_logo(
         )
 
 
+# Keep source SVGs independent from the one active profile header.
+SUPPORTED_HEADER_BACKGROUNDS = (
+    "eagle_background.svg",
+    "eagle_background-outlined.svg",
+    "eagle_background-outlined-minimal.svg",
+)
+
+
+def load_header_settings():
+    config_path = REPO_ROOT / "profile_config.json"
+    if not config_path.exists():
+        return BACKGROUND_SOURCE, True
+
+    config = json.loads(read_text(config_path))
+    if not isinstance(config, dict):
+        raise ValueError("profile_config.json must be an object.")
+
+    header = config.get("header", {})
+    if not isinstance(header, dict):
+        raise ValueError("profile_config.json: header must be an object.")
+
+    name = header.get("background_svg", "eagle_background.svg")
+    rules = header.get("side_rules", True)
+
+    if name not in SUPPORTED_HEADER_BACKGROUNDS:
+        raise ValueError(f"Unsupported header background_svg: {name!r}")
+    if type(rules) is not bool:
+        raise ValueError("header.side_rules must be true or false.")
+
+    return BACKGROUNDS_SVG_DIR / name, rules
+
+
+def unique_match(pattern, text, label):
+    matches = list(re.finditer(pattern, text, flags=re.DOTALL))
+    if len(matches) != 1:
+        raise ValueError(f"{label}: expected 1 match, found {len(matches)}")
+    return matches[0]
+
+
+def group_span(text, element_id):
+    opening = unique_match(
+        r'<g\b(?=[^>]*\bid="' + re.escape(element_id)
+        + r'")[^>]*>',
+        text,
+        element_id,
+    )
+    depth = 0
+    for tag in re.finditer(r'</?g(?=[\s>])[^>]*>', text[opening.start():]):
+        token = tag.group(0)
+        if token.startswith('</g'):
+            depth -= 1
+        elif not token.endswith('/>'):
+            depth += 1
+        if depth == 0:
+            return opening.start(), opening.start() + tag.end()
+    raise ValueError(f"Unclosed SVG group: {element_id}")
+
+
+def compose_header(target_path, source_path, side_rules,
+                   canonical_plum, canonical_background):
+    current = read_text(target_path)
+    source = read_text(source_path)
+
+    # Preserve existing header-only CSS, frame, positioning and sizes.
+    old_plum = element_fill(
+        current, "circle", "hittite-disk-outer"
+    )
+    old_background = header_background_color(current)
+    updated = replace_color(current, old_plum, canonical_plum)
+    updated = replace_color(
+        updated, old_background, canonical_background
+    )
+
+    source_defs = unique_match(
+        r'<defs>.*?</defs>', source, "source defs"
+    ).group(0)
+
+    old_defs = unique_match(
+        r'<defs>.*?</defs>', updated, "header defs"
+    )
+
+    new_defs = old_defs.group(0)
+
+    # Synchronize shared definitions without moving header-only ones.
+    for tag, identifier in (
+        ("radialGradient", "emblem-golden-crescent-gradient"),
+        ("clipPath", "emblem-hittite-disk-clip"),
+    ):
+        fragment = extract_element(
+            source_defs, tag, identifier, True
+        )
+        new_defs = replace_element(
+            new_defs, tag, identifier, True, fragment
+        )
+
+    # Remove previously selected variant-only gradients.
+    extra_gradients = (
+        "eagle-outline-golden-gradient",
+        "hittite-outline-gradient",
+    )
+
+    for identifier in extra_gradients:
+        pattern = (
+            r'(?m)^[ \t]*<radialGradient\b'
+            r'(?=[^>]*\bid="'
+            + re.escape(identifier)
+            + r'")[^>]*>.*?</radialGradient>[ \t]*\n?'
+        )
+
+        new_defs, removed = re.subn(
+            pattern,
+            "",
+            new_defs,
+            flags=re.DOTALL,
+        )
+
+        if removed > 1:
+            raise ValueError(
+                f"Duplicate header gradient: {identifier}"
+            )
+
+    # Insert only gradients required by the selected background.
+    for identifier in extra_gradients:
+        pattern = (
+            r'<radialGradient\b(?=[^>]*\bid="'
+            + re.escape(identifier)
+            + r'")[^>]*>.*?</radialGradient>'
+        )
+
+        match = re.search(
+            pattern, source_defs, flags=re.DOTALL
+        )
+
+        if match is None:
+            continue
+
+        closing = re.search(
+            r'(?m)^([ \t]*)</defs>', new_defs
+        )
+
+        if closing is None:
+            raise ValueError("Header closing defs tag not found.")
+
+        insertion = (
+            closing.group(1)
+            + "\t"
+            + match.group(0)
+            + "\n"
+        )
+
+        new_defs = (
+            new_defs[:closing.start()]
+            + insertion
+            + new_defs[closing.start():]
+        )
+
+    updated = (
+        updated[:old_defs.start()]
+        + new_defs
+        + updated[old_defs.end():]
+    )
+
+    begin, end = group_span(source, "eagle-layout")
+    selected_art = source[begin:end]
+
+    # Preserve the original header's CSS-controlled chest ring.
+    if source_path.name == "eagle_background.svg":
+        ring = (
+            f'fill="none" stroke="{canonical_background}" '
+            'stroke-width="5.0"'
+        )
+
+        if selected_art.count(ring) != 1:
+            raise ValueError(
+                "Canonical header chest ring was not found."
+            )
+
+        selected_art = selected_art.replace(
+            ring,
+            'fill="none" stroke-width="5.0"  '
+            'class="emblem-background-stroke"',
+            1,
+        )
+
+    begin, end = group_span(updated, "eagle-layout")
+    updated = updated[:begin] + selected_art + updated[end:]
+
+    # Reversible: do not delete rule geometry or its gradients.
+    count = [0]
+    def toggle(match):
+        tag = match.group(0)
+        if not re.search(
+            r'class="header-rule-(?:primary|accent)"', tag
+        ):
+            return tag
+        count[0] += 1
+        tag = tag.replace('<line display="none"', '<line', 1)
+        if not side_rules:
+            tag = tag.replace('<line', '<line display="none"', 1)
+        return tag
+
+    updated = re.sub(r'<line\b[^>]*?/>', toggle, updated,
+                     flags=re.DOTALL)
+    if count[0] != 4:
+        raise ValueError(
+            f"Expected four header side rules, found {count[0]}"
+        )
+
+    validate_svg_text(updated, target_path)
+    if updated != current:
+        write_text(target_path, updated)
+        print(f"Generated: {target_path.relative_to(REPO_ROOT)}")
+    else:
+        print(f"Already generated: {target_path.relative_to(REPO_ROOT)}")
+
+
 def sync_visual_assets():
+    header_background, side_rules = load_header_settings()
     background_sources = sorted(
         BACKGROUNDS_SVG_DIR.glob("eagle_background*.svg")
     )
@@ -671,6 +889,7 @@ def sync_visual_assets():
         CANONICAL_LOGO_SOURCE,
         REVERSED_LOGO_SOURCE,
         BACKGROUND_SOURCE,
+        header_background,
         *background_sources,
         *header_sources,
     )
@@ -728,9 +947,10 @@ def sync_visual_assets():
         )
 
     for header_source in header_sources:
-        sync_embedded_logo(
+        compose_header(
             header_source,
-            canonical_text,
+            header_background,
+            side_rules,
             canonical_plum,
             canonical_background,
         )
