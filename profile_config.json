@@ -4,7 +4,7 @@
     "Yusseter/windhawk-mods"
   ],
   "header": {
-    "background_svg": "eagle_background.svg",
-    "side_rules": true
+    "background_svg": "eagle_background-outlined-minimal.svg",
+    "side_rules": false
   }
 }
