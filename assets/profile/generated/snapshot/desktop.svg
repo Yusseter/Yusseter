@@ -95,23 +95,23 @@
     <rect class="bar-background" x="410" y="58" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="410.00" y="58" width="119.75" height="10" fill="#012456" />
-    <rect x="529.75" y="58" width="52.31" height="10" fill="#b07219" />
-    <rect x="582.06" y="58" width="43.09" height="10" fill="#3572A5" />
-    <rect x="625.15" y="58" width="26.75" height="10" fill="#f34b7d" />
-    <rect x="651.90" y="58" width="25.09" height="10" fill="#f1e05a" />
+        <rect x="410.00" y="58" width="119.39" height="10" fill="#012456" />
+    <rect x="529.39" y="58" width="52.15" height="10" fill="#b07219" />
+    <rect x="581.54" y="58" width="43.96" height="10" fill="#3572A5" />
+    <rect x="625.50" y="58" width="26.67" height="10" fill="#f34b7d" />
+    <rect x="652.17" y="58" width="25.01" height="10" fill="#f1e05a" />
     </g>
 
     
     <circle cx="416" cy="84" r="4" fill="#012456" />
     <text class="primary" x="428" y="88">PowerShell</text>
-    <text class="secondary" x="740" y="88" text-anchor="end">36.3%</text>
+    <text class="secondary" x="740" y="88" text-anchor="end">36.2%</text>
     <circle cx="416" cy="106" r="4" fill="#b07219" />
     <text class="primary" x="428" y="110">Java</text>
-    <text class="secondary" x="740" y="110" text-anchor="end">15.9%</text>
+    <text class="secondary" x="740" y="110" text-anchor="end">15.8%</text>
     <circle cx="416" cy="128" r="4" fill="#3572A5" />
     <text class="primary" x="428" y="132">Python</text>
-    <text class="secondary" x="740" y="132" text-anchor="end">13.1%</text>
+    <text class="secondary" x="740" y="132" text-anchor="end">13.3%</text>
     <circle cx="416" cy="150" r="4" fill="#f34b7d" />
     <text class="primary" x="428" y="154">C++</text>
     <text class="secondary" x="740" y="154" text-anchor="end">8.1%</text>

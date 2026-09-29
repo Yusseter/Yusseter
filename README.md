@@ -11,22 +11,22 @@
 
 <!-- building_now:start -->
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's profile repository.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-09-28T20:17:24Z">Sep 28, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-29T20:09:49Z">Sep 29, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Update profile header styling](https://github.com/Yusseter/Yusseter/commit/7c4ff542397b6a41d3dbed551c60c8f287953ea0)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-29T20:09:49Z">Sep 29, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;7c4ff54](https://github.com/Yusseter/Yusseter/commit/7c4ff542397b6a41d3dbed551c60c8f287953ea0)</blockquote></sub>
+- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add configurable profile header backgrounds](https://github.com/Yusseter/Yusseter/commit/5a1edca6b237f52ff4d2473d87ed5e1f192230a1)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-29T20:09:10Z">Sep 29, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;5a1edca](https://github.com/Yusseter/Yusseter/commit/5a1edca6b237f52ff4d2473d87ed5e1f192230a1)</blockquote></sub>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Sync all background SVG variants safely](https://github.com/Yusseter/Yusseter/commit/57c3a5da420ce99676d09847d9e44b3132b6fd02)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-28T20:17:24Z">Sep 28, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;57c3a5d](https://github.com/Yusseter/Yusseter/commit/57c3a5da420ce99676d09847d9e44b3132b6fd02)</blockquote></sub>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add outlined eagle background variants](https://github.com/Yusseter/Yusseter/commit/307300473c6c725278147d1412f80515fce65604)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-28T19:58:13Z">Sep 28, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;3073004](https://github.com/Yusseter/Yusseter/commit/307300473c6c725278147d1412f80515fce65604)</blockquote></sub>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Make release title include badge in one link](https://github.com/Yusseter/Yusseter/commit/60852cb2388f4ea6202db787be1c12abf1a77bd3)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-09-24T19:18:57Z">Sep 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;60852cb](https://github.com/Yusseter/Yusseter/commit/60852cb2388f4ea6202db787be1c12abf1a77bd3)</blockquote></sub>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Prevent wrapping within inline release and commit metadata](https://github.com/Yusseter/Yusseter/commit/1025ba685b5ea2868e63a3e7b070f5615a718e28)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-24T19:09:18Z">Sep 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;1025ba6](https://github.com/Yusseter/Yusseter/commit/1025ba685b5ea2868e63a3e7b070f5615a718e28)</blockquote></sub>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Omit commit body from recent commits render](https://github.com/Yusseter/Yusseter/commit/c3e9425da84e11103096b709006821c214f003fe)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-24T18:49:53Z">Sep 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;c3e9425](https://github.com/Yusseter/Yusseter/commit/c3e9425da84e11103096b709006821c214f003fe)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
