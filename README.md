@@ -10,6 +10,8 @@
 ## Building now
 
 <!-- building_now:start -->
+- [**yb_map**](https://github.com/Yusseter/yb_map) — *No description.*<br>
+  <sub><blockquote>Updated <relative-time datetime="2026-09-30T22:57:46Z">Sep 30, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=powershell"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/powershell.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/powershell.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/powershell.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/powershell.svg"><img src="./assets/profile/generated/languages/dark/desktop/powershell.svg" alt="" height="20" align="texttop"></picture>PowerShell</a></blockquote></sub>
 - [**Yusseter**](https://github.com/Yusseter/Yusseter) — Yusseter's profile repository.<br>
   <sub><blockquote>Updated <relative-time datetime="2026-09-29T20:09:49Z">Sep 29, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
@@ -17,31 +19,33 @@
 ## Recent commits
 
 <!-- recent_commits:start -->
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Update profile header styling](https://github.com/Yusseter/Yusseter/commit/7c4ff542397b6a41d3dbed551c60c8f287953ea0)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-29T20:09:49Z">Sep 29, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;7c4ff54](https://github.com/Yusseter/Yusseter/commit/7c4ff542397b6a41d3dbed551c60c8f287953ea0)</blockquote></sub>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add configurable profile header backgrounds](https://github.com/Yusseter/Yusseter/commit/5a1edca6b237f52ff4d2473d87ed5e1f192230a1)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-29T20:09:10Z">Sep 29, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;5a1edca](https://github.com/Yusseter/Yusseter/commit/5a1edca6b237f52ff4d2473d87ed5e1f192230a1)</blockquote></sub>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Sync all background SVG variants safely](https://github.com/Yusseter/Yusseter/commit/57c3a5da420ce99676d09847d9e44b3132b6fd02)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-28T20:17:24Z">Sep 28, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;57c3a5d](https://github.com/Yusseter/Yusseter/commit/57c3a5da420ce99676d09847d9e44b3132b6fd02)</blockquote></sub>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Add outlined eagle background variants](https://github.com/Yusseter/Yusseter/commit/307300473c6c725278147d1412f80515fce65604)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-28T19:58:13Z">Sep 28, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;3073004](https://github.com/Yusseter/Yusseter/commit/307300473c6c725278147d1412f80515fce65604)</blockquote></sub>
-- [**Yusseter**](https://github.com/Yusseter/Yusseter) — [Make release title include badge in one link](https://github.com/Yusseter/Yusseter/commit/60852cb2388f4ea6202db787be1c12abf1a77bd3)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-24T19:18:57Z">Sep 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;60852cb](https://github.com/Yusseter/Yusseter/commit/60852cb2388f4ea6202db787be1c12abf1a77bd3)</blockquote></sub>
+- [**yb_map**](https://github.com/Yusseter/yb_map) — [Generate release flatmap DDS with texconv](https://github.com/Yusseter/yb_map/commit/8b77c929bfcafb63265f619bba19e9530ad5725f)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-30T22:57:46Z">Sep 30, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;8b77c92](https://github.com/Yusseter/yb_map/commit/8b77c929bfcafb63265f619bba19e9530ad5725f)</blockquote></sub>
+- [**yb_map**](https://github.com/Yusseter/yb_map) — [Bump mod support to CK3 1.20 Crozier](https://github.com/Yusseter/yb_map/commit/c889920303e848455731f8b6f3fdc945bb9ac10d)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-30T22:36:48Z">Sep 30, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;c889920](https://github.com/Yusseter/yb_map/commit/c889920303e848455731f8b6f3fdc945bb9ac10d)</blockquote></sub>
+- [**yb_map**](https://github.com/Yusseter/yb_map) — [Update graphics config and mod metadata](https://github.com/Yusseter/yb_map/commit/f4c3c4c29d16ad06c1d0044721da2b592a6c5a6f)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-30T22:07:35Z">Sep 30, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;f4c3c4c](https://github.com/Yusseter/yb_map/commit/f4c3c4c29d16ad06c1d0044721da2b592a6c5a6f)</blockquote></sub>
+- [**yb_map**](https://github.com/Yusseter/yb_map) — [Add verified build and deploy PowerShell scripts](https://github.com/Yusseter/yb_map/commit/ea7b44b06121b8d752bfb8923dd77458164db752)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-30T21:21:24Z">Sep 30, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;ea7b44b](https://github.com/Yusseter/yb_map/commit/ea7b44b06121b8d752bfb8923dd77458164db752)</blockquote></sub>
+- [**yb_map**](https://github.com/Yusseter/yb_map) — [Refresh README and storefront descriptions](https://github.com/Yusseter/yb_map/commit/9f802b0c7caa8edc01ce568cc656f528bdb8f923)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-09-30T21:10:00Z">Sep 30, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;9f802b0](https://github.com/Yusseter/yb_map/commit/9f802b0c7caa8edc01ce568cc656f528bdb8f923)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
 
 <!-- recent_releases:start -->
+- [**Yusseter's Better Map Graphics 1.2.3 for 1.20**&nbsp;<img src="./assets/profile/icons/releases/latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/yb_map/releases/tag/1.2.3)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-09-30T23:05:36Z">Sep 30, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;1.2.3](https://github.com/Yusseter/yb_map/tree/1.2.3)</blockquote></sub>
 - [**Tray Order Lock 0.2.0**&nbsp;<img src="./assets/profile/icons/releases/latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/tray-order-lock/releases/tag/v0.2.0)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-28T11:31:20Z">Aug 28, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;v0.2.0](https://github.com/Yusseter/tray-order-lock/tree/v0.2.0)</blockquote></sub>
 - [**test**&nbsp;<img src="./assets/profile/icons/releases/latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/releases/tag/test)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-20T14:03:25Z">Aug 20, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;test](https://github.com/Yusseter/Minecraft-Yusseter-s-Vanilla-Resource-Pack/tree/test)</blockquote></sub>
-- [**CK3 Workshop Auto Updater v0.3.1**&nbsp;<img src="./assets/profile/icons/releases/latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.1)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-19T15:55:31Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;v0.3.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.1)</blockquote></sub>
 
 <details>
 <summary>More releases</summary>
 
+- [**CK3 Workshop Auto Updater v0.3.1**&nbsp;<img src="./assets/profile/icons/releases/latest.svg" alt="Latest" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.1)<br>
+  <sub><blockquote>Released <relative-time datetime="2026-08-19T15:55:31Z">Aug 19, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;v0.3.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.1)</blockquote></sub>
 - [**CK3 Workshop Auto Updater v0.3.0**](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.3.0)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-07T09:23:12Z">Aug 7, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;v0.3.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.3.0)</blockquote></sub>
 - [**Tray Order Lock 0.1.0**](https://github.com/Yusseter/tray-order-lock/releases/tag/v0.1.0)<br>
@@ -50,8 +54,6 @@
   <sub><blockquote>Released <relative-time datetime="2026-08-05T11:08:17Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;v0.2.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.2.0)</blockquote></sub>
 - [**CK3 Workshop Auto Updater v0.1.1**&nbsp;<img src="./assets/profile/icons/releases/prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.1)<br>
   <sub><blockquote>Released <relative-time datetime="2026-08-05T10:06:18Z">Aug 5, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;v0.1.1](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.1.1)</blockquote></sub>
-- [**CK3 Workshop Auto Updater v0.1.0**&nbsp;<img src="./assets/profile/icons/releases/prerelease.svg" alt="Pre-release" height="24" align="absmiddle">](https://github.com/Yusseter/ck3-workshop-auto-updater/releases/tag/v0.1.0)<br>
-  <sub><blockquote>Released <relative-time datetime="2026-08-03T12:43:57Z">Aug 3, 2026</relative-time> · [<img src="./assets/profile/icons/releases/tag.svg" alt="" height="18" align="texttop">&nbsp;v0.1.0](https://github.com/Yusseter/ck3-workshop-auto-updater/tree/v0.1.0)</blockquote></sub>
 
 </details>
 <!-- recent_releases:end -->
