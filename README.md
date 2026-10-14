@@ -10,8 +10,7 @@
 ## Building now
 
 <!-- building_now:start -->
-- [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — A visual overhaul for Crusader Kings III that improves map clarity and aesthetics with cleaner terrain textures, improved borders, reduced water reflections, and a refined paper map.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-10-07T18:09:21Z">Oct 7, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=powershell"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/powershell.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/powershell.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/powershell.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/powershell.svg"><img src="./assets/profile/generated/languages/dark/desktop/powershell.svg" alt="" height="20" align="texttop"></picture>PowerShell</a></blockquote></sub>
+*Nothing is actively being built in public right now.*
 <!-- building_now:end -->
 
 ## Recent commits
