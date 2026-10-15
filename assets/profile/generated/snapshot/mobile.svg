@@ -95,27 +95,27 @@
     <rect class="bar-background" x="20" y="268" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="20.00" y="268" width="98.58" height="10" fill="#012456" />
-    <rect x="118.58" y="268" width="57.88" height="10" fill="#7355dd" />
-    <rect x="176.46" y="268" width="41.85" height="10" fill="#b07219" />
-    <rect x="218.31" y="268" width="36.69" height="10" fill="#3572A5" />
-    <rect x="255.01" y="268" width="21.40" height="10" fill="#f34b7d" />
+        <rect x="20.00" y="268" width="96.29" height="10" fill="#012456" />
+    <rect x="116.29" y="268" width="64.20" height="10" fill="#7355dd" />
+    <rect x="180.49" y="268" width="40.88" height="10" fill="#b07219" />
+    <rect x="221.37" y="268" width="35.84" height="10" fill="#3572A5" />
+    <rect x="257.21" y="268" width="20.90" height="10" fill="#f34b7d" />
     </g>
 
     
     <circle cx="26" cy="294" r="4" fill="#012456" />
     <text class="primary" x="38" y="298">PowerShell</text>
-    <text class="secondary" x="350" y="298" text-anchor="end">29.9%</text>
+    <text class="secondary" x="350" y="298" text-anchor="end">29.2%</text>
     <circle cx="26" cy="316" r="4" fill="#7355dd" />
     <text class="primary" x="38" y="320">C#</text>
-    <text class="secondary" x="350" y="320" text-anchor="end">17.5%</text>
+    <text class="secondary" x="350" y="320" text-anchor="end">19.5%</text>
     <circle cx="26" cy="338" r="4" fill="#b07219" />
     <text class="primary" x="38" y="342">Java</text>
-    <text class="secondary" x="350" y="342" text-anchor="end">12.7%</text>
+    <text class="secondary" x="350" y="342" text-anchor="end">12.4%</text>
     <circle cx="26" cy="360" r="4" fill="#3572A5" />
     <text class="primary" x="38" y="364">Python</text>
-    <text class="secondary" x="350" y="364" text-anchor="end">11.1%</text>
+    <text class="secondary" x="350" y="364" text-anchor="end">10.9%</text>
     <circle cx="26" cy="382" r="4" fill="#f34b7d" />
     <text class="primary" x="38" y="386">C++</text>
-    <text class="secondary" x="350" y="386" text-anchor="end">6.5%</text>
+    <text class="secondary" x="350" y="386" text-anchor="end">6.3%</text>
 </svg>
