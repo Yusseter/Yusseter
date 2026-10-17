@@ -11,12 +11,14 @@
 
 <!-- building_now:start -->
 - [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — MoreBookmarks Plus mod for CK3<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-10-14T19:22:08Z">Oct 14, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-10-17T17:59:52Z">Oct 17, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — [Merge upstream character and ecclesiastical history updates](https://github.com/Yusseter/MoreBookmarksPlus/commit/b094605d6ded4716c83d0c9d6145b82d862b8c9f)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-10-17T17:59:52Z">Oct 17, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;b094605](https://github.com/Yusseter/MoreBookmarksPlus/commit/b094605d6ded4716c83d0c9d6145b82d862b8c9f)</blockquote></sub>
 - [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — [Merge upstream religious setup and ecclesiastical updates](https://github.com/Yusseter/MoreBookmarksPlus/commit/6fb5d85385b3fb1b06e3ad78365a7901a73683e4)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-14T19:22:08Z">Oct 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;6fb5d85](https://github.com/Yusseter/MoreBookmarksPlus/commit/6fb5d85385b3fb1b06e3ad78365a7901a73683e4)</blockquote></sub>
 - [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — [Merge upstream bookmark and holy-site updates](https://github.com/Yusseter/MoreBookmarksPlus/commit/c36b5c88e908ad8a3f1ada3bb9302ac5bf099397)<br>
@@ -25,8 +27,6 @@
   <sub><blockquote>Committed <relative-time datetime="2026-10-11T12:59:17Z">Oct 11, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;390f3be](https://github.com/Yusseter/MoreBookmarksPlus/commit/390f3be078a954c00e314dbed354a9d1112fcbf1)</blockquote></sub>
 - [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — [Automate visual asset generation workflow](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/630648063e2ef5f308b3e02421f5d0365275f8c7)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-07T18:09:21Z">Oct 7, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;6306480](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/630648063e2ef5f308b3e02421f5d0365275f8c7)</blockquote></sub>
-- [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — [Merge upstream religious history and portrait updates](https://github.com/Yusseter/MoreBookmarksPlus/commit/5d55b33cc595766a67e493d0b2c9aa9e9bc0309c)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-10-07T15:53:14Z">Oct 7, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;5d55b33](https://github.com/Yusseter/MoreBookmarksPlus/commit/5d55b33cc595766a67e493d0b2c9aa9e9bc0309c)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
