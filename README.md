@@ -10,22 +10,23 @@
 ## Building now
 
 <!-- building_now:start -->
-*Nothing is actively being built in public right now.*
+- [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — MoreBookmarks Plus mod for CK3<br>
+  <sub><blockquote>Updated <relative-time datetime="2026-10-14T19:22:08Z">Oct 14, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — [Merge upstream religious setup and ecclesiastical updates](https://github.com/Yusseter/MoreBookmarksPlus/commit/6fb5d85385b3fb1b06e3ad78365a7901a73683e4)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-10-14T19:22:08Z">Oct 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;6fb5d85](https://github.com/Yusseter/MoreBookmarksPlus/commit/6fb5d85385b3fb1b06e3ad78365a7901a73683e4)</blockquote></sub>
+- [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — [Merge upstream bookmark and holy-site updates](https://github.com/Yusseter/MoreBookmarksPlus/commit/c36b5c88e908ad8a3f1ada3bb9302ac5bf099397)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-10-14T19:15:47Z">Oct 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;c36b5c8](https://github.com/Yusseter/MoreBookmarksPlus/commit/c36b5c88e908ad8a3f1ada3bb9302ac5bf099397)</blockquote></sub>
+- [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — [Merge upstream Christian rites and ecclesiastical history](https://github.com/Yusseter/MoreBookmarksPlus/commit/390f3be078a954c00e314dbed354a9d1112fcbf1)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-10-11T12:59:17Z">Oct 11, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;390f3be](https://github.com/Yusseter/MoreBookmarksPlus/commit/390f3be078a954c00e314dbed354a9d1112fcbf1)</blockquote></sub>
 - [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — [Automate visual asset generation workflow](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/630648063e2ef5f308b3e02421f5d0365275f8c7)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-07T18:09:21Z">Oct 7, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;6306480](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/630648063e2ef5f308b3e02421f5d0365275f8c7)</blockquote></sub>
-- [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — [Localize README and storefront assets](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/63b3a44142731870d8908eea912d99af13175d14)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-10-04T20:44:48Z">Oct 4, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;63b3a44](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/63b3a44142731870d8908eea912d99af13175d14)</blockquote></sub>
-- [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — [Fix release links and formatting](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/b085add6f4990a19dc45ef696b9766d5aa0dafb7)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-10-03T15:54:01Z">Oct 3, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;b085add](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/b085add6f4990a19dc45ef696b9766d5aa0dafb7)</blockquote></sub>
-- [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — [Refine build/deploy preview and release validation](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/00d76d2192a2436202bd800f50e03a29235b6d63)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-10-03T15:53:15Z">Oct 3, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;00d76d2](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/00d76d2192a2436202bd800f50e03a29235b6d63)</blockquote></sub>
-- [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — [Generate release flatmap DDS with texconv](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/8b77c929bfcafb63265f619bba19e9530ad5725f)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-09-30T22:57:46Z">Sep 30, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;8b77c92](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/8b77c929bfcafb63265f619bba19e9530ad5725f)</blockquote></sub>
+- [**MoreBookmarksPlus**](https://github.com/Yusseter/MoreBookmarksPlus) — [Merge upstream religious history and portrait updates](https://github.com/Yusseter/MoreBookmarksPlus/commit/5d55b33cc595766a67e493d0b2c9aa9e9bc0309c)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-10-07T15:53:14Z">Oct 7, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;5d55b33](https://github.com/Yusseter/MoreBookmarksPlus/commit/5d55b33cc595766a67e493d0b2c9aa9e9bc0309c)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
