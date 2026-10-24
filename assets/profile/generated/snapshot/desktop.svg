@@ -95,11 +95,11 @@
     <rect class="bar-background" x="410" y="58" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="410.00" y="58" width="97.62" height="10" fill="#7355dd" />
-    <rect x="507.62" y="58" width="63.84" height="10" fill="#012456" />
-    <rect x="571.46" y="58" width="42.03" height="10" fill="#b07219" />
-    <rect x="613.49" y="58" width="31.12" height="10" fill="#3572A5" />
-    <rect x="644.60" y="58" width="21.49" height="10" fill="#f34b7d" />
+        <rect x="410.00" y="58" width="97.59" height="10" fill="#7355dd" />
+    <rect x="507.59" y="58" width="63.82" height="10" fill="#012456" />
+    <rect x="571.41" y="58" width="42.02" height="10" fill="#b07219" />
+    <rect x="613.43" y="58" width="31.20" height="10" fill="#3572A5" />
+    <rect x="644.63" y="58" width="21.48" height="10" fill="#f34b7d" />
     </g>
 
     
@@ -114,7 +114,7 @@
     <text class="secondary" x="740" y="132" text-anchor="end">12.7%</text>
     <circle cx="416" cy="150" r="4" fill="#3572A5" />
     <text class="primary" x="428" y="154">Python</text>
-    <text class="secondary" x="740" y="154" text-anchor="end">9.4%</text>
+    <text class="secondary" x="740" y="154" text-anchor="end">9.5%</text>
     <circle cx="416" cy="172" r="4" fill="#f34b7d" />
     <text class="primary" x="428" y="176">C++</text>
     <text class="secondary" x="740" y="176" text-anchor="end">6.5%</text>
