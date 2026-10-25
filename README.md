@@ -11,12 +11,14 @@
 
 <!-- building_now:start -->
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — Version of More Bookmarks+ adapted to Crusader Kings III's vanilla map projection.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-10-24T20:22:38Z">Oct 24, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-10-24T21:07:07Z">Oct 24, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream European and ecclesiastical history updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/4fa0f663c5e64ea3ad42fbde090dc655dff11f3f)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-10-24T21:07:07Z">Oct 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;4fa0f66](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/4fa0f663c5e64ea3ad42fbde090dc655dff11f3f)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Preserve the source name for k_mongnai from 1115](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/889725a3b63488edbbfae829085f9d60149bd266)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-24T20:22:38Z">Oct 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;889725a](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/889725a3b63488edbbfae829085f9d60149bd266)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Separate default and historical arms for merged titles](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/a3eb8f4a242b087cf31789edd6de87513c8872a6)<br>
@@ -25,8 +27,6 @@
   <sub><blockquote>Committed <relative-time datetime="2026-10-24T18:22:59Z">Oct 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;a4d828f](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/a4d828fb457afd3e5dc23ab95a5bd4662544d0a0)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Map ryukyu_animism holy sites to retained counties](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/aaa7a48c9394085cfd25472dbab21f11db9ab195)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-24T17:14:14Z">Oct 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;aaa7a48](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/aaa7a48c9394085cfd25472dbab21f11db9ab195)</blockquote></sub>
-- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Restore the Liaodong wall target for b_Liao_Chaoyang](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/101365d1ca9e0868c800cb5756bd8db29ddc85f0)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-10-24T17:01:23Z">Oct 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;101365d](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/101365d1ca9e0868c800cb5756bd8db29ddc85f0)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
