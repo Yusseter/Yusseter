@@ -11,12 +11,14 @@
 
 <!-- building_now:start -->
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — Version of More Bookmarks+ adapted to Crusader Kings III's vanilla map projection.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-10-25T19:33:49Z">Oct 25, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-10-26T15:02:45Z">Oct 26, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream holy-order and ecclesiastical updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/362af6a4ba4d34eaeba538ee2b38cc180257bed6)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-10-26T15:02:45Z">Oct 26, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;362af6a](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/362af6a4ba4d34eaeba538ee2b38cc180257bed6)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Restore source government inputs for mapped eastern rulers](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/5e3a1e28947b3e1b0c907193715d0652e522f129)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-25T19:33:49Z">Oct 25, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;5e3a1e2](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/5e3a1e28947b3e1b0c907193715d0652e522f129)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Restore holding histories for mapped eastern capitals](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/b4fa70dd7b24248a8791bee05a27023f9ddcac62)<br>
@@ -25,8 +27,6 @@
   <sub><blockquote>Committed <relative-time datetime="2026-10-25T11:06:08Z">Oct 25, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;2835e7d](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/2835e7dd330d70b5cbf72d252009019814aa1774)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream European and ecclesiastical history updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/4fa0f663c5e64ea3ad42fbde090dc655dff11f3f)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-24T21:07:07Z">Oct 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;4fa0f66](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/4fa0f663c5e64ea3ad42fbde090dc655dff11f3f)</blockquote></sub>
-- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Preserve the source name for k_mongnai from 1115](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/889725a3b63488edbbfae829085f9d60149bd266)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-10-24T20:22:38Z">Oct 24, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;889725a](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/889725a3b63488edbbfae829085f9d60149bd266)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
