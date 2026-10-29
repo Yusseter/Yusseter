@@ -11,12 +11,14 @@
 
 <!-- building_now:start -->
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — Version of More Bookmarks+ adapted to Crusader Kings III's vanilla map projection.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-10-28T13:02:21Z">Oct 28, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-10-29T10:12:09Z">Oct 29, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream monastic histories and holding updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/d865650c834c4b280c66e2ee08c48715b2e26611)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-10-29T10:12:09Z">Oct 29, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;d865650](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/d865650c834c4b280c66e2ee08c48715b2e26611)</blockquote></sub>
 - [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — [Add MIT license and asset clarifications](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/f41db9fc30a8ce138f436673c3e0a6dde0f16b3f)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-28T21:21:52Z">Oct 28, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;f41db9f](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/f41db9fc30a8ce138f436673c3e0a6dde0f16b3f)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream monastic leader updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/7bd148ae45061018ca094aa960eed1fd0393fc12)<br>
@@ -25,8 +27,6 @@
   <sub><blockquote>Committed <relative-time datetime="2026-10-28T12:06:26Z">Oct 28, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;4ea19da](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/4ea19da03d3873ddc9844f971ba6af8afa16adb4)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream holy-order setup and history updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/d2d823528b64f0d1f45e05bb68ca743637b23737)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-10-27T14:35:29Z">Oct 27, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;d2d8235](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/d2d823528b64f0d1f45e05bb68ca743637b23737)</blockquote></sub>
-- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream holy-order and ecclesiastical updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/362af6a4ba4d34eaeba538ee2b38cc180257bed6)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-10-26T15:02:45Z">Oct 26, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;362af6a](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/362af6a4ba4d34eaeba538ee2b38cc180257bed6)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
