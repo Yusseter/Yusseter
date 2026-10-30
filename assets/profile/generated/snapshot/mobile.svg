@@ -83,7 +83,7 @@
         <text class="secondary" x="0" y="30" text-anchor="middle">Total stars</text>
     </g>
     <g transform="translate(275 115)">
-        <text class="value" x="0" y="0" text-anchor="middle">22</text>
+        <text class="value" x="0" y="0" text-anchor="middle">23</text>
         <text class="secondary" x="0" y="30" text-anchor="middle">Total releases</text>
     </g>
 
@@ -95,11 +95,11 @@
     <rect class="bar-background" x="20" y="268" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="20.00" y="268" width="96.75" height="10" fill="#7355dd" />
-    <rect x="116.75" y="268" width="63.27" height="10" fill="#012456" />
-    <rect x="180.01" y="268" width="41.65" height="10" fill="#b07219" />
-    <rect x="221.66" y="268" width="30.34" height="10" fill="#3572A5" />
-    <rect x="252.00" y="268" width="23.44" height="10" fill="#f1e05a" />
+        <rect x="20.00" y="268" width="96.73" height="10" fill="#7355dd" />
+    <rect x="116.73" y="268" width="63.26" height="10" fill="#012456" />
+    <rect x="179.99" y="268" width="41.65" height="10" fill="#b07219" />
+    <rect x="221.64" y="268" width="30.33" height="10" fill="#3572A5" />
+    <rect x="251.97" y="268" width="23.47" height="10" fill="#f1e05a" />
     </g>
 
     
