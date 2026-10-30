@@ -97,9 +97,9 @@
     <g clip-path="url(#language-bar-clip)">
         <rect x="410.00" y="58" width="96.75" height="10" fill="#7355dd" />
     <rect x="506.75" y="58" width="63.27" height="10" fill="#012456" />
-    <rect x="570.02" y="58" width="41.65" height="10" fill="#b07219" />
-    <rect x="611.67" y="58" width="30.34" height="10" fill="#3572A5" />
-    <rect x="642.01" y="58" width="23.42" height="10" fill="#f1e05a" />
+    <rect x="570.01" y="58" width="41.65" height="10" fill="#b07219" />
+    <rect x="611.66" y="58" width="30.34" height="10" fill="#3572A5" />
+    <rect x="642.00" y="58" width="23.44" height="10" fill="#f1e05a" />
     </g>
 
     
