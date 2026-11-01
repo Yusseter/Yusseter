@@ -95,11 +95,11 @@
     <rect class="bar-background" x="410" y="58" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="410.00" y="58" width="96.05" height="10" fill="#7355dd" />
-    <rect x="506.05" y="58" width="62.81" height="10" fill="#012456" />
-    <rect x="568.86" y="58" width="41.35" height="10" fill="#b07219" />
-    <rect x="610.21" y="58" width="32.45" height="10" fill="#3572A5" />
-    <rect x="642.67" y="58" width="23.30" height="10" fill="#f1e05a" />
+        <rect x="410.00" y="58" width="95.94" height="10" fill="#7355dd" />
+    <rect x="505.94" y="58" width="62.74" height="10" fill="#012456" />
+    <rect x="568.68" y="58" width="41.30" height="10" fill="#b07219" />
+    <rect x="609.98" y="58" width="32.41" height="10" fill="#3572A5" />
+    <rect x="642.40" y="58" width="23.66" height="10" fill="#f1e05a" />
     </g>
 
     
@@ -117,5 +117,5 @@
     <text class="secondary" x="740" y="154" text-anchor="end">9.8%</text>
     <circle cx="416" cy="172" r="4" fill="#f1e05a" />
     <text class="primary" x="428" y="176">JavaScript</text>
-    <text class="secondary" x="740" y="176" text-anchor="end">7.1%</text>
+    <text class="secondary" x="740" y="176" text-anchor="end">7.2%</text>
 </svg>
