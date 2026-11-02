@@ -83,7 +83,7 @@
         <text class="secondary" x="0" y="30" text-anchor="middle">Total stars</text>
     </g>
     <g transform="translate(275 115)">
-        <text class="value" x="0" y="0" text-anchor="middle">24</text>
+        <text class="value" x="0" y="0" text-anchor="middle">25</text>
         <text class="secondary" x="0" y="30" text-anchor="middle">Total releases</text>
     </g>
 
@@ -95,17 +95,17 @@
     <rect class="bar-background" x="20" y="268" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="20.00" y="268" width="95.94" height="10" fill="#7355dd" />
-    <rect x="115.94" y="268" width="62.74" height="10" fill="#012456" />
-    <rect x="178.68" y="268" width="41.30" height="10" fill="#b07219" />
-    <rect x="219.98" y="268" width="32.41" height="10" fill="#3572A5" />
-    <rect x="252.40" y="268" width="23.66" height="10" fill="#f1e05a" />
+        <rect x="20.00" y="268" width="95.79" height="10" fill="#7355dd" />
+    <rect x="115.79" y="268" width="62.64" height="10" fill="#012456" />
+    <rect x="178.44" y="268" width="41.24" height="10" fill="#b07219" />
+    <rect x="219.68" y="268" width="32.87" height="10" fill="#3572A5" />
+    <rect x="252.54" y="268" width="23.62" height="10" fill="#f1e05a" />
     </g>
 
     
     <circle cx="26" cy="294" r="4" fill="#7355dd" />
     <text class="primary" x="38" y="298">C#</text>
-    <text class="secondary" x="350" y="298" text-anchor="end">29.1%</text>
+    <text class="secondary" x="350" y="298" text-anchor="end">29.0%</text>
     <circle cx="26" cy="316" r="4" fill="#012456" />
     <text class="primary" x="38" y="320">PowerShell</text>
     <text class="secondary" x="350" y="320" text-anchor="end">19.0%</text>
@@ -114,7 +114,7 @@
     <text class="secondary" x="350" y="342" text-anchor="end">12.5%</text>
     <circle cx="26" cy="360" r="4" fill="#3572A5" />
     <text class="primary" x="38" y="364">Python</text>
-    <text class="secondary" x="350" y="364" text-anchor="end">9.8%</text>
+    <text class="secondary" x="350" y="364" text-anchor="end">10.0%</text>
     <circle cx="26" cy="382" r="4" fill="#f1e05a" />
     <text class="primary" x="38" y="386">JavaScript</text>
     <text class="secondary" x="350" y="386" text-anchor="end">7.2%</text>
