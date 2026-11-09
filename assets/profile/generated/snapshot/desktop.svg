@@ -83,7 +83,7 @@
         <text class="secondary" x="0" y="30" text-anchor="middle">Total stars</text>
     </g>
     <g transform="translate(275 115)">
-        <text class="value" x="0" y="0" text-anchor="middle">29</text>
+        <text class="value" x="0" y="0" text-anchor="middle">30</text>
         <text class="secondary" x="0" y="30" text-anchor="middle">Total releases</text>
     </g>
 
