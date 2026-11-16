@@ -11,12 +11,14 @@
 
 <!-- building_now:start -->
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — Version of More Bookmarks+ adapted to Crusader Kings III's vanilla map projection.<br>
-  <sub><blockquote>Updated <relative-time datetime="2026-11-14T12:11:46Z">Nov 14, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
+  <sub><blockquote>Updated <relative-time datetime="2026-11-16T09:37:23Z">Nov 16, 2026</relative-time> · <a href="https://github.com/Yusseter?tab=repositories&amp;language=python"><picture><source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile/generated/languages/light/mobile/python.svg"><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile/generated/languages/dark/mobile/python.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/profile/generated/languages/light/desktop/python.svg"><source media="(prefers-color-scheme: dark)" srcset="./assets/profile/generated/languages/dark/desktop/python.svg"><img src="./assets/profile/generated/languages/dark/desktop/python.svg" alt="" height="20" align="texttop"></picture>Python</a></blockquote></sub>
 <!-- building_now:end -->
 
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream history and succession updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/7913b3fbb986d8549793ff35f255d06b64234655)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-11-16T09:37:23Z">Nov 16, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;7913b3f](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/7913b3fbb986d8549793ff35f255d06b64234655)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream government and tributary updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/03496e618013dafb6af8329732ab23b3bb15b845)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-11-14T12:11:46Z">Nov 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;03496e6](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/03496e618013dafb6af8329732ab23b3bb15b845)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream history and relic updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/cb748bd55099ee405ccbf387ae368177f5279e6e)<br>
@@ -25,8 +27,6 @@
   <sub><blockquote>Committed <relative-time datetime="2026-11-10T21:10:31Z">Nov 10, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;c60f961](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/c60f96177204dfbfba96739583163c9cc6f8735c)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Restore projected university and landmark histories](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/fe55254f2973f2d7c1c14cda439325e0c9f42572)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-11-10T19:37:58Z">Nov 10, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;fe55254](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/fe55254f2973f2d7c1c14cda439325e0c9f42572)</blockquote></sub>
-- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Restore geographic anchors for projected holy sites](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/8fdd63419c256cd907f395f194fe57f9a4e21e34)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-11-10T18:04:07Z">Nov 10, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;8fdd634](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/8fdd63419c256cd907f395f194fe57f9a4e21e34)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
