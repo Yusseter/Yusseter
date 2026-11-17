@@ -95,27 +95,27 @@
     <rect class="bar-background" x="410" y="58" width="330" height="10" rx="5" />
 
     <g clip-path="url(#language-bar-clip)">
-        <rect x="410.00" y="58" width="95.45" height="10" fill="#7355dd" />
-    <rect x="505.45" y="58" width="62.42" height="10" fill="#012456" />
-    <rect x="567.87" y="58" width="41.09" height="10" fill="#b07219" />
-    <rect x="608.97" y="58" width="33.92" height="10" fill="#3572A5" />
-    <rect x="642.89" y="58" width="23.54" height="10" fill="#f1e05a" />
+        <rect x="410.00" y="58" width="88.25" height="10" fill="#7355dd" />
+    <rect x="498.25" y="58" width="58.33" height="10" fill="#012456" />
+    <rect x="556.59" y="58" width="54.90" height="10" fill="#3572A5" />
+    <rect x="611.49" y="58" width="37.99" height="10" fill="#b07219" />
+    <rect x="649.48" y="58" width="22.50" height="10" fill="#f1e05a" />
     </g>
 
     
     <circle cx="416" cy="84" r="4" fill="#7355dd" />
     <text class="primary" x="428" y="88">C#</text>
-    <text class="secondary" x="740" y="88" text-anchor="end">28.9%</text>
+    <text class="secondary" x="740" y="88" text-anchor="end">26.7%</text>
     <circle cx="416" cy="106" r="4" fill="#012456" />
     <text class="primary" x="428" y="110">PowerShell</text>
-    <text class="secondary" x="740" y="110" text-anchor="end">18.9%</text>
-    <circle cx="416" cy="128" r="4" fill="#b07219" />
-    <text class="primary" x="428" y="132">Java</text>
-    <text class="secondary" x="740" y="132" text-anchor="end">12.5%</text>
-    <circle cx="416" cy="150" r="4" fill="#3572A5" />
-    <text class="primary" x="428" y="154">Python</text>
-    <text class="secondary" x="740" y="154" text-anchor="end">10.3%</text>
+    <text class="secondary" x="740" y="110" text-anchor="end">17.7%</text>
+    <circle cx="416" cy="128" r="4" fill="#3572A5" />
+    <text class="primary" x="428" y="132">Python</text>
+    <text class="secondary" x="740" y="132" text-anchor="end">16.6%</text>
+    <circle cx="416" cy="150" r="4" fill="#b07219" />
+    <text class="primary" x="428" y="154">Java</text>
+    <text class="secondary" x="740" y="154" text-anchor="end">11.5%</text>
     <circle cx="416" cy="172" r="4" fill="#f1e05a" />
     <text class="primary" x="428" y="176">JavaScript</text>
-    <text class="secondary" x="740" y="176" text-anchor="end">7.1%</text>
+    <text class="secondary" x="740" y="176" text-anchor="end">6.8%</text>
 </svg>
