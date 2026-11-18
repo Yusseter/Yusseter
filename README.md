@@ -17,6 +17,8 @@
 ## Recent commits
 
 <!-- recent_commits:start -->
+- [**Yusseters-Better-Map-Graphics**](https://github.com/Yusseter/Yusseters-Better-Map-Graphics) — [Refresh mod installation documentation](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/b895deb3864b1df906f3caf9373c6c93a0e8930e)<br>
+  <sub><blockquote>Committed <relative-time datetime="2026-11-18T14:04:25Z">Nov 18, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;b895deb](https://github.com/Yusseter/Yusseters-Better-Map-Graphics/commit/b895deb3864b1df906f3caf9373c6c93a0e8930e)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream history and startup updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/787396d5b03156a337b817de2a7e05bf9efe60ac)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-11-17T16:23:53Z">Nov 17, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;787396d](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/787396d5b03156a337b817de2a7e05bf9efe60ac)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream history and succession updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/7913b3fbb986d8549793ff35f255d06b64234655)<br>
@@ -25,8 +27,6 @@
   <sub><blockquote>Committed <relative-time datetime="2026-11-14T12:11:46Z">Nov 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;03496e6](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/03496e618013dafb6af8329732ab23b3bb15b845)</blockquote></sub>
 - [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream history and relic updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/cb748bd55099ee405ccbf387ae368177f5279e6e)<br>
   <sub><blockquote>Committed <relative-time datetime="2026-11-14T11:09:33Z">Nov 14, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;cb748bd](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/cb748bd55099ee405ccbf387ae368177f5279e6e)</blockquote></sub>
-- [**MoreBookmarks-Vanillafied**](https://github.com/Yusseter/MoreBookmarks-Vanillafied) — [Merge upstream saint and province history updates](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/c60f96177204dfbfba96739583163c9cc6f8735c)<br>
-  <sub><blockquote>Committed <relative-time datetime="2026-11-10T21:10:31Z">Nov 10, 2026</relative-time> · [<img src="./assets/profile/icons/commit.svg" alt="" height="18" align="texttop">&nbsp;c60f961](https://github.com/Yusseter/MoreBookmarks-Vanillafied/commit/c60f96177204dfbfba96739583163c9cc6f8735c)</blockquote></sub>
 <!-- recent_commits:end -->
 
 ## Recent releases
